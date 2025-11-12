@@ -1,0 +1,26 @@
+{
+  "name": "ibr",
+  "version": "1.0.0",
+  "description": "NodeJS MovieCommunity Project",
+  "keywords": [
+    "movie",
+    "community",
+    "imdb",
+    "cinemago"
+  ],
+  "homepage": "https://github.com/ib-hussain/3movieCollectors",
+  "bugs": {
+    "url": "https://github.com/ib-hussain/3movieCollectors/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ib-hussain/3movieCollectors.git"
+  },
+  "license": "MIT",
+  "author": "Ibrahim Hussain, Izhan Nasir, Saneed Khan",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "3mov"
+  }
+}
