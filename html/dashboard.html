@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Dashboard - 3movCollectors</title>
 
-    <!-- Shared component CSS -->
+    <!-- Component CSS -->
     <link rel="stylesheet" href="../css/main-navbar.css">
     <link rel="stylesheet" href="../css/side-panel.css">
     <link rel="stylesheet" href="../css/main-footer.css">
@@ -12,20 +12,25 @@
     <!-- Page CSS -->
     <link rel="stylesheet" href="../css/dashboard.css">
 
-    <link rel="icon" type="image/png" href="../pictures/M.png">
+    <link rel="icon" href="../pictures/M.png" />
 </head>
 
 <body>
 
-<!-- Inject Components -->
+<!-- NAVBAR -->
+<div id="navbar-container"></div>
 <script src="../js/include-main-navbar.js"></script>
-<script src="../js/include-side-panel.js"></script>
 
+<!-- MAIN WRAPPER -->
 <div class="layout-wrapper">
 
+    <!-- SIDEBAR -->
+    <div id="sidepanel-container"></div>
+    <script src="../js/include-side-panel.js"></script>
+
+    <!-- CONTENT -->
     <div class="content-area">
 
-        <!-- Dashboard Main -->
         <main class="dashboard-main">
 
             <header class="dashboard-header">
@@ -33,18 +38,18 @@
                 <p>Here's what's happening in your movie community today</p>
             </header>
 
-            <!-- Grid: left + trending -->
-            <div class="dashboard-grid">
+            <!-- GRID -->
+            <section class="dashboard-grid">
 
-                <!-- LEFT SIDE -->
-                <section class="dashboard-left">
+                <!-- LEFT COLUMN -->
+                <div class="dashboard-left">
 
-                    <!-- Stats -->
                     <div class="stats-row">
+
                         <div class="stat-card">
                             <div class="stat-top">
-                                <span class="stat-label">Movies Watched</span>
-                                <img src="../pictures/film.png" class="stat-icon">
+                                <span>Movies Watched</span>
+                                <img src="../pictures/film.png" />
                             </div>
                             <div class="stat-main">
                                 <span class="stat-value">127</span>
@@ -54,33 +59,33 @@
 
                         <div class="stat-card">
                             <div class="stat-top">
-                                <span class="stat-label">Friends</span>
-                                <img src="../pictures/friends.png" class="stat-icon">
+                                <span>Friends</span>
+                                <img src="../pictures/friends.png" />
                             </div>
                             <span class="stat-value">48</span>
                         </div>
 
                         <div class="stat-card">
                             <div class="stat-top">
-                                <span class="stat-label">Upcoming Events</span>
-                                <img src="../pictures/calndar.png" class="stat-icon">
+                                <span>Upcoming Events</span>
+                                <img src="../pictures/calendar.png" />
                             </div>
                             <span class="stat-value">3</span>
                         </div>
 
                         <div class="stat-card">
                             <div class="stat-top">
-                                <span class="stat-label">Activity Score</span>
-                                <img src="../pictures/trending.png" class="stat-icon">
+                                <span>Activity Score</span>
+                                <img src="../pictures/trending.png" />
                             </div>
                             <div class="stat-main">
                                 <span class="stat-value">892</span>
                                 <span class="stat-change positive">+5%</span>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Activity Feed -->
                     <section class="activity-header">
                         <h2>Activity Feed</h2>
                         <button class="filter-btn">Filter</button>
@@ -88,13 +93,12 @@
 
                     <section class="activity-feed">
 
-                        <!-- Card 1 -->
+                        <!-- FEED CARD 1 -->
                         <article class="feed-card">
                             <div class="feed-header">
                                 <div class="feed-avatar">
-                                    <img src="../pictures/profile.png">
+                                    <img src="../pictures/profile.png" />
                                 </div>
-
                                 <div class="feed-meta">
                                     <div class="feed-title-row">
                                         <span class="feed-name">Sarah Connor</span>
@@ -105,8 +109,8 @@
                                 </div>
                             </div>
 
-                            <p class="feed-text">
-                                Just finished watching The Godfather trilogy…
+                            <p>
+                                Just finished watching The Godfather trilogy back-to-back. What an incredible journey!
                             </p>
 
                             <div class="feed-footer">
@@ -115,20 +119,18 @@
                                     <span class="feed-dot">•</span>
                                     <span>2 comments</span>
                                 </div>
-
                                 <button class="share-btn">
-                                    <img src="../pictures/share.png">
+                                    <img src="../pictures/share.png" />
                                 </button>
                             </div>
                         </article>
 
-                        <!-- Card 2 -->
+                        <!-- FEED CARD 2 -->
                         <article class="feed-card">
                             <div class="feed-header">
                                 <div class="feed-avatar">
-                                    <img src="../pictures/profile.png">
+                                    <img src="../pictures/profile.png" />
                                 </div>
-
                                 <div class="feed-meta">
                                     <div class="feed-title-row">
                                         <span class="feed-name">John Smith</span>
@@ -137,15 +139,14 @@
                                     </div>
                                     <span class="feed-subtitle">reviewed Inception</span>
                                 </div>
-
                                 <div class="feed-rating-pill">
-                                    <img src="../pictures/star.png">
+                                    <img src="../pictures/star.png" />
                                     <span>9.5</span>
                                 </div>
                             </div>
 
-                            <p class="feed-text">
-                                A mind-bending masterpiece…
+                            <p>
+                                A mind-bending masterpiece that gets better with every rewatch.
                             </p>
 
                             <div class="feed-footer">
@@ -155,7 +156,7 @@
                                     <span>12 comments</span>
                                 </div>
                                 <button class="share-btn">
-                                    <img src="../pictures/share.png">
+                                    <img src="../pictures/share.png" />
                                 </button>
                             </div>
                         </article>
@@ -166,16 +167,15 @@
 
                     </section>
 
-                </section>
+                </div>
 
-                <!-- TRENDING PANEL -->
+                <!-- RIGHT COLUMN -->
                 <aside class="trending-panel">
-                    <header class="trending-header">
-                        <div class="trending-title">
-                            <img src="../pictures/trending-red.png" class="trending-icon">
-                            <h2>Trending Now</h2>
-                        </div>
-                    </header>
+
+                    <div class="trending-title">
+                        <img src="../pictures/trending-red.png" />
+                        <h2>Trending Now</h2>
+                    </div>
 
                     <div class="trending-tabs">
                         <button class="trending-tab trending-tab--active" data-tab="trending">Trending</button>
@@ -189,34 +189,31 @@
                                 <h3>The Shawshank Redemption</h3>
                                 <div class="trending-meta">
                                     <span>9,543 views</span>
-                                    <span class="trend-change positive">+5%</span>
+                                    <span class="positive">+5%</span>
                                 </div>
                                 <div class="trending-rating">
-                                    <img src="../pictures/star.png">
+                                    <img src="../pictures/star.png" />
                                     <span>9.3</span>
                                 </div>
                             </div>
                             <span class="trending-rank">1</span>
                         </li>
-                        <!-- more items... -->
                     </ul>
 
-                    <!-- Recommended -->
-                    <ul class="trending-list trending-list--hidden" id="recommendedList">
-                        <!-- recommended items -->
-                    </ul>
+                    <ul class="trending-list trending-list--hidden" id="recommendedList"></ul>
 
                 </aside>
 
-            </div>
+            </section>
+
         </main>
 
-        <!-- Footer inject -->
+        <!-- FOOTER -->
+        <div id="footer-container"></div>
         <script src="../js/include-footer.js"></script>
 
     </div>
 </div>
-
 
 <script src="../js/dashboard.js"></script>
 

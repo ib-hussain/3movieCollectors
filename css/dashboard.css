@@ -1,124 +1,452 @@
-/* Outer wrapper under navbar */
+/* =========================
+   GLOBAL / LAYOUT
+========================= */
+
+body {
+    background: #0f0f0f;
+    color: #ffffff;
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Wrapper under navbar (navbar height ~70px from your other CSS) */
 .layout-wrapper {
     display: flex;
     min-height: calc(100vh - 70px);
-    background-color: #111;
+    width: 100%;
+    background: #0f0f0f;
 }
 
-/* Sidebar + main */
+/* Content area that sits to the right of sidebar */
 .content-area {
     flex: 1;
-    display: flex;
-    flex-direction: column;
-    color: white;
+    padding: 28px 32px 40px;
+    transition: margin-left 0.25s ease;
+    box-sizing: border-box;
 }
 
-/* Main dashboard content */
+/* Center the main content and give a max width so it doesn't stretch forever */
 .dashboard-main {
-    flex: 1;
-    padding: 28px 32px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-/* ---------------------------
-   Sidebar collapse behaviour
-----------------------------*/
-.sidebar {
-    width: 250px;
-    transition: width 0.25s ease;
-}
+/* =========================
+   HEADER
+========================= */
 
-.sidebar--collapsed {
-    width: 70px;
-}
-
-/* Make grid stretch properly */
-.layout-wrapper .sidebar {
-    flex-shrink: 0;
-}
-
-/* ---------------------------
-   Header
-----------------------------*/
 .dashboard-header h1 {
     font-size: 32px;
-}
-.dashboard-header p {
-    color: #bbb;
+    font-weight: 700;
+    margin: 0 0 4px;
 }
 
-/* ---------------------------
-   Dashboard 2-col layout
-----------------------------*/
+.dashboard-header p {
+    margin: 0;
+    color: #aaaaaa;
+    font-size: 14px;
+}
+
+/* =========================
+   GRID: LEFT + RIGHT
+========================= */
+
 .dashboard-grid {
+    margin-top: 24px;
     display: grid;
-    grid-template-columns: 2.2fr 1fr;
+    grid-template-columns: minmax(0, 2.2fr) minmax(280px, 1fr);
     gap: 24px;
 }
 
-/* ---------------------------
-   Stats cards
-----------------------------*/
+/* Left side wrapper */
+.dashboard-left {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* =========================
+   STATS CARDS
+========================= */
+
 .stats-row {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
-    margin-bottom: 30px;
 }
 
 .stat-card {
-    background: #141414;
-    padding: 18px;
+    background: #151515;
     border-radius: 12px;
-    border: 1px solid #252525;
-    transition: 0.2s ease;
+    padding: 16px 18px;
+    border: 1px solid #202020;
+    box-sizing: border-box;
 }
 
 .stat-card:hover {
-    border-color: #333;
-    transform: translateY(-2px);
+    border-color: #333333;
 }
 
-/* ---------------------------
-   Activity Feed
-----------------------------*/
+.stat-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+.stat-top img {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+}
+
+.stat-main {
+    margin-top: 10px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.stat-change {
+    font-size: 13px;
+}
+
+.stat-change.positive {
+    color: #37d24f;
+}
+
+/* =========================
+   ACTIVITY FEED
+========================= */
+
+.activity-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.activity-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.filter-btn {
+    padding: 6px 14px;
+    border-radius: 16px;
+    border: 1px solid #ff2c2c;
+    background: transparent;
+    color: #ff2c2c;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #ff2c2c;
+    color: #fff;
+}
+
+/* Feed cards */
+
 .activity-feed {
     display: flex;
     flex-direction: column;
     gap: 16px;
 }
 
-/* ---------------------------
-   Trending Panel
-----------------------------*/
-.trending-panel {
-    background: #141414;
-    padding: 20px;
+.feed-card {
+    background: #151515;
+    border-radius: 12px;
+    padding: 18px 20px;
+    border: 1px solid #202020;
+    box-sizing: border-box;
+}
+
+.feed-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.feed-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.feed-meta {
+    flex: 1;
+}
+
+.feed-title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.feed-name {
+    font-weight: 600;
+}
+
+.feed-in {
+    color: #aaaaaa;
+    font-size: 13px;
+}
+
+.feed-topic {
+    color: #ff2c2c;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.feed-topic:hover {
+    text-decoration: underline;
+}
+
+.feed-time,
+.feed-time-inline {
+    color: #888888;
+    font-size: 12px;
+}
+
+.feed-subtitle {
+    font-size: 13px;
+    color: #bbbbbb;
+}
+
+.feed-rating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
     border-radius: 16px;
-    border: 1px solid #252525;
+    background: #202020;
+    font-size: 13px;
+}
+
+.feed-rating-pill img {
+    width: 14px;
+    height: 14px;
+}
+
+/* Body text */
+.feed-card p {
+    margin: 10px 0 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #dddddd;
+}
+
+/* Footer of feed card */
+.feed-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.feed-stats {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #aaaaaa;
+}
+
+.feed-dot {
+    color: #555555;
+}
+
+/* Share button */
+.share-btn {
+    border: none;
+    background: transparent;
+    padding: 4px;
+    border-radius: 999px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.share-btn img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+.share-btn:hover {
+    background: #222222;
+}
+
+/* Load more */
+.load-more-wrap {
+    text-align: center;
+    margin-top: 8px;
+}
+
+.load-more-btn {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid #ff2c2c;
+    background: transparent;
+    color: #ff2c2c;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.load-more-btn:hover {
+    background: #ff2c2c;
+    color: #fff;
+}
+
+/* =========================
+   TRENDING PANEL (RIGHT)
+========================= */
+
+.trending-panel {
+    background: #151515;
+    border-radius: 16px;
+    padding: 18px 18px 20px;
+    border: 1px solid #202020;
+    box-sizing: border-box;
+    align-self: flex-start;
+}
+
+.trending-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.trending-title img {
+    width: 18px;
+    height: 18px;
+}
+
+.trending-title h2 {
+    margin: 0;
+    font-size: 18px;
+}
+
+/* Tabs */
+.trending-tabs {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    background: #202020;
+    padding: 4px;
+    border-radius: 999px;
+}
+
+.trending-tab {
+    flex: 1;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: none;
+    font-size: 13px;
+    background: transparent;
+    color: #bbbbbb;
+    cursor: pointer;
+}
+
+.trending-tab--active {
+    background: #ffffff;
+    color: #000000;
+}
+
+/* List */
+.trending-list {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
 }
 
 .trending-list--hidden {
     display: none;
 }
 
-/* Poster placeholder */
+.trending-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #252525;
+}
+
+.trending-item:last-child {
+    border-bottom: none;
+}
+
 .trending-thumb {
     width: 40px;
     height: 40px;
-    background: #1c1c1c;
+    background: #262626;
     border-radius: 8px;
 }
 
-/* ---------------------------
-   Responsive
-----------------------------*/
+.trending-info {
+    flex: 1;
+}
+
+.trending-info h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+}
+
+.trending-meta {
+    font-size: 12px;
+    color: #aaaaaa;
+}
+
+.trending-meta .positive {
+    color: #37d24f;
+    margin-left: 4px;
+}
+
+.trending-rating {
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: #ffaa22;
+}
+
+.trending-rating img {
+    width: 12px;
+    height: 12px;
+}
+
+.trending-rank {
+    font-size: 16px;
+    font-weight: 600;
+    color: #888888;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 1200px) {
     .stats-row {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
+
 @media (max-width: 900px) {
     .dashboard-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .trending-panel {
+        margin-top: 20px;
     }
 }

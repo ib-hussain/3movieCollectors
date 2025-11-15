@@ -1,26 +1,33 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     fetch("../components/side-panel.html")
         .then(res => res.text())
         .then(html => {
+            const target = document.getElementById("sidepanel-container");
+            if (!target) return;
 
-            const layout = document.querySelector(".layout-wrapper");
+            target.innerHTML = html;
 
-            if (!layout) {
-                console.error("layout-wrapper not found. Make sure it exists before this script runs.");
-                return;
+            const sidebar = document.querySelector(".sidebar");
+            const toggleBtn = document.querySelector("#sidebar-toggle");
+            const content = document.querySelector(".content-area");
+            const footer = document.querySelector(".footer"); // main-footer.html uses class="footer"
+
+            function updateLayout() {
+                const isCollapsed = sidebar.classList.contains("sidebar--collapsed");
+                const width = isCollapsed ? 70 : 250; // match your sidebar.css widths
+
+                if (content) content.style.marginLeft = width + "px";
+                if (footer) footer.style.marginLeft = width + "px";
             }
 
-            // Insert sidebar INSIDE layout-wrapper
-            layout.insertAdjacentHTML("afterbegin", html);
+            // initial
+            updateLayout();
 
-            // Enable toggle
-            const sidebar = document.getElementById("sidebar");
-            const toggle = document.getElementById("sidebar-toggle");
-
-            toggle.addEventListener("click", () => {
-                sidebar.classList.toggle("sidebar--collapsed");
-            });
+            if (toggleBtn) {
+                toggleBtn.addEventListener("click", () => {
+                    sidebar.classList.toggle("sidebar--collapsed");
+                    updateLayout();
+                });
+            }
         });
-
 });
