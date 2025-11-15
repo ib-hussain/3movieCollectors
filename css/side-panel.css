@@ -1,0 +1,183 @@
+/* ===========================
+   Base
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* ===========================
+   Sidebar container
+   =========================== */
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background-color: #111;
+    padding: 18px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* ===========================
+   Header (top menu icon)
+   =========================== */
+.sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 8px;
+}
+
+.menu-btn {
+    border: none;
+    background: transparent;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    /* transparent bg as requested */
+}
+
+/* ===========================
+   Menu blocks
+   =========================== */
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-menu--secondary {
+    margin-top: 4px;
+}
+
+/* Single menu item */
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #e0e0e0;
+    font-size: 15px;
+    position: relative;
+    transition: background-color 0.18s ease, transform 0.12s ease;
+}
+
+.menu-item:hover {
+    background-color: #171a1f;
+    transform: translateY(-1px);
+}
+
+/* Active item (Dashboard) */
+.menu-item--active {
+    background-color: #e50914;
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* Icon circle (white rounded background) */
+.icon-circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease, transform 0.12s ease;
+}
+
+.menu-item:hover .icon-circle {
+    background-color: #f2f2f2;
+}
+
+.icon-circle--active {
+    background-color: #ffffff;
+}
+
+.item-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Text label */
+.menu-label {
+    flex: 1;
+}
+
+/* Badge for messages */
+.menu-badge {
+    background-color: #e50914;
+    color: #ffffff;
+    font-size: 11px;
+    min-width: 18px;
+    padding: 0 6px;
+    height: 18px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+}
+
+/* Divider */
+.sidebar-divider {
+    border: none;
+    border-top: 1px solid #171a1f; /* color as requested */
+    margin: 14px 0 4px;
+}
+
+/* ===========================
+   Responsive behaviour
+   =========================== */
+
+/* Slightly narrower on medium screens */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 230px;
+    }
+}
+
+/* On very small widths, make it full width at top (optional but nice) */
+@media (max-width: 650px) {
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 12px 10px;
+    }
+
+    .sidebar-header {
+        display: none; /* could be used later for a collapsible menu */
+    }
+
+    .sidebar-menu,
+    .sidebar-menu--secondary {
+        flex-direction: row;
+        gap: 8px;
+    }
+
+    .menu-item {
+        padding: 6px 8px;
+    }
+
+    .sidebar-divider {
+        display: none;
+    }
+}
