@@ -478,3 +478,27 @@
         padding: 18px 16px 32px;
     }
 }
+/* Content area (main + footer) */
+.content-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* When sidebar collapsed, content naturally expands because of flexbox */
+
+/* ... (all previous dashboard-main, stats, feed styles stay the same) ... */
+
+/* Trending poster placeholders */
+.trending-thumb {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    background-color: #1c1c1c;
+    border: 1px solid #272727;
+}
+
+/* Hide list helper */
+.trending-list--hidden {
+    display: none;
+}

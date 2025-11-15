@@ -181,3 +181,57 @@ body {
         display: none;
     }
 }
+/* Base sidebar width */
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background-color: #111;
+    padding: 18px 16px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    transition: width 0.25s ease, padding 0.25s ease;
+}
+
+/* Collapsed (icon-only) state */
+.sidebar--collapsed {
+    width: 70px;
+    padding: 18px 10px 24px;
+}
+
+/* When collapsed, hide text labels & badges text */
+.sidebar--collapsed .menu-label {
+    display: none;
+}
+
+.sidebar--collapsed .menu-badge {
+    position: absolute;
+    right: 4px;
+}
+
+/* Slightly center icons more when collapsed */
+.sidebar--collapsed .menu-item {
+    justify-content: center;
+}
+
+/* Header & menu button stay visible */
+.sidebar-header-collapsedd {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.menu-btn-collapsedd {
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.menu-icon-collapsedd {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}

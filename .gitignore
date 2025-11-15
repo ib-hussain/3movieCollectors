@@ -22,4 +22,6 @@ rad.json
 TestResults.xml
 *commands.txt
 node_modules/
-Critic Watch
+Critic Watch/
+*database.js
+*index.js
