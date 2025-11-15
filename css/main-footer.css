@@ -6,6 +6,10 @@
     padding: 50px 40px 25px;
     color: #ddd;
     font-family: Arial, sans-serif;
+
+    /* NEW: let JS animate horizontal space sharing with sidebar */
+    margin-left: 0;
+    transition: margin-left 0.25s ease;
 }
 
 .footer-container {
