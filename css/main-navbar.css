@@ -24,6 +24,10 @@ body {
     justify-content: space-between;
     background: #111;
     gap: 24px;
+    position: fixed;      /* ADD THIS */
+    top: 0;               /* ADD THIS */
+    left: 0;              /* ADD THIS */
+    z-index: 100;         /* ADD THIS */
 }
 
 /* ===========================

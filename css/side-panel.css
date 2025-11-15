@@ -24,6 +24,12 @@ body {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    transition: width 0.25s ease, padding 0.25s ease;
+    position: fixed;
+    top: 68px;           /* CHANGE THIS - was 0, now below navbar */
+    left: 0;
+    bottom: 0;
+    z-index: 50;         /* ADD THIS - below navbar */
 }
 
 /* ===========================
@@ -198,7 +204,12 @@ body {
     width: 70px;
     padding: 18px 10px 24px;
 }
-
+.sidebar--collapsed .menu-btn {
+    justify-content: center;
+}
+.sidebar--collapsed .sidebar-header {
+    justify-content: center;
+}
 /* When collapsed, hide text labels & badges text */
 .sidebar--collapsed .menu-label {
     display: none;
