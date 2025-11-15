@@ -1,0 +1,269 @@
+/* ===========================
+   Global reset & base styles
+   =========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #111;
+    font-family: Arial, sans-serif;
+    color: #fff;
+}
+
+/* ===========================
+   NAVBAR CONTAINER
+   =========================== */
+.navbar {
+    width: 100%;
+    padding: 14px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #111;
+    gap: 24px;
+}
+
+/* ===========================
+   LEFT (LOGO + TITLE)
+   =========================== */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.03);
+}
+
+.nav-title {
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.nav-title:hover {
+    color: #f5f5f5;
+}
+
+/* ===========================
+   CENTER (SEARCH BAR)
+   =========================== */
+.nav-search {
+    flex: 1;
+    max-width: 55%;
+    display: flex;
+    align-items: center;
+    background: #1c1c1c;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #2a2a2a;
+    gap: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.nav-search:hover {
+    border-color: #3a3a3a;
+    background: #202020;
+    box-shadow: 0 0 0 1px #272727;
+}
+
+.search-icon-img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.nav-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 15px;
+    color: #fff;
+}
+
+.nav-search input::placeholder {
+    color: #777;
+}
+
+/* ===========================
+   RIGHT (ICONS + USER)
+   =========================== */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-shrink: 0;
+}
+
+/* Icon buttons reset */
+.icon-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* White round background for icons */
+.icon-circle {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.icon-circle:hover {
+    background-color: #f2f2f2;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+.icon-img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+/* Badge for notifications/messages */
+.icon-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background-color: #e50914;
+    color: #fff;
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+    font-weight: 600;
+}
+/* Vertical separator line between icons and user */
+.nav-separator {
+    width: 1px;
+    height: 28px;
+    object-fit: contain;
+    opacity: 0.55;
+    margin: 0 10px;
+}
+
+/* User section */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-circle {
+    width: 36px;
+    height: 36px;
+}
+
+.user-name {
+    font-size: 15px;
+    color: #f0f0f0;
+    white-space: nowrap;
+}
+
+/* Hover on user name */
+.user-section:hover .user-name {
+    color: #ffffff;
+}
+
+/* ===========================
+   RESPONSIVE BEHAVIOUR
+   =========================== */
+
+/* Large desktops: let search expand */
+@media (min-width: 1600px) {
+    .nav-search {
+        max-width: 50%;
+    }
+}
+
+/* Medium screens / smaller laptops */
+@media (max-width: 1200px) {
+    .navbar {
+        padding: 12px 30px;
+    }
+
+    .nav-search {
+        max-width: 60%;
+        margin: 0 10px;
+    }
+}
+
+/* Tablets / narrow laptops */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 12px 20px;
+        gap: 16px;
+    }
+
+    .nav-search {
+        max-width: 100%;
+        margin: 0 10px;
+    }
+
+    .nav-title {
+        font-size: 18px;
+    }
+
+    .nav-right {
+        gap: 14px;
+    }
+
+    .user-name {
+        font-size: 14px;
+    }
+}
+
+/* Small screens (optional, but keeps it usable) */
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-left {
+        justify-content: center;
+    }
+
+    .nav-search {
+        order: 3;
+        margin: 0;
+    }
+
+    .nav-right {
+        justify-content: center;
+        order: 2;
+    }
+
+    /* Hide username on very small widths to avoid crowding */
+    .user-name {
+        display: none;
+    }
+}

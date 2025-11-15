@@ -1,9 +1,14 @@
 {
-  "name": "ibr",
+  "name": "3movieCollectors",
   "version": "1.0.0",
-  "description": "NodeJS MovieCommunity Project",
+  "description": "NodeJS Movie Community Project",
   "keywords": [
     "movie",
+    "movie-recommendation-app",
+    "webscraping",
+    "nodejs",
+    "recommendation",
+    "movie-discussion",
     "community",
     "imdb",
     "cinemago"
@@ -14,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ib-hussain/3movieCollectors.git"
+    "url": "https://github.com/ib-hussain/3movieCollectors"
   },
   "license": "MIT",
   "author": "Ibrahim Hussain, Izhan Nasir, Saneed Khan",
@@ -22,5 +27,9 @@
   "main": "index.js",
   "scripts": {
     "test": "3mov"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "mysql": "^2.18.1"
   }
 }

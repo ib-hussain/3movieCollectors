@@ -1,0 +1,126 @@
+/* ===========================
+   FOOTER BASE
+   =========================== */
+.footer {
+    background-color: #111;
+    padding: 50px 40px 25px;
+    color: #ddd;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+/* ===========================
+   BRAND SECTION
+   =========================== */
+.footer-brand {
+    max-width: 280px;
+}
+
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.footer-logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.footer-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.footer-desc {
+    margin-top: 12px;
+    line-height: 1.5;
+    font-size: 14px;
+    color: #aaa;
+}
+
+/* ===========================
+   COLUMNS
+   =========================== */
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-column h3 {
+    margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.footer-column a {
+    text-decoration: none;
+    color: #bbb;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: #fff;
+}
+
+/* Special red link */
+.highlight-link {
+    color: #e50914;
+}
+
+.highlight-link:hover {
+    color: #ff2630;
+}
+
+/* ===========================
+   DIVIDER + COPYRIGHT
+   =========================== */
+.footer-divider {
+    border: none;
+    border-top: 1px solid #2a2a2a;
+    margin: 35px 0 20px;
+}
+
+.footer-copy {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+}
+
+/* ===========================
+   RESPONSIVE BEHAVIOR
+   =========================== */
+
+/* Medium screens */
+@media (max-width: 1100px) {
+    .footer-container {
+        gap: 30px;
+    }
+}
+
+/* Tablet / Mobile */
+@media (max-width: 750px) {
+    .footer {
+        padding: 40px 25px 20px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer-copy {
+        margin-top: 15px;
+    }
+}

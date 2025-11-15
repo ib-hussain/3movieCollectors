@@ -20,3 +20,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+*commands.txt
+node_modules/
+Critic Watch
