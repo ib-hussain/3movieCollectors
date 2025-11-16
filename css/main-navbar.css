@@ -167,6 +167,7 @@ body {
 }
 /* Vertical separator line between icons and user */
 .nav-separator {
+    background-color: #ffffff;
     width: 1px;
     height: 28px;
     object-fit: contain;
@@ -270,4 +271,28 @@ body {
     .user-name {
         display: none;
     }
+}
+/* ===========================
+   ACTIVE NOTIFICATION ICON
+   =========================== */
+
+/* Active notification icon - inverted colors */
+.icon-btn.active .icon-circle {
+    background-color: #ff2c2c; /* Red background */
+    transform: scale(1.05);
+}
+
+.icon-btn.active .icon-img {
+    filter: invert(1); /* White icon */
+}
+
+.icon-btn.active .icon-badge {
+    background-color: #ffffff; /* White background */
+    color: #ff2c2c; /* Red text */
+}
+
+/* Hover state for active notification */
+.icon-btn.active:hover .icon-circle {
+    background-color: #e50914; /* Darker red on hover */
+    transform: scale(1.05) translateY(-1px);
 }

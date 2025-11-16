@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Friends</title>
+
+        <!-- Shared CSS -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
+
+        <!-- Page CSS -->
+        <link rel="stylesheet" href="../css/friends.css">
+
+        <!-- JS Includes -->
+        <script defer src="../js/include-main-navbar.js"></script>
+        <script defer src="../js/include-side-panel.js"></script>
+        <script defer src="../js/include-footer.js"></script>
+        <script defer src="../js/friends.js"></script>
+    </head>
+
+    <body>
+
+        <!-- Sidebar -->
+        <div id="side-panel-container"></div>
+
+        <!-- Navbar -->
+        <div id="navbar-container"></div>
+
+        <!-- MAIN CONTENT -->
+        <div class="friends-page-wrapper">
+
+            <h1 class="page-title">Friends</h1>
+            <p class="page-subtitle">Connect with fellow movie enthusiasts</p>
+
+            <!-- Stats -->
+            <div class="friend-stats">
+                <div class="stat-box">
+                    <h2>8</h2><p>Total Friends</p>
+                </div>
+                <div class="stat-box">
+                    <h2>5</h2><p>Online Now</p>
+                </div>
+                <div class="stat-box">
+                    <h2>3</h2><p>Pending Requests</p>
+                </div>
+                <div class="stat-box">
+                    <h2>4</h2><p>Suggestions</p>
+                </div>
+                <button class="find-friends-btn">
+                    <img src="../pictures/friend.png" class="btn-icon"> Find
+                    Friends
+                </button>
+            </div>
+
+            <!-- Search -->
+            <div class="friends-search">
+                <input type="text" placeholder="Search friends...">
+            </div>
+
+            <!-- TABS -->
+            <div class="friends-tabs">
+                <div class="friend-tab active" data-tab="allFriends">All Friends
+                    (8)</div>
+                <div class="friend-tab" data-tab="requests">Requests (3)</div>
+                <div class="friend-tab" data-tab="suggestions">Suggestions
+                    (4)</div>
+            </div>
+
+            <!-- ALL FRIENDS SECTION -->
+            <div id="allFriends" class="friends-section"
+                style="display: block;">
+
+                <!-- Friend Card -->
+                <div class="friend-card">
+                    <div class="friend-avatar"></div>
+                    <div class="friend-info">
+                        <div class="friend-name">Sarah Connor</div>
+                        <div class="friend-username">@sarahc</div>
+
+                        <div class="friend-label">45 Watchlist</div>
+                        <div class="friend-label">28 Reviews</div>
+                        <div class="friend-label">Favorite Genre: Action</div>
+                        <div class="friend-label">Mutual Friends: 12</div>
+
+                        <div class="friend-actions">
+                            <button class="msg-btn">Message</button>
+                            <button class="accept-btn">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Duplicate for other friends -->
+            </div>
+
+            <!-- REQUESTS SECTION -->
+            <div id="requests" class="friends-section" style="display:none;">
+
+                <div class="friend-card">
+                    <div class="friend-avatar"></div>
+                    <div class="friend-info">
+                        <div class="friend-name">John Smith</div>
+                        <div class="friend-username">@johnsmith</div>
+
+                        <div class="friend-label">5 mutual friends · 2 days
+                            ago</div>
+
+                        <div class="friend-actions">
+                            <button class="accept-btn">Accept</button>
+                            <button class="decline-btn">Decline</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SUGGESTIONS SECTION -->
+            <div id="suggestions" class="friends-section" style="display:none;">
+
+                <div class="friend-card">
+                    <div class="friend-avatar"></div>
+                    <div class="friend-info">
+                        <div class="friend-name">Nina Patel</div>
+                        <div class="friend-username">@ninap</div>
+
+                        <div class="friend-label">Loves Sci-Fi movies</div>
+                        <div class="friend-label">12 mutual friends</div>
+
+                        <div class="friend-actions">
+                            <button class="add-btn">Add Friend</button>
+                            <button class="msg-btn">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Friends List Container -->
+            <div id="friends-container"></div>
+
+        </div>
+
+        <!-- Footer -->
+        <div id="footer-container"></div>
+
+    </body>
+</html>

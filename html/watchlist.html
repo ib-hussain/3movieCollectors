@@ -1,256 +1,263 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My Watchlist - 3movCollectors</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>My Watchlist - 3movCollectors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Shared styles -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+        <!-- Shared styles -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
 
-    <!-- Page styles -->
-    <link rel="stylesheet" href="../css/watchlist.css">
-</head>
-<body>
+        <!-- Page styles -->
+        <link rel="stylesheet" href="../css/watchlist.css">
+    </head>
+    <body>
 
-    <!-- NAVBAR -->
-    <div id="navbar-container"></div>
+        <!-- NAVBAR -->
+        <div id="navbar-container"></div>
 
-    <div class="layout-wrapper">
-        <!-- SIDEBAR -->
-        <div id="sidepanel-container"></div>
+        <div class="layout-wrapper">
+            <!-- SIDEBAR -->
+            <div id="sidepanel-container"></div>
 
-        <!-- MAIN CONTENT -->
-        <main class="content-area">
-            <!-- Header -->
-            <section class="watchlist-header">
-                <h1>My Watchlist</h1>
-                <p>Keep track of movies you want to watch.</p>
-            </section>
+            <!-- MAIN CONTENT -->
+            <main class="content-area">
+                <!-- Header -->
+                <section class="watchlist-header">
+                    <h1>My Watchlist</h1>
+                    <p>Keep track of movies you want to watch.</p>
+                </section>
 
-            <!-- Summary cards -->
-            <section class="watchlist-summary">
-                <div class="summary-card">
-                    <div class="summary-number">12</div>
-                    <div class="summary-label">Total Movies</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-number">4</div>
-                    <div class="summary-label">Want to Watch</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-number summary-number--orange">3</div>
-                    <div class="summary-label">Currently Watching</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-number summary-number--green">5</div>
-                    <div class="summary-label">Completed</div>
-                </div>
-            </section>
-
-            <!-- Tabs + sort -->
-            <section class="watchlist-tabs-row">
-                <div class="watchlist-tabs">
-                    <button class="watchlist-tab watchlist-tab--active" data-filter="all">
-                        All (12)
-                    </button>
-                    <button class="watchlist-tab" data-filter="want">
-                        Want to Watch (4)
-                    </button>
-                    <button class="watchlist-tab" data-filter="watching">
-                        Watching (3)
-                    </button>
-                    <button class="watchlist-tab" data-filter="completed">
-                        Completed (5)
-                    </button>
-                </div>
-
-                <div class="watchlist-sort">
-                    <span>Sort by:</span>
-                    <div class="select-wrapper">
-                        <select id="watchlistSort">
-                            <option value="recent">Recently Added</option>
-                            <option value="az">A - Z</option>
-                            <option value="rating">Rating</option>
-                        </select>
+                <!-- Summary cards -->
+                <section class="watchlist-summary">
+                    <div class="summary-card">
+                        <div class="summary-number">12</div>
+                        <div class="summary-label">Total Movies</div>
                     </div>
-                </div>
-            </section>
+                    <div class="summary-card">
+                        <div class="summary-number">4</div>
+                        <div class="summary-label">Want to Watch</div>
+                    </div>
+                    <div class="summary-card">
+                        <div
+                            class="summary-number summary-number--orange">3</div>
+                        <div class="summary-label">Currently Watching</div>
+                    </div>
+                    <div class="summary-card">
+                        <div
+                            class="summary-number summary-number--green">5</div>
+                        <div class="summary-label">Completed</div>
+                    </div>
+                </section>
 
-            <!-- Grid of movies (4 per row, square posters) -->
-            <section class="watchlist-grid-section">
-                <div class="watchlist-grid">
+                <!-- Tabs + sort -->
+                <section class="watchlist-tabs-row">
+                    <div class="watchlist-tabs">
+                        <button class="watchlist-tab watchlist-tab--active"
+                            data-filter="all">
+                            All (12)
+                        </button>
+                        <button class="watchlist-tab" data-filter="want">
+                            Want to Watch (4)
+                        </button>
+                        <button class="watchlist-tab" data-filter="watching">
+                            Watching (3)
+                        </button>
+                        <button class="watchlist-tab" data-filter="completed">
+                            Completed (5)
+                        </button>
+                    </div>
 
-                    <!-- Want to Watch -->
-                    <article class="watch-card" data-status="want">
-                        <div class="watch-card-status watch-card-status--want">Want to Watch</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                    <div class="watchlist-sort">
+                        <span>Sort by:</span>
+                        <div class="select-wrapper">
+                            <select id="watchlistSort">
+                                <option value="recent">Recently Added</option>
+                                <option value="az">A - Z</option>
+                                <option value="rating">Rating</option>
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Grid of movies (4 per row, square posters) -->
+                <section class="watchlist-grid-section">
+                    <div class="watchlist-grid">
+
+                        <!-- Want to Watch -->
+                        <article class="watch-card" data-status="want">
+                            <div
+                                class="watch-card-status watch-card-status--want">Want
+                                to Watch</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Dune: Part Two</h3>
-                            <p class="watch-card-meta">2024 • Sci-Fi</p>
-                        </div>
-                    </article>
 
-                    <article class="watch-card" data-status="want">
-                        <div class="watch-card-status watch-card-status--want">Want to Watch</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Dune: Part Two</h3>
+                                <p class="watch-card-meta">2024 • Sci-Fi</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Parasite</h3>
-                            <p class="watch-card-meta">2019 • Thriller</p>
-                        </div>
-                    </article>
+                        </article>
 
-                    <article class="watch-card" data-status="want">
-                        <div class="watch-card-status watch-card-status--want">Want to Watch</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                        <article class="watch-card" data-status="want">
+                            <div
+                                class="watch-card-status watch-card-status--want">Want
+                                to Watch</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Spider-Man: Across the Spider-Verse</h3>
-                            <p class="watch-card-meta">2023 • Animation</p>
-                        </div>
-                    </article>
 
-                    <article class="watch-card" data-status="want">
-                        <div class="watch-card-status watch-card-status--want">Want to Watch</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Parasite</h3>
+                                <p class="watch-card-meta">2019 • Thriller</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Whiplash</h3>
-                            <p class="watch-card-meta">2014 • Drama</p>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- Watching -->
-                    <article class="watch-card" data-status="watching">
-                        <div class="watch-card-status watch-card-status--watching">Watching</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                        <article class="watch-card" data-status="want">
+                            <div
+                                class="watch-card-status watch-card-status--want">Want
+                                to Watch</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Breaking Bad (Season 3)</h3>
-                            <p class="watch-card-meta">TV • Crime</p>
-                        </div>
-                    </article>
 
-                    <article class="watch-card" data-status="watching">
-                        <div class="watch-card-status watch-card-status--watching">Watching</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Spider-Man: Across the Spider-Verse</h3>
+                                <p class="watch-card-meta">2023 • Animation</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Oppenheimer</h3>
-                            <p class="watch-card-meta">2023 • Drama</p>
-                        </div>
-                    </article>
+                        </article>
 
-                    <article class="watch-card" data-status="watching">
-                        <div class="watch-card-status watch-card-status--watching">Watching</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                        <article class="watch-card" data-status="want">
+                            <div
+                                class="watch-card-status watch-card-status--want">Want
+                                to Watch</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>The Last of Us</h3>
-                            <p class="watch-card-meta">TV • Drama</p>
-                        </div>
-                    </article>
 
-                    <!-- Completed -->
-                    <article class="watch-card" data-status="completed">
-                        <div class="watch-card-status watch-card-status--completed">Completed</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Whiplash</h3>
+                                <p class="watch-card-meta">2014 • Drama</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>The Shawshank Redemption</h3>
-                            <p class="watch-card-meta">1994 • Drama</p>
-                        </div>
-                    </article>
+                        </article>
 
-                    <article class="watch-card" data-status="completed">
-                        <div class="watch-card-status watch-card-status--completed">Completed</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                        <!-- Watching -->
+                        <article class="watch-card" data-status="watching">
+                            <div
+                                class="watch-card-status watch-card-status--watching">Watching</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Interstellar</h3>
-                            <p class="watch-card-meta">2014 • Sci-Fi</p>
-                        </div>
-                    </article>
 
-                    <article class="watch-card" data-status="completed">
-                        <div class="watch-card-status watch-card-status--completed">Completed</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Breaking Bad (Season 3)</h3>
+                                <p class="watch-card-meta">TV • Crime</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Inception</h3>
-                            <p class="watch-card-meta">2010 • Sci-Fi</p>
-                        </div>
-                    </article>
+                        </article>
 
-                    <article class="watch-card" data-status="completed">
-                        <div class="watch-card-status watch-card-status--completed">Completed</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                        <article class="watch-card" data-status="watching">
+                            <div
+                                class="watch-card-status watch-card-status--watching">Watching</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>The Dark Knight</h3>
-                            <p class="watch-card-meta">2008 • Action</p>
-                        </div>
-                    </article>
 
-                    <article class="watch-card" data-status="completed">
-                        <div class="watch-card-status watch-card-status--completed">Completed</div>
-                        <div class="watch-card-poster">
-                            <div class="poster-square">
-                                <div class="poster-eye"></div>
+                            <div class="watch-card-info">
+                                <h3>Oppenheimer</h3>
+                                <p class="watch-card-meta">2023 • Drama</p>
                             </div>
-                        </div>
-                        <div class="watch-card-info">
-                            <h3>Forrest Gump</h3>
-                            <p class="watch-card-meta">1994 • Drama</p>
-                        </div>
-                    </article>
+                        </article>
 
-                </div>
-            </section>
-        </main>
-    </div>
+                        <article class="watch-card" data-status="watching">
+                            <div
+                                class="watch-card-status watch-card-status--watching">Watching</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
 
-    <!-- FOOTER -->
-    <script src="../js/include-main-navbar.js"></script>
-    <script src="../js/include-side-panel.js"></script>
-    <script src="../js/include-footer.js"></script>
-    <script src="../js/watchlist.js"></script>
-</body>
+                            <div class="watch-card-info">
+                                <h3>The Last of Us</h3>
+                                <p class="watch-card-meta">TV • Drama</p>
+                            </div>
+                        </article>
+
+                        <!-- Completed -->
+                        <article class="watch-card" data-status="completed">
+                            <div
+                                class="watch-card-status watch-card-status--completed">Completed</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
+
+                            <div class="watch-card-info">
+                                <h3>The Shawshank Redemption</h3>
+                                <p class="watch-card-meta">1994 • Drama</p>
+                            </div>
+                        </article>
+
+                        <article class="watch-card" data-status="completed">
+                            <div
+                                class="watch-card-status watch-card-status--completed">Completed</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
+
+                            <div class="watch-card-info">
+                                <h3>Interstellar</h3>
+                                <p class="watch-card-meta">2014 • Sci-Fi</p>
+                            </div>
+                        </article>
+
+                        <article class="watch-card" data-status="completed">
+                            <div
+                                class="watch-card-status watch-card-status--completed">Completed</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
+
+                            <div class="watch-card-info">
+                                <h3>Inception</h3>
+                                <p class="watch-card-meta">2010 • Sci-Fi</p>
+                            </div>
+                        </article>
+
+                        <article class="watch-card" data-status="completed">
+                            <div
+                                class="watch-card-status watch-card-status--completed">Completed</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
+
+                            <div class="watch-card-info">
+                                <h3>The Dark Knight</h3>
+                                <p class="watch-card-meta">2008 • Action</p>
+                            </div>
+                        </article>
+
+                        <article class="watch-card" data-status="completed">
+                            <div
+                                class="watch-card-status watch-card-status--completed">Completed</div>
+                            <div class="watch-card-poster">
+                                <div class="poster-square">POSTER</div>
+                            </div>
+
+                            <div class="watch-card-info">
+                                <h3>Forrest Gump</h3>
+                                <p class="watch-card-meta">1994 • Drama</p>
+                            </div>
+                        </article>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- FOOTER -->
+        <script src="../js/include-main-navbar.js"></script>
+        <script src="../js/include-side-panel.js"></script>
+        <script src="../js/include-footer.js"></script>
+        <script src="../js/watchlist.js"></script>
+    </body>
 </html>

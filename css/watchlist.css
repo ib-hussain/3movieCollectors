@@ -149,11 +149,13 @@ body {
     margin-top: 22px;
 }
 
+.movies-grid,
 .watchlist-grid {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr)); /* always 4 columns on desktop */
-    gap: 18px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
 }
+
 
 /* Cards */
 
@@ -208,24 +210,23 @@ body {
 
 .poster-square {
     width: 100%;
-    aspect-ratio: 1 / 1;         /* square */
-    background: #202020;
-    border-radius: 12px;
+    aspect-ratio: 1 / 1;          /* perfect square, same as Browse Movies */
+    background: #ffffff;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: #888888;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
 }
 
-/* Center "eye" circle (no external icon needed) */
-
+/* Hide old circular "eye" graphic so the square is clean like Browse Movies */
 .poster-eye {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid #555555;
-    box-sizing: border-box;
-    position: relative;
+    display: none;
 }
+
 
 .poster-eye::before {
     content: "";

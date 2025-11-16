@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notifications - MovieHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
+    
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../css/notifications.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+
+    <div class="layout-wrapper">
+        <!-- SIDEBAR -->
+        <div id="sidepanel-container"></div>
+
+        <!-- MAIN CONTENT -->
+        <main class="content-area">
+            <div class="notifications-container">
+                <!-- Header -->
+                <div class="notifications-header">
+                    <h1>Notifications</h1>
+                    <div class="notifications-count">2 unread notifications</div>
+                </div>
+
+                <!-- Unread Section -->
+                <section class="notifications-section">
+                    <h2 class="section-title">Unread (2)</h2>
+                    
+                    <div class="notification-list">
+                        <!-- Notification 1 -->
+                        <div class="notification-item unread">
+                            <div class="notification-checkbox">
+                                <img src="../pictures/edit.png" class="notification-check" >
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    <strong>Sarah Connor</strong> commented on your review
+                                </div>
+                                <div class="notification-message">
+                                    "Great analysis! I completely agree about the cinematography."
+                                </div>
+                                <div class="notification-time">3 minutes ago</div>
+                            </div>
+                        </div>
+
+                        <!-- Notification 2 -->
+                        <div class="notification-item unread">
+                            <div class="notification-checkbox">
+                                <img src="../pictures/friend.png" class="notification-check" >
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    <strong>Michael Chen</strong> accepted your friend request
+                                </div>
+                                <div class="notification-message">
+                                    You are now friends with Michael Chen
+                                </div>
+                                <div class="notification-time">2 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Read Section -->
+                <section class="notifications-section">
+                    <h2 class="section-title">Read</h2>
+                    
+                    <div class="notification-list">
+                        <!-- Notification 3 -->
+                        <div class="notification-item read">
+                            <div class="notification-checkbox">
+                                <img src="../pictures/star.png" class="notification-check" >
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    Your review received 25 likes
+                                </div>
+                                <div class="notification-message">
+                                    Your review of "Inception" is getting popular!
+                                </div>
+                                <div class="notification-time">4 hours ago</div>
+                            </div>
+                        </div>
+
+                        <!-- Notification 4 -->
+                        <div class="notification-item read">
+                            <div class="notification-checkbox">
+                                <img src="../pictures/calendar.png" class="notification-check" >
+                            </div>
+                            <div class="notification-content">
+                                <div class="notification-title">
+                                    Watch Party starting soon
+                                </div>
+                                <div class="notification-message">
+                                    "The Dark Knight" watch party starts in 30 minutes
+                                </div>
+                                <div class="notification-time">6 hours ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mark All as Read Button -->
+                <div class="notifications-actions">
+                    <button class="mark-all-read-btn">Mark all as read</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <!-- JS -->
+    <script src="../js/include-main-navbar.js"></script>
+    <script src="../js/include-side-panel.js"></script>
+    <script src="../js/include-footer.js"></script>
+    <script src="../js/notifications.js"></script>
+</body>
+</html>
