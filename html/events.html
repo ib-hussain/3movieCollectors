@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Watch Parties & Events - 3movCollectors</title>
+
+        <!-- Component CSS -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
+
+        <!-- Page CSS -->
+        <link rel="stylesheet" href="../css/events.css">
+
+        <link rel="icon" href="../pictures/M.png" />
+    </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+        <div id="navbar-container"></div>
+        <script src="../js/include-main-navbar.js"></script>
+
+        <!-- MAIN WRAPPER -->
+        <div class="layout-wrapper">
+
+            <!-- SIDEBAR -->
+            <div id="sidepanel-container"></div>
+            <script src="../js/include-side-panel.js"></script>
+
+            <!-- CONTENT -->
+            <div class="content-area">
+
+                <main class="events-main">
+
+                    <!-- PAGE HEADER -->
+                    <header class="events-header">
+                        <div>
+                            <h1>Watch Parties &amp; Events</h1>
+                            <p>Join or host movie watch parties with the community</p>
+                        </div>
+
+                        <button class="events-host-btn">
+                            <span class="events-host-icon">
+                                <img src="../pictures/friend-request.png" alt="Host event">
+                            </span>
+                            <span>Host Event</span>
+                        </button>
+                    </header>
+
+                    <!-- TABS -->
+                    <section class="events-tabs-section">
+                        <div class="events-tabs" role="tablist">
+                            <button
+                                class="events-tab events-tab--active"
+                                data-tab="events-upcoming"
+                                role="tab"
+                                aria-selected="true">
+                                Upcoming (3)
+                            </button>
+                            <button
+                                class="events-tab"
+                                data-tab="events-mine"
+                                role="tab"
+                                aria-selected="false">
+                                My Events (1)
+                            </button>
+                            <button
+                                class="events-tab"
+                                data-tab="events-past"
+                                role="tab"
+                                aria-selected="false">
+                                Past (1)
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- TAB PANELS -->
+                    <section class="events-tab-panels">
+
+                        <!-- UPCOMING TAB -->
+                        <div
+                            class="events-tab-panel events-tab-panel--active"
+                            id="events-upcoming"
+                            role="tabpanel">
+
+                            <!-- Event 1 -->
+                            <article class="event-card">
+                                <div class="event-card-body">
+                                    <div class="event-icon-column">
+                                        <div class="event-main-icon">
+                                            <img src="../pictures/calendar.png" alt="Event">
+                                        </div>
+                                    </div>
+
+                                    <div class="event-main-content">
+                                        <h2 class="event-title">Classic Noir Night</h2>
+                                        <p class="event-watching">
+                                            Watching: The Maltese Falcon
+                                        </p>
+
+                                        <div class="event-meta">
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>Hosted by Sarah Connor</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/calendar.png" alt="">
+                                                <span>Nov 15, 2024</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/clock.png" alt="">
+                                                <span>8:00 PM EST</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>4/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="event-cta-row">
+                                    <button class="event-cta-button">
+                                        Join (6 spots left)
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- Event 2 -->
+                            <article class="event-card">
+                                <div class="event-card-body">
+                                    <div class="event-icon-column">
+                                        <div class="event-main-icon">
+                                            <img src="../pictures/calendar.png" alt="Event">
+                                        </div>
+                                    </div>
+
+                                    <div class="event-main-content">
+                                        <h2 class="event-title">Sci-Fi Marathon</h2>
+                                        <p class="event-watching">
+                                            Watching: Blade Runner 2049
+                                        </p>
+
+                                        <div class="event-meta">
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>Hosted by David Martinez</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/calendar.png" alt="">
+                                                <span>Nov 16, 2024</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/clock.png" alt="">
+                                                <span>7:30 PM EST</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>7/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="event-cta-row">
+                                    <button class="event-cta-button">
+                                        Join (3 spots left)
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- Event 3 -->
+                            <article class="event-card">
+                                <div class="event-card-body">
+                                    <div class="event-icon-column">
+                                        <div class="event-main-icon">
+                                            <img src="../pictures/calendar.png" alt="Event">
+                                        </div>
+                                    </div>
+
+                                    <div class="event-main-content">
+                                        <h2 class="event-title">Horror Movie Marathon</h2>
+                                        <p class="event-watching">
+                                            Watching: The Shining
+                                        </p>
+
+                                        <div class="event-meta">
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>Hosted by Rachel Green</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/calendar.png" alt="">
+                                                <span>Nov 17, 2024</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/clock.png" alt="">
+                                                <span>9:00 PM EST</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>2/12</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="event-cta-row">
+                                    <button class="event-cta-button">
+                                        Join (10 spots left)
+                                    </button>
+                                </div>
+                            </article>
+
+                            <!-- Load more -->
+                            <div class="events-load-more-wrap">
+                                <button class="events-load-more-btn">
+                                    Load More Events
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- MY EVENTS TAB -->
+                        <div
+                            class="events-tab-panel events-tab-panel--hidden"
+                            id="events-mine"
+                            role="tabpanel">
+
+                            <article class="event-card">
+                                <div class="event-card-body">
+                                    <div class="event-icon-column">
+                                        <div class="event-main-icon">
+                                            <img src="../pictures/calendar.png" alt="Event">
+                                        </div>
+                                    </div>
+
+                                    <div class="event-main-content">
+                                        <h2 class="event-title">Nolan Discussion Group</h2>
+                                        <p class="event-watching">
+                                            Watching: Interstellar
+                                        </p>
+
+                                        <div class="event-meta">
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>Hosted by Alex Turner</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/calendar.png" alt="">
+                                                <span>Nov 18, 2024</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/clock.png" alt="">
+                                                <span>6:00 PM EST</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>5/15</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="event-cta-row">
+                                    <button class="event-cta-button">
+                                        Join (10 spots left)
+                                    </button>
+                                </div>
+                            </article>
+
+                            <div class="events-load-more-wrap">
+                                <button class="events-load-more-btn">
+                                    Load More Events
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- PAST TAB -->
+                        <div
+                            class="events-tab-panel events-tab-panel--hidden"
+                            id="events-past"
+                            role="tabpanel">
+
+                            <article class="event-card">
+                                <div class="event-card-body">
+                                    <div class="event-icon-column">
+                                        <div class="event-main-icon">
+                                            <img src="../pictures/calendar.png" alt="Event">
+                                        </div>
+                                    </div>
+
+                                    <div class="event-main-content">
+                                        <h2 class="event-title">Tarantino Retrospective</h2>
+                                        <p class="event-watching">
+                                            Watching: Pulp Fiction
+                                        </p>
+
+                                        <div class="event-meta">
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>Hosted by John Smith</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/calendar.png" alt="">
+                                                <span>Nov 10, 2024</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/clock.png" alt="">
+                                                <span>8:00 PM EST</span>
+                                            </div>
+                                            <div class="event-meta-row">
+                                                <img src="../pictures/people.png" alt="">
+                                                <span>8/10</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="event-cta-row">
+                                    <button class="event-cta-button">
+                                        Join (2 spots left)
+                                    </button>
+                                </div>
+                            </article>
+
+                            <div class="events-load-more-wrap">
+                                <button class="events-load-more-btn">
+                                    Load More Events
+                                </button>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </main>
+
+                <!-- FOOTER -->
+                <div id="footer-container"></div>
+                <script src="../js/include-footer.js"></script>
+
+            </div>
+        </div>
+
+        <script src="../js/events.js"></script>
+    </body>
+</html>

@@ -1,0 +1,282 @@
+/* EVENTS PAGE ONLY */
+
+/* Layout wrapper similar to dashboard */
+.layout-wrapper {
+    display: flex;
+    background-color: #111;
+    min-height: 100vh;
+}
+
+.content-area {
+    flex: 1;
+    padding: 32px 40px 40px;
+    margin-top: 68px;        /* navbar height; JS updates margin-left */
+    transition: margin-left 0.25s ease;
+}
+
+/* Main container */
+.events-main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.events-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.events-header h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.events-header p {
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+/* Host event button */
+.events-host-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    background-color: #e50914;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.events-host-btn:hover {
+    background-color: #ff2630;
+}
+
+.events-host-icon {
+    width: 18px;
+    height: 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.events-host-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* TABS (Option B - small pill group) */
+.events-tabs-section {
+    margin-bottom: 18px;
+}
+
+.events-tabs {
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid #303030;
+    background-color: #111;
+}
+
+.events-tab {
+    border: none;
+    padding: 8px 20px;
+    border-radius: 999px;
+    background: transparent;
+    color: #bfbfbf;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+}
+
+.events-tab--active {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Tab panels */
+.events-tab-panels {
+    display: block;
+}
+
+.events-tab-panel {
+    display: none;
+}
+
+.events-tab-panel--active {
+    display: block;
+}
+
+.events-tab-panel--hidden {
+    display: none;
+}
+
+/* Event card layout */
+.event-card {
+    background-color: #171a1f;
+    border-radius: 16px;
+    padding: 18px 20px 16px;
+    margin-bottom: 16px;
+}
+
+.event-card-body {
+    display: flex;
+    align-items: stretch;
+    gap: 18px;
+}
+
+.event-icon-column {
+    flex: 0 0 80px;
+    display: flex;
+    justify-content: center;
+}
+
+.event-main-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background-color: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-main-icon img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.event-main-content {
+    flex: 1;
+}
+
+/* Titles / watching */
+.event-title {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.event-watching {
+    font-size: 13px;
+    color: #dddddd;
+    margin-bottom: 10px;
+}
+
+/* Meta info */
+.event-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.event-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #bfbfbf;
+}
+
+.event-meta-row img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+/* CTA row */
+.event-cta-row {
+    margin-top: 14px;
+}
+
+.event-cta-button {
+    width: 100%;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: #e50914;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.event-cta-button:hover {
+    background-color: #ff2630;
+}
+
+/* Load more */
+.events-load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.events-load-more-btn {
+    padding: 10px 24px;
+    border-radius: 999px;
+    border: 1px solid #303030;
+    background-color: #171a1f;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.events-load-more-btn:hover {
+    background-color: #202020;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .content-area {
+        padding: 24px 18px 32px;
+    }
+
+    .events-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .event-card-body {
+        flex-direction: row;
+    }
+
+    .event-icon-column {
+        flex: 0 0 60px;
+    }
+}
+
+@media (max-width: 650px) {
+    .events-tabs {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .events-tab {
+        flex: 1;
+        text-align: center;
+        padding-inline: 8px;
+    }
+
+    .event-card-body {
+        flex-direction: column;
+    }
+
+    .event-icon-column {
+        flex: 0 0 auto;
+        justify-content: flex-start;
+    }
+
+    .event-main-icon {
+        width: 52px;
+        height: 52px;
+    }
+}
