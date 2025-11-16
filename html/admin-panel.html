@@ -37,7 +37,7 @@
                     <header class="admin-header">
                         <div class="admin-title-left">
                             <div class="admin-title-icon">
-                                <img src="../pictures/warning.png" alt="Admin">
+                                <img src="../pictures/admin.png" alt="Admin">
                             </div>
                             <div>
                                 <h1>Admin Dashboard</h1>
@@ -51,12 +51,14 @@
 
                         <div class="admin-stat-card">
                             <div class="admin-stat-top">
-                                <span class="admin-stat-label">Total Users</span>
-                                <img src="../pictures/people.png" alt="">
+                                <span class="admin-stat-label">Total
+                                    Users</span>
+                                <img src="../pictures/people.png" alt>
                             </div>
                             <div class="admin-stat-main">
                                 <span class="admin-stat-value">52,341</span>
-                                <span class="admin-stat-change admin-stat-change--positive">
+                                <span
+                                    class="admin-stat-change admin-stat-change--positive">
                                     +8%
                                 </span>
                             </div>
@@ -64,12 +66,14 @@
 
                         <div class="admin-stat-card">
                             <div class="admin-stat-top">
-                                <span class="admin-stat-label">Total Movies</span>
-                                <img src="../pictures/film.png" alt="">
+                                <span class="admin-stat-label">Total
+                                    Movies</span>
+                                <img src="../pictures/film.png" alt>
                             </div>
                             <div class="admin-stat-main">
                                 <span class="admin-stat-value">12,847</span>
-                                <span class="admin-stat-change admin-stat-change--positive">
+                                <span
+                                    class="admin-stat-change admin-stat-change--positive">
                                     +3%
                                 </span>
                             </div>
@@ -77,8 +81,9 @@
 
                         <div class="admin-stat-card">
                             <div class="admin-stat-top">
-                                <span class="admin-stat-label">Pending Reports</span>
-                                <img src="../pictures/flag-red.png" alt="">
+                                <span class="admin-stat-label">Pending
+                                    Reports</span>
+                                <img src="../pictures/flag-red.png" alt>
                             </div>
                             <div class="admin-stat-main">
                                 <span class="admin-stat-value">23</span>
@@ -87,12 +92,14 @@
 
                         <div class="admin-stat-card">
                             <div class="admin-stat-top">
-                                <span class="admin-stat-label">Active Sessions</span>
-                                <img src="../pictures/trending.png" alt="">
+                                <span class="admin-stat-label">Active
+                                    Sessions</span>
+                                <img src="../pictures/trending-red.png" alt>
                             </div>
                             <div class="admin-stat-main">
                                 <span class="admin-stat-value">3,421</span>
-                                <span class="admin-stat-change admin-stat-change--positive">
+                                <span
+                                    class="admin-stat-change admin-stat-change--positive">
                                     +12%
                                 </span>
                             </div>
@@ -104,28 +111,31 @@
                     <section class="admin-quick-actions">
                         <div class="admin-quick-card">
                             <div class="admin-quick-icon">
-                                <img src="../pictures/people.png" alt="">
+                                <img src="../pictures/people.png" alt>
                             </div>
-                            <span class="admin-quick-label">User Management</span>
+                            <span class="admin-quick-label">User
+                                Management</span>
                         </div>
 
                         <div class="admin-quick-card">
                             <div class="admin-quick-icon">
-                                <img src="../pictures/film.png" alt="">
+                                <img src="../pictures/film.png" alt>
                             </div>
-                            <span class="admin-quick-label">Movie Management</span>
+                            <span class="admin-quick-label">Movie
+                                Management</span>
                         </div>
 
                         <div class="admin-quick-card">
                             <div class="admin-quick-icon">
-                                <img src="../pictures/warning.png" alt="">
+                                <img src="../pictures/warning.png" alt>
                             </div>
-                            <span class="admin-quick-label">Moderation Queue</span>
+                            <span class="admin-quick-label">Moderation
+                                Queue</span>
                         </div>
 
                         <div class="admin-quick-card">
                             <div class="admin-quick-icon">
-                                <img src="../pictures/report.png" alt="">
+                                <img src="../pictures/report.png" alt>
                             </div>
                             <span class="admin-quick-label">View Reports</span>
                         </div>
@@ -143,43 +153,62 @@
                                     <h2>Rating Distribution</h2>
                                 </header>
 
-                                <div id="rating-chart" class="rating-chart-container">
-                                    <!-- D3.js chart renders inside this container -->
+                                <div class="rating-chart-wrapper">
+                                    <div id="rating-chart"
+                                        class="rating-chart-container"></div>
                                 </div>
+
                             </section>
 
                             <!-- FLAGGED CONTENT -->
-                            <section class="admin-card admin-flagged-card" style="margin-top: 30px;">
-                                <header class="admin-card-header admin-flagged-header">
+                            <section class="admin-card admin-flagged-card"
+                                style="margin-top: 30px;">
+                                <header
+                                    class="admin-card-header admin-flagged-header">
                                     <div class="admin-flagged-title">
-                                        <img src="../pictures/flag-red.png" alt="">
+                                        <img src="../pictures/flag-red.png" alt>
                                         <h2>Flagged Content</h2>
                                     </div>
-                                    <button class="admin-view-all-btn">View All</button>
+                                    <button class="admin-view-all-btn">View
+                                        All</button>
                                 </header>
 
                                 <div class="flagged-table-header">
-                                    <span class="flagged-col flagged-col--type">Type</span>
-                                    <span class="flagged-col flagged-col--content">Content</span>
-                                    <span class="flagged-col flagged-col--reporter">Reporter</span>
-                                    <span class="flagged-col flagged-col--date">Date</span>
-                                    <span class="flagged-col flagged-col--status">Status</span>
-                                    <span class="flagged-col flagged-col--actions">Actions</span>
+                                    <div class="flagged-table-wrapper">
+                                        <span
+                                            class="flagged-col flagged-col--type">Type</span>
+                                        <span
+                                            class="flagged-col flagged-col--content">Content</span>
+                                        <span
+                                            class="flagged-col flagged-col--reporter">Reporter</span>
+                                        <span
+                                            class="flagged-col flagged-col--date">Date</span>
+                                        <span
+                                            class="flagged-col flagged-col--status">Status</span>
+                                        <span
+                                            class="flagged-col flagged-col--actions">Actions</span></div>
                                 </div>
 
                                 <div class="flagged-row">
-                                    <span class="flagged-type-pill">Review</span>
+                                    <span
+                                        class="flagged-type-pill">Review</span>
                                     <span class="flagged-content">
-                                        Inappropriate language in review of "The Matrix"
+                                        Inappropriate language in review of
+                                        "The Matrix"
                                     </span>
-                                    <span class="flagged-reporter">John Smith</span>
-                                    <span class="flagged-date">2 hours ago</span>
-                                    <span class="flagged-status flagged-status--pending">pending</span>
+                                    <span class="flagged-reporter">John
+                                        Smith</span>
+                                    <span class="flagged-date">2 hours
+                                        ago</span>
+                                    <span
+                                        class="flagged-status flagged-status--pending">pending</span>
                                     <span class="flagged-actions">
-                                        <button class="flagged-btn flagged-btn--secondary">
+                                        <button
+                                            class="flagged-btn flagged-btn--secondary">
                                             Review
                                         </button>
-                                        <button class="flagged-btn flagged-btn--danger">
+                                        <button
+                                            class="flagged-btn flagged-btn--danger">
                                             Remove
                                         </button>
                                     </span>
@@ -190,32 +219,42 @@
                                     <span class="flagged-content">
                                         Spam post in General Discussion
                                     </span>
-                                    <span class="flagged-reporter">Sarah Connor</span>
-                                    <span class="flagged-date">5 hours ago</span>
-                                    <span class="flagged-status flagged-status--pending">pending</span>
+                                    <span class="flagged-reporter">Sarah
+                                        Connor</span>
+                                    <span class="flagged-date">5 hours
+                                        ago</span>
+                                    <span
+                                        class="flagged-status flagged-status--pending">pending</span>
                                     <span class="flagged-actions">
-                                        <button class="flagged-btn flagged-btn--secondary">
+                                        <button
+                                            class="flagged-btn flagged-btn--secondary">
                                             Review
                                         </button>
-                                        <button class="flagged-btn flagged-btn--danger">
+                                        <button
+                                            class="flagged-btn flagged-btn--danger">
                                             Remove
                                         </button>
                                     </span>
                                 </div>
 
                                 <div class="flagged-row">
-                                    <span class="flagged-type-pill">Comment</span>
+                                    <span
+                                        class="flagged-type-pill">Comment</span>
                                     <span class="flagged-content">
                                         Harassment in comment thread
                                     </span>
-                                    <span class="flagged-reporter">Emma Wilson</span>
+                                    <span class="flagged-reporter">Emma
+                                        Wilson</span>
                                     <span class="flagged-date">1 day ago</span>
-                                    <span class="flagged-status flagged-status--pending">pending</span>
+                                    <span
+                                        class="flagged-status flagged-status--pending">pending</span>
                                     <span class="flagged-actions">
-                                        <button class="flagged-btn flagged-btn--secondary">
+                                        <button
+                                            class="flagged-btn flagged-btn--secondary">
                                             Review
                                         </button>
-                                        <button class="flagged-btn flagged-btn--danger">
+                                        <button
+                                            class="flagged-btn flagged-btn--danger">
                                             Remove
                                         </button>
                                     </span>
@@ -228,14 +267,17 @@
                                     </span>
                                     <span class="flagged-reporter">System</span>
                                     <span class="flagged-date">1 day ago</span>
-                                    <span class="flagged-status flagged-status--reviewing">
+                                    <span
+                                        class="flagged-status flagged-status--reviewing">
                                         reviewing
                                     </span>
                                     <span class="flagged-actions">
-                                        <button class="flagged-btn flagged-btn--secondary">
+                                        <button
+                                            class="flagged-btn flagged-btn--secondary">
                                             Review
                                         </button>
-                                        <button class="flagged-btn flagged-btn--danger">
+                                        <button
+                                            class="flagged-btn flagged-btn--danger">
                                             Remove
                                         </button>
                                     </span>
@@ -250,12 +292,14 @@
                             <section class="admin-card admin-recent-users-card">
                                 <header class="admin-card-header">
                                     <h2>Recent Users</h2>
-                                    <button class="admin-view-all-link">View All</button>
+                                    <button class="admin-view-all-link">View
+                                        All</button>
                                 </header>
 
                                 <div class="recent-user-item">
                                     <div class="recent-user-main">
-                                        <span class="recent-user-name">Alex Turner</span>
+                                        <span class="recent-user-name">Alex
+                                            Turner</span>
                                         <span class="recent-user-email">
                                             alex.turner@example.com
                                         </span>
@@ -263,14 +307,16 @@
                                             Joined 2 hours ago
                                         </span>
                                     </div>
-                                    <span class="recent-user-status recent-user-status--active">
+                                    <span
+                                        class="recent-user-status recent-user-status--active">
                                         active
                                     </span>
                                 </div>
 
                                 <div class="recent-user-item">
                                     <div class="recent-user-main">
-                                        <span class="recent-user-name">Maria Garcia</span>
+                                        <span class="recent-user-name">Maria
+                                            Garcia</span>
                                         <span class="recent-user-email">
                                             maria.g@example.com
                                         </span>
@@ -278,14 +324,16 @@
                                             Joined 5 hours ago
                                         </span>
                                     </div>
-                                    <span class="recent-user-status recent-user-status--active">
+                                    <span
+                                        class="recent-user-status recent-user-status--active">
                                         active
                                     </span>
                                 </div>
 
                                 <div class="recent-user-item">
                                     <div class="recent-user-main">
-                                        <span class="recent-user-name">David Chen</span>
+                                        <span class="recent-user-name">David
+                                            Chen</span>
                                         <span class="recent-user-email">
                                             david.chen@example.com
                                         </span>
@@ -293,14 +341,16 @@
                                             Joined 1 day ago
                                         </span>
                                     </div>
-                                    <span class="recent-user-status recent-user-status--active">
+                                    <span
+                                        class="recent-user-status recent-user-status--active">
                                         active
                                     </span>
                                 </div>
 
                                 <div class="recent-user-item">
                                     <div class="recent-user-main">
-                                        <span class="recent-user-name">Sophie Laurent</span>
+                                        <span class="recent-user-name">Sophie
+                                            Laurent</span>
                                         <span class="recent-user-email">
                                             sophie.l@example.com
                                         </span>
@@ -308,7 +358,8 @@
                                             Joined 2 days ago
                                         </span>
                                     </div>
-                                    <span class="recent-user-status recent-user-status--active">
+                                    <span
+                                        class="recent-user-status recent-user-status--active">
                                         active
                                     </span>
                                 </div>
