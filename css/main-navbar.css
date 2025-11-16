@@ -296,3 +296,13 @@ body {
     background-color: #e50914; /* Darker red on hover */
     transform: scale(1.05) translateY(-1px);
 }
+.user-status-dot {
+    width: 8px;
+    height: 8px;
+    background: #4caf50;  /* green online */
+    border-radius: 50%;
+    margin-left: -6px;     /* visually attaches to user image */
+    margin-top: 22px;
+    border: 2px solid #111; /* blends with navbar */
+    position: absolute;
+}

@@ -1,0 +1,442 @@
+/* -------------------------------------------------
+   PROFILE PAGE — MAIN WRAPPER
+--------------------------------------------------*/
+
+.profile-content {
+    padding: 30px 40px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+}
+
+/* -------------------------------------------------
+   BACK BUTTON
+--------------------------------------------------*/
+/* Fix profile page content being pushed behind navbar */
+.profile-page {
+    padding-top: 120px;   /* Matches navbar height */
+}
+
+.profile-back-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #1e1e1e;
+    border: 1px solid #2a2a2a;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.profile-back-btn img {
+    width: 16px;
+    opacity: 0.6;
+}
+
+/* -------------------------------------------------
+   HEADER CARD
+--------------------------------------------------*/
+
+.profile-header-card {
+    width: 80%;
+    background: #151515;
+    padding: 30px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #222;
+}
+
+.profile-header-left {
+    display: flex;
+    gap: 25px;
+}
+
+.profile-avatar img {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+}
+
+.profile-info-text h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.username {
+    color: #ccc;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+
+.bio {
+    font-size: 15px;
+    color: #bdbdbd;
+    line-height: 1.4;
+    max-width: 600px;
+    margin-bottom: 12px;
+}
+
+.profile-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #9b9b9b;
+    font-size: 14px;
+}
+
+.profile-meta img {
+    width: 16px;
+    opacity: 0.8;
+}
+
+.profile-meta .dot {
+    font-size: 18px;
+    color: #666;
+}
+
+/* -------------------------------------------------
+   HEADER RIGHT BUTTONS
+--------------------------------------------------*/
+
+.profile-header-right {
+    height: 72px;
+    /* justify-content: left;    */
+    vertical-align: middle;
+    /* align-items: center; */
+    /* display: flex; */
+    /* gap: 12px; */
+}
+
+.edit-profile-btn {
+    background: #d60000;
+    vertical-align: middle;
+    /* margin-top: 0; */
+    padding: 10px 22px;
+    /* padding-top: 30px; */
+    /* padding-bottom: 30px; */
+    border-radius: 12px;
+    border: none;
+    color: #fff;
+    font-size: large;
+    font-weight: 900;    
+    cursor: pointer;
+}
+
+
+/* -------------------------------------------------
+   METRICS GRID
+--------------------------------------------------*/
+
+.profile-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(15%, 19%));
+    gap: 18px;
+}
+
+.metric-card {
+    background: #151515;
+    padding: 25px 20px;
+    border-radius: 16px;
+    border: 1px solid #222;
+}
+
+.metric-card h2 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.metric-card p {
+    margin: 0;
+    margin-top: 6px;
+    color: #bbbbbb;
+}
+
+/* -------------------------------------------------
+   FAVORITE GENRES
+--------------------------------------------------*/
+
+.favorite-genres-card {
+    width: 80%;
+    background: #151515;
+    padding: 25px;
+    border-radius: 16px;
+    border: 1px solid #222;
+}
+
+.fg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fg-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.fg-edit-btn {
+    background: transparent;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.fg-edit-btn img {
+    width: 14px;
+    opacity: 0.6;
+}
+
+.fg-genres {
+    margin-top: 20px;
+    display: flex;
+    gap: 24px;
+}
+
+.fg-genres span {
+    color: #d23131;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* -------------------------------------------------
+   TABS
+--------------------------------------------------*/
+
+.profile-tabs {
+    display: flex;
+    gap: 12px;
+}
+
+.tab-btn {
+    background: #1c1c1c;
+    padding: 8px 18px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.tab-btn.active {
+    background: #fff;
+    color: #000;
+    font-weight: 700;
+    border-color: #fff;
+}
+
+/* -------------------------------------------------
+   TAB CONTENT SECTIONS
+--------------------------------------------------*/
+
+.tab-content {
+    display: none;
+    animation: fade 0.2s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* -------------------------------------------------
+   REVIEWS
+--------------------------------------------------*/
+
+.review-card {
+    width: 80%;
+    background: #151515;
+    padding: 22px 24px;
+    border-radius: 16px;
+    border: 1px solid #222;
+    margin-bottom: 20px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.review-user {
+    display: flex;
+    gap: 14px;
+}
+
+.review-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.review-rating img {
+    width: 18px;
+}
+
+.review-text {
+    margin: 14px 0 12px 0;
+    color: #ddd;
+    line-height: 1.45;
+}
+
+.review-stats {
+    display: flex;
+    gap: 22px;
+    color: #aaa;
+}
+
+.review-stats img {
+    width: 16px;
+    opacity: 0.7;
+}
+
+.center-wrap {
+    display: flex;
+    justify-content: center;
+}
+
+.view-all-btn {
+    background: #d60000;
+    padding: 10px 26px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* -------------------------------------------------
+   MOVIES GRID (Top Movies tab)
+--------------------------------------------------*/
+
+.movies-grid {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 22px;
+    padding-bottom: 60px;
+}
+
+/* Movie Card (copied exactly from browse-movies.css) */
+
+.movie-card {
+    
+    background: #151515;
+    border-radius: 16px;
+    border: 1px solid #202020;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie-poster {
+    height: 260px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.poster-placeholder {
+    width: 48px;
+    height: 48px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+.movie-info {
+    padding: 16px;
+}
+
+.movie-info h3 {
+    margin: 0;
+}
+
+.movie-meta {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.movie-meta .dot {
+    color: #555;
+}
+
+.movie-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #f0c040;
+}
+
+.movie-rating img {
+    width: 16px;
+}
+
+/* -------------------------------------------------
+   ACTIVITY
+--------------------------------------------------*/
+
+.activity-item {
+    width: 80%;
+    background: #151515;
+    border-radius: 14px;
+    border: 1px solid #222;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.dot-circle {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+}
+
+.activity-item.red .dot-circle { background: #d93030; }
+.activity-item.green .dot-circle { background: #3cc45e; }
+.activity-item.orange .dot-circle { background: #e6a300; }
+
+.activity-item p {
+    margin: 0;
+    color: #ddd;
+}
+
+/* -------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------*/
+
+@media (max-width: 1450px) {
+    .profile-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .profile-header-card {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .profile-header-right {
+        justify-content: flex-end;
+    }
+}
