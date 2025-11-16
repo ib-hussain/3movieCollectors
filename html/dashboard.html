@@ -1,221 +1,385 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>Dashboard - 3movCollectors</title>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Dashboard - 3movCollectors</title>
 
-    <!-- Component CSS -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+        <!-- Component CSS -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
 
-    <!-- Page CSS -->
-    <link rel="stylesheet" href="../css/dashboard.css">
+        <!-- Page CSS -->
+        <link rel="stylesheet" href="../css/dashboard.css">
 
-    <link rel="icon" href="../pictures/M.png" />
-</head>
+        <link rel="icon" href="../pictures/M.png" />
+    </head>
 
-<body>
+    <body>
 
-<!-- NAVBAR -->
-<div id="navbar-container"></div>
-<script src="../js/include-main-navbar.js"></script>
+        <!-- NAVBAR -->
+        <div id="navbar-container"></div>
+        <script src="../js/include-main-navbar.js"></script>
 
-<!-- MAIN WRAPPER -->
-<div class="layout-wrapper">
+        <!-- MAIN WRAPPER -->
+        <div class="layout-wrapper">
 
-    <!-- SIDEBAR -->
-    <div id="sidepanel-container"></div>
-    <script src="../js/include-side-panel.js"></script>
+            <!-- SIDEBAR -->
+            <div id="sidepanel-container"></div>
+            <script src="../js/include-side-panel.js"></script>
 
-    <!-- CONTENT -->
-    <div class="content-area">
+            <!-- CONTENT -->
+            <div class="content-area">
 
-        <main class="dashboard-main">
+                <main class="dashboard-main">
 
-            <header class="dashboard-header">
-                <h1>Welcome back, Alex!</h1>
-                <p>Here's what's happening in your movie community today</p>
-            </header>
+                    <header class="dashboard-header">
+                        <h1>Welcome back, Alex!</h1>
+                        <p>Here's what's happening in your movie community
+                            today</p>
+                    </header>
 
-            <!-- GRID -->
-            <section class="dashboard-grid">
+                    <!-- GRID -->
+                    <section class="dashboard-grid">
 
-                <!-- LEFT COLUMN -->
-                <div class="dashboard-left">
+                        <!-- LEFT COLUMN -->
+                        <div class="dashboard-left">
 
-                    <div class="stats-row">
+                            <div class="stats-row">
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Movies Watched</span>
-                                <img src="../pictures/film.png" />
+                                <div class="stat-card">
+                                    <div class="stat-top">
+                                        <span>Movies Watched</span>
+                                        <img src="../pictures/film.png" />
+                                    </div>
+                                    <div class="stat-main">
+                                        <span class="stat-value">127</span>
+                                        <span
+                                            class="stat-change positive">+12%</span>
+                                    </div>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-top">
+                                        <span>Friends</span>
+                                        <img src="../pictures/friends.png" />
+                                    </div>
+                                    <span class="stat-value">48</span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-top">
+                                        <span>Upcoming Events</span>
+                                        <img src="../pictures/calendar.png" />
+                                    </div>
+                                    <span class="stat-value">3</span>
+                                </div>
+
+                                <div class="stat-card">
+                                    <div class="stat-top">
+                                        <span>Activity Score</span>
+                                        <img src="../pictures/trending.png" />
+                                    </div>
+                                    <div class="stat-main">
+                                        <span class="stat-value">892</span>
+                                        <span
+                                            class="stat-change positive">+5%</span>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="stat-main">
-                                <span class="stat-value">127</span>
-                                <span class="stat-change positive">+12%</span>
-                            </div>
+
+                            <section class="activity-header">
+                                <h2>Activity Feed</h2>
+                                <button class="filter-btn">Filter</button>
+                            </section>
+
+                            <section class="activity-feed">
+
+                                <!-- FEED CARD 1 -->
+                                <article class="feed-card">
+                                    <div class="feed-header">
+                                        <div class="feed-avatar">
+                                            <img
+                                                src="../pictures/profile.png" />
+                                        </div>
+                                        <div class="feed-meta">
+                                            <div class="feed-title-row">
+                                                <span class="feed-name">Sarah
+                                                    Connor</span>
+                                                <span class="feed-in">in</span>
+                                                <a class="feed-topic">General
+                                                    Discussion</a>
+                                            </div>
+                                            <span class="feed-time">2 hours
+                                                ago</span>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        Just finished watching The Godfather
+                                        trilogy back-to-back. What an incredible
+                                        journey!
+                                    </p>
+
+                                    <div class="feed-footer">
+                                        <div class="feed-stats">
+                                            <span>24 likes</span>
+                                            <span class="feed-dot">•</span>
+                                            <span>2 comments</span>
+                                        </div>
+                                        <button class="share-btn">
+                                            <img src="../pictures/share.png" />
+                                        </button>
+                                    </div>
+                                </article>
+
+                                <!-- FEED CARD 2 -->
+                                <article class="feed-card">
+                                    <div class="feed-header">
+                                        <div class="feed-avatar">
+                                            <img
+                                                src="../pictures/profile.png" />
+                                        </div>
+                                        <div class="feed-meta">
+                                            <div class="feed-title-row">
+                                                <span class="feed-name">John
+                                                    Smith</span>
+                                                <span class="feed-dot">•</span>
+                                                <span class="feed-time-inline">5
+                                                    hours ago</span>
+                                            </div>
+                                            <span class="feed-subtitle">reviewed
+                                                Inception</span>
+                                        </div>
+                                        <div class="feed-rating-pill">
+                                            <img src="../pictures/star.png" />
+                                            <span>9.5</span>
+                                        </div>
+                                    </div>
+
+                                    <p>
+                                        A mind-bending masterpiece that gets
+                                        better with every rewatch.
+                                    </p>
+
+                                    <div class="feed-footer">
+                                        <div class="feed-stats">
+                                            <span>45 likes</span>
+                                            <span class="feed-dot">•</span>
+                                            <span>12 comments</span>
+                                        </div>
+                                        <button class="share-btn">
+                                            <img src="../pictures/share.png" />
+                                        </button>
+                                    </div>
+                                </article>
+
+                                <div class="load-more-wrap">
+                                    <button class="load-more-btn">Load More
+                                        Activity</button>
+                                </div>
+
+                            </section>
+
                         </div>
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Friends</span>
-                                <img src="../pictures/friends.png" />
-                            </div>
-                            <span class="stat-value">48</span>
-                        </div>
+                        <!-- RIGHT COLUMN -->
+                        <aside class="trending-panel">
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Upcoming Events</span>
-                                <img src="../pictures/calendar.png" />
+                            <div class="trending-title">
+                                <img src="../pictures/trending-red.png" />
+                                <h2>Trending Now</h2>
                             </div>
-                            <span class="stat-value">3</span>
-                        </div>
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Activity Score</span>
-                                <img src="../pictures/trending.png" />
+                            <div class="trending-tabs">
+                                <button
+                                    class="trending-tab trending-tab--active"
+                                    data-tab="trending">Trending</button>
+                                <button class="trending-tab"
+                                    data-tab="recommended">Recommended</button>
                             </div>
-                            <div class="stat-main">
-                                <span class="stat-value">892</span>
-                                <span class="stat-change positive">+5%</span>
-                            </div>
-                        </div>
 
-                    </div>
+                            <!-- TRENDING TAB CONTENT -->
+                            <ul class="trending-list" id="trendingList">
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>The Shawshank Redemption</h3>
+                                        <div class="trending-meta">
+                                            <span>9,543 views</span>
+                                            <span class="positive">+5%</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>9.3</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">1</span>
+                                </li>
 
-                    <section class="activity-header">
-                        <h2>Activity Feed</h2>
-                        <button class="filter-btn">Filter</button>
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>The Godfather</h3>
+                                        <div class="trending-meta">
+                                            <span>8,932 views</span>
+                                            <span class="positive">+4%</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>9.2</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">2</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>The Dark Knight</h3>
+                                        <div class="trending-meta">
+                                            <span>8,101 views</span>
+                                            <span class="positive">+3%</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>9.0</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">3</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>12 Angry Men</h3>
+                                        <div class="trending-meta">
+                                            <span>7,543 views</span>
+                                            <span class="positive">+2%</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>9.0</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">4</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Pulp Fiction</h3>
+                                        <div class="trending-meta">
+                                            <span>7,021 views</span>
+                                            <span class="positive">+1%</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.9</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">5</span>
+                                </li>
+                            </ul>
+
+                            <!-- RECOMMENDED TAB CONTENT -->
+                            <ul class="trending-list trending-list--hidden"
+                                id="recommendedList">
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Inception</h3>
+                                        <div class="trending-meta">
+                                            <span>Because you liked
+                                                mind-benders</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.8</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">1</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Interstellar</h3>
+                                        <div class="trending-meta">
+                                            <span>From your favourite director
+                                                list</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.6</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">2</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Parasite</h3>
+                                        <div class="trending-meta">
+                                            <span>Popular in your region</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.6</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">3</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Whiplash</h3>
+                                        <div class="trending-meta">
+                                            <span>Based on your drama
+                                                picks</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.5</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">4</span>
+                                </li>
+
+                                <li class="trending-item">
+                                    <div class="trending-thumb"></div>
+                                    <div class="trending-info">
+                                        <h3>Fight Club</h3>
+                                        <div class="trending-meta">
+                                            <span>Because you liked
+                                                thrillers</span>
+                                        </div>
+                                        <div class="trending-rating">
+                                            <img src="../pictures/star.png" />
+                                            <span>8.8</span>
+                                        </div>
+                                    </div>
+                                    <span class="trending-rank">5</span>
+                                </li>
+                            </ul>
+
+                        </aside>
+
                     </section>
 
-                    <section class="activity-feed">
+                </main>
 
-                        <!-- FEED CARD 1 -->
-                        <article class="feed-card">
-                            <div class="feed-header">
-                                <div class="feed-avatar">
-                                    <img src="../pictures/profile.png" />
-                                </div>
-                                <div class="feed-meta">
-                                    <div class="feed-title-row">
-                                        <span class="feed-name">Sarah Connor</span>
-                                        <span class="feed-in">in</span>
-                                        <a class="feed-topic">General Discussion</a>
-                                    </div>
-                                    <span class="feed-time">2 hours ago</span>
-                                </div>
-                            </div>
+                <!-- FOOTER -->
+                <div id="footer-container"></div>
+                <script src="../js/include-footer.js"></script>
 
-                            <p>
-                                Just finished watching The Godfather trilogy back-to-back. What an incredible journey!
-                            </p>
+            </div>
+        </div>
 
-                            <div class="feed-footer">
-                                <div class="feed-stats">
-                                    <span>24 likes</span>
-                                    <span class="feed-dot">•</span>
-                                    <span>2 comments</span>
-                                </div>
-                                <button class="share-btn">
-                                    <img src="../pictures/share.png" />
-                                </button>
-                            </div>
-                        </article>
+        <script src="../js/dashboard.js"></script>
 
-                        <!-- FEED CARD 2 -->
-                        <article class="feed-card">
-                            <div class="feed-header">
-                                <div class="feed-avatar">
-                                    <img src="../pictures/profile.png" />
-                                </div>
-                                <div class="feed-meta">
-                                    <div class="feed-title-row">
-                                        <span class="feed-name">John Smith</span>
-                                        <span class="feed-dot">•</span>
-                                        <span class="feed-time-inline">5 hours ago</span>
-                                    </div>
-                                    <span class="feed-subtitle">reviewed Inception</span>
-                                </div>
-                                <div class="feed-rating-pill">
-                                    <img src="../pictures/star.png" />
-                                    <span>9.5</span>
-                                </div>
-                            </div>
-
-                            <p>
-                                A mind-bending masterpiece that gets better with every rewatch.
-                            </p>
-
-                            <div class="feed-footer">
-                                <div class="feed-stats">
-                                    <span>45 likes</span>
-                                    <span class="feed-dot">•</span>
-                                    <span>12 comments</span>
-                                </div>
-                                <button class="share-btn">
-                                    <img src="../pictures/share.png" />
-                                </button>
-                            </div>
-                        </article>
-
-                        <div class="load-more-wrap">
-                            <button class="load-more-btn">Load More Activity</button>
-                        </div>
-
-                    </section>
-
-                </div>
-
-                <!-- RIGHT COLUMN -->
-                <aside class="trending-panel">
-
-                    <div class="trending-title">
-                        <img src="../pictures/trending-red.png" />
-                        <h2>Trending Now</h2>
-                    </div>
-
-                    <div class="trending-tabs">
-                        <button class="trending-tab trending-tab--active" data-tab="trending">Trending</button>
-                        <button class="trending-tab" data-tab="recommended">Recommended</button>
-                    </div>
-
-                    <ul class="trending-list" id="trendingList">
-                        <li class="trending-item">
-                            <div class="trending-thumb"></div>
-                            <div class="trending-info">
-                                <h3>The Shawshank Redemption</h3>
-                                <div class="trending-meta">
-                                    <span>9,543 views</span>
-                                    <span class="positive">+5%</span>
-                                </div>
-                                <div class="trending-rating">
-                                    <img src="../pictures/star.png" />
-                                    <span>9.3</span>
-                                </div>
-                            </div>
-                            <span class="trending-rank">1</span>
-                        </li>
-                    </ul>
-
-                    <ul class="trending-list trending-list--hidden" id="recommendedList"></ul>
-
-                </aside>
-
-            </section>
-
-        </main>
-
-        <!-- FOOTER -->
-        <div id="footer-container"></div>
-        <script src="../js/include-footer.js"></script>
-
-    </div>
-</div>
-
-<script src="../js/dashboard.js"></script>
-
-</body>
+    </body>
 </html>
