@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
 
-/* ===========================
-   Global reset & base styles
-   =========================== */
+/* ======================================
+   ROOT VARIABLES (Fixes var(--accent-red))
+====================================== */
+:root {
+    --accent-red: #e02626;  /* Your chosen red */
+    --brand: #ffffff;
+}
+
+/* ======================================
+   Global reset
+====================================== */
 * {
     margin: 0;
     padding: 0;
@@ -14,12 +22,12 @@ body {
     font-family: Arial, sans-serif;
     color: #fff;
     background: transparent;
-  transition: transform .25s ease;
+    transition: transform .25s ease;
 }
 
-/* ===========================
+/* ======================================
    NAVBAR CONTAINER
-   =========================== */
+====================================== */
 .navbar {
     width: 100%;
     padding: 14px 40px;
@@ -28,81 +36,41 @@ body {
     justify-content: space-between;
     background: #171a1f;
     gap: 24px;
-    position: fixed;      /* ADD THIS */
-    top: 0;               /* ADD THIS */
-    left: 0;              /* ADD THIS */
-    z-index: 100;         /* ADD THIS */
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
-/* ===========================
-   LEFT (LOGO + TITLE)
-   =========================== */
-/* .nav-left {
-    display: flex;
+/* ======================================
+    BRAND (LEFT)
+====================================== */
+.navbar-brand {
+    font-family: 'Manrope', sans-serif;
+    font-weight: bolder;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-    
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s ease;
+    gap: 6px;
+    color: var(--brand);
+    text-decoration: none;
+    font-size: 28px;
+    line-height: 1;
+    transition: transform .25s ease;
+    margin-left: 20px;
 }
 
-.nav-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.navbar-brand:hover {
+    transform: scale(1.06);
 }
 
-.nav-logo:hover {
-    transform: scale(1.05);
+.navbar-logo {
+    height: 36px;
+    width: 36px;
 }
 
-.nav-title {
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-.nav-title:hover {
-    color: #f5f5f5;
-    transform: scale(1.05);
-    
-} */
-/* ---------- Brand (left) ---------- */
-.navbar-brand{
-  /* position: absolute; */
-  /* left: 20px; */
-  /* padding: 15px 0; */
-  font-family: 'Manrope', sans-serif;
-  font-weight:bolder;
-
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-
-  color: var(--brand);
-  text-decoration: none;
-  font-size: 28px;
-  line-height: 1;
-  transition: transform .25s ease;
-  margin-left: 20px;
-}
-.navbar-brand:hover,
-.navbar-brand:active{ transform: scale(1.06); }
-
-.navbar-logo{
-  height: 36px;
-  width: auto;
-  vertical-align: middle;
-} 
-/* ===========================
-   CENTER (SEARCH BAR)
-   =========================== */
+/* ======================================
+   CENTER SEARCH BAR
+====================================== */
 .nav-search {
     flex: 1;
     max-width: 55%;
@@ -117,10 +85,8 @@ body {
 }
 
 .nav-search:hover {
-    /* border-color: #3a3a3a; */
     border-color: #ffffff;
     background: #212429;
-    /* box-shadow: 0 0 0 1px #272727; */
 }
 
 .search-icon-img {
@@ -128,7 +94,6 @@ body {
     height: 18px;
     opacity: 0.7;
     object-fit: contain;
-    flex-shrink: 0;
 }
 
 .nav-search input {
@@ -144,17 +109,16 @@ body {
     color: #777;
 }
 
-/* ===========================
-   RIGHT (ICONS + USER)
-   =========================== */
+/* ======================================
+   NAV RIGHT (ICONS + USER)
+====================================== */
 .nav-right {
     display: flex;
     align-items: center;
     gap: 18px;
-    flex-shrink: 0;
 }
 
-/* Icon buttons reset */
+/* Base icon button */
 .icon-btn {
     border: none;
     background: transparent;
@@ -162,7 +126,7 @@ body {
     cursor: pointer;
 }
 
-/* White round background for icons */
+/* Icon background circle */
 .icon-circle {
     position: relative;
     width: 34px;
@@ -172,17 +136,29 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.25s ease;
+    transition: transform 0.25s ease, background-color .2s ease;
+}
+.icon-circle-profile {
+    position: relative;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background-color .2s ease;
 }
 
-
+/* Icon image */
 .icon-img {
     width: 18px;
     height: 18px;
     object-fit: contain;
+    transition: filter .2s ease;
 }
 
-/* Badge for notifications/messages */
+/* Badge */
 .icon-badge {
     position: absolute;
     top: -4px;
@@ -194,148 +170,135 @@ body {
     background-color: #e50914;
     color: #fff;
     font-size: 11px;
-    line-height: 16px;
-    text-align: center;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.icon-circle:hover{
+/* ======================================
+   HOVER EFFECTS (Shared for all icons)
+====================================== */
+.icon-circle:hover {
     background-color: #e50914;
-    color: white;
-    transform: scale(1.06); 
-    /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45); */
+    transform: scale(1.06);
 }
-.icon-badge:hover {
-    color: #e50914;
+
+.icon-circle-profile:hover {
+    background-color: #5c8bc0   ;
+    transform: scale(1.06);
+}
+
+.icon-circle:hover .icon-img {
+    filter: invert(1);
+}
+
+/* ======================================
+   ACTIVE STATE (Notifications, Messages)
+====================================== */
+.icon-btn.active .icon-circle {
+    background-color: var(--accent-red);
+    transform: scale(1.06);
+}
+
+.icon-btn.active .icon-img {
+    filter: invert(1);
+}
+
+.icon-btn.active .icon-badge .icon-btn{
     background-color: white;
-    transform: scale(1.06); 
+    color: var(--accent-red);
 }
-/* Vertical separator line between icons and user */
+
+ /* ======================================
+   FIX: NOTIFICATIONS ICON
+/* ======================================
+   FIX: MESSAGES MATCH NOTIFICATIONS
+====================================== */
+.icon-btn.messages-btn:hover .icon-circle {
+    background-color: var(--accent-red);
+}
+
+.icon-btn.messages-btn:hover .icon-img {
+    filter: invert(1);
+}
+
+.icon-btn.messages-btn.active .icon-circle {
+    background-color: var(--accent-red);
+}
+
+.icon-btn.messages-btn.active .icon-img {
+    filter: invert(1);
+}
+
+/* ======================================
+   SEPARATOR LINE
+====================================== */
 .nav-separator {
     background-color: #ffffff;
     width: 1px;
     height: 28px;
-    object-fit: contain;
     opacity: 0.55;
-    margin: 0 10px;
 }
 
-/* User section */
+/* ======================================
+   USER SECTION
+====================================== */
 .user-section {
     display: flex;
     align-items: center;
-    gap: 10px;
 }
 
 .user-circle {
     width: 36px;
     height: 36px;
+    position: relative;
 }
 
-/* ===========================
-   RESPONSIVE BEHAVIOUR
-   =========================== */
+/* ONLINE DOT FIXED */
+.user-circle::after {
+    content: "";
+    position: absolute;
+    width: 9px;
+    height: 9px;
+    background: #4caf50;
+    border-radius: 50%;
+    bottom: -1px;
+    right: -1px;
+    border: 2px solid #171a1f;
+}
+/* FIXED — Profile Active State Uses Your Assigned Color */
+/* ======================================================
+   PROFILE PAGE – ACTIVE STATE COLOR FIX
+   ======================================================*/
 
-/* Large desktops: let search expand */
-@media (min-width: 1600px) {
-    .nav-search {
-        max-width: 50%;
-    }
+.user-section.active .icon-circle-profile {
+    background-color: #5c8bc0 !important;  /* your custom color */
+    transition: transform 0.25s ease, background-color .2s ease;
 }
 
-/* Medium screens / smaller laptops */
+.user-section.active .icon-circle-profile .icon-img {
+    filter: invert(1);
+}
+
+
+/* ======================================
+   RESPONSIVENESS
+====================================== */
 @media (max-width: 1200px) {
     .navbar {
         padding: 12px 30px;
     }
-
     .nav-search {
         max-width: 60%;
-        margin: 0 10px;
     }
 }
 
-/* Tablets / narrow laptops */
 @media (max-width: 900px) {
     .navbar {
         padding: 12px 20px;
-        gap: 16px;
     }
-
     .nav-search {
-        max-width: 100%;
-        margin: 0 10px;
-    }
-
-    .nav-title {
-        font-size: 18px;
-    }
-
-    .nav-right {
-        gap: 14px;
-    }
-
-    .user-name {
-        font-size: 14px;
-    }
-}
-
-/* Small screens (optional, but keeps it usable) */
-@media (max-width: 700px) {
-    .navbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .nav-left {
-        justify-content: center;
-    }
-
-    .nav-search {
-        order: 3;
-        margin: 0;
-    }
-
-    .nav-right {
-        justify-content: center;
-        order: 2;
-    }
-
-    /* Hide username on very small widths to avoid crowding */
-    .user-name {
         display: none;
     }
-}
-/* ===========================
-   ACTIVE NOTIFICATION ICON
-   =========================== */
-
-/* Active notification icon - inverted colors */
-.icon-btn.active .icon-circle {
-    background-color: #e50914; /* Red background */
-}
-
-.icon-btn.active .icon-img {
-    filter: invert(1); /* White icon */
-}
-
-.icon-btn.active .icon-badge {
-    background-color: #ffffff; /* White background */
-    color: #e50914; /* Red text */
-}
-
-/* Hover state for active notification */
-.icon-btn.active:hover .icon-circle {
-    background-color: #e50914; /* Darker red on hover */
-    transform: scale(1.06); 
-}
-.user-status-dot {
-    width: 8px;
-    height: 8px;
-    background: #4caf50;  /* green online */
-    border-radius: 50%;
-    margin-left: -6px;     /* visually attaches to user image */
-    margin-top: 22px;
-    border: 2px solid #111; /* blends with navbar */
-    position: absolute;
 }

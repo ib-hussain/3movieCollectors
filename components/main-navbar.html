@@ -1,49 +1,56 @@
-<nav class="navbar">
-    <!-- <a class="nav-left" href="../html/dashboard.html" >
-        <img src="../pictures/M.png" alt="Logo" class="nav-logo" onclick="window.location.href='dashboard.html'">
-        
-    </a> -->
-    <a href="../html/dashboard.html" class="navbar-brand">
-        <img
-            src="../pictures/M.png"
-            alt="M Logo" class="navbar-logo" loading="lazy">
+<nav class="navbar" loading="lazy">
+
+    <!-- LEFT: BRAND -->
+    <a href="dashboard.html" class="navbar-brand">
+        <img src="../pictures/M.png" class="navbar-logo" alt="Logo">
         3movCollectors
     </a>
+
+    <!-- CENTER: SEARCH BAR -->
     <div class="nav-search">
-        <img src="../pictures/search.png" alt="Search" class="search-icon-img">
-        <input type="text" placeholder="Search movies, people, discussions...">
+        <img src="../pictures/search.png" class="search-icon-img">
+        <input type="text" placeholder="Search movies, people, discussions…" >
     </div>
 
+    <!-- RIGHT: ICONS -->
     <div class="nav-right">
-        <!-- Active Notification Button -->
-        <button class="icon-btn active" type="button"
-            onclick="window.location.href='notifications.html'">
-            <div class="icon-circle active">
-                <img src="../pictures/bell-notification-social-media.png"
-                    alt="Notifications" class="icon-img">
+
+        <!-- Notifications -->
+        <button
+            class="icon-btn notifications-btn"
+            data-nav="notifications"
+            onclick="window.location.href='notifications.html'"
+        >
+            <div class="icon-circle">
+                <img src="../pictures/bell-notification-social-media.png" class="icon-img">
                 <span class="icon-badge">2</span>
             </div>
         </button>
 
-        <button class="icon-btn" type="button"
-            onclick="window.location.href='messages.html'">
+        <!-- Messages -->
+        <button
+            class="icon-btn messages-btn"
+            data-nav="messages"
+            onclick="window.location.href='messages.html'"
+        >
             <div class="icon-circle">
-                <img src="../pictures/envelope.png" alt="Messages"
-                    class="icon-img">
+                <img src="../pictures/envelope.png" class="icon-img">
                 <span class="icon-badge">3</span>
             </div>
         </button>
 
-        <img src="../pictures/line.png" alt="Divider" class="nav-separator">
+        <img src="../pictures/line.png" class="nav-separator">
 
-        <div class="user-section" onclick="window.location.href='profile.html'">
-            <span class="user-status-dot"></span>
-
-            <div class="icon-circle user-circle"
-                onclick="window.location.href='profile.html'">
-                <img src="../pictures/user.png" alt="User" class="icon-img"
-                    onclick="window.location.href='profile.html'">
+        <!-- Profile -->
+        <div
+            class="user-section"
+            data-nav="profile"
+            onclick="window.location.href='profile.html'"
+        >
+            <div class="icon-circle-profile user-circle">
+                <img src="../pictures/user.png" class="icon-img">
             </div>
         </div>
+
     </div>
 </nav>
