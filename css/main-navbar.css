@@ -10,10 +10,10 @@
 }
 
 body {
-    background-color: #111;
+    background-color: #171a1f;
     font-family: Arial, sans-serif;
     color: #fff;
-    
+    background: transparent;
   transition: transform .25s ease;
 }
 
@@ -108,18 +108,19 @@ body {
     max-width: 55%;
     display: flex;
     align-items: center;
-    background: #1c1c1c;
+    background: transparent;
     padding: 10px 15px;
     border-radius: 8px;
-    border: 1px solid #2a2a2a;
+    border: 1px solid #3a3a3a;
     gap: 10px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .nav-search:hover {
-    border-color: #3a3a3a;
-    background: #202020;
-    box-shadow: 0 0 0 1px #272727;
+    /* border-color: #3a3a3a; */
+    border-color: #ffffff;
+    background: #212429;
+    /* box-shadow: 0 0 0 1px #272727; */
 }
 
 .search-icon-img {
@@ -171,14 +172,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: transform 0.25s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    transition: transform 0.25s ease;
 }
 
-.icon-circle:hover {
-    background-color: #f2f2f2;
-    transform: scale(1.06); 
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45);
-}
 
 .icon-img {
     width: 18px;
@@ -202,6 +198,18 @@ body {
     text-align: center;
     font-weight: 600;
 }
+
+.icon-circle:hover{
+    background-color: #e50914;
+    color: white;
+    transform: scale(1.06); 
+    /* box-shadow: 0 3px 8px rgba(0, 0, 0, 0.45); */
+}
+.icon-badge:hover {
+    color: #e50914;
+    background-color: white;
+    transform: scale(1.06); 
+}
 /* Vertical separator line between icons and user */
 .nav-separator {
     background-color: #ffffff;
@@ -222,18 +230,6 @@ body {
 .user-circle {
     width: 36px;
     height: 36px;
-}
-
-.user-name {
-    font-size: 15px;
-    color: #f0f0f0;
-    white-space: nowrap;
-}
-
-/* Hover on user name */
-.user-section:hover .user-name {
-    transform: scale(1.06); 
-    color: #ffffff;
 }
 
 /* ===========================
@@ -316,8 +312,7 @@ body {
 
 /* Active notification icon - inverted colors */
 .icon-btn.active .icon-circle {
-    background-color: #ff2c2c; /* Red background */
-    transform: scale(1.06); 
+    background-color: #e50914; /* Red background */
 }
 
 .icon-btn.active .icon-img {
@@ -326,7 +321,7 @@ body {
 
 .icon-btn.active .icon-badge {
     background-color: #ffffff; /* White background */
-    color: #ff2c2c; /* Red text */
+    color: #e50914; /* Red text */
 }
 
 /* Hover state for active notification */
