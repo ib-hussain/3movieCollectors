@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings – 3movCollectors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../pictures/M.png">
+
+    <!-- Shared styles -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="../css/settings.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+
+    <div class="layout-wrapper">
+        <!-- SIDEPANEL -->
+        <div id="sidepanel-container"></div>
+
+        <!-- MAIN CONTENT -->
+        <main class="content-area settings-content">
+            <div class="settings-inner">
+                <!-- HEADER -->
+                <header class="settings-header">
+                    <h1>Settings</h1>
+                    <p>Manage your account settings and preferences</p>
+                </header>
+
+                <!-- TABS -->
+                <section class="settings-tabs">
+                    <button class="settings-tab-btn active" data-tab="account">
+                        <span class="settings-tab-icon-wrap">
+                            <img src="../pictures/user.png" alt="" class="settings-tab-icon">
+                        </span>
+                        <span>Account</span>
+                    </button>
+
+                    <button class="settings-tab-btn" data-tab="security">
+                        <span class="settings-tab-icon-wrap">
+                            <img src="../pictures/settings.png" alt="" class="settings-tab-icon">
+                        </span>
+                        <span>Security</span>
+                    </button>
+
+                    <button class="settings-tab-btn" data-tab="notifications">
+                        <span class="settings-tab-icon-wrap">
+                            <img src="../pictures/bell-notification-social-media.png" alt="" class="settings-tab-icon">
+                        </span>
+                        <span>Notifications</span>
+                    </button>
+                </section>
+
+                <!-- TAB: ACCOUNT -->
+                <section class="settings-tab-content active" id="settings-tab-account">
+
+                    <section class="settings-card">
+                        <h2>Account Information</h2>
+
+                        <div class="settings-field-group">
+                            <label for="display-name">Display Name</label>
+                            <input id="display-name" type="text" placeholder="Alex Turner">
+                        </div>
+
+                        <div class="settings-field-group">
+                            <label for="email-address">Email Address</label>
+                            <input id="email-address" type="email" placeholder="alex.turner@example.com">
+                        </div>
+
+                        <div class="settings-field-group">
+                            <label for="username">Username</label>
+                            <input id="username" type="text" placeholder="@alexturner">
+                        </div>
+
+                        <div class="settings-field-group">
+                            <label for="bio">Bio</label>
+                            <textarea id="bio" rows="3"
+                                placeholder="Cinephile exploring the art of storytelling through film"></textarea>
+                        </div>
+
+                        <div class="settings-actions-row">
+                            <button class="primary-btn" type="button">Save Changes</button>
+                        </div>
+                    </section>
+
+                    <!-- DANGER ZONE -->
+                    <section class="settings-card danger-zone-card">
+                        <h2>Danger Zone</h2>
+                        <p class="danger-description">
+                            Permanently delete your account and all associated data.
+                        </p>
+
+                        <div class="settings-actions-row">
+                            <button class="danger-btn" type="button">Delete Account</button>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- TAB: SECURITY -->
+                <section class="settings-tab-content" id="settings-tab-security">
+
+                    <section class="settings-card">
+                        <h2>Change Password</h2>
+
+                        <div class="settings-field-group">
+                            <label for="current-password">Current Password</label>
+                            <div class="field-with-icons">
+                                <img src="../pictures/secure-password.png" alt="" class="field-icon-left">
+                                <input id="current-password" type="password" placeholder="Enter current password">
+                                <img src="../pictures/eye-closed.png" alt="" class="field-icon-right">
+                            </div>
+                        </div>
+
+                        <div class="settings-field-group">
+                            <label for="new-password">New Password</label>
+                            <div class="field-with-icons">
+                                <img src="../pictures/secure-password.png" alt="" class="field-icon-left">
+                                <input id="new-password" type="password" placeholder="Enter new password">
+                                <img src="../pictures/eye-closed.png" alt="" class="field-icon-right">
+                            </div>
+                            <p class="field-hint">
+                                Must be at least 8 characters with uppercase, lowercase, and number.
+                            </p>
+                        </div>
+
+                        <div class="settings-field-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <div class="field-with-icons">
+                                <img src="../pictures/secure-password.png" alt="" class="field-icon-left">
+                                <input id="confirm-password" type="password" placeholder="Confirm new password">
+                                <img src="../pictures/eye-closed.png" alt="" class="field-icon-right">
+                            </div>
+                        </div>
+
+                        <div class="settings-actions-row">
+                            <button class="primary-btn" type="button">Update Password</button>
+                        </div>
+                    </section>
+
+                    <!-- LOG OUT CARD -->
+                    <section class="settings-card logout-card" onclick="window.location.href='login.html'">
+                        <h2>Log Out</h2>
+                        <p>Sign out of your account on this device.</p>
+                        <div class="settings-actions-row" onclick="window.location.href='login.html'">
+                            <button class="secondary-btn" type="button" onclick="window.location.href='login.html'">Log Out</button>
+                        </div>
+                    </section>
+                </section>
+
+                <!-- TAB: NOTIFICATIONS -->
+                <section class="settings-tab-content" id="settings-tab-notifications">
+
+                    <section class="settings-card">
+                        <h2>Notification Preferences</h2>
+
+                        <!-- Email / Push -->
+                        <div class="settings-toggle-group">
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Email Notifications</p>
+                                    <p class="toggle-desc">Receive notifications via email</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Push Notifications</p>
+                                    <p class="toggle-desc">Receive push notifications in browser</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <hr class="settings-divider">
+
+                        <!-- Activity Notifications -->
+                        <div class="settings-toggle-group">
+                            <p class="section-label">Activity Notifications</p>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Friend Requests</p>
+                                    <p class="toggle-desc">When someone sends you a friend request</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Comments</p>
+                                    <p class="toggle-desc">When someone comments on your posts or reviews</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Likes</p>
+                                    <p class="toggle-desc">When someone likes your content</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="settings-toggle-row">
+                                <div class="toggle-text">
+                                    <p class="toggle-title">Watch Parties</p>
+                                    <p class="toggle-desc">Updates about upcoming watch parties</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="settings-actions-row">
+                            <button class="primary-btn" type="button">Save Preferences</button>
+                        </div>
+                    </section>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+
+    <!-- JS INCLUDES -->
+    <script src="../js/include-main-navbar.js"></script>
+    <script src="../js/include-side-panel.js"></script>
+    <script src="../js/include-footer.js"></script>
+    <script src="../js/settings.js"></script>
+
+</body>
+</html>

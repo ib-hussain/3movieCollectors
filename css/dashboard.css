@@ -3,10 +3,19 @@
 ========================= */
 
 body {
-    background: #0f0f0f;
     color: #ffffff;
     margin: 0;
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgba(255, 212, 196, 1) 0%, 
+        rgba(255, 237, 188, 1) 30%, 
+        rgba(236, 217, 255, 1) 55%, 
+        rgba(202, 224, 255, 1) 80%
+    );
+    background-blend-mode: screen; 
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /* Wrapper under navbar (navbar height ~70px from your other CSS) */
@@ -15,6 +24,7 @@ body {
     min-height: calc(100vh - 70px);
     width: 100%;
     background: #0f0f0f;
+    /* opacity:0.9; */
 }
 
 /* Content area that sits to the right of sidebar */
