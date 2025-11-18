@@ -1,77 +1,55 @@
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <button id="sidebar-toggle" class="menu-btn">
-            <img src="../pictures/menu.png" class="menu-icon">
-        </button>
+<div class="side-panel expanded">
+
+    <!-- Toggle Button -->
+    <div class="side-toggle">
+        <img id="sideToggleIcon" src="../pictures/back.png" alt="toggle">
     </div>
-    <nav class="sidebar-menu">
-        <!-- Dashboard -->
-        <a href="../html/dashboard.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/home.png" alt="Dashboard" class="item-icon">
-            </div>
-            <span class="menu-label">Dashboard</span>
-        </a>
 
-        <!-- Browse Movies -->
-        <a href="../html/browse-movies.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/film.png" alt="Browse Movies" class="item-icon">
-            </div>
-            <span class="menu-label">Browse Movies</span>
-        </a>
+    <!-- Menu Items -->
+    <ul class="side-menu">
+        <li class="menu-item active" data-link="dashboard.html">
+            <img src="../pictures/home.png" class="menu-icon">
+            <span>Dashboard</span>
+        </li>
 
-        <!-- My Watchlist -->
-        <a href="../html/watchlist.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/bookmark.png" alt="My Watchlist" class="item-icon">
-            </div>
-            <span class="menu-label">My Watchlist</span>
-        </a>
+        <li class="menu-item" data-link="browse-movies.html">
+            <img src="../pictures/film.png" class="menu-icon">
+            <span>Browse Movies</span>
+        </li>
 
-        <!-- Friends -->
-        <a href="../html/friends.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/friends.png" alt="Friends" class="item-icon">
-            </div>
-            <span class="menu-label">Friends</span>
-        </a>
+        <li class="menu-item" data-link="watchlist.html">
+            <img src="../pictures/bookmark.png" class="menu-icon">
+            <span>My Watchlist</span>
+        </li>
 
+        <li class="menu-item" data-link="friends.html">
+            <img src="../pictures/friends.png" class="menu-icon">
+            <span>Friends</span>
+        </li>
 
-        <!-- Events -->
-        <a href="../html/events.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/calendar.png" alt="Events" class="item-icon">
-            </div>
-            <span class="menu-label">Events</span>
-        </a>
-    </nav>
+        <li class="menu-item" data-link="messages.html">
+            <img src="../pictures/envelope.png" class="menu-icon">
+            <span>Messages</span>
+        </li>
+        <!-- - - -  -->
+        <li class="menu-item" data-link="events.html">
+            <img src="../pictures/calendar.png" class="menu-icon">
+            <span>Events</span>
+        </li>
 
-    <hr class="sidebar-divider">
+        <li class="menu-item" data-link="admin-panel.html">
+            <img src="../pictures/admin.png" class="menu-icon">
+            <span>Admin Panel</span>
+        </li>
 
-    <nav class="sidebar-menu sidebar-menu--secondary">
-        <!-- Admin Panel -->
-        <a href="../html/admin-panel.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/admin.png" alt="Admin Panel" class="item-icon">
-            </div>
-            <span class="menu-label">Admin Panel</span>
-        </a>
+        <li class="menu-item" data-link="settings.html">
+            <img src="../pictures/settings.png" class="menu-icon">
+            <span>Settings</span>
+        </li>
 
-        <!-- Settings -->
-        <a href="../html/settings.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/settings.png" alt="Settings" class="item-icon">
-            </div>
-            <span class="menu-label">Settings</span>
-        </a>
-
-        <!-- Help & Support -->
-        <a href="../html/help.html" class="menu-item">
-            <div class="icon-circle">
-                <img src="../pictures/help.png" alt="Help & Support" class="item-icon">
-            </div>
-            <span class="menu-label">Help & Support</span>
-        </a>
-    </nav>
-</aside>
+        <li class="menu-item" data-link="help.html">
+            <img src="../pictures/help.png" class="menu-icon">
+            <span>Help & Support</span>
+        </li>
+    </ul>
+</div>

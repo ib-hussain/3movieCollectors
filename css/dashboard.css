@@ -1,7 +1,9 @@
 /* =========================
    GLOBAL / LAYOUT
 ========================= */
-
+.content-area {
+    margin-left: 260px;
+}
 body {
     color: #ffffff;
     margin: 0;
@@ -17,6 +19,7 @@ body {
     background-size: cover;
     background-attachment: fixed; */
     background: #0f0f0f;
+    margin-top: 72px;
 }
 
 /* Wrapper under navbar (navbar height ~70px from your other CSS) */

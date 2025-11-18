@@ -1,248 +1,94 @@
-/* ===========================
-   Base
-   =========================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background-color: #111;
-    font-family: Arial, sans-serif;
-    color: #fff;
-}
-
-/* ===========================
-   Sidebar container
-   =========================== */
-.sidebar {
+/* ————————————  
+   Main Panel Container  
+———————————— */
+.side-panel {
     width: 260px;
-    min-height: 100vh;
-    background-color: #111;
-    padding: 18px 16px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    transition: width 0.25s ease, padding 0.25s ease;
+    background: #1d1f24;
+    height: 100vh;
     position: fixed;
-    top: 68px;           /* CHANGE THIS - was 0, now below navbar */
+    top: 70px; /* matches navbar height */
     left: 0;
-    bottom: 0;
-    z-index: 50;         /* ADD THIS - below navbar */
+    padding-top: 20px;
+    transition: width .28s ease, background .25s ease;
+    z-index: 80;
+    border-right: 1px solid #2a2d33;
 }
 
-/* ===========================
-   Header (top menu icon)
-   =========================== */
-.sidebar-header {
+/* Collapsed Mode */
+.side-panel.collapsed {
+    width: 78px;
+    background: #171a1f;
+}
+
+/* ————————————  
+   Toggle Button  
+———————————— */
+.side-toggle {
+    width: 100%;
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 8px;
+    padding: 0 18px;
+    margin-bottom: 20px;
 }
 
-.menu-btn {
-    border: none;
-    background: transparent;
-    padding: 4px;
+.side-toggle img {
+    margin-right: 6px;
+    width: 26px;
+    height: 26px;
     cursor: pointer;
+    opacity: 0.8;
+    transition: transform .25s ease;
 }
 
-.menu-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    /* transparent bg as requested */
+.side-toggle img:hover {
+    transform: scale(1.06);
+    opacity: 1;
 }
 
-/* ===========================
-   Menu blocks
-   =========================== */
-.sidebar-menu {
+/* ————————————  
+   Menu Items  
+———————————— */
+
+.side-menu {
+    list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
 }
 
-.sidebar-menu--secondary {
-    margin-top: 4px;
-}
-
-/* Single menu item */
 .menu-item {
+    width: 100%;
+    padding: 12px 22px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 8px 10px;
+    gap: 16px;
+    cursor: pointer;
     border-radius: 10px;
-    text-decoration: none;
-    color: #e0e0e0;
-    font-size: 15px;
-    position: relative;
-    transition: background-color 0.18s ease, transform 0.12s ease;
+    transition: background .25s, color .25s;
 }
 
 .menu-item:hover {
-    background-color: #171a1f;
-    transform: translateY(-1px);
+    background: #2a2d33;
 }
 
-/* Active item (Dashboard) */
-.menu-item--active {
-    background-color: #e50914;
-    color: #ffffff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
+.menu-item.active {
+    background: #e02626 !important;
+    color: #fff;
 }
 
-/* Icon circle (white rounded background) */
-.icon-circle {
-    width: 32px;
-    height: 32px;
-    border-radius: 999px;
-    background-color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.menu-item img.menu-icon {
+    width: 22px;
+    height: 22px;
     flex-shrink: 0;
-    transition: background-color 0.2s ease, transform 0.12s ease;
+    filter: brightness(0) invert(1);
 }
 
-.menu-item:hover .icon-circle {
-    background-color: #f2f2f2;
-}
-
-.icon-circle--active {
-    background-color: #ffffff;
-}
-
-.item-icon {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-}
-
-/* Text label */
-.menu-label {
-    flex: 1;
-}
-
-/* Badge for messages */
-.menu-badge {
-    background-color: #e50914;
-    color: #ffffff;
-    font-size: 11px;
-    min-width: 18px;
-    padding: 0 6px;
-    height: 18px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 600;
-}
-
-/* Divider */
-.sidebar-divider {
-    border: none;
-    border-top: 1px solid #171a1f; /* color as requested */
-    margin: 14px 0 4px;
-}
-
-/* ===========================
-   Responsive behaviour
-   =========================== */
-
-/* Slightly narrower on medium screens */
-@media (max-width: 1024px) {
-    .sidebar {
-        width: 230px;
-    }
-}
-
-/* On very small widths, make it full width at top (optional but nice) */
-@media (max-width: 650px) {
-    .sidebar {
-        width: 100%;
-        min-height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 12px 10px;
-    }
-
-    .sidebar-header {
-        display: none; /* could be used later for a collapsible menu */
-    }
-
-    .sidebar-menu,
-    .sidebar-menu--secondary {
-        flex-direction: row;
-        gap: 8px;
-    }
-
-    .menu-item {
-        padding: 6px 8px;
-    }
-
-    .sidebar-divider {
-        display: none;
-    }
-}
-/* Base sidebar width */
-.sidebar {
-    width: 260px;
-    min-height: 100vh;
-    background-color: #111;
-    padding: 18px 16px 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    transition: width 0.25s ease, padding 0.25s ease;
-}
-
-/* Collapsed (icon-only) state */
-.sidebar--collapsed {
-    width: 70px;
-    padding: 18px 10px 24px;
-}
-.sidebar--collapsed .menu-btn {
-    justify-content: center;
-}
-.sidebar--collapsed .sidebar-header {
-    justify-content: center;
-}
-/* When collapsed, hide text labels & badges text */
-.sidebar--collapsed .menu-label {
+.side-panel.collapsed .menu-item span {
     display: none;
 }
 
-.sidebar--collapsed .menu-badge {
-    position: absolute;
-    right: 4px;
-}
-
-/* Slightly center icons more when collapsed */
-.sidebar--collapsed .menu-item {
+/* Ensure icons remain center-aligned when collapsed */
+.side-panel.collapsed .menu-item {
     justify-content: center;
-}
-
-/* Header & menu button stay visible */
-.sidebar-header-collapsedd {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 8px;
-}
-
-.menu-btn-collapsedd {
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background: transparent;
-    padding: 4px;
-    cursor: pointer;
-}
-
-.menu-icon-collapsedd {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
+    padding: 12px 0;
 }

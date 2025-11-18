@@ -1,28 +1,47 @@
-<aside class="sidebar sidebar--collapsed" id="sidebar">
-    <div class="sidebar-header">
-        <button id="sidebar-toggle" class="menu-btn">
-            <img src="../pictures/menu.png" class="menu-icon">
-        </button>
+<div class="side-panel collapsed">
+
+    <!-- Toggle Button -->
+    <div class="side-toggle">
+        <img id="sideToggleIcon" src="../pictures/menu.png" alt="toggle">
     </div>
 
-    <nav class="sidebar-menu">
-        <a class="menu-item" href="../html/dashboard.html">
-            <div class="icon-circle">
-                <img src="../pictures/home.png" class="item-icon">
-            </div>
-        </a>
+    <ul class="side-menu">
 
-        <a class="menu-item" href="../html/browse-movies.html"><div class="icon-circle"><img src="../pictures/film.png"></div></a>
-        <a class="menu-item" href="../html/watchlist.html"><div class="icon-circle"><img src="../pictures/bookmark.png"></div></a>
-        <a class="menu-item" href="../html/friends.html"><div class="icon-circle"><img src="../pictures/friends.png"></div></a>
-        <a class="menu-item" href="../html/events.html"><div class="icon-circle"><img src="../pictures/calendar.png"></div></a>
-    </nav>
+        <li class="menu-item" data-link="dashboard.html">
+            <img src="../pictures/home.png" class="menu-icon">
+        </li>
 
-    <hr class="sidebar-divider">
+        <li class="menu-item" data-link="browse-movies.html">
+            <img src="../pictures/film.png" class="menu-icon">
+        </li>
 
-    <nav class="sidebar-menu sidebar-menu--secondary">
-        <a class="menu-item" href="../html/admin-panel.html"><div class="icon-circle"><img src="../pictures/admin.png"></div></a>
-        <a class="menu-item" href="../html/settings.html"><div class="icon-circle"><img src="../pictures/settings.png"></div></a>
-        <a class="menu-item" href="../html/help.html"><div class="icon-circle"><img src="../pictures/help.png"></div></a>
-    </nav>
-</aside>
+        <li class="menu-item" data-link="watchlist.html">
+            <img src="../pictures/bookmark.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="friends.html">
+            <img src="../pictures/friend.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="messages.html">
+            <img src="../pictures/envelope.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="events.html">
+            <img src="../pictures/calendar.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="admin-panel.html">
+            <img src="../pictures/admin.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="settings.html">
+            <img src="../pictures/settings.png" class="menu-icon">
+        </li>
+
+        <li class="menu-item" data-link="help.html">
+            <img src="../pictures/help.png" class="menu-icon">
+        </li>
+
+    </ul>
+</div>
