@@ -1,5 +1,7 @@
 /* SETTINGS PAGE LAYOUT */
-
+.body{
+    background-color: black;
+}
 .settings-content {
     padding: 32px 40px 40px;
     flex: 1;

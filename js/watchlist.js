@@ -1,19 +1,22 @@
+// watchlist.js
+// Simple client-side filtering for the watchlist chips
+
 document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".watchlist-tab");
-    const cards = document.querySelectorAll(".watch-card");
+    const filterChips = document.querySelectorAll(".filter-chip");
+    const cards = document.querySelectorAll(".movie-card");
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            const filter = tab.getAttribute("data-filter");
+    if (!filterChips.length || !cards.length) return;
 
-            // activate tab
-            tabs.forEach(t => t.classList.remove("watchlist-tab--active"));
-            tab.classList.add("watchlist-tab--active");
+    filterChips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            // set active chip
+            filterChips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
 
-            // filter cards
+            const filter = chip.dataset.filter; // all | want | watching | completed
+
             cards.forEach(card => {
-                const status = card.getAttribute("data-status");
-
+                const status = card.dataset.status;
                 if (filter === "all" || status === filter) {
                     card.style.display = "";
                 } else {
@@ -22,13 +25,4 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     });
-
-    // sort select is just a stub for now; you can hook it to Node/MySQL later
-    const sortSelect = document.getElementById("watchlistSort");
-    if (sortSelect) {
-        sortSelect.addEventListener("change", () => {
-            // placeholder for future logic
-            // console.log("Sort by:", sortSelect.value);
-        });
-    }
 });

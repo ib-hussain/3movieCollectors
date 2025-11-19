@@ -1,354 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Browse Movies - 3movCollectors</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <title>Browse Movies - 3movCollectors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Shared styles -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+        <!-- Shared styles -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
 
-    <!-- Page styles -->
-    <link rel="stylesheet" href="../css/browse-movies.css">
-</head>
-<body>
+        <!-- Page styles -->
+        <link rel="stylesheet" href="../css/browse-movies.css">
+    </head>
 
-    <!-- NAVBAR -->
-    <div id="navbar-container"></div>
+    <body data-page="browse">
 
-    <div class="layout-wrapper">
-        <!-- SIDEBAR -->
-        <div id="sidepanel-container"></div>
+        <!-- NAVBAR -->
+        <div id="navbar-container"></div>
 
-        <!-- MAIN CONTENT -->
-        <main class="content-area">
-            <section class="browse-header">
-                <h1>Browse Movies</h1>
-                <p>Discover your next favorite film from our extensive catalog.</p>
-            </section>
+        <div class="layout-wrapper">
 
-            <!-- FILTERS CARD -->
-            <section class="filters-card">
-                <div class="filters-card-header">
-                    <div class="filters-title">
-                        <img src="../pictures/filter.png" alt="Filter">
-                        <h2>Filters</h2>
-                    </div>
-                    <button class="filters-reset">Reset</button>
-                </div>
+            <!-- SIDEBAR -->
+            <div id="sidepanel-container"></div>
 
-                <div class="filters-body">
-                    <div class="filter-group">
-                        <span class="filter-label">Genre</span>
-                        <div class="genre-chips">
-                            <button class="chip chip--active" data-genre="all">All</button>
-                            <button class="chip" data-genre="action">Action</button>
-                            <button class="chip" data-genre="drama">Drama</button>
-                            <button class="chip" data-genre="comedy">Comedy</button>
-                            <button class="chip" data-genre="sci-fi">Sci-Fi</button>
-                            <button class="chip" data-genre="horror">Horror</button>
-                            <button class="chip" data-genre="romance">Romance</button>
-                            <button class="chip" data-genre="thriller">Thriller</button>
+            <!-- MAIN CONTENT -->
+            <main class="content-area">
+
+                <section class="browse-header">
+                    <h1>Browse Movies</h1>
+                    <p>Discover your next favorite film from our extensive
+                        catalog.</p>
+                </section>
+
+                <!-- FILTERS CARD -->
+                <section class="filters-card">
+                    <div class="filters-card-header">
+                        <div class="filters-title">
+                            <img src="../pictures/filter.png" alt="Filter">
+                            <h2>Filters</h2>
                         </div>
+                        <button class="filters-reset">Reset</button>
                     </div>
 
-                    <button class="more-filters-btn">
-                        <img src="../pictures/sliders-red.png" alt="">
-                        <span>More Filters</span>
-                    </button>
-                </div>
-            </section>
+                    <div class="filters-body">
 
-            <!-- MOVIES LIST + SORT -->
-            <section class="movies-section">
-                <div class="movies-section-header">
-                    <p class="movies-count">Showing <span>12</span> movies</p>
+                        <div class="filter-group">
+                            <span class="filter-label">Genre</span>
+                            <div class="genre-chips">
+                                <button class="chip chip--active"
+                                    data-genre="all">All</button>
+                                <button class="chip"
+                                    data-genre="action">Action</button>
+                                <button class="chip"
+                                    data-genre="drama">Drama</button>
+                                <button class="chip"
+                                    data-genre="comedy">Comedy</button>
+                                <button class="chip"
+                                    data-genre="sci-fi">Sci-Fi</button>
+                                <button class="chip"
+                                    data-genre="horror">Horror</button>
+                                <button class="chip"
+                                    data-genre="romance">Romance</button>
+                                <button class="chip"
+                                    data-genre="thriller">Thriller</button>
+                            </div>
+                        </div>
 
-                    <div class="sort-control">
-                        <label for="sortSelect">Sort by:</label>
-                        <div class="select-wrapper">
-                            <select id="sortSelect">
-                                <option value="top-rated">Top Rated</option>
-                                <option value="newest">Newest</option>
-                                <option value="oldest">Oldest</option>
-                                <option value="az">A - Z</option>
-                            </select>
+                        <button class="more-filters-btn">
+                            <img src="../pictures/sliders-red.png" alt>
+                            <span>More Filters</span>
+                        </button>
+
+                    </div>
+                </section>
+
+                <!-- MOVIES LIST + SORT -->
+                <section class="movies-section">
+                    <div class="movies-section-header">
+                        <p class="movies-count">Showing <span>12</span>
+                            movies</p>
+
+                        <div class="sort-control">
+                            <label for="sortSelect">Sort by:</label>
+                            <div class="select-wrapper">
+                                <select id="sortSelect">
+                                    <option value="top-rated">Top Rated</option>
+                                    <option value="newest">Newest</option>
+                                    <option value="oldest">Oldest</option>
+                                    <option value="az">A - Z</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="movies-grid">
 
-                <!-- GRID OF MOVIES -->
-                <div class="movies-grid">
+                        <!-- 1 -->
+                        <article class="movie-card" data-genre="drama"  onclick="window.location.href='THEshawshankRedemption.html'">
+                            <div class="movie-poster">
+                                <!-- white rectangle placeholder for any aspect ratio -->
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
+                            </div>
+                            <div class="movie-info" onclick="window.location.href='THEshawshankRedemption.html'">
+                                <h3>The Shawshank Redemption</h3>
+                                <p class="movie-meta">
+                                    <span>1994</span>
+                                    <span class="dot">•</span>
+                                    <span>Drama</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>9.3</span>
+                                </div>
+                            </div>
+                        </article>
 
-                    <!-- 1 -->
-                    <article class="movie-card" data-genre="drama">
-                        <div class="movie-poster">
-                            <!-- white rectangle placeholder for any aspect ratio -->
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 2 -->
+                        <article class="movie-card" data-genre="crime drama">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Shawshank Redemption</h3>
-                            <p class="movie-meta">
-                                <span>1994</span>
-                                <span class="dot">•</span>
-                                <span>Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>9.3</span>
+                            <div class="movie-info">
+                                <h3>The Godfather</h3>
+                                <p class="movie-meta">
+                                    <span>1972</span>
+                                    <span class="dot">•</span>
+                                    <span>Crime, Drama</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>9.2</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 2 -->
-                    <article class="movie-card" data-genre="crime drama">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 3 -->
+                        <article class="movie-card" data-genre="action">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Godfather</h3>
-                            <p class="movie-meta">
-                                <span>1972</span>
-                                <span class="dot">•</span>
-                                <span>Crime, Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>9.2</span>
+                            <div class="movie-info">
+                                <h3>The Dark Knight</h3>
+                                <p class="movie-meta">
+                                    <span>2008</span>
+                                    <span class="dot">•</span>
+                                    <span>Action</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>9.0</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 3 -->
-                    <article class="movie-card" data-genre="action">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 4 -->
+                        <article class="movie-card" data-genre="drama">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Dark Knight</h3>
-                            <p class="movie-meta">
-                                <span>2008</span>
-                                <span class="dot">•</span>
-                                <span>Action</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>9.0</span>
+                            <div class="movie-info">
+                                <h3>12 Angry Men</h3>
+                                <p class="movie-meta">
+                                    <span>1957</span>
+                                    <span class="dot">•</span>
+                                    <span>Drama</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>9.0</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 4 -->
-                    <article class="movie-card" data-genre="drama">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 5 -->
+                        <article class="movie-card" data-genre="sci-fi">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>12 Angry Men</h3>
-                            <p class="movie-meta">
-                                <span>1957</span>
-                                <span class="dot">•</span>
-                                <span>Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>9.0</span>
+                            <div class="movie-info">
+                                <h3>Interstellar</h3>
+                                <p class="movie-meta">
+                                    <span>2014</span>
+                                    <span class="dot">•</span>
+                                    <span>Sci-Fi</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.6</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 5 -->
-                    <article class="movie-card" data-genre="sci-fi">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 6 -->
+                        <article class="movie-card"
+                            data-genre="horror thriller">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Interstellar</h3>
-                            <p class="movie-meta">
-                                <span>2014</span>
-                                <span class="dot">•</span>
-                                <span>Sci-Fi</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.6</span>
+                            <div class="movie-info">
+                                <h3>The Silence of the Lambs</h3>
+                                <p class="movie-meta">
+                                    <span>1991</span>
+                                    <span class="dot">•</span>
+                                    <span>Thriller</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.6</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 6 -->
-                    <article class="movie-card" data-genre="horror thriller">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 7 -->
+                        <article class="movie-card" data-genre="war">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Silence of the Lambs</h3>
-                            <p class="movie-meta">
-                                <span>1991</span>
-                                <span class="dot">•</span>
-                                <span>Thriller</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.6</span>
+                            <div class="movie-info">
+                                <h3>Saving Private Ryan</h3>
+                                <p class="movie-meta">
+                                    <span>1998</span>
+                                    <span class="dot">•</span>
+                                    <span>War</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.6</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 7 -->
-                    <article class="movie-card" data-genre="war">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 8 -->
+                        <article class="movie-card" data-genre="drama">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Saving Private Ryan</h3>
-                            <p class="movie-meta">
-                                <span>1998</span>
-                                <span class="dot">•</span>
-                                <span>War</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.6</span>
+                            <div class="movie-info">
+                                <h3>The Green Mile</h3>
+                                <p class="movie-meta">
+                                    <span>1999</span>
+                                    <span class="dot">•</span>
+                                    <span>Drama</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.6</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 8 -->
-                    <article class="movie-card" data-genre="drama">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 9 -->
+                        <article class="movie-card" data-genre="crime thriller">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Green Mile</h3>
-                            <p class="movie-meta">
-                                <span>1999</span>
-                                <span class="dot">•</span>
-                                <span>Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.6</span>
+                            <div class="movie-info">
+                                <h3>Pulp Fiction</h3>
+                                <p class="movie-meta">
+                                    <span>1994</span>
+                                    <span class="dot">•</span>
+                                    <span>Crime</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.9</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 9 -->
-                    <article class="movie-card" data-genre="crime thriller">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 10 -->
+                        <article class="movie-card" data-genre="drama romance">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Pulp Fiction</h3>
-                            <p class="movie-meta">
-                                <span>1994</span>
-                                <span class="dot">•</span>
-                                <span>Crime</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.9</span>
+                            <div class="movie-info">
+                                <h3>Forrest Gump</h3>
+                                <p class="movie-meta">
+                                    <span>1994</span>
+                                    <span class="dot">•</span>
+                                    <span>Drama</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.8</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 10 -->
-                    <article class="movie-card" data-genre="drama romance">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 11 -->
+                        <article class="movie-card" data-genre="drama romance">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Forrest Gump</h3>
-                            <p class="movie-meta">
-                                <span>1994</span>
-                                <span class="dot">•</span>
-                                <span>Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.8</span>
+                            <div class="movie-info">
+                                <h3>La La Land</h3>
+                                <p class="movie-meta">
+                                    <span>2016</span>
+                                    <span class="dot">•</span>
+                                    <span>Romance</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>8.0</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 11 -->
-                    <article class="movie-card" data-genre="drama romance">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
+                        <!-- 12 -->
+                        <article class="movie-card" data-genre="horror">
+                            <div class="movie-poster">
+                                <div class="poster-placeholder">
+                                    Poster
+                                </div>
                             </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>La La Land</h3>
-                            <p class="movie-meta">
-                                <span>2016</span>
-                                <span class="dot">•</span>
-                                <span>Romance</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>8.0</span>
+                            <div class="movie-info">
+                                <h3>Get Out</h3>
+                                <p class="movie-meta">
+                                    <span>2017</span>
+                                    <span class="dot">•</span>
+                                    <span>Horror</span>
+                                </p>
+                                <div class="movie-rating">
+                                    <img src="../pictures/star.png" alt="Star">
+                                    <span>7.7</span>
+                                </div>
                             </div>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- 12 -->
-                    <article class="movie-card" data-genre="horror">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder">
-                                Poster
-                            </div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Get Out</h3>
-                            <p class="movie-meta">
-                                <span>2017</span>
-                                <span class="dot">•</span>
-                                <span>Horror</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png" alt="Star">
-                                <span>7.7</span>
-                            </div>
-                        </div>
-                    </article>
+                    </div>
+                    <div class="load-more-wrap">
+                        <button class="load-more-btn">Load More Movies</button>
+                    </div>
+                </section>
+            </main>
+        </div>
 
-                </div>
+        <!-- FOOTER -->
+        <div id="footer-container"></div>
 
-                <div class="load-more-wrap">
-                    <button class="load-more-btn">Load More Movies</button>
-                </div>
-            </section>
-        </main>
-    </div>
+        <!-- Scripts -->
+        <script src="../js/include-main-navbar.js"></script>
+        <script src="../js/include-side-panel.js"></script>
+        <script src="../js/include-footer.js"></script>
+        <script src="../js/browse-movies.js"></script>
 
-    <!-- FOOTER (injected) -->
-    <!-- JS -->
-    <script src="../js/include-main-navbar.js"></script>
-    <script src="../js/include-side-panel.js"></script>
-    <script src="../js/include-footer.js"></script>
-    <script src="../js/browse-movies.js"></script>
-</body>
+    </body>
 </html>

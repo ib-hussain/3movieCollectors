@@ -92,3 +92,10 @@
     justify-content: center;
     padding: 12px 0;
 }
+.footer-divider {
+    /* margin-left: 10px; */
+    width:100%;
+    /* border: none; */
+    /* border-top: 3px solid #ffffff; */
+    /* margin: 5px 0 20px; */
+}
