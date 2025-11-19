@@ -1,22 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
 /* ===========================
    FOOTER BASE
    =========================== */
 .footer {
     background-color: #111;
-    padding: 50px 40px 25px;
-    color: #ddd;
+    opacity: 0.9;
+    color: #ffffff;
     font-family: Arial, sans-serif;
-
-    /* NEW: let JS animate horizontal space sharing with sidebar */
-    margin-left: 0;
-    transition: margin-left 0.25s ease;
+    /* margin-left: auto; */
+    transition: 0.25s ;
 }
-
 .footer-container {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 40px;
+    justify-content:center;  
+    align-items:center;
+    gap: 20%;
     flex-wrap: wrap;
 }
 
@@ -24,23 +22,28 @@
    BRAND SECTION
    =========================== */
 .footer-brand {
-    max-width: 280px;
+    padding-top: 40px;
+    /* padding-left: 20%; */
+    /* max-width: 40%; */
+    padding-bottom: 25px;
 }
 
 .footer-logo-wrap {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 2px;
 }
 
 .footer-logo {
-    width: 42px;
-    height: 42px;
-    object-fit: contain;
+    width: 54px;
+    height: 54px;
+    /* object-fit: contain; */
 }
 
 .footer-title {
-    font-size: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: bolder;
+    font-size: 36px;
     font-weight: 600;
 }
 
@@ -48,16 +51,20 @@
     margin-top: 12px;
     line-height: 1.5;
     font-size: 14px;
-    color: #aaa;
+    color: #bbb;
 }
 
 /* ===========================
    COLUMNS
    =========================== */
 .footer-column {
+    padding-top: 94px;
+    padding-bottom: 15px;
+    /* padding-right: -30px; */
+    /* vertical-align: middle; */
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
 }
 
 .footer-column h3 {
@@ -68,63 +75,14 @@
 }
 
 .footer-column a {
+    align-items: center;
     text-decoration: none;
     color: #bbb;
     font-size: 14px;
-    transition: color 0.2s ease;
+    transition: 0.25s ;
 }
 
 .footer-column a:hover {
+    /* transform: scale(1.06); */
     color: #fff;
-}
-
-/* Special red link */
-.highlight-link {
-    color: #e50914;
-}
-
-.highlight-link:hover {
-    color: #ff2630;
-}
-
-/* ===========================
-   DIVIDER + COPYRIGHT
-   =========================== */
-.footer-divider {
-    border: none;
-    border-top: 1px solid #ffffff;
-    margin: 35px 0 20px;
-}
-
-.footer-copy {
-    text-align: center;
-    font-size: 13px;
-    color: #888;
-}
-
-/* ===========================
-   RESPONSIVE BEHAVIOR
-   =========================== */
-
-/* Medium screens */
-@media (max-width: 1100px) {
-    .footer-container {
-        gap: 30px;
-    }
-}
-
-/* Tablet / Mobile */
-@media (max-width: 750px) {
-    .footer {
-        padding: 40px 25px 20px;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .footer-copy {
-        margin-top: 15px;
-    }
 }

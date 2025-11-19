@@ -41,7 +41,9 @@ body {
 ====================================== */
 .navbar {
     width: 100%;
-    padding: 14px 40px;
+    padding: 14px ;
+    padding-left: 10px;
+    padding-right: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,10 +63,10 @@ body {
     font-weight: bolder;
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    gap: 2px;
     color: var(--brand);
     text-decoration: none;
-    font-size: 28px;
+    font-size: 24px;
     line-height: 1;
     transition: transform .25s ease;
     margin-left: 20px;

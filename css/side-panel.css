@@ -2,17 +2,17 @@
    Main Panel Container  
 ———————————— */
 .side-panel {
-    opacity: .9;
+    opacity: 0.9;
     width: 260px;
-    background: #1d1f24;
+    background: #111;
     height: 100vh;
     position: fixed;
     top: 65px; /* matches navbar height */
     left: 0;
     padding-top: 20px;
-    transition: width .28s ease, background .25s ease;
+    transition: 0.25s ;
     z-index: 80;
-    border-right: 1px solid #2a2d33;
+    /* border-right: 1px solid #2a2d33; */
 }
 
 /* Collapsed Mode */
@@ -76,7 +76,7 @@
 }
 
 .menu-item.active {
-    background: #e02626 !important;
+    background: #C90000 !important;
     color: #fff;
 }
 
