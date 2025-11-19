@@ -60,6 +60,7 @@ function initializeSidePanel() {
 
             // change icon to menu
             toggleIcon.src = "../pictures/menu.png";
+            toggleIcon.style.opacity = "1";
 
         } 
         /* EXPAND */
@@ -69,6 +70,7 @@ function initializeSidePanel() {
 
             // change icon to back
             toggleIcon.src = "../pictures/back.png";
+            toggleIcon.style.opacity = "1";
         }
 
         updateContentShift();

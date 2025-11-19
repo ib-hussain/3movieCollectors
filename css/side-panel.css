@@ -2,11 +2,12 @@
    Main Panel Container  
 ———————————— */
 .side-panel {
+    opacity: .9;
     width: 260px;
     background: #1d1f24;
     height: 100vh;
     position: fixed;
-    top: 70px; /* matches navbar height */
+    top: 68px; /* matches navbar height */
     left: 0;
     padding-top: 20px;
     transition: width .28s ease, background .25s ease;
@@ -24,6 +25,7 @@
    Toggle Button  
 ———————————— */
 .side-toggle {
+    opacity: 1;
     width: 100%;
     display: flex;
     justify-content: flex-end;
@@ -32,6 +34,7 @@
 }
 
 .side-toggle img {
+    opacity: 1;
     margin-right: 6px;
     width: 26px;
     height: 26px;
@@ -41,6 +44,7 @@
 }
 
 .side-toggle img:hover {
+    opacity: 1;
     transform: scale(1.06);
     opacity: 1;
 }

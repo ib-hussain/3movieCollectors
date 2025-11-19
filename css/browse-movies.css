@@ -1,10 +1,30 @@
 /* Layout matches dashboard so sidebar / footer JS work */
-
+*{
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0,0,0,0.15);
+    --clickAbleLink: #ff2c2c;   /* issue: to be decided, fix this colour later */
+    --ratingYellow: #FF9100;    
+}
 body {
     margin: 0;
-    background: #0f0f0f;
     color: #ffffff;
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgb(196, 255, 250) 0%, 
+        rgba(255, 237, 188, 1) 30%, 
+        rgba(236, 217, 255, 1) 55%, 
+        rgba(202, 224, 255, 1) 80%
+    );
+    background-blend-mode: screen; 
+    background-size: cover;
+    background-attachment: fixed; */
+    background: #0f0f0f;
     margin-top: 72px;
 }
 
@@ -15,6 +35,7 @@ body {
 }
 
 .content-area {
+    color:var(--TextColor);
     flex: 1;
     padding: 28px 32px 40px;
     box-sizing: border-box;
@@ -31,7 +52,7 @@ body {
 
 .browse-header p {
     margin: 0;
-    color: #aaaaaa;
+    color: var(--TextColor);
     font-size: 14px;
 }
 
@@ -39,9 +60,10 @@ body {
 
 .filters-card {
     margin-top: 24px;
-    background: #151515;
+    background: var(--boxBackground);
     border-radius: 16px;
-    border: 1px solid #202020;
+    /* border: 1px solid #202020; */
+    box-shadow: var(--Shadow);
     padding: 18px 22px 20px;
 }
 
@@ -70,13 +92,15 @@ body {
 .filters-reset {
     border: none;
     background: transparent;
-    color: #bbbbbb;
+    color: white;
     font-size: 13px;
     cursor: pointer;
 }
 
 .filters-reset:hover {
-    color: #ffffff;
+    transition: 0.25s;
+    transform: scale(1.06);
+    color: #000;
 }
 
 .filters-body {
@@ -90,7 +114,7 @@ body {
 .filter-label {
     display: block;
     font-size: 13px;
-    color: #aaaaaa;
+    color: var(--TextColor);
     margin-bottom: 8px;
 }
 
@@ -103,48 +127,24 @@ body {
 .chip {
     padding: 7px 16px;
     border-radius: 999px;
-    border: 1px solid #2a2a2a;
-    background: #1b1b1b;
-    color: #dddddd;
+    border: transparent;
+    background: var(--DarkBlue);
+    color: var(--LightBlue);
     font-size: 13px;
     cursor: pointer;
     transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .chip:hover {
-    border-color: #ff2c2c;
+    /* color: var(--Pink); */
+    transform: scale(1.06);
+    transition: 0.25s;
 }
 
 .chip--active {
-    background: #ff2c2c;
-    border-color: #ff2c2c;
-    color: #ffffff;
+    color: var(--DarkBlue);
+    background-color: var(--Pink);
 }
-
-.more-filters-btn {
-    margin-top: 4px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: 999px;
-    border: 1px solid #ff2c2c;
-    background: #1b1b1b;
-    color: #ff2c2c;
-    font-size: 13px;
-    cursor: pointer;
-}
-
-.more-filters-btn img {
-    width: 16px;
-    height: 16px;
-}
-
-.more-filters-btn:hover {
-    background: #ff2c2c;
-    color: #ffffff;
-}
-
 /* Movies section */
 
 .movies-section {
@@ -160,12 +160,12 @@ body {
 
 .movies-count {
     font-size: 13px;
-    color: #aaaaaa;
+    color: var(--TextColor);
 }
 
 .movies-count span {
     font-weight: 600;
-    color: #ffffff;
+    color: #000;
 }
 
 .sort-control {
@@ -173,7 +173,7 @@ body {
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: #aaaaaa;
+    color: var(--TextColor);
 }
 
 .select-wrapper {
@@ -184,12 +184,12 @@ body {
     appearance: none;
     -moz-appearance: none;
     -webkit-appearance: none;
-    background: #1b1b1b;
-    border: 1px solid #2a2a2a;
+    background: var(--DarkBlue);
+    border: 0px solid transparent;
     color: #ffffff;
     padding: 6px 30px 6px 10px;
-    border-radius: 8px;
-    font-size: 13px;
+    border-radius: 56px;
+    font-size: 14px;
     cursor: pointer;
 }
 
@@ -201,7 +201,7 @@ body {
     transform: translateY(-50%);
     font-size: 10px;
     pointer-events: none;
-    color: #bbbbbb;
+    color: #000000;
 }
 
 /* Movie grid */
@@ -217,20 +217,21 @@ body {
 /* Cards */
 
 .movie-card {
-    background: #151515;
-    border-radius: 16px;
-    border: 1px solid #202020;
+    background: var(--boxBackground) ;
+    border-radius: 24px;
+    /* border: 1px solid #202020; */
     overflow: hidden;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: transform 0.25s;
 }
 
 .movie-card:hover {
-    transform: translateY(-3px);
-    border-color: #ff2c2c;
-    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+    transition: transform 0.25s;
+    transform: scale(1.06);
+    /* border-color: #ff2c2c; */
+    box-shadow: 0 12px 25px var(--Shadow);
 }
 /* --- UNIFIED SQUARE POSTER --- */
 .movie-poster {
@@ -240,7 +241,7 @@ body {
     width: 100%;
     aspect-ratio: 1 / 1; /* SQUARE */
     background: #fff;
-    color: #888;
+    color: var(--TextColor);
     border-radius: 12px;
     font-size: 14px;
     display: flex;
@@ -266,12 +267,12 @@ body {
 .movie-meta {
     margin: 0 0 8px;
     font-size: 12px;
-    color: #aaaaaa;
+    color: var(--TextColor);
 }
 
 .movie-meta .dot {
     margin: 0 6px;
-    color: #555555;
+    color: black;
 }
 
 .movie-rating {
@@ -279,7 +280,7 @@ body {
     align-items: center;
     gap: 5px;
     font-size: 13px;
-    color: #ffb526;
+    color: var(--ratingYellow);
 }
 
 .movie-rating img {
@@ -297,16 +298,17 @@ body {
 .load-more-btn {
     padding: 9px 22px;
     border-radius: 999px;
-    border: 1px solid #ff2c2c;
-    background: #ff2c2c;
-    color: #ffffff;
+    border: 1px solid var(--LightBlue);
+    background: var(--LightBlue);
+    color: var(--DarkBlue);
     font-size: 13px;
     cursor: pointer;
 }
 
 .load-more-btn:hover {
-    background: transparent;
-    color: #ff2c2c;
+    transition: 0.25s;
+    background: var(--DarkBlue);
+    color: #fff;
 }
 
 /* Responsive tweaks */
