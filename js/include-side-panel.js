@@ -87,8 +87,7 @@ function initializeSidePanel() {
 function updateContentShift() {
     const panel = document.querySelector(".side-panel");
     const content = document.querySelector(".content-area");
-    const footer = document.querySelector(".footer-container") 
-                || document.querySelector("#footer-container");
+    const footer = document.querySelector(".footer");  // Changed to select .footer directly
 
     if (!panel) return;
 
@@ -96,5 +95,5 @@ function updateContentShift() {
     const width = isCollapsed ? 78 : 260;
 
     if (content) content.style.marginLeft = width + "px";
-    if (footer) footer.style.marginLeft = width + "px";
+    if (footer) footer.style.marginLeft = width + "px";  // Apply margin to footer
 }
