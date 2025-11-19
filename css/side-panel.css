@@ -67,7 +67,7 @@
     align-items: center;
     gap: 16px;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 999px;
     transition: background .25s, color .25s;
 }
 

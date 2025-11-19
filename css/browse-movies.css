@@ -25,8 +25,7 @@ body {
     );
     background-blend-mode: screen; 
     background-size: cover;
-    background-attachment: fixed; */
-    background: #0f0f0f;
+    background-attachment: fixed; 
     margin-top: 72px;
 }
 

@@ -1,382 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Admin Dashboard - 3movCollectors</title>
+<head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - 3movCollectors</title>
 
-        <!-- Component CSS -->
-        <link rel="stylesheet" href="../css/main-navbar.css">
-        <link rel="stylesheet" href="../css/side-panel.css">
-        <link rel="stylesheet" href="../css/main-footer.css">
+    <!-- Shared component CSS -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
 
-        <!-- Page CSS -->
-        <link rel="stylesheet" href="../css/admin-panel.css">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/admin-panel.css">
 
-        <link rel="icon" href="../pictures/M.png" />
-    </head>
+    <link rel="icon" href="../pictures/M.png" />
+</head>
 
-    <body>
+<body data-page="admin">
 
-        <!-- NAVBAR -->
-        <div id="navbar-container"></div>
-        <script src="../js/include-main-navbar.js"></script>
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+    <script src="../js/include-main-navbar.js" defer></script>
 
-        <!-- MAIN WRAPPER -->
-        <div class="layout-wrapper">
+    <!-- MAIN WRAPPER -->
+    <div class="layout-wrapper">
 
-            <!-- SIDEBAR -->
-            <div id="sidepanel-container"></div>
-            <script src="../js/include-side-panel.js"></script>
+        <!-- SIDEPANEL -->
+        <div id="sidepanel-container"></div>
+        <script src="../js/include-side-panel.js" defer></script>
 
-            <!-- CONTENT -->
-            <div class="content-area">
+        <!-- CONTENT AREA -->
+        <main class="content-area">
+            <div class="admin-main">
 
-                <main class="admin-main">
-
-                    <!-- PAGE HEADER -->
-                    <header class="admin-header">
-                        <div class="admin-title-left">
-                            <div>
-                                <h1>Admin Dashboard</h1>
-                                <p>System overview and moderation tools</p>
-                            </div>
+                <!-- PAGE HEADER -->
+                <header class="admin-header">
+                    <div class="admin-title-left">
+                        <div>
+                            <h1>Admin Dashboard</h1>
+                            <p>System overview and moderation tools</p>
                         </div>
-                    </header>
+                    </div>
+                </header>
 
-                    <!-- STATS ROW -->
-                    <section class="admin-stats-row">
+                <!-- STATS ROW -->
+                <section class="admin-stats-row">
 
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-top">
-                                <span class="admin-stat-label">Total
-                                    Users</span>
-                                <img src="../pictures/people.png" alt>
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span class="admin-stat-label">Total Users</span>
+                            <img src="../pictures/people.png" alt="users">
+                        </div>
+                        <div class="admin-stat-main">
+                            <span class="admin-stat-value">52,341</span>
+                            <span class="admin-stat-change admin-stat-change--positive">+8%</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span class="admin-stat-label">Total Movies</span>
+                            <img src="../pictures/film.png" alt="movies">
+                        </div>
+                        <div class="admin-stat-main">
+                            <span class="admin-stat-value">12,847</span>
+                            <span class="admin-stat-change admin-stat-change--positive">+3%</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span class="admin-stat-label">Pending Reports</span>
+                            <img src="../pictures/flag-red.png" alt="reports">
+                        </div>
+                        <div class="admin-stat-main">
+                            <span class="admin-stat-value">23</span>
+                        </div>
+                    </div>
+
+                    <div class="admin-stat-card">
+                        <div class="admin-stat-top">
+                            <span class="admin-stat-label">Active Sessions</span>
+                            <img src="../pictures/trending-red.png" alt="sessions">
+                        </div>
+                        <div class="admin-stat-main">
+                            <span class="admin-stat-value">3,421</span>
+                            <span class="admin-stat-change admin-stat-change--positive">+12%</span>
+                        </div>
+                    </div>
+
+                </section>
+
+                <!-- QUICK ACTIONS -->
+                <section class="admin-quick-actions">
+                    <button class="admin-quick-card">
+                        <div class="admin-quick-icon">
+                            <img src="../pictures/people.png" alt="">
+                        </div>
+                        <span class="admin-quick-label">User Management</span>
+                    </button>
+
+                    <button class="admin-quick-card">
+                        <div class="admin-quick-icon">
+                            <img src="../pictures/film.png" alt="">
+                        </div>
+                        <span class="admin-quick-label">Movie Management</span>
+                    </button>
+
+                    <button class="admin-quick-card">
+                        <div class="admin-quick-icon">
+                            <img src="../pictures/warning.png" alt="">
+                        </div>
+                        <span class="admin-quick-label">Moderation Queue</span>
+                    </button>
+
+                    <button class="admin-quick-card">
+                        <div class="admin-quick-icon">
+                            <img src="../pictures/report.png" alt="">
+                        </div>
+                        <span class="admin-quick-label">View Reports</span>
+                    </button>
+                </section>
+
+                <!-- LOWER GRID -->
+                <section class="admin-lower-grid">
+
+                    <!-- LEFT: FLAGGED CONTENT -->
+                    <section class="admin-card admin-flagged-card">
+                        <header class="admin-card-header admin-flagged-header">
+                            <div class="admin-flagged-title">
+                                <h2>Flagged Content</h2>
                             </div>
-                            <div class="admin-stat-main">
-                                <span class="admin-stat-value">52,341</span>
-                                <span
-                                    class="admin-stat-change admin-stat-change--positive">
-                                    +8%
+                            <button class="admin-view-all-btn">View All</button>
+                        </header>
+
+                        <div class="flagged-table-wrapper">
+                            <div class="flagged-table-header">
+                                <span class="flagged-col flagged-col--type">Type</span>
+                                <span class="flagged-col flagged-col--content">Content</span>
+                                <span class="flagged-col flagged-col--reporter">Reporter</span>
+                                <span class="flagged-col flagged-col--date">Date</span>
+                                <span class="flagged-col flagged-col--status">Status</span>
+                                <span class="flagged-col flagged-col--actions">Actions</span>
+                            </div>
+
+                            <!-- Row 1 -->
+                            <article class="flagged-row">
+                                <span class="flagged-type-pill">Review</span>
+                                <span class="flagged-content">
+                                    Inappropriate language in review of "The Matrix"
                                 </span>
-                            </div>
-                        </div>
-
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-top">
-                                <span class="admin-stat-label">Total
-                                    Movies</span>
-                                <img src="../pictures/film.png" alt>
-                            </div>
-                            <div class="admin-stat-main">
-                                <span class="admin-stat-value">12,847</span>
-                                <span
-                                    class="admin-stat-change admin-stat-change--positive">
-                                    +3%
+                                <span class="flagged-reporter">John Smith</span>
+                                <span class="flagged-date">2 hours ago</span>
+                                <span class="flagged-status flagged-status--pending">pending</span>
+                                <span class="flagged-actions">
+                                    <button class="flagged-btn flagged-btn--secondary">Review</button>
+                                    <button class="flagged-btn flagged-btn--danger">Remove</button>
                                 </span>
-                            </div>
-                        </div>
+                            </article>
 
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-top">
-                                <span class="admin-stat-label">Pending
-                                    Reports</span>
-                                <img src="../pictures/flag-red.png" alt>
-                            </div>
-                            <div class="admin-stat-main">
-                                <span class="admin-stat-value">23</span>
-                            </div>
-                        </div>
-
-                        <div class="admin-stat-card">
-                            <div class="admin-stat-top">
-                                <span class="admin-stat-label">Active
-                                    Sessions</span>
-                                <img src="../pictures/trending-red.png" alt>
-                            </div>
-                            <div class="admin-stat-main">
-                                <span class="admin-stat-value">3,421</span>
-                                <span
-                                    class="admin-stat-change admin-stat-change--positive">
-                                    +12%
+                            <!-- Row 2 -->
+                            <article class="flagged-row">
+                                <span class="flagged-type-pill">Post</span>
+                                <span class="flagged-content">
+                                    Spam post in General Discussion
                                 </span>
-                            </div>
-                        </div>
+                                <span class="flagged-reporter">Sarah Connor</span>
+                                <span class="flagged-date">5 hours ago</span>
+                                <span class="flagged-status flagged-status--pending">pending</span>
+                                <span class="flagged-actions">
+                                    <button class="flagged-btn flagged-btn--secondary">Review</button>
+                                    <button class="flagged-btn flagged-btn--danger">Remove</button>
+                                </span>
+                            </article>
 
+                            <!-- Row 3 -->
+                            <article class="flagged-row">
+                                <span class="flagged-type-pill">Comment</span>
+                                <span class="flagged-content">
+                                    Harassment in comment thread
+                                </span>
+                                <span class="flagged-reporter">Emma Wilson</span>
+                                <span class="flagged-date">1 day ago</span>
+                                <span class="flagged-status flagged-status--pending">pending</span>
+                                <span class="flagged-actions">
+                                    <button class="flagged-btn flagged-btn--secondary">Review</button>
+                                    <button class="flagged-btn flagged-btn--danger">Remove</button>
+                                </span>
+                            </article>
+
+                            <!-- Row 4 -->
+                            <article class="flagged-row">
+                                <span class="flagged-type-pill">User</span>
+                                <span class="flagged-content">
+                                    Suspicious account activity
+                                </span>
+                                <span class="flagged-reporter">System</span>
+                                <span class="flagged-date">1 day ago</span>
+                                <span class="flagged-status flagged-status--reviewing">reviewing</span>
+                                <span class="flagged-actions">
+                                    <button class="flagged-btn flagged-btn--secondary">Review</button>
+                                    <button class="flagged-btn flagged-btn--danger">Remove</button>
+                                </span>
+                            </article>
+                        </div>
                     </section>
 
-                    <!-- QUICK ACTIONS -->
-                    <section class="admin-quick-actions">
-                        <div class="admin-quick-card">
-                            <div class="admin-quick-icon">
-                                <img src="../pictures/people.png" alt>
-                            </div>
-                            <span class="admin-quick-label">User
-                                Management</span>
+                    <!-- RIGHT: RECENT USERS -->
+                    <aside class="admin-card admin-recent-users-card">
+                        <header class="admin-card-header">
+                            <h2>Recent Users</h2>
+                            <button class="admin-view-all-link">View All</button>
+                        </header>
+
+                        <div class="recent-user-list">
+
+                            <article class="recent-user-item">
+                                <div class="recent-user-main">
+                                    <span class="recent-user-name">Alex Turner</span>
+                                    <span class="recent-user-email">alex.turner@example.com</span>
+                                    <span class="recent-user-meta">Joined 2 hours ago</span>
+                                </div>
+                                <span class="recent-user-status recent-user-status--active">Active</span>
+                            </article>
+
+                            <article class="recent-user-item">
+                                <div class="recent-user-main">
+                                    <span class="recent-user-name">Maria Garcia</span>
+                                    <span class="recent-user-email">maria.g@example.com</span>
+                                    <span class="recent-user-meta">Joined 5 hours ago</span>
+                                </div>
+                                <span class="recent-user-status recent-user-status--active">Active</span>
+                            </article>
+
+                            <article class="recent-user-item">
+                                <div class="recent-user-main">
+                                    <span class="recent-user-name">David Chen</span>
+                                    <span class="recent-user-email">david.chen@example.com</span>
+                                    <span class="recent-user-meta">Joined 1 day ago</span>
+                                </div>
+                                <span class="recent-user-status recent-user-status--active">Active</span>
+                            </article>
+
+                            <article class="recent-user-item">
+                                <div class="recent-user-main">
+                                    <span class="recent-user-name">Sophie Laurent</span>
+                                    <span class="recent-user-email">sophie.l@example.com</span>
+                                    <span class="recent-user-meta">Joined 2 days ago</span>
+                                </div>
+                                <span class="recent-user-status recent-user-status--active">Active</span>
+                            </article>
+
                         </div>
+                    </aside>
 
-                        <div class="admin-quick-card">
-                            <div class="admin-quick-icon">
-                                <img src="../pictures/film.png" alt>
-                            </div>
-                            <span class="admin-quick-label">Movie
-                                Management</span>
-                        </div>
-
-                        <div class="admin-quick-card">
-                            <div class="admin-quick-icon">
-                                <img src="../pictures/warning.png" alt>
-                            </div>
-                            <span class="admin-quick-label">Moderation
-                                Queue</span>
-                        </div>
-
-                        <div class="admin-quick-card">
-                            <div class="admin-quick-icon">
-                                <img src="../pictures/report.png" alt>
-                            </div>
-                            <span class="admin-quick-label">View Reports</span>
-                        </div>
-                    </section>
-
-                    <!-- LOWER GRID (LEFT + RIGHT COLUMN) -->
-                    <section class="admin-lower-grid">
-
-                        <!-- LEFT COLUMN -->
-                        <div class="admin-left-column">
-
-                            <!-- RATING DISTRIBUTION -->
-                            <!-- <section class="admin-card admin-rating-card">
-                                <header class="admin-card-header">
-                                    <h2>Rating Distribution</h2>
-                                </header>
-
-                                <div class="rating-chart-wrapper">
-                                    <div id="rating-chart"
-                                        class="rating-chart-container"></div>
-                                </div>
-
-                            </section> -->
-
-                            <!-- FLAGGED CONTENT -->
-                            <section class="admin-card admin-flagged-card"  >
-                                <header
-                                    class="admin-card-header admin-flagged-header">
-                                    <div class="admin-flagged-title">
-                                        <img src="../pictures/flag-red.png" alt>
-                                        <h2>Flagged Content</h2>
-                                    </div>
-                                    <button class="admin-view-all-btn">View
-                                        All</button>
-                                </header>
-
-                                <div class="flagged-table-header">
-                                    <div class="flagged-table-wrapper">
-                                        <span
-                                            class="flagged-col flagged-col--type">Type</span>
-                                        <span
-                                            class="flagged-col flagged-col--content">Content</span>
-                                        <span
-                                            class="flagged-col flagged-col--reporter">Reporter</span>
-                                        <span
-                                            class="flagged-col flagged-col--date">Date</span>
-                                        <span
-                                            class="flagged-col flagged-col--status">Status</span>
-                                        <span
-                                            class="flagged-col flagged-col--actions">Actions</span></div>
-                                </div>
-
-                                <div class="flagged-row">
-                                    <span
-                                        class="flagged-type-pill">Review</span>
-                                    <span class="flagged-content">
-                                        Inappropriate language in review of
-                                        "The Matrix"
-                                    </span>
-                                    <span class="flagged-reporter">John
-                                        Smith</span>
-                                    <span class="flagged-date">2 hours
-                                        ago</span>
-                                    <span
-                                        class="flagged-status flagged-status--pending">pending</span>
-                                    <span class="flagged-actions">
-                                        <button
-                                            class="flagged-btn flagged-btn--secondary">
-                                            Review
-                                        </button>
-                                        <button
-                                            class="flagged-btn flagged-btn--danger">
-                                            Remove
-                                        </button>
-                                    </span>
-                                </div>
-
-                                <div class="flagged-row">
-                                    <span class="flagged-type-pill">Post</span>
-                                    <span class="flagged-content">
-                                        Spam post in General Discussion
-                                    </span>
-                                    <span class="flagged-reporter">Sarah
-                                        Connor</span>
-                                    <span class="flagged-date">5 hours
-                                        ago</span>
-                                    <span
-                                        class="flagged-status flagged-status--pending">pending</span>
-                                    <span class="flagged-actions">
-                                        <button
-                                            class="flagged-btn flagged-btn--secondary">
-                                            Review
-                                        </button>
-                                        <button
-                                            class="flagged-btn flagged-btn--danger">
-                                            Remove
-                                        </button>
-                                    </span>
-                                </div>
-
-                                <div class="flagged-row">
-                                    <span
-                                        class="flagged-type-pill">Comment</span>
-                                    <span class="flagged-content">
-                                        Harassment in comment thread
-                                    </span>
-                                    <span class="flagged-reporter">Emma
-                                        Wilson</span>
-                                    <span class="flagged-date">1 day ago</span>
-                                    <span
-                                        class="flagged-status flagged-status--pending">pending</span>
-                                    <span class="flagged-actions">
-                                        <button
-                                            class="flagged-btn flagged-btn--secondary">
-                                            Review
-                                        </button>
-                                        <button
-                                            class="flagged-btn flagged-btn--danger">
-                                            Remove
-                                        </button>
-                                    </span>
-                                </div>
-
-                                <div class="flagged-row">
-                                    <span class="flagged-type-pill">User</span>
-                                    <span class="flagged-content">
-                                        Suspicious account activity
-                                    </span>
-                                    <span class="flagged-reporter">System</span>
-                                    <span class="flagged-date">1 day ago</span>
-                                    <span
-                                        class="flagged-status flagged-status--reviewing">
-                                        reviewing
-                                    </span>
-                                    <span class="flagged-actions">
-                                        <button
-                                            class="flagged-btn flagged-btn--secondary">
-                                            Review
-                                        </button>
-                                        <button
-                                            class="flagged-btn flagged-btn--danger">
-                                            Remove
-                                        </button>
-                                    </span>
-                                </div>
-                            </section>
-                        </div>
-
-                        <!-- RIGHT COLUMN -->
-                        <aside class="admin-right-column">
-
-                            <!-- RECENT USERS -->
-                            <section class="admin-card admin-recent-users-card">
-                                <header class="admin-card-header">
-                                    <h2>Recent Users</h2>
-                                    <button class="admin-view-all-link">View
-                                        All</button>
-                                </header>
-
-                                <div class="recent-user-item">
-                                    <div class="recent-user-main">
-                                        <span class="recent-user-name">Alex
-                                            Turner</span>
-                                        <span class="recent-user-email">
-                                            alex.turner@example.com
-                                        </span>
-                                        <span class="recent-user-meta">
-                                            Joined 2 hours ago
-                                        </span>
-                                    </div>
-                                    <span
-                                        class="recent-user-status recent-user-status--active">
-                                        active
-                                    </span>
-                                </div>
-
-                                <div class="recent-user-item">
-                                    <div class="recent-user-main">
-                                        <span class="recent-user-name">Maria
-                                            Garcia</span>
-                                        <span class="recent-user-email">
-                                            maria.g@example.com
-                                        </span>
-                                        <span class="recent-user-meta">
-                                            Joined 5 hours ago
-                                        </span>
-                                    </div>
-                                    <span
-                                        class="recent-user-status recent-user-status--active">
-                                        active
-                                    </span>
-                                </div>
-
-                                <div class="recent-user-item">
-                                    <div class="recent-user-main">
-                                        <span class="recent-user-name">David
-                                            Chen</span>
-                                        <span class="recent-user-email">
-                                            david.chen@example.com
-                                        </span>
-                                        <span class="recent-user-meta">
-                                            Joined 1 day ago
-                                        </span>
-                                    </div>
-                                    <span
-                                        class="recent-user-status recent-user-status--active">
-                                        active
-                                    </span>
-                                </div>
-
-                                <div class="recent-user-item">
-                                    <div class="recent-user-main">
-                                        <span class="recent-user-name">Sophie
-                                            Laurent</span>
-                                        <span class="recent-user-email">
-                                            sophie.l@example.com
-                                        </span>
-                                        <span class="recent-user-meta">
-                                            Joined 2 days ago
-                                        </span>
-                                    </div>
-                                    <span
-                                        class="recent-user-status recent-user-status--active">
-                                        active
-                                    </span>
-                                </div>
-                            </section>
-
-                        </aside>
-                    </section>
-
-                </main>
-
-                <!-- FOOTER -->
-                <div id="footer-container"></div>
-                <script src="../js/include-footer.js"></script>
+                </section>
 
             </div>
-        </div>
+        </main>
+    </div>
 
-        <!-- D3.js CDN (Q1: A) -->
-        <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script src="../js/include-footer.js" defer></script>
 
-        <!-- Page JS -->
-        <script src="../js/admin-panel.js"></script>
-    </body>
+    <!-- PAGE JS -->
+    <script src="../js/admin-panel.js" defer></script>
+
+</body>
 </html>
