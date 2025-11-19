@@ -7,7 +7,9 @@
     --boxBackground: #afe4f163;
     --Shadow: rgba(0,0,0,0.15);
     --clickAbleLink: #ff2c2c;   /* issue: to be decided, fix this colour later */
-    --ratingYellow: #FF9100;    
+    --ratingYellow: #FF9100;   
+    --statCardBG:#7f6d8d0a; 
+    --statCardBorder: #dfdcbc;
 }
 .content-area {
     margin-left: 260px;
@@ -98,11 +100,15 @@ body {
 }
 
 .stat-card {
-    background: #7f6d8d0a;
-    border-radius: 12px;
+    background: var(--statCardBG);
+    border-radius: 14px;
     padding: 16px 18px;
-    border: 1px solid #dfdcbc;
+    border: 1px solid var(--statCardBorder);
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
 }
 
 /* .stat-card:hover {
@@ -113,7 +119,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #171a1f;
+    color: var(--TextColor);
     font-size: 13px;
 }
 

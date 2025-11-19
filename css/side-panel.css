@@ -7,7 +7,7 @@
     background: #1d1f24;
     height: 100vh;
     position: fixed;
-    top: 68px; /* matches navbar height */
+    top: 65px; /* matches navbar height */
     left: 0;
     padding-top: 20px;
     transition: width .28s ease, background .25s ease;
