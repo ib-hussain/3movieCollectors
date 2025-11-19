@@ -1,550 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Friends - 3movCollectors</title>
+<head>
+    <meta charset="UTF-8" />
+    <title>Friends - 3movCollectors</title>
 
-        <!-- Component CSS -->
-        <link rel="stylesheet" href="../css/main-navbar.css">
-        <link rel="stylesheet" href="../css/side-panel.css">
-        <link rel="stylesheet" href="../css/main-footer.css">
+    <!-- Shared CSS -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
 
-        <!-- Page CSS -->
-        <link rel="stylesheet" href="../css/friends.css">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/friends.css">
 
-        <link rel="icon" href="../pictures/M.png" />
-    </head>
+    <link rel="icon" href="../pictures/M.png" />
+</head>
 
-    <body>
+<body data-page="friends">
 
-        <!-- NAVBAR -->
-        <div id="navbar-container"></div>
-        <script src="../js/include-main-navbar.js"></script>
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+    <script src="../js/include-main-navbar.js" defer></script>
 
-        <!-- MAIN WRAPPER -->
-        <div class="layout-wrapper">
+    <!-- MAIN WRAPPER -->
+    <div class="layout-wrapper">
 
-            <!-- SIDEBAR -->
-            <div id="sidepanel-container"></div>
-            <script src="../js/include-side-panel.js"></script>
+        <!-- SIDEPANEL -->
+        <div id="sidepanel-container"></div>
+        <script src="../js/include-side-panel.js" defer></script>
 
-            <!-- CONTENT -->
-            <div class="content-area">
+        <!-- MAIN CONTENT -->
+        <main class="content-area">
+            <div class="friends-main">
 
-                <main class="friends-main">
+                <!-- HEADER -->
+                <section class="friends-header">
+                    <div>
+                        <h1>Friends</h1>
+                        <p>View your friends, requests and suggestions</p>
+                    </div>
+                </section>
 
-                    <!-- PAGE HEADER -->
-                    <header class="friends-header">
-                        <div>
-                            <h1>Friends</h1>
-                            <p>Connect with fellow movie enthusiasts</p>
+                <!-- STATS -->
+                <section class="friends-stats-row">
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Total Friends</span>
+                            <img src="../pictures/friends.png" alt="">
                         </div>
-                    </header>
+                        <span class="stat-value">8</span>
+                    </div>
 
-                    <!-- STATS ROW -->
-                    <section class="friends-stats-row">
-
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Total Friends</span>
-                                <img src="../pictures/people.png" alt="">
-                            </div>
-                            <span class="stat-value">8</span>
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Online</span>
+                            <img src="../pictures/people.png" alt="">
                         </div>
+                        <span class="stat-value stat-value--online">5</span>
+                    </div>
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Online Now</span>
-                                <img src="../pictures/friends.png" alt="">
-                            </div>
-                            <span class="stat-value stat-value--online">5</span>
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Requests</span>
+                            <img src="../pictures/friend-request.png" alt="">
                         </div>
+                        <span class="stat-value stat-value--pending">3</span>
+                    </div>
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Pending Requests</span>
-                                <img src="../pictures/friend.png" alt="">
-                            </div>
-                            <span class="stat-value stat-value--pending">3</span>
+                    <div class="stat-card">
+                        <div class="stat-top">
+                            <span>Suggestions</span>
+                            <img src="../pictures/friend.png" alt="">
                         </div>
+                        <span class="stat-value">4</span>
+                    </div>
+                </section>
 
-                        <div class="stat-card">
-                            <div class="stat-top">
-                                <span>Suggestions</span>
-                                <img src="../pictures/friend-request.png" alt="">
-                            </div>
-                            <span class="stat-value">4</span>
-                        </div>
+                <!-- SEARCH -->
+                <section class="friends-search-section">
+                    <div class="friends-search">
+                        <img src="../pictures/search.png" class="friends-search-icon" alt="">
+                        <input type="text" placeholder="Search friends." aria-label="Search friends">
+                    </div>
+                </section>
 
-                    </section>
-
-                    <!-- SEARCH BAR -->
-                    <section class="friends-search-section">
-                        <div class="friends-search">
-                            <img src="../pictures/search.png" alt="" class="friends-search-icon">
-                            <input
-                                type="text"
-                                placeholder="Search friends..."
-                                aria-label="Search friends" />
-                        </div>
-                    </section>
-
-                    <!-- TABS -->
-                    <section class="friends-tabs-wrapper">
-
-                        <div class="friends-tabs" role="tablist">
-                            <button
-                                class="friends-tab friends-tab--active"
+                <!-- TABS -->
+                <section class="friends-tabs-wrapper">
+                    <div class="friends-tabs" role="tablist">
+                        <button class="friends-tab friends-tab--active"
                                 data-tab="tab-all"
                                 role="tab"
                                 aria-selected="true">
-                                <img src="../pictures/friends.png" alt="" class="friends-tab-icon">
-                                <span>All Friends (8)</span>
-                            </button>
+                            <img src="../pictures/friends.png" class="friends-tab-icon" alt="">
+                            <span>All Friends (8)</span>
+                        </button>
 
-                            <button
-                                class="friends-tab"
+                        <button class="friends-tab"
                                 data-tab="tab-requests"
                                 role="tab"
                                 aria-selected="false">
-                                <img src="../pictures/friend-request.png" alt="" class="friends-tab-icon">
-                                <span>Requests (3)</span>
-                            </button>
+                            <img src="../pictures/friend-request.png" class="friends-tab-icon" alt="">
+                            <span>Requests (3)</span>
+                        </button>
 
-                            <button
-                                class="friends-tab"
+                        <button class="friends-tab"
                                 data-tab="tab-suggestions"
                                 role="tab"
                                 aria-selected="false">
-                                <img src="../pictures/friend.png" alt="" class="friends-tab-icon">
-                                <span>Suggestions (4)</span>
-                            </button>
+                            <img src="../pictures/friend.png" class="friends-tab-icon" alt="">
+                            <span>Suggestions (4)</span>
+                        </button>
+                    </div>
+
+                    <!-- TAB PANELS -->
+                    <div class="friends-tab-panels">
+
+                        <!-- TAB: ALL FRIENDS -->
+                        <div class="friends-tab-panel friends-tab-panel--active"
+                             id="tab-all"
+                             role="tabpanel">
+
+                            <div class="friend-grid">
+
+                                <!-- Friend 1 -->
+                                <article class="friend-card">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">SC</div>
+                                            <div class="friend-meta">
+                                                <h3>Sarah Connor</h3>
+                                                <span class="friend-handle">@sarahc</span>
+                                            </div>
+                                        </div>
+                                        <button class="friend-more-btn">
+                                            <img src="../pictures/menu-dots.png">
+                                        </button>
+                                    </header>
+
+                                    <div class="friend-stats-row">
+                                        <div class="friend-stat">
+                                            <span class="friend-stat-value">152</span>
+                                            <span class="friend-stat-label">Movies</span>
+                                        </div>
+                                        <div class="friend-stat">
+                                            <span class="friend-stat-value">38</span>
+                                            <span class="friend-stat-label">Reviews</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="friend-info-row">
+                                        <span class="friend-info-label">Favorite Genre</span>
+                                        <span class="friend-genre-pill">Sci-Fi</span>
+                                    </div>
+
+                                    <div class="friend-info-row">
+                                        <span class="friend-info-label">Mutual Friends</span>
+                                        <span class="friend-info-value">8</span>
+                                    </div>
+
+                                    <div class="friend-card-footer">
+                                        <button class="friend-btn friend-btn--secondary">Message</button>
+                                        <button class="friend-btn friend-btn--primary-link">View Profile</button>
+                                    </div>
+                                </article>
+
+                                <!-- Friend 2 -->
+                                <article class="friend-card">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">MC</div>
+                                            <div class="friend-meta">
+                                                <h3>Michael Chen</h3>
+                                                <span class="friend-handle">@mchen</span>
+                                            </div>
+                                        </div>
+                                        <button class="friend-more-btn">
+                                            <img src="../pictures/menu-dots.png">
+                                        </button>
+                                    </header>
+
+                                    <div class="friend-stats-row">
+                                        <div class="friend-stat">
+                                            <span class="friend-stat-value">99</span>
+                                            <span class="friend-stat-label">Movies</span>
+                                        </div>
+                                        <div class="friend-stat">
+                                            <span class="friend-stat-value">12</span>
+                                            <span class="friend-stat-label">Reviews</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="friend-info-row">
+                                        <span class="friend-info-label">Favorite Genre</span>
+                                        <span class="friend-genre-pill">Comedy</span>
+                                    </div>
+
+                                    <div class="friend-info-row">
+                                        <span class="friend-info-label">Mutual Friends</span>
+                                        <span class="friend-info-value">14</span>
+                                    </div>
+
+                                    <div class="friend-card-footer">
+                                        <button class="friend-btn friend-btn--secondary">Message</button>
+                                        <button class="friend-btn friend-btn--primary-link">View Profile</button>
+                                    </div>
+                                </article>
+
+                            </div>
                         </div>
 
-                        <!-- TAB PANELS -->
-                        <div class="friends-tab-panels">
+                        <!-- TAB: REQUESTS -->
+                        <div class="friends-tab-panel"
+                             id="tab-requests"
+                             role="tabpanel">
 
-                            <!-- ALL FRIENDS TAB -->
-                            <div
-                                class="friends-tab-panel friends-tab-panel--active"
-                                id="tab-all"
-                                role="tabpanel">
+                            <div class="friend-requests-list">
 
-                                <div class="friend-grid">
-
-                                    <!-- Friend card 1 -->
-                                    <article class="friend-card">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">SC</div>
-                                                <div class="friend-meta">
-                                                    <h3>Sarah Connor</h3>
-                                                    <span class="friend-handle">@sarahc</span>
-                                                </div>
-                                            </div>
-                                            <button class="friend-more-btn">
-                                                <img src="../pictures/menu-dots.png" alt="More options icon">
-                                            </button>
-                                        </header>
-
-                                        <div class="friend-stats-row">
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">45</span>
-                                                <span class="friend-stat-label">Watchlist</span>
-                                            </div>
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">28</span>
-                                                <span class="friend-stat-label">Reviews</span>
+                                <!-- Request 1 -->
+                                <article class="friend-card friend-card--request">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">JS</div>
+                                            <div class="friend-meta">
+                                                <h3>John Smith</h3>
+                                                <span class="friend-handle">@johnsmith</span>
+                                                <span class="friend-request-meta">
+                                                    5 mutual friends • 2 days ago
+                                                </span>
                                             </div>
                                         </div>
+                                    </header>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Favorite Genre</span>
-                                            <span class="friend-genre-pill">Action</span>
-                                        </div>
+                                    <div class="friend-request-actions">
+                                        <button class="friend-btn friend-btn--primary">Accept</button>
+                                        <button class="friend-btn friend-btn--ghost">Decline</button>
+                                    </div>
+                                </article>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Mutual Friends</span>
-                                            <span class="friend-info-value">12</span>
-                                        </div>
-
-                                        <div class="friend-card-footer">
-                                            <button class="friend-btn friend-btn--secondary">
-                                                Message
-                                            </button>
-                                            <button class="friend-btn friend-btn--primary-link">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Friend card 2 -->
-                                    <article class="friend-card">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">MC</div>
-                                                <div class="friend-meta">
-                                                    <h3>Michael Chen</h3>
-                                                    <span class="friend-handle">@mchen</span>
-                                                </div>
-                                            </div>
-                                            <button class="friend-more-btn">
-                                                <img src="../pictures/menu-dots.png" alt="More options icon">
-                                            </button>
-                                        </header>
-
-                                        <div class="friend-stats-row">
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">67</span>
-                                                <span class="friend-stat-label">Watchlist</span>
-                                            </div>
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">42</span>
-                                                <span class="friend-stat-label">Reviews</span>
+                                <!-- Request 2 -->
+                                <article class="friend-card friend-card--request">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">AG</div>
+                                            <div class="friend-meta">
+                                                <h3>Anna Garcia</h3>
+                                                <span class="friend-handle">@annagarcia</span>
+                                                <span class="friend-request-meta">
+                                                    3 mutual friends • 4 days ago
+                                                </span>
                                             </div>
                                         </div>
+                                    </header>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Favorite Genre</span>
-                                            <span class="friend-genre-pill">Sci-Fi</span>
-                                        </div>
+                                    <div class="friend-request-actions">
+                                        <button class="friend-btn friend-btn--primary">Accept</button>
+                                        <button class="friend-btn friend-btn--ghost">Decline</button>
+                                    </div>
+                                </article>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Mutual Friends</span>
-                                            <span class="friend-info-value">8</span>
-                                        </div>
-
-                                        <div class="friend-card-footer">
-                                            <button class="friend-btn friend-btn--secondary">
-                                                Message
-                                            </button>
-                                            <button class="friend-btn friend-btn--primary-link">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Friend card 3 -->
-                                    <article class="friend-card">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">LA</div>
-                                                <div class="friend-meta">
-                                                    <h3>Lisa Anderson</h3>
-                                                    <span class="friend-handle">@lisaa</span>
-                                                </div>
-                                            </div>
-                                            <button class="friend-more-btn">
-                                                <img src="../pictures/menu-dots.png" alt="More options icon">
-                                            </button>
-                                        </header>
-
-                                        <div class="friend-stats-row">
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">48</span>
-                                                <span class="friend-stat-label">Watchlist</span>
-                                            </div>
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">37</span>
-                                                <span class="friend-stat-label">Reviews</span>
+                                <!-- Request 3 -->
+                                <article class="friend-card friend-card--request">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">TB</div>
+                                            <div class="friend-meta">
+                                                <h3>Tom Bradley</h3>
+                                                <span class="friend-handle">@tombradley</span>
+                                                <span class="friend-request-meta">
+                                                    8 mutual friends • 1 week ago
+                                                </span>
                                             </div>
                                         </div>
+                                    </header>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Favorite Genre</span>
-                                            <span class="friend-genre-pill">Comedy</span>
-                                        </div>
+                                    <div class="friend-request-actions">
+                                        <button class="friend-btn friend-btn--primary">Accept</button>
+                                        <button class="friend-btn friend-btn--ghost">Decline</button>
+                                    </div>
+                                </article>
 
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Mutual Friends</span>
-                                            <span class="friend-info-value">14</span>
-                                        </div>
-
-                                        <div class="friend-card-footer">
-                                            <button class="friend-btn friend-btn--secondary">
-                                                Message
-                                            </button>
-                                            <button class="friend-btn friend-btn--primary-link">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Friend card 4 -->
-                                    <article class="friend-card">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">MT</div>
-                                                <div class="friend-meta">
-                                                    <h3>Marcus Taylor</h3>
-                                                    <span class="friend-handle">@mtaylor</span>
-                                                </div>
-                                            </div>
-                                            <button class="friend-more-btn">
-                                                <img src="../pictures/menu-dots.png" alt="More options icon">
-                                            </button>
-                                        </header>
-
-                                        <div class="friend-stats-row">
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">62</span>
-                                                <span class="friend-stat-label">Watchlist</span>
-                                            </div>
-                                            <div class="friend-stat">
-                                                <span class="friend-stat-value">44</span>
-                                                <span class="friend-stat-label">Reviews</span>
-                                            </div>
-                                        </div>
-
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Favorite Genre</span>
-                                            <span class="friend-genre-pill">Animation</span>
-                                        </div>
-
-                                        <div class="friend-info-row">
-                                            <span class="friend-info-label">Mutual Friends</span>
-                                            <span class="friend-info-value">7</span>
-                                        </div>
-
-                                        <div class="friend-card-footer">
-                                            <button class="friend-btn friend-btn--secondary">
-                                                Message
-                                            </button>
-                                            <button class="friend-btn friend-btn--primary-link">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                </div>
                             </div>
-
-                            <!-- REQUESTS TAB -->
-                            <div
-                                class="friends-tab-panel friends-tab-panel--hidden"
-                                id="tab-requests"
-                                role="tabpanel">
-
-                                <div class="friend-requests-list">
-
-                                    <!-- Request 1 -->
-                                    <article class="friend-card friend-card--request">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">JS</div>
-                                                <div class="friend-meta">
-                                                    <h3>John Smith</h3>
-                                                    <span class="friend-handle">@johnsmith</span>
-                                                    <span class="friend-request-meta">
-                                                        5 mutual friends • 2 days ago
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-request-actions">
-                                            <button class="friend-btn friend-btn--primary">
-                                                Accept
-                                            </button>
-                                            <button class="friend-btn friend-btn--ghost">
-                                                Decline
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Request 2 -->
-                                    <article class="friend-card friend-card--request">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">AG</div>
-                                                <div class="friend-meta">
-                                                    <h3>Anna Garcia</h3>
-                                                    <span class="friend-handle">@annagarcia</span>
-                                                    <span class="friend-request-meta">
-                                                        3 mutual friends • 4 days ago
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-request-actions">
-                                            <button class="friend-btn friend-btn--primary">
-                                                Accept
-                                            </button>
-                                            <button class="friend-btn friend-btn--ghost">
-                                                Decline
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Request 3 -->
-                                    <article class="friend-card friend-card--request">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">TB</div>
-                                                <div class="friend-meta">
-                                                    <h3>Tom Bradley</h3>
-                                                    <span class="friend-handle">@tombradley</span>
-                                                    <span class="friend-request-meta">
-                                                        8 mutual friends • 1 week ago
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-request-actions">
-                                            <button class="friend-btn friend-btn--primary">
-                                                Accept
-                                            </button>
-                                            <button class="friend-btn friend-btn--ghost">
-                                                Decline
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                </div>
-                            </div>
-
-                            <!-- SUGGESTIONS TAB -->
-                            <div
-                                class="friends-tab-panel friends-tab-panel--hidden"
-                                id="tab-suggestions"
-                                role="tabpanel">
-
-                                <div class="friend-grid friend-grid--suggestions">
-
-                                    <!-- Suggestion 1 -->
-                                    <article class="friend-card friend-card--suggestion">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">NP</div>
-                                                <div class="friend-meta">
-                                                    <h3>Nina Patel</h3>
-                                                    <span class="friend-handle">@ninap</span>
-                                                    <span class="friend-suggestion-meta">
-                                                        Loves Sci-Fi movies
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-suggestion-meta-bottom">
-                                            12 mutual friends
-                                        </div>
-
-                                        <div class="friend-suggestion-actions">
-                                            <button class="friend-btn friend-btn--primary-wide">
-                                                Add Friend
-                                            </button>
-                                            <button class="friend-btn friend-btn--secondary-wide">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Suggestion 2 -->
-                                    <article class="friend-card friend-card--suggestion">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">CE</div>
-                                                <div class="friend-meta">
-                                                    <h3>Chris Evans</h3>
-                                                    <span class="friend-handle">@cevans</span>
-                                                    <span class="friend-suggestion-meta">
-                                                        Similar taste in films
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-suggestion-meta-bottom">
-                                            9 mutual friends
-                                        </div>
-
-                                        <div class="friend-suggestion-actions">
-                                            <button class="friend-btn friend-btn--primary-wide">
-                                                Add Friend
-                                            </button>
-                                            <button class="friend-btn friend-btn--secondary-wide">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Suggestion 3 -->
-                                    <article class="friend-card friend-card--suggestion">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">MJ</div>
-                                                <div class="friend-meta">
-                                                    <h3>Maya Johnson</h3>
-                                                    <span class="friend-handle">@mayaj</span>
-                                                    <span class="friend-suggestion-meta">
-                                                        Active in same discussions
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-suggestion-meta-bottom">
-                                            15 mutual friends
-                                        </div>
-
-                                        <div class="friend-suggestion-actions">
-                                            <button class="friend-btn friend-btn--primary-wide">
-                                                Add Friend
-                                            </button>
-                                            <button class="friend-btn friend-btn--secondary-wide">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                    <!-- Suggestion 4 -->
-                                    <article class="friend-card friend-card--suggestion">
-                                        <header class="friend-card-header">
-                                            <div class="friend-user">
-                                                <div class="friend-avatar">AP</div>
-                                                <div class="friend-meta">
-                                                    <h3>Alex Park</h3>
-                                                    <span class="friend-handle">@alexpark</span>
-                                                    <span class="friend-suggestion-meta">
-                                                        Similar watchlist
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </header>
-
-                                        <div class="friend-suggestion-meta-bottom">
-                                            6 mutual friends
-                                        </div>
-
-                                        <div class="friend-suggestion-actions">
-                                            <button class="friend-btn friend-btn--primary-wide">
-                                                Add Friend
-                                            </button>
-                                            <button class="friend-btn friend-btn--secondary-wide">
-                                                View Profile
-                                            </button>
-                                        </div>
-                                    </article>
-
-                                </div>
-                            </div>
-
                         </div>
-                    </section>
 
-                </main>
+                        <!-- TAB: SUGGESTIONS -->
+                        <div class="friends-tab-panel"
+                             id="tab-suggestions"
+                             role="tabpanel">
 
-                <!-- FOOTER -->
-                <div id="footer-container"></div>
-                <script src="../js/include-footer.js"></script>
+                            <div class="friend-grid friend-grid--suggestions">
+
+                                <!-- Suggestion 1 -->
+                                <article class="friend-card friend-card--suggestion">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">MJ</div>
+                                            <div class="friend-meta">
+                                                <h3>Mary Johnson</h3>
+                                                <span class="friend-handle">@maryj</span>
+                                                <span class="friend-suggestion-meta">
+                                                    Similar movie taste
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </header>
+
+                                    <div class="friend-suggestion-meta-bottom">
+                                        12 mutual friends
+                                    </div>
+
+                                    <div class="friend-suggestion-actions">
+                                        <button class="friend-btn friend-btn--primary-wide">Add Friend</button>
+                                        <button class="friend-btn friend-btn--secondary-wide">View Profile</button>
+                                    </div>
+                                </article>
+
+                                <!-- Suggestion 2 -->
+                                <article class="friend-card friend-card--suggestion">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">CE</div>
+                                            <div class="friend-meta">
+                                                <h3>Chris Evans</h3>
+                                                <span class="friend-handle">@cevans</span>
+                                                <span class="friend-suggestion-meta">
+                                                    Similar taste in films
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </header>
+
+                                    <div class="friend-suggestion-meta-bottom">
+                                        9 mutual friends
+                                    </div>
+
+                                    <div class="friend-suggestion-actions">
+                                        <button class="friend-btn friend-btn--primary-wide">Add Friend</button>
+                                        <button class="friend-btn friend-btn--secondary-wide">View Profile</button>
+                                    </div>
+                                </article>
+
+                                <!-- Suggestion 3 -->
+                                <article class="friend-card friend-card--suggestion">
+                                    <header class="friend-card-header">
+                                        <div class="friend-user">
+                                            <div class="friend-avatar">MJ</div>
+                                            <div class="friend-meta">
+                                                <h3>Mark Jacobs</h3>
+                                                <span class="friend-handle">@mjacobs</span>
+                                                <span class="friend-suggestion-meta">
+                                                    Watches similar genres
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </header>
+
+                                    <div class="friend-suggestion-meta-bottom">
+                                        6 mutual friends
+                                    </div>
+
+                                    <div class="friend-suggestion-actions">
+                                        <button class="friend-btn friend-btn--primary-wide">Add Friend</button>
+                                        <button class="friend-btn friend-btn--secondary-wide">View Profile</button>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
 
             </div>
-        </div>
+        </main>
+    </div>
 
-        <script src="../js/friends.js"></script>
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script src="../js/include-footer.js" defer></script>
 
-    </body>
+    <!-- PAGE JS -->
+    <script src="../js/friends.js" defer></script>
+
+</body>
 </html>
