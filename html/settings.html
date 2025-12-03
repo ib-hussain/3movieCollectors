@@ -5,30 +5,33 @@
     <title>Settings – 3movCollectors</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" type="image/png" href="../pictures/M.png">
+    <!-- Favicon -->
+    <link rel="icon" href="../pictures/M.png">
 
-    <!-- Shared styles -->
+    <!-- Shared site CSS -->
     <link rel="stylesheet" href="../css/main-navbar.css">
     <link rel="stylesheet" href="../css/side-panel.css">
     <link rel="stylesheet" href="../css/main-footer.css">
 
-    <!-- Page styles -->
+    <!-- Page CSS -->
     <link rel="stylesheet" href="../css/settings.css">
 </head>
+
 <body data-page="settings">
 
-    <!-- NAVBAR -->
+    <!--  NAVBAR (ALWAYS AT TOP)  -->
     <div id="navbar-container"></div>
     <script src="../js/include-main-navbar.js" defer></script>
 
+    <!--  PAGE WRAPPER (SIDEBAR + CONTENT)  -->
     <div class="layout-wrapper">
 
-        <!-- SIDEBAR -->
+        <!--  SIDE PANEL (LEFT)  -->
         <div id="sidepanel-container"></div>
         <script src="../js/include-side-panel.js" defer></script>
 
-        <!-- SETTINGS MAIN -->
-        <main class="settings-main">
+        <!--  PAGE CONTENT  -->
+        <main class="settings-main with-sidebar">
             <div class="settings-inner">
 
                 <!-- HEADER -->
@@ -37,303 +40,175 @@
                     <p>Manage your account settings and preferences</p>
                 </header>
 
-                <!-- TABS (Account / Security / Notifications) -->
+                <!-- TABS -->
                 <div class="settings-tabs-shell">
                     <div class="settings-tabs">
-                        <button
-                            class="settings-tab-btn settings-tab-btn--active"
-                            type="button"
-                            data-settings-tab="account"
-                        >
-                            <span class="settings-tab-label">Account</span>
-                        </button>
-
-                        <button
-                            class="settings-tab-btn"
-                            type="button"
-                            data-settings-tab="security"
-                        >
-                            <span class="settings-tab-label">Security</span>
-                        </button>
-
-                        <button
-                            class="settings-tab-btn"
-                            type="button"
-                            data-settings-tab="notifications"
-                        >
-                            <span class="settings-tab-label">Notifications</span>
-                        </button>
+                        <button class="settings-tab-btn settings-tab-btn--active" data-settings-tab="account">Account</button>
+                        <button class="settings-tab-btn" data-settings-tab="security">Security</button>
+                        <button class="settings-tab-btn" data-settings-tab="notifications">Notifications</button>
                     </div>
                 </div>
 
-                <!-- ===================== ACCOUNT TAB ===================== -->
-                <section
-                    id="settings-panel-account"
-                    class="settings-tab-panel settings-tab-panel--active"
-                >
-                    <!-- Account information card -->
+                <!--  ACCOUNT TAB  -->
+                <section id="settings-panel-account" class="settings-tab-panel settings-tab-panel--active">
+
                     <section class="settings-card">
                         <h2>Account Information</h2>
 
                         <div class="settings-field-group">
-                            <label for="displayName">Display Name</label>
-                            <input
-                                id="displayName"
-                                type="text"
-                                placeholder="Alex Turner"
-                            />
+                            <label>Display Name</label>
+                            <input type="text" placeholder="Alex Turner">
                         </div>
 
                         <div class="settings-field-group">
-                            <label for="emailAddress">Email Address</label>
-                            <input
-                                id="emailAddress"
-                                type="email"
-                                placeholder="alex.turner@example.com"
-                            />
+                            <label>Email Address</label>
+                            <input type="email" placeholder="alex.turner@example.com">
                         </div>
 
                         <div class="settings-field-group">
-                            <label for="username">Username</label>
-                            <input
-                                id="username"
-                                type="text"
-                                placeholder="@alexturner"
-                            />
+                            <label>Username</label>
+                            <input type="text" placeholder="@alexturner">
                         </div>
 
                         <div class="settings-field-group">
-                            <label for="bio">Bio</label>
-                            <textarea
-                                id="bio"
-                                rows="3"
-                                placeholder="Cinephile exploring the art of storytelling through film"
-                            ></textarea>
+                            <label>Bio</label>
+                            <textarea rows="3">Cinephile exploring the art of storytelling through film</textarea>
                         </div>
 
                         <div class="settings-actions-row">
-                            <button type="button" class="settings-btn settings-btn--primary">
-                                Save Changes
-                            </button>
+                            <button class="settings-btn settings-btn--primary">Save Changes</button>
                         </div>
                     </section>
 
-                    <!-- Danger zone card -->
                     <section class="settings-card settings-card--danger">
                         <h2>Danger Zone</h2>
-                        <p class="danger-text">
-                            Permanently delete your account and all associated data.
-                            This action cannot be undone.
-                        </p>
+                        <p>Permanently delete your account and all associated data.</p>
                         <div class="settings-actions-row">
-                            <button type="button" class="settings-btn settings-btn--danger">
-                                Delete Account
-                            </button>
+                            <button class="settings-btn settings-btn--danger">Delete Account</button>
                         </div>
                     </section>
+
                 </section>
 
-                <!-- ===================== SECURITY TAB ===================== -->
+                <!--  SECURITY TAB  -->
                 <section id="settings-panel-security" class="settings-tab-panel">
-                    <!-- Change password card -->
+
                     <section class="settings-card">
                         <h2>Change Password</h2>
 
-                        <div class="settings-field-group">
-                            <label for="currentPassword">Current Password</label>
+                        <div class="settings-field-group password-field">
+                            <label>Current Password</label>
                             <div class="field-with-icons">
-                                <span class="field-icon-left">
-                                    <img src="../pictures/secure-password.png" alt="">
+                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
+                                <input type="password" class="password-input">
+                                <span class="field-icon-right password-toggle">
+                                    <img src="../pictures/eye.png">
                                 </span>
-                                <input
-                                    id="currentPassword"
-                                    type="password"
-                                    placeholder="••••••••"
-                                />
-                                <button
-                                    type="button"
-                                    class="field-icon-right password-toggle"
-                                    data-target="currentPassword"
-                                >
-                                    <img src="../pictures/eye-closed.png" alt="">
-                                </button>
                             </div>
                         </div>
 
-                        <div class="settings-field-group">
-                            <label for="newPassword">New Password</label>
+                        <div class="settings-field-group password-field">
+                            <label>New Password</label>
                             <div class="field-with-icons">
-                                <span class="field-icon-left">
-                                    <img src="../pictures/secure-password.png" alt="">
+                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
+                                <input type="password" class="password-input">
+                                <span class="field-icon-right password-toggle">
+                                    <img src="../pictures/eye.png">
                                 </span>
-                                <input
-                                    id="newPassword"
-                                    type="password"
-                                    placeholder="••••••••"
-                                />
-                                <button
-                                    type="button"
-                                    class="field-icon-right password-toggle"
-                                    data-target="newPassword"
-                                >
-                                    <img src="../pictures/eye.png" alt="">
-                                </button>
                             </div>
-                            <p class="field-hint">
-                                Must be at least 8 characters with uppercase, lowercase, and a number.
-                            </p>
+                            <p class="field-hint">Must be at least 8 characters with uppercase, lowercase, and a number.</p>
                         </div>
 
-                        <div class="settings-field-group">
-                            <label for="confirmPassword">Confirm New Password</label>
+                        <div class="settings-field-group password-field">
+                            <label>Confirm New Password</label>
                             <div class="field-with-icons">
-                                <span class="field-icon-left">
-                                    <img src="../pictures/secure-password.png" alt="">
+                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
+                                <input type="password" class="password-input">
+                                <span class="field-icon-right password-toggle">
+                                    <img src="../pictures/eye.png">
                                 </span>
-                                <input
-                                    id="confirmPassword"
-                                    type="password"
-                                    placeholder="••••••••"
-                                />
-                                <button
-                                    type="button"
-                                    class="field-icon-right password-toggle"
-                                    data-target="confirmPassword"
-                                >
-                                    <img src="../pictures/eye.png" alt="">
-                                </button>
                             </div>
                         </div>
 
                         <div class="settings-actions-row">
-                            <button type="button" class="settings-btn settings-btn--primary">
-                                Update Password
-                            </button>
+                            <button class="settings-btn settings-btn--primary">Update Password</button>
                         </div>
                     </section>
 
-                    <!-- Logout card -->
                     <section class="settings-card settings-card--logout">
                         <h2>Log Out</h2>
-                        <p class="logout-text">
-                            Sign out of your account on this device.
-                        </p>
+                        <p>Sign out of your account on this device.</p>
                         <div class="settings-actions-row settings-actions-row--left">
-                            <button type="button" class="settings-btn settings-btn--outline">
-                                Log Out
-                            </button>
+                            <button class="settings-btn settings-btn--outline">Log Out</button>
                         </div>
                     </section>
+
                 </section>
 
-                <!-- ===================== NOTIFICATIONS TAB ===================== -->
+                <!--  NOTIFICATIONS TAB  -->
                 <section id="settings-panel-notifications" class="settings-tab-panel">
                     <section class="settings-card">
                         <h2>Notification Preferences</h2>
 
                         <div class="settings-toggle-group">
-                            <!-- Email notifications -->
+
                             <div class="settings-toggle-row">
-                                <div class="toggle-text">
+                                <div>
                                     <div class="toggle-title">Email Notifications</div>
-                                    <div class="toggle-subtitle">
-                                        Receive notifications via email.
-                                    </div>
+                                    <div class="toggle-subtitle">Receive notifications via email.</div>
                                 </div>
                                 <label class="switch">
-                                    <input type="checkbox" checked />
+                                    <input type="checkbox" checked>
                                     <span class="slider"></span>
                                 </label>
                             </div>
 
-                            <!-- Push notifications -->
                             <div class="settings-toggle-row">
-                                <div class="toggle-text">
+                                <div>
                                     <div class="toggle-title">Push Notifications</div>
-                                    <div class="toggle-subtitle">
-                                        Receive push notifications in browser.
-                                    </div>
+                                    <div class="toggle-subtitle">Receive push notifications in browser.</div>
                                 </div>
                                 <label class="switch">
-                                    <input type="checkbox" />
+                                    <input type="checkbox">
                                     <span class="slider"></span>
                                 </label>
                             </div>
 
                             <hr class="settings-divider">
 
-                            <!-- Activity notifications header -->
-                            <div class="settings-toggle-section-title">
-                                Activity Notifications
-                            </div>
-
-                            <!-- Friend requests -->
                             <div class="settings-toggle-row">
-                                <div class="toggle-text">
+                                <div>
                                     <div class="toggle-title">Friend Requests</div>
-                                    <div class="toggle-subtitle">
-                                        When someone sends you a friend request.
-                                    </div>
+                                    <div class="toggle-subtitle">When someone sends you a friend request.</div>
                                 </div>
                                 <label class="switch">
-                                    <input type="checkbox" checked />
+                                    <input type="checkbox" checked>
                                     <span class="slider"></span>
                                 </label>
                             </div>
 
-                            <!-- Comments -->
                             <div class="settings-toggle-row">
-                                <div class="toggle-text">
+                                <div>
                                     <div class="toggle-title">Comments</div>
-                                    <div class="toggle-subtitle">
-                                        When someone comments on your posts or reviews.
-                                    </div>
+                                    <div class="toggle-subtitle">When someone comments on your posts or reviews.</div>
                                 </div>
                                 <label class="switch">
-                                    <input type="checkbox" checked />
+                                    <input type="checkbox" checked>
                                     <span class="slider"></span>
                                 </label>
                             </div>
 
-                            <!-- Likes -->
-                            <div class="settings-toggle-row">
-                                <div class="toggle-text">
-                                    <div class="toggle-title">Likes</div>
-                                    <div class="toggle-subtitle">
-                                        When someone likes your content.
-                                    </div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" />
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <!-- Watch parties -->
-                            <div class="settings-toggle-row">
-                                <div class="toggle-text">
-                                    <div class="toggle-title">Watch Parties</div>
-                                    <div class="toggle-subtitle">
-                                        Updates about upcoming watch parties.
-                                    </div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" checked />
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
                         </div>
 
                         <div class="settings-actions-row settings-actions-row--left">
-                            <button type="button" class="settings-btn settings-btn--primary">
-                                Save Preferences
-                            </button>
+                            <button class="settings-btn settings-btn--primary">Save Preferences</button>
                         </div>
                     </section>
                 </section>
 
             </div>
         </main>
+
     </div>
 
     <!-- FOOTER -->
@@ -342,5 +217,6 @@
 
     <!-- SETTINGS LOGIC -->
     <script src="../js/settings.js" defer></script>
+
 </body>
 </html>

@@ -1,440 +1,352 @@
-/* ============================================================
-   GLOBAL COLOURS — MATCH THE REST OF YOUR SITE
-============================================================ */
+/* ===============================
+   GLOBAL COLOURS
+=============================== */
 * {
-    --TextColor: #171a1f;
-    --DarkBlue: #5C8BC0;
-    --LightBlue: #e0edfc;
-    --Pink: #F2E0E7;
-    --boxBackground: #afe4f163;
-    --Shadow: rgba(0, 0, 0, 0.15);
-    --Red: #e50914;
-    --RedHover: #ff2630;
-
-    --cardBG: rgba(255, 255, 255, 0.88);
-    --cardBGSoft: rgba(255, 255, 255, 0.75);
-    --inputBG: rgba(255, 255, 255, 0.9);
-    --borderSoft: #dcdcdc;
-    --borderVerySoft: rgba(0, 0, 0, 0.10);
+    --TextColor:#171a1f;
+    --DarkBlue:#5C8BC0;
+    --LightBlue:#e0edfc;
+    --Pink:#F2E0E7;
+    --boxBackground:#ffffffd1;
+    --Shadow:rgba(0,0,0,0.15);
+    --Red:#e50914;
+    --RedHover:#ff2630;
+    --inputBG:rgba(255,255,255,0.95);
 }
 
-/* ============================================================
+/* ===============================
    PAGE BACKGROUND
-============================================================ */
-
-body[data-page="settings"] {
-    margin: 0;
-    margin-top: 72px;
-    background: radial-gradient(
+=============================== */
+body {
+    margin:0;
+    margin-top:72px;
+    background:radial-gradient(
         circle at 20% 20%,
         rgb(196,255,250) 0%,
         rgba(255,237,188,1) 30%,
         rgba(236,217,255,1) 55%,
         rgba(202,224,255,1) 80%
     );
-    background-size: cover;
-    background-attachment: fixed;
-    /* color: var(--TextColor); */
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background-attachment:fixed;
+    font-family:"Inter", sans-serif;
 }
 
+/* ===============================
+   WRAPPER
+=============================== */
 .layout-wrapper {
-    display: flex;
-    min-height: calc(100vh - 72px);
+    display:flex;
 }
 
-/* ============================================================
-   MAIN WRAPPER
-============================================================ */
-
+/* ===============================
+   SETTINGS CONTENT
+=============================== */
 .settings-main {
     color: var(--TextColor);
-    flex: 1;
-    padding: 32px 36px 48px;
-    box-sizing: border-box;
-    transition: margin-left 0.25s ease;
-}
-/* Sidebar offset behaviour */
-.settings-main.with-sidebar {
-    margin-left: 260px;
+    flex:1;
+    padding:32px 40px 60px;
+    transition:margin-left .25s ease;
+    margin-left:260px; /* default: sidebar open */
 }
 
-.settings-main.with-sidebar-collapsed {
-    margin-left: 80px;
+/* when sidebar collapses, JS adds .sidebar--collapsed to #sidepanel-container */
+#sidepanel-container.sidebar--collapsed ~ .settings-main {
+    margin-left:80px !important;
 }
-
-.settings-main {
-    transition: margin-left 0.25s ease;
-}
-
 
 .settings-inner {
-    width: 100%;
-    max-width: 950px;
-    margin: 0 auto;
-}
-
-/* ============================================================
-   HEADER
-============================================================ */
-
-.settings-header {
-    margin-bottom: 22px;
+    max-width:900px;
+    margin:0 auto;
 }
 
 .settings-header h1 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 4px;
+    font-size:32px;
+    margin:0 0 8px;
 }
-
 .settings-header p {
-    margin: 0;
-    font-size: 14px;
-    color: #555;
+    font-size:14px;
+    margin:0;
 }
 
-/* ============================================================
-   PILLED TABS (MATCH FRIENDS/EVENTS STYLE)
-============================================================ */
-
+/* ===============================
+   TABS
+=============================== */
 .settings-tabs-shell {
-    display: flex;
-    justify-content: flex-start;
-    margin-bottom: 30px;
+    margin-top:18px;
+    margin-bottom:28px;
 }
-
 .settings-tabs {
-    display: inline-flex;
-    padding: 4px;
-    border-radius: 999px;
-    background-color: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(0, 0, 0, 0.10);
-    box-shadow: 0 6px 16px var(--Shadow);
+    display:inline-flex;
+    padding:5px;
+    border-radius:50px;
+    color: white;
+    background:var(--DarkBlue);
+    box-shadow:0 6px 20px var(--Shadow);
 }
-
 .settings-tab-btn {
-    border: none;
-    padding: 8px 22px;
-    background: transparent;
-    color: #555;
-    font-size: 14px;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: 0.25s ease;
+    border:none;
+    padding:10px 26px;
+    background:transparent;
+    font-size:14px;
+    border-radius:40px;
+    cursor:pointer;
+    transition:.25s ease;
+    color: white;
 }
-
-.settings-tab-btn:hover {
-    background: var(--LightBlue);
-}
-
 .settings-tab-btn--active {
-    background: #ffffff;
-    color: #000;
-    box-shadow: 0 10px 22px var(--Shadow);
+    background:var(--Pink);
+    color:var(--DarkBlue);
 }
 
-/* ============================================================
-   CARDS (MATCH ADMIN PANEL / EVENTS / FRIENDS)
-============================================================ */
+/* TAB PANELS – THIS IS WHAT WAS MISSING */
+.settings-tab-panel {
+    display:none;
+}
+.settings-tab-panel--active {
+    display:block;
+}
 
+/* ===============================
+   CARDS
+=============================== */
 .settings-card {
-    background: var(--cardBG);
-    border-radius: 18px;
-    border: 1px solid var(--borderVerySoft);
-    padding: 22px 24px 26px;
-    margin-bottom: 26px;
-    box-shadow: 0 10px 26px var(--Shadow);
-    transition: 0.25s ease;
+    background:var(--boxBackground);
+    padding:26px 30px;
+    border-radius:16px;
+    box-shadow:0 10px 26px var(--Shadow);
+    margin-bottom:32px;
+    border:1px solid rgba(0,0,0,0.1);
 }
-
 .settings-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 16px 32px var(--Shadow);
+    transform:translateY(-2px);
 }
-
 .settings-card h2 {
-    margin: 0 0 18px;
-    font-size: 19px;
-    font-weight: 600;
+    margin:0 0 20px;
+    font-size:20px;
 }
 
-/* Danger card (light theme) */
+/* Danger */
 .settings-card--danger {
-    border-color: #ff9ba8;
-    background: rgba(255, 230, 230, 0.7);
+    background:rgba(255,230,230,.75);
+    border-color:#ff9ba8;
 }
 
+/* Logout */
 .settings-card--logout {
-    background: rgba(255, 255, 255, 0.8);
+    background:#ffffffc7;
 }
 
-/* ============================================================
-   FORM FIELDS — LIGHT MODE
-============================================================ */
-
+/* ===============================
+   FORM FIELDS
+=============================== */
 .settings-field-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    margin-bottom: 16px;
+    margin-bottom:22px;
 }
 
 .settings-field-group label {
-    font-size: 13px;
-    color: #444;
+    display:block;
+    margin-bottom:6px;
+    font-size:14px;
+    color:#333;
 }
 
 .settings-field-group input,
 .settings-field-group textarea {
-    background: var(--inputBG);
-    border-radius: 10px;
-    border: 1px solid var(--borderSoft);
-    padding: 12px 14px;
-    font-size: 14px;
-    color: #000;
-    outline: none;
-    transition: 0.22s ease;
+    width:100%;
+    background:var(--inputBG);
+    border-radius:10px;
+    border:1px solid #ccc;
+    padding:12px 14px;
+    font-size:14px;
+    transition:.25s ease;
 }
-
-.settings-field-group input:focus,
-.settings-field-group textarea:focus {
-    border-color: var(--DarkBlue);
-    box-shadow: 0 0 0 3px rgba(92, 139, 192, 0.25);
+.settings-field-group input:focus {
+    border-color:var(--DarkBlue);
+    box-shadow:0 0 0 3px rgba(92,139,192,.25);
 }
 
 textarea {
-    resize: vertical;
+    resize:vertical;
 }
 
 .field-hint {
-    font-size: 12px;
-    color: #777;
-    margin-top: 2px;
+    font-size:12px;
+    color:#666;
+    margin-top:4px;
 }
 
-/* With icons */
-
+/* ===============================
+   ICON INPUTS (password fields)
+=============================== */
 .field-with-icons {
-    position: relative;
-    display: flex;
-    align-items: center;
+    position:relative;
 }
-
-.field-icon-left,
-.field-icon-right {
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    opacity: 0.6;
-}
-
 .field-icon-left {
-    left: 12px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0.75;
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
 }
-
 .field-icon-left img {
-    width: 17px !important;
-    height: 17px !important;
+    width:18px;
+    opacity:.7;
 }
-
 
 .field-icon-right {
-    right: 12px;
-    width: 22px;
-    height: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    opacity: 0.75;
-    transition: 0.2s ease;
+    position:absolute;
+    right:14px;
+    top:50%;
+    transform:translateY(-50%);
+    cursor:pointer;
+    opacity:.8;
+    transition:.2s ease;
 }
-
 .field-icon-right:hover {
-    opacity: 1;
+    opacity:1;
 }
-
 .field-icon-right img {
-    width: 18px !important;
-    height: 18px !important;
+    width:20px;
 }
 
-
+/* padding so text doesn't overlap icons */
 .field-with-icons input {
-    padding-left: 42px;
-    padding-right: 42px;
+    padding-left:45px;
+    padding-right:46px;
 }
 
-/* ============================================================
-   BUTTONS — LIGHT THEME
-============================================================ */
+/* ===============================
+   BUTTONS
+=============================== */
+.settings-btn {
+    border:none;
+    padding:10px 22px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s ease;
+}
+
+.settings-btn--primary {
+    background:var(--Red);
+    color:white;
+}
+.settings-btn--primary:hover {
+    background:var(--RedHover);
+}
+
+.settings-btn--danger {
+    background:transparent;
+    border:1px solid #d20000;
+    color:#d20000;
+}
+.settings-btn--danger:hover {
+    background:#d20000;
+    color:white;
+}
+
+.settings-btn--outline {
+    margin-top: 24px;
+    border:1px solid #d20000;
+    background:transparent;
+    color:#d20000;
+}
+.settings-btn--outline:hover {
+    background:#d20000;
+    color:white;
+}
 
 .settings-actions-row {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 12px;
+    display:flex;
+    justify-content:flex-end;
+    gap:14px;
 }
 
 .settings-actions-row--left {
-    justify-content: flex-start;
+    /* gap: 28px; */
+    justify-content:flex-start;
 }
 
-.settings-btn {
-    border-radius: 999px;
-    padding: 10px 22px;
-    font-size: 14px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: 0.25s ease;
-}
-
-/* Red primary */
-.settings-btn--primary {
-    background: var(--Red);
-    color: #fff;
-    border-color: var(--Red);
-}
-.settings-btn--primary:hover {
-    background: var(--RedHover);
-}
-
-/* Danger outline */
-.settings-btn--danger {
-    background: transparent;
-    border-color: #ff697a;
-    color: #d20000;
-}
-.settings-btn--danger:hover {
-    background: #ff697a;
-    color: #fff;
-}
-
-/* Logout outline */
-.settings-btn--outline {
-    background: transparent;
-    border-color: #d20000;
-    color: #d20000;
-}
-.settings-btn--outline:hover {
-    background: #d20000;
-    color: #fff;
-}
-
-/* ============================================================
-   TABS PANEL VISIBILITY
-============================================================ */
-
-.settings-tab-panel {
-    display: none;
-}
-
-.settings-tab-panel--active {
-    display: block;
-}
-
-/* ============================================================
-   NOTIFICATIONS – LIGHT THEME
-============================================================ */
-
+/* ===============================
+   TOGGLES
+=============================== */
 .settings-toggle-group {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
 }
 
 .settings-toggle-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .toggle-title {
-    font-size: 14px;
-    color: #000;
+    font-weight:600;
+    font-size:14px;
+    color:#000;
 }
-
 .toggle-subtitle {
-    font-size: 13px;
-    color: #555;
+    font-size:13px;
+    color:#444;
 }
-
-/* Divider */
-.settings-divider {
-    border: none;
-    border-top: 1px solid #e3e3e3;
-    margin: 10px 0;
-}
-
-/* Switch (light mode) */
 
 .switch {
-    position: relative;
-    width: 46px;
-    height: 24px;
+    position:relative;
+    width:46px;
+    height:24px;
 }
-
 .switch input {
-    opacity: 0;
+    opacity:0;
 }
-
 .slider {
-    position: absolute;
-    inset: 0;
-    background: #ccc;
-    border-radius: 999px;
-    transition: 0.25s ease;
+    position:absolute;
+    inset:0;
+    background:#ccc;
+    border-radius:50px;
+    transition:.25s ease;
 }
-
-.slider::before {
-    content: "";
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: white;
-    top: 3px;
-    left: 3px;
-    transition: 0.25s ease;
+.slider:before {
+    content:"";
+    position:absolute;
+    width:18px;
+    height:18px;
+    background:white;
+    border-radius:50%;
+    top:3px;
+    left:3px;
+    transition:.25s ease;
 }
-
 .switch input:checked + .slider {
-    background: var(--Red);
+    background:var(--Red);
+}
+.switch input:checked + .slider:before {
+    transform:translateX(22px);
 }
 
-.switch input:checked + .slider::before {
-    transform: translateX(22px);
-}
-
-/* ============================================================
-   RESPOND: MOBILE & TABLET
-============================================================ */
-
-@media (max-width: 768px) {
+/* ===============================
+   RESPONSIVE
+=============================== */
+@media (max-width:768px) {
     .settings-main {
-        padding: 24px 20px 40px;
+        padding:24px 20px 40px;
     }
-
-    .settings-actions-row,
-    .settings-actions-row--left {
-        flex-direction: column;
+    .settings-actions-row {
+        flex-direction:column;
     }
-
     .settings-btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .settings-toggle-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
+        width:100%;
     }
 }
+/* Reduce spacing above Save Preferences button */
+#settings-panel-notifications .settings-card {
+    padding-bottom: 18px !important;   /* was 26–30px, now tighter */
+}
+
+#settings-panel-notifications .settings-actions-row--left {
+    margin-top: 36px !important;        /* reduces gap above the button */
+}
+/* Center the Update Password button */
+/* #settings-panel-security .settings-actions-row--right {
+    justify-content: center !important;
+} */
+ 
