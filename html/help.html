@@ -1,67 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Help & Support • 3movCollectors</title>
+<head>
+    <meta charset="UTF-8" />
+    <title>Help & Support – 3movCollectors</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <link rel="stylesheet" href="../css/side-panel.css">
-        <link rel="stylesheet" href="../css/main-navbar.css">
-        <link rel="stylesheet" href="../css/main-footer.css">
-        <link rel="stylesheet" href="../css/help.css">
+    <!-- Favicon -->
+    <link rel="icon" href="../pictures/M.png">
 
-    </head>
-    <body>
+    <!-- Shared site CSS -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
 
-        <!-- NAVBAR -->
-        <div id="navbar-container"></div>
-        <script src="../js/include-main-navbar.js"></script>
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="../css/help.css">
+</head>
 
-        <!-- MAIN WRAPPER -->
-        <div class="layout-wrapper">
+<body data-page="settings">
 
-            <!-- SIDEBAR -->
-            <div id="sidepanel-container"></div>
-            <script src="../js/include-side-panel.js"></script>
+    <!--  NAVBAR (ALWAYS AT TOP)  -->
+    <div id="navbar-container"></div>
+    <script src="../js/include-main-navbar.js" defer></script>
 
-            <!-- Page Content -->
-            <div class="help-page">
+    <!--  PAGE WRAPPER (SIDEBAR + CONTENT)  -->
+    <div class="layout-wrapper">
 
-                <h1 class="help-title">Help & Support</h1>
+        <!--  SIDE PANEL (LEFT)  -->
+        <div id="sidepanel-container"></div>
+        <script src="../js/include-side-panel.js" defer></script>
 
-                <p class="help-subtitle">We're here to assist you. Choose a
-                    contact option below:</p>
+        <!--  PAGE CONTENT  -->
+        <main class="content-area">
+                <div class="help-main">
 
-                <div class="help-cards-container">
+                    <!-- HEADER -->
+                    <header class="help-header">
+                        <h1>Help & Support</h1>
+                        <p>Find answers and get in touch with support.</p>
+                    </header>
 
-                    <!-- Email -->
-                    <div class="help-card">
-                        <img src="../pictures/envelope.png" class="help-icon">
-                        <h3>Email Support</h3>
-                        <p>If you need assistance or want to report an issue,
-                            contact us directly via email.</p>
-                        <a href="mailto:ibrahimbeaconarion@gmail.com"
-                            class="help-btn red">ibrahimbeaconarion@gmail.com</a>
-                    </div>
+                    <!-- CARDS GRID -->
+                    <section class="help-grid">
 
-                    <!-- GitHub Profile -->
-                    <div class="help-card">
-                        <img src="../pictures/rose.png" class="help-icon">
-                        <h3>GitHub Profile</h3>
-                        <p>Explore more projects and contributions.</p>
-                        <a href="https://github.com/ib-hussain" target="_blank"
-                            class="help-btn">Open Profile</a>
-                    </div>
+                        <!-- Email -->
+                        <article class="help-card">
+                            <div class="help-icon-wrap">
+                                <img src="../pictures/envelope.png" alt>
+                            </div>
+                            <h3>Email Support</h3>
+                            <p>Message us for technical help, bugs or general
+                                inquiries.</p>
+                            <a href="mailto:ibrahimbeaconarion@gmail.com"
+                                class="help-btn help-btn--primary">
+                                Email Support
+                            </a>
+                        </article>
 
+                        <!-- GitHub -->
+                        <article class="help-card">
+                            <div class="help-icon-wrap">
+                                <img src="../pictures/rose.png" alt>
+                            </div>
+                            <h3>GitHub</h3>
+                            <p>Explore the project, issues and
+                                contributions.</p>
+                            <a href="https://github.com/ib-hussain"
+                                target="_blank"
+                                class="help-btn help-btn--primary">
+                                Open GitHub
+                            </a>
+                        </article>
 
-                    <!-- FOOTER -->
-                    <div id="footer-container"></div>
-                    <script src="../js/include-footer.js"></script>
+                    </section>
+
                 </div>
-            </div>
+            </main>
 
-        </div>
-        <!-- Page JS -->
-        <!-- <script src="../js/admin-panel.js"></script> -->
-    </body>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script src="../js/include-footer.js" defer></script>
+
+    <!-- SETTINGS LOGIC -->
+    <script src="../js/help.js" defer></script>
+
+</body>
 </html>
+
