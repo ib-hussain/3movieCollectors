@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
+
+/* ===========================
+   GLOBAL VARIABLES (same as login)
+=========================== */
+* {
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0, 0, 0, 0.15);
+    --clickAbleLink: #ff2c2c;
+    --ratingYellow: #FF9100;
+    --statCardBG: #7f6d8d0a;
+    --statCardBorder: #dfdcbc;
+}
+
+/* ===========================
+   BODY + LAYOUT
+=========================== */
+body {
+    margin: 0;
+    color: #ffffff;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgb(196, 255, 250) 0%,
+        rgba(255, 237, 188, 1) 30%,
+        rgba(236, 217, 255, 1) 55%,
+        rgba(202, 224, 255, 1) 80%
+    );
+    background-attachment: fixed;
+}
+
+.signup-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===========================
+   LOGO BUBBLE (same as login)
+=========================== */
+.logo-area {
+    width: 240px;
+    height: 240px;
+    border-radius: 120px;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color: transparent;
+    backdrop-filter: blur(36px);
+    -webkit-backdrop-filter: blur(36px);
+    box-shadow: 0 8px 20px var(--Shadow);
+}
+
+.main-logo {
+    margin-top: 60px;
+    width: 60px;
+    height: 60px;
+}
+
+.logo-area h1 {
+    font-size: 24px;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+/* ===========================
+   SIGNUP CARD (copy of login card)
+=========================== */
+.signup-card {
+    color: var(--TextColor);
+    background: var(--LightBlue);
+    padding: 34px 34px;
+    width: 35%;
+    border-radius: 18px;
+    box-shadow: 0 0 25px var(--Shadow);
+    box-sizing: border-box;
+}
+
+.signup-card h2 {
+    margin: 0 0 4px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    color: black;
+}
+
+/* ===========================
+   INPUT FIELDS
+=========================== */
+label {
+    margin-bottom: 6px;
+    display: block;
+}
+
+.input-box {
+    width: 100%;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 42px;
+    background: white;
+    border: 1px solid var(--Pink);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--TextColor);
+    box-sizing: border-box;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+/* Password helper text */
+.password-info {
+    margin: -10px 0 10px 0;
+    font-size: 12px;
+    color: #555;
+}
+
+/* ===========================
+   TERMS ROW
+=========================== */
+.terms-row {
+    margin-top: -4px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #000;
+}
+
+.terms-row span {
+    color: var(--clickAbleLink);
+    cursor: pointer;
+}
+
+/* ===========================
+   CREATE BUTTON (same style as login)
+=========================== */
+.create-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--clickAbleLink);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.25s;
+    margin-bottom: 18px;
+}
+
+.create-btn:hover {
+    background: white;
+    color: var(--clickAbleLink);
+    transform: scale(1.01);
+    box-shadow: 0 0 15px var(--Shadow);
+}
+
+/* ===========================
+   SIGN IN TEXT
+=========================== */
+.login-text {
+    text-align: center;
+    font-size: 13px;
+    color: black;
+}
+
+.login-link {
+    color: var(--clickAbleLink);
+    text-decoration: none;
+}

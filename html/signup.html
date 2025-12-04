@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account – 3movCollectors</title>
+
+    <link rel="stylesheet" href="../css/signup.css">
+    <link rel="icon" href="../pictures/M.png" />
+</head>
+
+<body>
+
+    <div class="signup-wrapper">
+
+        <!-- Round Logo Banner -->
+        <div class="logo-area">
+            <img src="../pictures/M.png" class="main-logo" alt="logo">
+            <h1>3movCollectors</h1>
+        </div>
+
+        <div class="signup-card">
+
+            <h2>Create Account</h2>
+            <p class="subtitle">Join the ultimate movie community today</p>
+
+            <form id="signupForm">
+
+                <!-- FULL NAME -->
+                <label>Full Name</label>
+                <div class="input-box">
+                    <img src="../pictures/user.png" class="input-icon">
+                    <input type="text" id="fullName" placeholder="John Doe" required>
+                </div>
+
+                <!-- EMAIL -->
+                <label>Email Address</label>
+                <div class="input-box">
+                    <img src="../pictures/envelope.png" class="input-icon">
+                    <input type="email" id="email" placeholder="you@example.com" required>
+                </div>
+
+                <!-- PASSWORD -->
+                <label>Password</label>
+                <div class="input-box">
+                    <img src="../pictures/secure-password.png" class="input-icon">
+                    <input type="password" id="password" class="password-field" placeholder="Create a strong password" required>
+                    <img src="../pictures/eye.png" class="toggle-eye" data-toggle="password">
+                </div>
+
+                <p class="password-info">
+                    Must be at least 8 characters with uppercase, lowercase, and number
+                </p>
+
+                <!-- CONFIRM PASSWORD -->
+                <label>Confirm Password</label>
+                <div class="input-box">
+                    <img src="../pictures/secure-password.png" class="input-icon">
+                    <input type="password" id="confirmPassword" class="password-field" placeholder="Re-enter your password" required>
+                    <img src="../pictures/eye.png" class="toggle-eye" data-toggle="confirmPassword">
+                </div>
+
+
+                <!-- SUBMIT -->
+                <button type="submit" class="create-btn">Create Account</button>
+
+
+                <p class="login-text">
+                    Already have an account?
+                    <a href="login.html" class="login-link">Sign in</a>
+                </p>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../js/signup.js"></script>
+</body>
+</html>
