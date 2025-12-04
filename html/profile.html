@@ -1,289 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile – 3movCollectors</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="../pictures/M.png">
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile – 3movCollectors</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="../pictures/M.png">
 
-    <!-- Shared styles -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+        <!-- Shared styles -->
+        <link rel="stylesheet" href="../css/main-navbar.css">
+        <link rel="stylesheet" href="../css/side-panel.css">
+        <link rel="stylesheet" href="../css/main-footer.css">
 
-    <!-- Profile Page Styles -->
-    <link rel="stylesheet" href="../css/profile.css">
-</head>
+        <!-- Profile Page Styles -->
+        <link rel="stylesheet" href="../css/profile.css">
+    </head>
 
-<body data-page="profile">
+    <body data-page="profile">
+        <!-- NAVBAR -->
+        <div id="navbar-container"></div>
 
-    <!-- NAVBAR -->
-    <div id="navbar-container"></div>
+        <div class="layout-wrapper">
+            <!-- SIDEPANEL -->
+            <div id="sidepanel-container"></div>
 
-    <div class="layout-wrapper">
+            <!-- MAIN CONTENT -->
+            <main class="content-area">
 
-        <!-- SIDEPANEL -->
-        <div id="sidepanel-container"></div>
+                <section class="profile-page">
+                    <div class="profile-shell">
 
-        <!-- MAIN CONTENT -->
-        <main class="content-area profile-content">
+                        <!-- HEADER / USER CARD -->
+                        <header class="profile-header">
+                            <div class="profile-header-main">
+                                <div class="profile-avatar-wrap">
+                                    <img src="../pictures/profile.png"
+                                        alt="Alex Turner"
+                                        class="profile-avatar">
+                                </div>
 
-
-            <!-- PROFILE HEADER CARD -->
-            <section class="profile-header-card">
-
-                <div class="profile-header-left">
-                    <div class="profile-avatar">
-                        <img src="../pictures/profile.png" alt="User">
-                    </div>
-
-                    <div class="profile-info-text">
-                        <h1>Alex Turner</h1>
-                        <p class="username">@alexturner</p>
-
-                        <p class="bio">
-                            Cinephile exploring the art of storytelling through film. 
-                            Love discussing cinematography, soundtracks, and hidden gems.
-                        </p>
-
-                        <div class="profile-meta">
-                            <span><img src="../pictures/calendar.png"> Joined January 2023</span>
-                            <span class="dot">•</span>
-                            <span><img src="../pictures/location.png"> New York, NY</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="profile-header-right">
-                    <button class="edit-profile-btn" onclick="window.location.href='settings.html'"><img src="../pictures/edit.png" 
-                        style="width: 20px; height: 20px; 
-                        margin-right: 6px;
-                        vertical-align: middle;
-                        /* padding-top: 31px; */
-                        "
-                        > Edit Profile</button>
-                </div>
-
-            </section>
-
-            <!-- METRICS GRID -->
-            <section class="profile-metrics">
-                <div class="metric-card">
-                    <h2>127</h2>
-                    <p>Movies Watched</p>
-                </div>
-
-                <div class="metric-card">
-                    <h2>45</h2>
-                    <p>Reviews</p>
-                </div>
-
-                <div class="metric-card">
-                    <h2>48</h2>
-                    <p>Friends</p>
-                </div>
-
-                <div class="metric-card">
-                    <h2>67</h2>
-                    <p>Watchlist</p>
-                </div>
-            </section>
-
-            <!-- FAVORITE GENRES -->
-            <section class="favorite-genres-card">
-                <div class="fg-header">
-                    <h2>Favorite Genres</h2>
-                    <button class="fg-edit-btn">
-                        <img src="../pictures/edit.png"> Edit
-                    </button>
-                </div>
-
-                <div class="fg-genres">
-                    <span>Drama</span>
-                    <span>Sci-Fi</span>
-                    <span>Thriller</span>
-                    <span>Crime</span>
-                </div>
-            </section>
-
-            <!-- TABS -->
-            <section class="profile-tabs">
-                <button class="tab-btn active" data-tab="reviews">My Reviews (45)</button>
-                <button class="tab-btn" data-tab="top-movies">Top Movies</button>
-                <button class="tab-btn" data-tab="activity">Activity</button>
-            </section>
-
-            <!-- TAB CONTENT -->
-
-            <!-- TAB 1 — REVIEWS -->
-            <section class="tab-content active" id="tab-reviews">
-
-                <!-- Review Card -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-user">
-                            <img src="../pictures/profile.png" class="review-avatar">
-                            <div>
-                                <h3>Alex Turner</h3>
-                                <p>reviewed Inception • 5 hours ago</p>
+                                <div class="profile-header-text">
+                                    <h1 class="profile-name">Alex Turner</h1>
+                                    <p class="profile-handle">@alexturner</p>
+                                    <p class="profile-bio">
+                                        Cinephile exploring the art of
+                                        storytelling through film.
+                                        Love discussing cinematography,
+                                        soundtracks, and hidden gems.
+                                    </p>
+                                    <p class="profile-meta">
+                                        Joined January 2023 • New York, NY
+                                    </p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="review-rating">
-                            <img src="../pictures/star.png">
-                            <span>9.5</span>
-                        </div>
+                            <div class="profile-header-actions">
+                                <button class="profile-edit-btn">
+    <img src="../pictures/edit.png" alt="edit icon" class="edit-icon">
+    Edit Profile
+</button>
+                            </div>
+                        </header>
+
+                        <!-- STATS ROW -->
+                        <section class="profile-stats">
+                            <article class="profile-stat-card">
+                                <span class="profile-stat-value">127</span>
+                                <span class="profile-stat-label">Movies
+                                    Watched</span>
+                            </article>
+                            <article class="profile-stat-card">
+                                <span class="profile-stat-value">45</span>
+                                <span class="profile-stat-label">Reviews</span>
+                            </article>
+                            <article class="profile-stat-card">
+                                <span class="profile-stat-value">48</span>
+                                <span class="profile-stat-label">Friends</span>
+                            </article>
+                            <article class="profile-stat-card">
+                                <span class="profile-stat-value">67</span>
+                                <span
+                                    class="profile-stat-label">Watchlist</span>
+                            </article>
+                        </section>
+
+                        <!-- GENRES + TABS CONTAINER -->
+                        <section class="profile-lower-card">
+
+                            <!-- FAVORITE GENRES -->
+                            <div class="profile-genres-header">
+                                <h2 class="section-title">Favorite Genres</h2>
+                                
+
+
+                            </div>
+
+                            <div class="profile-genres-list">
+                                <span class="genre-pill">Drama</span>
+                                <span class="genre-pill">Sci-Fi</span>
+                                <span class="genre-pill">Thriller</span>
+                                <span class="genre-pill">Crime</span>
+                            </div>
+
+                            <!-- TABS -->
+                            <div class="profile-tabs">
+                                <button class="tab-btn active"
+                                    data-tab="reviews">My Reviews (45)</button>
+                                <button class="tab-btn"
+                                    data-tab="top-movies">Top Movies</button>
+                                <button class="tab-btn"
+                                    data-tab="activity">Activity</button>
+                            </div>
+
+                            <!-- TAB CONTENTS -->
+                            <div class="profile-tab-contents">
+
+                                <!-- REVIEWS TAB -->
+                                <div id="tab-reviews"
+                                    class="tab-content active">
+                                    <div class="reviews-list">
+
+                                        <article class="review-card">
+                                            <div class="review-header">
+                                                <div class="review-user">
+                                                    <img
+                                                        src="../pictures/profile.png"
+                                                        alt
+                                                        class="review-avatar">
+                                                    <div>
+                                                        <h3
+                                                            class="review-user-name">Alex
+                                                            Turner</h3>
+                                                        <p class="review-meta">
+                                                            reviewed <span
+                                                                class="review-film">Inception</span>
+                                                            • 5 hours ago
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="review-rating">
+                                                    <img
+                                                        src="../pictures/star.png"
+                                                        alt>
+                                                    <span>9.5</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="review-text">
+                                                A mind-bending masterpiece that
+                                                gets better with every rewatch.
+                                                Nolan's direction combined with
+                                                Hans Zimmer's score creates an
+                                                unforgettable cinematic
+                                                experience.
+                                            </p>
+
+                                            <div class="review-footer">
+                                                <span class="review-stat">45
+                                                    likes</span>
+                                                <span class="review-stat">12
+                                                    comments</span>
+                                            </div>
+                                        </article>
+
+                                        <article class="review-card">
+                                            <div class="review-header">
+                                                <div class="review-user">
+                                                    <img
+                                                        src="../pictures/profile.png"
+                                                        alt
+                                                        class="review-avatar">
+                                                    <div>
+                                                        <h3
+                                                            class="review-user-name">Alex
+                                                            Turner</h3>
+                                                        <p class="review-meta">
+                                                            reviewed <span
+                                                                class="review-film">The
+                                                                Godfather</span>
+                                                            • 3 days ago
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="review-rating">
+                                                    <img
+                                                        src="../pictures/star.png"
+                                                        alt>
+                                                    <span>9.2</span>
+                                                </div>
+                                            </div>
+
+                                            <p class="review-text">
+                                                A timeless classic that set the
+                                                standard for crime dramas.
+                                                Every scene is meticulously
+                                                crafted, and the performances
+                                                are legendary.
+                                            </p>
+
+                                            <div class="review-footer">
+                                                <span class="review-stat">32
+                                                    likes</span>
+                                                <span class="review-stat">8
+                                                    comments</span>
+                                            </div>
+                                        </article>
+
+                                    </div>
+                                </div>
+
+                                <!-- TOP MOVIES TAB -->
+                                <div id="tab-top-movies" class="tab-content">
+                                    <div class="movie-grid">
+                                        <article class="movie-card">
+                                            <div class="movie-poster"></div>
+                                            <div class="movie-info">
+                                                <h3 class="movie-title">The
+                                                    Shawshank Redemption</h3>
+                                                <p class="movie-year">1994 •
+                                                    Drama</p>
+                                            </div>
+                                        </article>
+
+                                        <article class="movie-card">
+                                            <div class="movie-poster"></div>
+                                            <div class="movie-info">
+                                                <h3
+                                                    class="movie-title">Inception</h3>
+                                                <p class="movie-year">2010 •
+                                                    Sci-Fi</p>
+                                            </div>
+                                        </article>
+
+                                        <article class="movie-card">
+                                            <div class="movie-poster"></div>
+                                            <div class="movie-info">
+                                                <h3 class="movie-title">The Dark
+                                                    Knight</h3>
+                                                <p class="movie-year">2008 •
+                                                    Action</p>
+                                            </div>
+                                        </article>
+
+                                        <article class="movie-card">
+                                            <div class="movie-poster"></div>
+                                            <div class="movie-info">
+                                                <h3 class="movie-title">Pulp
+                                                    Fiction</h3>
+                                                <p class="movie-year">1994 •
+                                                    Crime</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+
+                                <!-- ACTIVITY TAB -->
+                                <div id="tab-activity" class="tab-content">
+                                    <div class="activity-list">
+                                        <article class="activity-item">
+                                            <div class="activity-dot"></div>
+                                            <div class="activity-content">
+                                                <p class="activity-text">
+                                                    Became friends with <span
+                                                        class="activity-highlight">Michael
+                                                        Chen</span>.
+                                                </p>
+                                                <p class="activity-time">1 day
+                                                    ago</p>
+                                            </div>
+                                        </article>
+
+                                        <article class="activity-item">
+                                            <div class="activity-dot"></div>
+                                            <div class="activity-content">
+                                                <p class="activity-text">
+                                                    Added <span
+                                                        class="activity-highlight">Interstellar</span>
+                                                    to watchlist.
+                                                </p>
+                                                <p class="activity-time">3 days
+                                                    ago</p>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </section>
+
                     </div>
+                </section>
+            </main>
+        </div>
 
-                    <p class="review-text">
-                        A mind-bending masterpiece that gets better with every rewatch. Nolan’s 
-                        direction combined with Hans Zimmer’s score creates an unforgettable cinematic experience.
-                    </p>
+        <!-- FOOTER -->
+        <div id="footer-container"></div>
 
-                    <div class="review-stats">
-                        <span><img src="../pictures/heart.png"> 45</span>
-                        <span><img src="../pictures/comment.png"> 12</span>
-                    </div>
-                </div>
-
-                <!-- Another review -->
-                <div class="review-card">
-                    <div class="review-header">
-                        <div class="review-user">
-                            <img src="../pictures/profile.png" class="review-avatar">
-                            <div>
-                                <h3>Alex Turner</h3>
-                                <p>reviewed The Godfather • 3 days ago</p>
-                            </div>
-                        </div>
-
-                        <div class="review-rating">
-                            <img src="../pictures/star.png">
-                            <span>9.2</span>
-                        </div>
-                    </div>
-
-                    <p class="review-text">
-                        A timeless classic that set the standard for crime dramas. Every scene is meticulously crafted,
-                        and the performances are legendary.
-                    </p>
-
-                    <div class="review-stats">
-                        <span><img src="../pictures/heart.png"> 32</span>
-                        <span><img src="../pictures/comment.png"> 8</span>
-                    </div>
-                </div>
-
-                <div class="center-wrap">
-                    <button class="view-all-btn">View All Reviews</button>
-                </div>
-            </section>
-
-            <!-- TAB 2 — TOP MOVIES -->
-            <section class="tab-content" id="tab-top-movies">
-
-                <div class="movies-grid">
-
-                    <!-- EXACT BROWSE-MOVIES MOVIE CARD STRUCTURE -->
-                    <article class="movie-card">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder"></div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Shawshank Redemption</h3>
-                            <p class="movie-meta">
-                                <span>1994</span> <span class="dot">•</span> <span>Drama</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png">
-                                <span>9.3</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="movie-card">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder"></div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Inception</h3>
-                            <p class="movie-meta">
-                                <span>2010</span> <span class="dot">•</span> <span>Sci-Fi</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png">
-                                <span>8.8</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="movie-card">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder"></div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>The Dark Knight</h3>
-                            <p class="movie-meta">
-                                <span>2008</span> <span class="dot">•</span> <span>Action</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png">
-                                <span>9.0</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="movie-card">
-                        <div class="movie-poster">
-                            <div class="poster-placeholder"></div>
-                        </div>
-                        <div class="movie-info">
-                            <h3>Pulp Fiction</h3>
-                            <p class="movie-meta">
-                                <span>1994</span> <span class="dot">•</span> <span>Crime</span>
-                            </p>
-                            <div class="movie-rating">
-                                <img src="../pictures/star.png">
-                                <span>8.9</span>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-
-            </section>
-
-            <!-- TAB 3 — ACTIVITY -->
-            <section class="tab-content" id="tab-activity">
-
-                <div class="activity-item red">
-                    <span class="dot-circle"></span>
-                    <p>Reviewed <strong>Inception</strong> • 5 hours ago</p>
-                </div>
-
-                <div class="activity-item green">
-                    <span class="dot-circle"></span>
-                    <p>Became friends with <strong>Michael Chen</strong> • 1 day ago</p>
-                </div>
-
-                <div class="activity-item orange">
-                    <span class="dot-circle"></span>
-                    <p>Added <strong>Oppenheimer</strong> to watchlist • 2 days ago</p>
-                </div>
-
-            </section>
-
-        </main>
-    </div>
-
-    <!-- FOOTER -->
-    <div id="footer-container"></div>
-
-    <!-- JS -->
-    <script src="../js/include-main-navbar.js"></script>
-    <script src="../js/include-side-panel.js"></script>
-    <script src="../js/include-footer.js"></script>
-    <script src="../js/profile.js"></script>
-
-</body>
+        <!-- JS -->
+        <script src="../js/include-main-navbar.js"></script>
+        <script src="../js/include-side-panel.js"></script>
+        <script src="../js/include-footer.js"></script>
+        <script src="../js/profile.js"></script>
+    </body>
 </html>

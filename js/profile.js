@@ -1,12 +1,11 @@
 // PROFILE PAGE SCRIPT
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* ------------------------------
-       TAB SWITCHING
-    -------------------------------*/
-
-    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabButtons  = document.querySelectorAll(".tab-btn");
     const tabContents = document.querySelectorAll(".tab-content");
+
+    // Highlight correct page in sidebar (if side panel uses data-page)
+    document.body.dataset.currentPage = "profile";
 
     tabButtons.forEach(btn => {
         btn.addEventListener("click", () => {
@@ -23,7 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
             tabContents.forEach(c => c.classList.remove("active"));
 
             // Show correct tab
-            document.querySelector(`#tab-${target}`).classList.add("active");
+            const targetEl = document.querySelector(`#tab-${target}`);
+            if (targetEl) targetEl.classList.add("active");
         });
     });
 
