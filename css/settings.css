@@ -2,17 +2,21 @@
    GLOBAL COLOURS
 =============================== */
 * {
-    --TextColor:#171a1f;
-    --DarkBlue:#5C8BC0;
-    --LightBlue:#e0edfc;
-    --Pink:#F2E0E7;
-    --boxBackground:#ffffffd1;
-    --Shadow:rgba(0,0,0,0.15);
-    --Red:#e50914;
-    --RedHover:#ff2630;
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0,0,0,0.15);
+    --clickAbleLink: #ff2c2c;   /* issue: to be decided, fix this colour later */
+    --ratingYellow: #FF9100;   
+    --statCardBG:#7f6d8d0a; 
+    --statCardBorder: #dfdcbc;
+    
+    --RedHover:#e50914;
     --inputBG:rgba(255,255,255,0.95);
 }
-
 /* ===============================
    PAGE BACKGROUND
 =============================== */
@@ -146,7 +150,7 @@ body {
     display:block;
     margin-bottom:6px;
     font-size:14px;
-    color:#333;
+    color:var(--TextColor);
 }
 
 .settings-field-group input,
@@ -170,7 +174,7 @@ textarea {
 
 .field-hint {
     font-size:12px;
-    color:#666;
+    color:var(--TextColor);
     margin-top:4px;
 }
 
@@ -226,7 +230,7 @@ textarea {
 }
 
 .settings-btn--primary {
-    background:var(--Red);
+    background:var(--clickAbleLink);
     color:white;
 }
 .settings-btn--primary:hover {
@@ -240,7 +244,7 @@ textarea {
 }
 .settings-btn--danger:hover {
     background:#d20000;
-    color:white;
+    color:rgb(83, 23, 23);
 }
 
 .settings-btn--outline {
@@ -301,7 +305,7 @@ textarea {
 .slider {
     position:absolute;
     inset:0;
-    background:#ccc;
+    background:#bdbdbd;
     border-radius:50px;
     transition:.25s ease;
 }
@@ -317,7 +321,7 @@ textarea {
     transition:.25s ease;
 }
 .switch input:checked + .slider {
-    background:var(--Red);
+    background:var(--clickAbleLink);
 }
 .switch input:checked + .slider:before {
     transform:translateX(22px);
