@@ -9,47 +9,60 @@
     <!-- Shared styles -->
     <link rel="stylesheet" href="../css/main-navbar.css">
     <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
 
     <!-- Page styles -->
     <link rel="stylesheet" href="../css/messages.css">
 </head>
+
 <body data-page="messages">
-    <!-- Navbar injected dynamically -->
+
+    <!-- NAVBAR -->
     <div id="navbar-container"></div>
+    <script src="../js/include-main-navbar.js" defer></script>
 
     <div class="layout-wrapper">
-        <!-- Sidebar injected dynamically -->
+
+        <!-- SIDEPANEL -->
         <div id="sidepanel-container"></div>
+        <script src="../js/include-side-panel.js" defer></script>
 
-        <!-- Main content -->
-        <main class="content-area messages-content">
-            <header class="page-header">
-                <h1 class="page-title">Messages</h1>
-            </header>
+        <!-- MAIN CONTENT -->
+        <main class="content-area">
 
-            <div class="messages-layout messages-layout--empty" id="messagesLayout">
-                <!-- LEFT: conversation list -->
-                <aside class="thread-list">
-                    <div class="thread-list-inner">
-                        <div class="thread-list-top">
+            <div class="messages-main">
+
+                <!-- PAGE HEADER -->
+                <header class="messages-header">
+                    <h1 class="page-title">Messages</h1>
+                </header>
+
+                <!-- GRID LAYOUT -->
+                <section class="messages-layout messages-layout--empty" id="messagesLayout">
+
+                    <!-- LEFT: THREAD LIST -->
+                    <aside class="thread-list">
+
+                        <div class="thread-list-header">
                             <h2 class="thread-list-title">Messages</h2>
+
                             <div class="thread-search">
-                                <img src="../pictures/messages.png" alt="" class="thread-search-icon">
                                 <input
-                                    type="text"
                                     class="thread-search-input"
+                                    type="text"
                                     placeholder="Search conversations..."
                                     disabled
-                                >
+                                />
                             </div>
                         </div>
 
                         <ul class="thread-items">
-                            <!-- Only one conversation, Sarah Connor -->
-                            <li class="thread-item thread-item--unread" data-thread="sarah">
+                            <!-- Single demo conversation -->
+                            <li class="thread-item thread-item--active thread-item--unread" data-thread="sarah">
                                 <div class="thread-avatar">
                                     <img src="../pictures/user.png" alt="Sarah Connor">
                                 </div>
+
                                 <div class="thread-main">
                                     <div class="thread-main-top">
                                         <span class="thread-name">Sarah Connor</span>
@@ -64,100 +77,103 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
-                </aside>
 
-                <!-- RIGHT MODE 1: Empty / home state -->
-                <section class="conversation-panel conversation-panel--empty">
-                    <div class="conversation-empty">
-                        <div class="conversation-empty-icon-wrap">
-                            <img src="../pictures/paper-plane.png" alt="Messages" class="conversation-empty-icon">
+                    </aside>
+
+                    <!-- RIGHT: EMPTY STATE -->
+                    <section class="conversation-panel conversation-panel--empty">
+                        <div class="conversation-empty">
+                            <img
+                                src="../pictures/paper-plane.png"
+                                alt=""
+                                class="conversation-empty-icon"
+                            />
+                            <h2 class="conversation-empty-title">Your messages</h2>
+                            <p class="conversation-empty-text">
+                                Select a conversation from the left to start chatting.
+                            </p>
                         </div>
-                        <h2 class="conversation-empty-title">Your messages</h2>
-                        <p class="conversation-empty-text">
-                            Select a conversation from the left to start chatting.
-                        </p>
-                    </div>
+                    </section>
+
+                    <!-- RIGHT: ACTIVE CHAT -->
+                    <section class="conversation-panel conversation-panel--active">
+
+                        <!-- Chat header -->
+                        <header class="conversation-header">
+                            <div class="conversation-user">
+                                <div class="conversation-avatar">
+                                    <img src="../pictures/user.png" alt="Sarah Connor">
+                                </div>
+                                <div class="conversation-user-meta">
+                                    <span class="conversation-name">Sarah Connor</span>
+                                    <span class="conversation-status">Active now</span>
+                                </div>
+                            </div>
+                        </header>
+
+                        <!-- Chat body -->
+                        <div class="conversation-body">
+
+                            <div class="message-row message-row--incoming">
+                                <div class="message-bubble">
+                                    <p>Hey! How are you doing?</p>
+                                    <span class="message-time">10:30 AM</span>
+                                </div>
+                            </div>
+
+                            <div class="message-row message-row--outgoing">
+                                <div class="message-bubble">
+                                    <p>I’m good! Just finished watching <strong>The Dark Knight</strong> again.</p>
+                                    <span class="message-time">10:32 AM</span>
+                                </div>
+                            </div>
+
+                            <div class="message-row message-row--incoming">
+                                <div class="message-bubble">
+                                    <p>
+                                        That’s one of my all-time favourites! How many times have you watched it?
+                                    </p>
+                                    <span class="message-time">10:33 AM</span>
+                                </div>
+                            </div>
+
+                            <div class="message-row message-row--outgoing">
+                                <div class="message-bubble">
+                                    <p>
+                                        This must be the 5th or 6th time. It never gets old. The Joker’s performance is phenomenal.
+                                    </p>
+                                    <span class="message-time">10:35 AM</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- Chat input -->
+                        <form class="conversation-input-row" action="javascript:void(0);">
+                            <div class="conversation-input-wrap">
+                                <input
+                                    class="conversation-input"
+                                    type="text"
+                                    placeholder="Type a message..."
+                                    disabled
+                                />
+                            </div>
+
+                            <button type="button" class="conversation-send-btn">
+                                <img src="../pictures/paper-plane.png" alt="Send">
+                            </button>
+                        </form>
+
+                    </section>
                 </section>
 
-                <!-- RIGHT MODE 2: Chat open -->
-                <section class="conversation-panel conversation-panel--active">
-                    <header class="conversation-header">
-                        <div class="conversation-user">
-                            <div class="conversation-avatar">
-                                <img src="../pictures/user.png" alt="Sarah Connor">
-                            </div>
-                            <div class="conversation-user-meta">
-                                <div class="conversation-name">Sarah Connor</div>
-                                <!-- <div class="conversation-status">Active now</div> -->
-                            </div>
-                        </div>
-
-                        <button class="conversation-menu-btn" type="button">
-                            <img src="../pictures/menu-dots.png" alt="More">
-                        </button>
-                    </header>
-
-                    <div class="conversation-body">
-                        <!-- Incoming message -->
-                        <div class="message-row message-row--incoming">
-                            <div class="message-bubble">
-                                <p>Hey! How are you doing?</p>
-                                <span class="message-time">10:30 AM</span>
-                            </div>
-                        </div>
-
-                        <!-- Outgoing messages -->
-                        <div class="message-row message-row--outgoing">
-                            <div class="message-bubble">
-                                <p>
-                                    I’m good! Just finished watching <strong>The Dark Knight</strong> again.
-                                </p>
-                                <span class="message-time">10:32 AM</span>
-                            </div>
-                        </div>
-
-                        <div class="message-row message-row--incoming">
-                            <div class="message-bubble">
-                                <p>
-                                    That’s one of my all-time favourites! How many times have you watched it?
-                                </p>
-                                <span class="message-time">10:33 AM</span>
-                            </div>
-                        </div>
-
-                        <div class="message-row message-row--outgoing">
-                            <div class="message-bubble">
-                                <p>
-                                    This must be the 5th or 6th time. It never gets old. The Joker’s performance is just phenomenal.
-                                </p>
-                                <span class="message-time">10:35 AM</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <form class="conversation-input-row" action="javascript:void(0);">
-                        <div class="conversation-input-wrap">
-                            <input
-                                type="text"
-                                class="conversation-input"
-                                placeholder="Type a message..."
-                                disabled
-                            >
-                        </div>
-
-                        <button class="conversation-send-btn" type="button">
-                            <img src="../pictures/paper-plane.png" alt="Send">
-                        </button>
-                    </form>
-                </section>
             </div>
         </main>
     </div>
 
-    <!-- Scripts -->
-    <script src="../js/include-main-navbar.js"></script>
-    <script src="../js/include-side-panel.js"></script>
-    <script src="../js/messages.js"></script>
+
+    <!-- PAGE JS -->
+    <script src="../js/messages.js" defer></script>
+
 </body>
 </html>
