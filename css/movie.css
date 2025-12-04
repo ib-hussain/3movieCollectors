@@ -1,0 +1,260 @@
+/* =====================================================
+   DESIGN TOKENS – identical to browse-movies.css
+===================================================== */
+* {
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0,0,0,0.15);
+    --statCardBorder: #dfdcbc;
+}
+
+/* Background identical to other pages */
+body {
+    margin: 0;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgb(196,255,250),
+        rgb(255,237,188),
+        rgb(236,217,255),
+        rgb(202,224,255)
+    );
+    background-attachment: fixed;
+    font-family: Inter, sans-serif;
+    margin-top: 75px;
+}
+
+.layout-wrapper {
+    display: flex;
+}
+
+.content-area {
+    color: var(--TextColor);
+    flex: 1;
+    padding: 32px;
+    box-sizing: border-box;
+}
+
+/* ==========================
+   MAIN WRAPPER
+========================== */
+.movie-main {
+    width: 100%;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+/* ==========================
+   HEADER
+========================== */
+.movie-header {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 32px;
+}
+
+.movie-poster-box {
+    width: 300px;
+    height: 300px;
+    border-radius: 22px;
+    background: #fff;
+    box-shadow: 0 10px 25px var(--Shadow);
+    overflow: hidden;
+}
+
+.movie-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.movie-info-box h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+}
+
+.movie-meta {
+    display: flex;
+    gap: 8px;
+    opacity: 0.8;
+    margin-bottom: 14px;
+}
+
+.dot {
+    color: #000;
+}
+
+.movie-genres {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.genre-pill {
+    padding: 7px 15px;
+    background: var(--DarkBlue);
+    color: var(--LightBlue);
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+/* ==========================
+   TABS
+========================== */
+.overview-tabs {
+    gap: 5px;
+    display: inline-flex;
+    padding: 4px;
+    border-radius: 999px;
+    background-color: var(--DarkBlue);
+    box-shadow: 0 8px 20px var(--Shadow);
+    border: none;
+    margin-bottom: 15px;
+}
+
+.tab {
+    border: none;
+    padding: 6px 18px;
+    border-radius: 999px;
+    background: transparent;
+    color: #ffffff;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.tab:hover {
+    transform: translateY(-1px);
+}
+
+.tab.active {
+    background-color: var(--Pink);
+    color: var(--DarkBlue);
+}
+
+/* SECTION WRAPPER */
+.movie-section {
+    margin-bottom: 32px;
+}
+
+.movie-section h2 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+/* ==========================
+   CAST
+========================== */
+.cast-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.cast-pill {
+    padding: 7px 15px;
+    background: var(--boxBackground);
+    border: 1px solid var(--statCardBorder);
+    border-radius: 999px;
+    font-size: 13px;
+}
+
+/* ==========================
+   SIMILAR MOVIES (GRID)
+========================== */
+.similar-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 26px;
+}
+
+.movie-card {
+    background: var(--boxBackground);
+    border-radius: 20px;
+    padding-bottom: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px var(--Shadow);
+}
+
+.thumb {
+    width: 100%;
+    height: 200px;
+    background: #fff;
+    border-radius: 12px;
+}
+
+.movie-card h3 {
+    margin: 10px 14px 4px;
+}
+
+.movie-card p {
+    margin: 0 14px;
+    opacity: 0.8;
+}
+
+/* ==========================
+   TAB CONTENT
+========================== */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==========================
+   DISCUSSION STYLE (Figma)
+========================== */
+.discussion-box {
+    padding: 20px;
+    background: var(--boxBackground);
+    border-radius: 18px;
+    margin-bottom: 22px;
+}
+
+.discussion-sub {
+    opacity: 0.7;
+    margin-bottom: 10px;
+}
+
+.discussion-input {
+    width: 100%;
+    height: 130px;
+    padding: 14px;
+    resize: none;
+    border-radius: 12px;
+    border: 1px solid var(--statCardBorder);
+    box-sizing: border-box;
+    margin-bottom: 14px;
+    background: #fff;
+}
+
+.post-btn {
+    background: #ff2c2c;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    float: right;
+}
+
+/* Comment cards */
+.comment-card {
+    padding: 20px;
+    background: var(--boxBackground);
+    border-radius: 18px;
+    margin-bottom: 16px;
+}

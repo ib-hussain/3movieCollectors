@@ -22,6 +22,7 @@
 =========================== */
 body {
     margin: 0;
+    margin-top: 15px; /* navbar height */
     color: #ffffff;
     font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     background: radial-gradient(
@@ -31,6 +32,8 @@ body {
         rgba(236, 217, 255, 1) 55%,
         rgba(202, 224, 255, 1) 80%
     );
+    background-blend-mode: screen;
+    background-size: cover;
     background-attachment: fixed;
 }
 
@@ -49,11 +52,15 @@ body {
     width: 240px;
     height: 240px;
     border-radius: 120px;
+    /* border: 3px solid var(--statCardBorder); */
+    inset-inline: 0;
+    font-family: 'Manrope', sans-serif;
     text-align: center;
-    margin-bottom: 10px;
-    background-color: transparent;
+    margin-bottom: 15px;
+    background-color:transparent;
     backdrop-filter: blur(36px);
     -webkit-backdrop-filter: blur(36px);
+    transition: background-color .25s ease;
     box-shadow: 0 8px 20px var(--Shadow);
 }
 

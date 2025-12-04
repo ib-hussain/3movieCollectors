@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inception – 3movCollectors</title>
+
+    <!-- Shared Layout Components -->
+    <link rel="stylesheet" href="../css/main-navbar.css">
+    <link rel="stylesheet" href="../css/side-panel.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
+
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="../css/movie.css">
+
+    <link rel="icon" href="../pictures/M.png" />
+</head>
+
+<body data-page="movie">
+
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+    <script src="../js/include-main-navbar.js" defer></script>
+
+    <div class="layout-wrapper">
+
+        <!-- SIDEBAR -->
+        <div id="sidepanel-container"></div>
+        <script src="../js/include-side-panel.js" defer></script>
+
+        <!-- MAIN CONTENT -->
+        <div class="content-area">
+            <main class="movie-main">
+
+                <!-- ========== HEADER ========== -->
+                <section class="movie-header">
+
+                    <div class="movie-poster-box">
+                        <img src="../pictures/movie_posters/inception.jpg" class="movie-poster">
+                    </div>
+
+                    <div class="movie-info-box">
+
+                        <h1>Inception</h1>
+
+                        <div class="movie-meta">
+                            <span>2010</span>
+                            <span class="dot">•</span>
+                            <span>148 min</span>
+                            <span class="dot">•</span>
+                            <span>Christopher Nolan</span>
+                        </div>
+
+                        <div class="movie-genres">
+                            <span class="genre-pill">Sci-Fi</span>
+                            <span class="genre-pill">Action</span>
+                            <span class="genre-pill">Thriller</span>
+                        </div>
+
+                        <!-- TABS -->
+                        <div class="overview-tabs">
+                            <button class="tab active" data-target="overview-section">Overview</button>
+                            <button class="tab" data-target="discussion-section">Discussion (3)</button>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ========== OVERVIEW CONTENT ========== -->
+                <section id="overview-section" class="tab-content active">
+
+                    <div class="movie-section">
+                        <h2>Plot Summary</h2>
+                        <p>
+                            A thief who steals corporate secrets through dream-sharing technology
+                            is tasked with planting an idea into the mind of a CEO.
+                        </p>
+                    </div>
+
+                    <div class="movie-section">
+                        <h2>Cast</h2>
+                        <div class="cast-row">
+                            <span class="cast-pill">Leonardo DiCaprio</span>
+                            <span class="cast-pill">Joseph Gordon-Levitt</span>
+                            <span class="cast-pill">Elliot Page</span>
+                            <span class="cast-pill">Tom Hardy</span>
+                        </div>
+                    </div>
+
+                    <div class="movie-section">
+                        <h2>More Like This</h2>
+
+                        <div class="similar-grid">
+
+                            <div class="movie-card">
+                                <div class="thumb"></div>
+                                <h3>Interstellar</h3>
+                                <p>2014 • Sci-Fi</p>
+                            </div>
+
+                            <div class="movie-card">
+                                <div class="thumb"></div>
+                                <h3>The Prestige</h3>
+                                <p>2006 • Mystery</p>
+                            </div>
+
+                            <div class="movie-card">
+                                <div class="thumb"></div>
+                                <h3>Shutter Island</h3>
+                                <p>2010 • Thriller</p>
+                            </div>
+
+                            <div class="movie-card">
+                                <div class="thumb"></div>
+                                <h3>The Matrix</h3>
+                                <p>1999 • Sci-Fi</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- ========== DISCUSSION SECTION (Hidden by default) ========== -->
+                <section id="discussion-section" class="tab-content">
+
+                    <div class="discussion-box">
+
+                        <h2>Discussion about Inception</h2>
+                        <p class="discussion-sub">
+                            Share your theories, thoughts, and insights about this film with the community.
+                        </p>
+
+                        <!-- Input -->
+                        <textarea class="discussion-input"
+                                  placeholder="Share your thoughts about this movie..."></textarea>
+
+                        <button class="post-btn">Post</button>
+
+                    </div>
+
+                    <!-- Comments List -->
+                    <div class="comment-card">
+                        <h3>David Martinez</h3>
+                        <p>I've watched this 5 times and still can't decide if Cobb is dreaming or not!</p>
+                    </div>
+
+                    <div class="comment-card">
+                        <h3>Emma Wilson</h3>
+                        <p>The hallway fight scene is one of the greatest practical effects sequences ever filmed.</p>
+                    </div>
+
+                    <div class="comment-card">
+                        <h3>Chris Anderson</h3>
+                        <p>The kids’ clothes revealing the final twist still blows my mind.</p>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script src="../js/include-footer.js" defer></script>
+
+    <!-- TAB SWITCHING LOGIC -->
+    <script src="../js/movie.js" defer></script>
+
+</body>
+</html>
