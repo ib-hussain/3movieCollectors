@@ -1,4 +1,6 @@
-/* ROOT COLORS */
+/* ========================================
+   GLOBAL
+======================================== */
 * {
     --theGreenColor: #09855b;
     --TextColor: #171a1f;
@@ -9,13 +11,12 @@
     --Shadow: rgba(0, 0, 0, 0.15);
     --clickAbleLink: #ff2c2c;
     --ratingYellow: #FF9100;
-    --statCardBG: #7f6d8d0a;
-    --statCardBorder: #dfdcbc;
 }
+
 body {
     margin: 0;
-    color: #ffffff;
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: "Inter", system-ui, sans-serif;
+    /* Figma gradient background */
     background: radial-gradient(
         circle at 20% 20%,
         rgb(196, 255, 250) 0%,
@@ -23,188 +24,168 @@ body {
         rgba(236, 217, 255, 1) 55%,
         rgba(202, 224, 255, 1) 80%
     );
-    background-blend-mode: screen;
-    background-size: cover;
     background-attachment: fixed;
 }
-/* Remove sidebar spacing */
+
+/* Center page content (matches Dashboard Width) */
 .content-area.no-sidepanel {
     margin-left: 0 !important;
-    padding-top: 100px;     /* Moves hero down below navbar cleanly */
-    max-width: 1200px;
-    margin: 0 auto;
+    padding-top: 120px;          /* spacing below navbar */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;         /* center all sections horizontally */
+    color: var(--TextColor);
 }
 
 
-/* HERO SECTION */
+
+/* ========================================
+   HERO
+======================================== */
 .hero-section {
     text-align: center;
-    padding: 60px 20px;
-    margin-top: 20px;
-    padding-bottom: 40px;
-} 
+    padding: 0 20px;
+    margin-bottom: 100px;
+}
 
 .hero-section h1 {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 16px;
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--TextColor);                /* FIXED: White like Figma */
+    margin-bottom: 18px;
 }
 
 .hero-subtext {
-    max-width: 750px;
+    max-width: 720px;
     margin: 0 auto;
-    font-size: 16px;
-    margin-bottom: 32px;
-}
-
-.hero-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
+    font-size: 18px;
+    color:black; /* FIXED readability */
+    line-height: 1.55;
     margin-bottom: 40px;
 }
 
-.btn-primary {
-    padding: 12px 26px;
-    background: var(--clickAbleLink);
-    color: #fff;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-    transition: .25s;
+/* BUTTONS */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 55px;
 }
 
-.btn-primary:hover {
-    transform: scale(1.06);
-}
-
-.btn-secondary {
-    padding: 12px 26px;
-    background: transparent;
-    border: 1px solid #444;
-    color: #fff;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .25s;
-}
-
-.btn-secondary:hover {
-    transform: scale(1.06);
-}
 
 /* HERO STATS */
 .hero-stats {
     display: flex;
     justify-content: center;
-    gap: 80px;
-    margin-top: 40px;
-}
-
-.stat-box {
-    text-align: center;
+    gap: 130px;      /* FIXED: Figma spacing */
+    margin-top: 20px;
 }
 
 .stat-box h2 {
-    font-size: 32px;
+    font-size: 34px;
     color: var(--clickAbleLink);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
 }
 
 .stat-box p {
-    color: var(--TextColor);
+    font-size: 15px;
+    color: var(--clickAbleLink);
 }
 
-/* FEATURES SECTION */
 
+/* ========================================
+   EVERYTHING YOU NEED
+======================================== */
 .features-section {
-    max-width: 1100px;
+    max-width: 1000px;
     margin: 0 auto;
-    margin-top: 80px;
+    margin-top: 60px;       /* FIXED spacing from stats */
     text-align: center;
 }
 
 .section-title {
-    font-size: 32px;
-    margin-bottom: 6px;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--TextColor);
+    margin-bottom: 8px;
 }
 
 .section-subtext {
-    color: var(--TextColor);
-    margin-bottom: 40px;
+    font-size: 16px;
+    color: black;
+    margin-bottom: 45px;
 }
 
+/* Feature cards grid */
 .features-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    max-width: 800px;
+    gap: 28px;
+    max-width: 760px;
     margin: 0 auto;
 }
 
 .feature-card {
-    background: #111;
-    padding: 24px;
-    border-radius: 16px;
-    text-align: left;
+    background: var(--DarkBlue);
+    padding: 26px;
+    border-radius: 32px;
+    color: white;
+    transition: 0.25s;
 }
 
-.feature-icon {
-    width: 28px;
-    height: 28px;
-    background: var(--clickAbleLink);
-    border-radius: 6px;
-    margin-bottom: 12px;
+.feature-card:hover {
+    transform: translateY(-4px);
 }
+
 
 .feature-card h3 {
+    font-size: 17px;
     margin-bottom: 6px;
 }
 
 .feature-card p {
-    color: var(--TextColor);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--Pink);
 }
 
-/* FEATURED MOVIES */
 
+/* ========================================
+   FEATURED MOVIES
+======================================== */
 .featured-movies-section {
-    max-width: 1100px;
-    margin: 80px auto 60px auto;
+    max-width: 1000px;
+    margin: 140px auto 80px auto; /* FIXED spacing */
 }
 
 .featured-title-row {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     align-items: center;
+    text-align: center;
 }
 
-.btn-outline {
-    padding: 8px 18px;
-    border-radius: 6px;
-    border: 1px solid var(--clickAbleLink);
-    background: transparent;
-    color: var(--clickAbleLink);
-    cursor: pointer;
-    transition: .25s;
+.featured-title-row h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--TextColor);
 }
 
-.btn-outline:hover {
-    background: var(--clickAbleLink);
-    color: #fff;
-}
 
+/* Grid */
 .featured-grid {
-    margin-top: 24px;
+    margin-top: 32px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 26px;
 }
 
 .featured-card {
-    background: #111;
+    background: var(--LightBlue);
     padding: 14px;
-    border-radius: 14px;
-    cursor: pointer;
-    transition: .25s;
+    border-radius: 16px;
+    transition: 0.25s;
 }
 
 .featured-card:hover {
@@ -214,7 +195,6 @@ body {
 .featured-poster img {
     width: 100%;
     aspect-ratio: 1/1;
-    object-fit: contain;
     background: #fff;
     border-radius: 12px;
 }
@@ -223,47 +203,82 @@ body {
     margin-top: 10px;
 }
 
+.featured-info h3 {
+    margin: 0;
+    margin-bottom: 2px;
+    font-size: 15px;
+    color: var(--TextColor);
+}
+
 .featured-info p {
-    color: var(--textDim);
-    margin: 4px 0;
+    font-size: 13px;
+    color: black;
 }
 
 .rating {
-    color: #ffb400;
-    font-size: 14px;
+    color: var(--ratingYellow);
+    font-size: 13px;
 }
 
-/* CTA SECTION */
+
+/* ========================================
+   CTA SECTION
+======================================== */
 .cta-section {
-    padding: 40px;
+    margin: 140px auto 120px auto; /* FIXED spacing */
+    padding: 50px 40px;
     background: var(--clickAbleLink);
-    border-radius: 20px;
+    border-radius: 60px;
     text-align: center;
-    margin-top: 100px;
-    margin-bottom: 80px;
+    max-width: 1080px;
 }
 
 .cta-section h2 {
-    font-size: 28px;
-    margin-bottom: 6px;
+    font-size: 30px;
+    margin-bottom: 10px;
+    color: #fff;
 }
 
 .cta-section p {
-    color: #fff;
-    opacity: 0.9;
-    margin-bottom: 22px;
+    color: white;
+    max-width: 720px;
+    margin: 0 auto 26px auto;
 }
 
 .btn-white {
     padding: 12px 26px;
     background: #fff;
     color: #000;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .25s;
+    border: 1px solid var(--clickAbleLink);
     font-weight: 600;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: 0.20s;
 }
 
 .btn-white:hover {
+    background-color: var(--clickAbleLink);
+    border: 3px solid white;
     transform: scale(1.06);
+    color: white;
+
+}
+/* ===== UNIFIED PAGE WIDTH + TRUE CENTERING ===== */
+
+/* All main sections share the same centered max-width */
+.hero-section,
+.features-section,
+.featured-movies-section,
+.cta-section {
+    width: 100%;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Features grid stays narrower inside its section but still centered */
+.features-grid {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 }

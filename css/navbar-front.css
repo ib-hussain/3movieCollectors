@@ -109,6 +109,6 @@ body {
 .nav-separator {
     background-color: #ffffff;
     width: 1px;
-    height: 28px;
-    opacity: 0.55;
+    height: 36px;
+    opacity: 1;
 }
