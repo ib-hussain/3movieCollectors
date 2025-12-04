@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
+/* GLOBAL */
+* {
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0, 0, 0, 0.15);
+    --clickAbleLink: #ff2c2c;
+    --ratingYellow: #FF9100;
+    --statCardBG: #7f6d8d0a;
+    --statCardBorder: #dfdcbc;
+}
+
+/* ===========================
+   BODY + LAYOUT
+=========================== */
+body {
+    margin: 0;
+    margin-top: 5px; /* navbar height */
+    color: #ffffff;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(
+        circle at 20% 20%,
+        rgb(196, 255, 250) 0%,
+        rgba(255, 237, 188, 1) 30%,
+        rgba(236, 217, 255, 1) 55%,
+        rgba(202, 224, 255, 1) 80%
+    );
+    background-blend-mode: screen;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* LOGO AREA */
+.logo-area {
+    width: 240px;
+    height: 240px;
+    border-radius: 120px;
+    /* border: 3px solid var(--statCardBorder); */
+    inset-inline: 0;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    margin-bottom: 10px;
+    background-color:transparent;
+    backdrop-filter: blur(36px);
+    -webkit-backdrop-filter: blur(36px);
+    transition: background-color .25s ease;
+    box-shadow: 0 8px 20px var(--Shadow);
+}
+
+.main-logo {
+    margin-top: 60px;
+    width: 60px;
+    height: 60px;
+}
+
+.logo-area h1 {
+    font-size: 24px;
+    margin-top: 8px;
+    font-weight: 700;
+}
+
+/* LOGIN CARD */
+.login-card {
+    color: var(--TextColor);
+    background: var(--LightBlue);
+    padding: 34px 34px; /* equal padding prevents overflow */
+    width: 35%;
+    border-radius: 18px;
+    box-shadow: 0 0 25px var(--Shadow);
+    box-sizing: border-box; /* FIX: prevents content from exceeding width */
+}
+
+.login-card h2 {
+    margin: 0 0 4px 0;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    margin: 0 0 24px 0;
+    font-size: 14px;
+    color: black;
+}
+/* INPUT ICONS FIX */
+.input-box {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.toggle-eye {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+
+label {
+    margin-bottom: 6px;
+    display: block;
+}
+
+.input-box input {
+    width: 100%;
+    padding: 12px 42px 12px 42px; /* space for left + right icons */
+    background: white;
+    border: 1px solid var(--Pink);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--TextColor);
+    box-sizing: border-box;
+}
+
+
+
+
+
+/* OPTIONS ROW */
+.options-row {
+    margin-top: 0px;     /* prevents crowding */
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #000000;
+}
+
+.forgot {
+    color: var(--clickAbleLink);
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.25s;
+}
+.forgot:hover{
+    transform: scale(1.06);
+}
+.remember-row input {
+    margin-right: 6px;
+}
+
+/* SIGN IN BUTTON */
+.sign-in-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--clickAbleLink);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 18px;
+    transition: 0.25s;
+}
+
+.sign-in-btn:hover {
+    background: white;
+    color: var(--clickAbleLink);
+    transform: scale(1.01);
+    box-shadow: 0 0 15px var(--Shadow);
+}
+/* SIGNUP TEXT */
+.signup-text {
+    text-align: center;
+    font-size: 13px;
+    color: black;
+}
+
+.signup-link {
+    text-decoration: none;
+    color: var(--clickAbleLink);
+}
+/* TERMS */
+.terms {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 20px;
+    color: var(--DarkBlue);
+}
+
+.terms span {
+    color: var(--clickAbleLink);
+    cursor: pointer;
+}
