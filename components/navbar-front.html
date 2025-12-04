@@ -1,16 +1,23 @@
-<nav class="navbar navbar-front">
-    <div class="nav-left">
-        <img src="../pictures/M.png" class="nav-logo">
-        <span class="nav-title">3movCollectors</span>
-    </div>
+<nav class="navbar">
 
-    <div class="nav-search">
-        <img src="../pictures/search.png" class="search-icon-img">
-        <input type="text" placeholder="Search movies, people, discussions...">
-    </div>
+    <!-- BRAND -->
+    <a href="index.html" class="navbar-brand">
+        <img src="../pictures/M.png" class="navbar-logo" alt="Logo">
+        3movCollectors
+    </a>
 
+    <!-- RIGHT SIDE -->
     <div class="nav-right">
-        <a href="../html/login.html" class="login-link">Login</a>
-        <a href="../html/signup.html" class="signup-btn">Sign Up</a>
+
+        <button class="navbar-buttons" onclick="window.location.href='login.html'">
+            Login
+        </button>
+
+        <img src="../pictures/line.png" class="nav-separator">
+
+        <button class="navbar-buttons" onclick="window.location.href='signup.html'">
+            Sign Up
+        </button>
+
     </div>
 </nav>

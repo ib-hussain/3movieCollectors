@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>3movCollectors – Your Movie Community</title>
+
+    <!-- Shared Components -->
+    <link rel="stylesheet" href="../css/navbar-front.css">
+    <link rel="stylesheet" href="../css/main-footer.css">
+
+    <!-- Page Styles -->
+    <link rel="stylesheet" href="../css/index.css">
+
+    <link rel="icon" href="../pictures/M.png" />
+</head>
+
+<body data-page="home">
+
+    <!-- NAVBAR -->
+    <div id="navbar-container"></div>
+    <script src="../js/include-navbar-front.js" defer></script>
+
+    <!-- PAGE STRUCTURE WITHOUT SIDEBAR -->
+    <div class="layout-wrapper">
+
+        <main class="content-area no-sidepanel">
+
+            <!-- HERO SECTION -->
+            <section class="hero-section">
+                <h1>Your Ultimate Movie Community</h1>
+                <p class="hero-subtext">
+                    Discover, discuss and experience cinema with a passionate community of film lovers. 
+                    Track your watchlist, join watch parties, and connect with friends who share your taste in movies.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='signup.html'">Join Now</button>
+                    <button class="btn-secondary">Learn More</button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-box">
+                        <h2>10K+</h2>
+                        <p>Movies</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h2>50K+</h2>
+                        <p>Members</p>
+                    </div>
+
+                    <div class="stat-box">
+                        <h2>200K+</h2>
+                        <p>Reviews</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FEATURES SECTION -->
+            <section class="features-section">
+                <h2 class="section-title">Everything You Need</h2>
+                <p class="section-subtext">
+                    A complete platform for movie lovers with powerful features to enhance your cinematic experience.
+                </p>
+
+                <div class="features-grid">
+
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Extensive Movie Catalog</h3>
+                        <p>Browse thousands of movies with detailed information, ratings and reviews.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Social Community</h3>
+                        <p>Connect with fellow movie enthusiasts and share your passion for cinema.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Real-time Chat</h3>
+                        <p>Discuss your favourite films with friends instantly.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon"></div>
+                        <h3>Watch Parties</h3>
+                        <p>Host or join synchronized watch parties and enjoy movies together.</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- FEATURED MOVIES -->
+            <section class="featured-movies-section">
+                <div class="featured-title-row">
+                    <h2>Featured Movies</h2>
+                    <button class="btn-outline" onclick="window.location.href='browse-movies.html'">Browse All Movies</button>
+                </div>
+
+                <div class="featured-grid">
+
+                    <div class="featured-card">
+                        <div class="featured-poster"><img src="../pictures/movie_posters/default.png"></div>
+                        <div class="featured-info">
+                            <h3>The Shawshank Redemption</h3>
+                            <p>1994 • Drama</p>
+                            <span class="rating">★ 9.3</span>
+                        </div>
+                    </div>
+
+                    <div class="featured-card">
+                        <div class="featured-poster"><img src="../pictures/movie_posters/default.png"></div>
+                        <div class="featured-info">
+                            <h3>The Dark Knight</h3>
+                            <p>2008 • Action</p>
+                            <span class="rating">★ 9.0</span>
+                        </div>
+                    </div>
+
+                    <div class="featured-card">
+                        <div class="featured-poster"><img src="../pictures/movie_posters/default.png"></div>
+                        <div class="featured-info">
+                            <h3>Inception</h3>
+                            <p>2010 • Sci-Fi</p>
+                            <span class="rating">★ 9.0</span>
+                        </div>
+                    </div>
+
+                    <div class="featured-card">
+                        <div class="featured-poster"><img src="../pictures/movie_posters/default.png"></div>
+                        <div class="featured-info">
+                            <h3>Pulp Fiction</h3>
+                            <p>1994 • Crime</p>
+                            <span class="rating">★ 8.9</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CTA SECTION -->
+            <section class="cta-section">
+                <h2>Ready to Join?</h2>
+                <p>Start your journey with the most vibrant movie community online. Connect, discover, and share your love for cinema.</p>
+
+                <button class="btn-white" onclick="window.location.href='signup.html'">
+                    Create Free Account
+                </button>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- FOOTER -->
+    <div id="footer-container"></div>
+    <script src="../js/include-footer.js" defer></script>
+
+</body>
+</html>

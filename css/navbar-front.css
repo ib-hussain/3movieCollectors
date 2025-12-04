@@ -1,211 +1,114 @@
-/* ===========================
-   Global reset & base styles
-   =========================== */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
+/* ======================================
+   Global reset
+====================================== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --theGreenColor: #09855b;
+    --TextColor: #171a1f;
+    --Pink: #F2E0E7;
+    --DarkBlue: #5C8BC0;
+    --LightBlue: #e0edfc;
+    --boxBackground: #afe4f163;
+    --Shadow: rgba(0,0,0,0.15);
+    --clickAbleLink: #ff2c2c;   /* issue: to be decided, fix this colour later */
+    --ratingYellow: #FF9100;   
+    --statCardBG:#7f6d8d0a; 
+    --statCardBorder: #dfdcbc;
 }
 
 body {
-    background-color: #111;
-    font-family: Arial, sans-serif;
+    background-color: #171a1f;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     color: #fff;
+    background: transparent;
+    transition: transform .25s ease;
 }
 
-/* ===========================
-   NAVBAR
-   =========================== */
+/* ======================================
+   NAVBAR CONTAINER
+====================================== */
 .navbar {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
     width: 100%;
-    padding: 14px 40px;
+    padding: 14px ;
+    padding-left: 10px;
+    padding-right: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #111;
+    background: #171a1f;
     gap: 24px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }
 
-/* LEFT SIDE (LOGO + TITLE) */
-.nav-left {
-    display: flex;
+/* ======================================
+    BRAND (LEFT)
+====================================== */
+.navbar-brand {
+    font-family: 'Manrope', sans-serif;
+    font-weight: bolder;
+    display: inline-flex;
     align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
+    gap: 2px;
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    line-height: 1;
+    transition: transform .25s ease;
+    margin-left: 20px;
 }
 
-.nav-logo {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    cursor: pointer;
-    transition: transform 0.2s ease;
+.navbar-brand:hover {
+    transform: scale(1.06);
 }
 
-.nav-logo:hover {
-    transform: scale(1.03);
+.navbar-logo {
+    height: 36px;
+    width: 36px;
 }
 
-.nav-title {
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
 
-.nav-title:hover {
-    color: #f5f5f5;
-}
-
-/* ===========================
-   SEARCH BAR
-   =========================== */
-.nav-search {
-    flex: 1;
-    max-width: 55%;
-    display: flex;
-    align-items: center;
-    background: #1c1c1c;
-    padding: 10px 15px;
-    border-radius: 8px;
-    border: 1px solid #2a2a2a;
-    gap: 10px;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-}
-
-.nav-search:hover {
-    border-color: #3a3a3a;
-    background: #202020;
-    box-shadow: 0 0 0 1px #272727;
-}
-
-.search-icon-img {
-    width: 18px;
-    height: 18px;
-    opacity: 0.7;
-    object-fit: contain;
-    flex-shrink: 0;
-}
-
-.nav-search input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 15px;
-    color: #fff;
-}
-
-.nav-search input::placeholder {
-    color: #777;
-}
-
-/* ===========================
-   RIGHT SIDE (AUTH BUTTONS)
-   =========================== */
+/* ======================================
+   NAV RIGHT (ICONS + USER)
+====================================== */
 .nav-right {
     display: flex;
     align-items: center;
-    gap: 20px;
-    flex-shrink: 0;
+    gap: 18px;
 }
 
-.login-link {
-    color: #cfcfcf;
-    text-decoration: none;
+.navbar-buttons {
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 500;
+    padding: 8px 16px;
     font-size: 15px;
-    transition: color 0.2s ease;
-}
-
-.login-link:hover {
-    color: #ffffff;
-}
-
-.signup-btn {
-    background-color: #e50914;
+    background: var(--clickAbleLink);
+    border: 1px solid var(--clickAbleLink);
+    border-radius: 24px;
     color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 15px;
-    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.15s ease;
-    white-space: nowrap;
+    /* cursor: pointer; */
+    transition: 0.25s;
 }
 
-.signup-btn:hover {
-    background-color: #ff2630;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+.navbar-buttons:hover {
+    /* background: var(--Pink); */
+    transform: scale(1.06);
 }
 
-/* ===========================
-   RESPONSIVE BEHAVIOUR
-   (Desktop-first but flexible)
-   =========================== */
 
-/* Large desktops: give search more width */
-@media (min-width: 1600px) {
-    .nav-search {
-        max-width: 50%;
-    }
-}
-
-/* Medium screens / smaller laptops */
-@media (max-width: 1200px) {
-    .navbar {
-        padding: 12px 30px;
-    }
-
-    .nav-search {
-        max-width: 60%;
-        margin: 0 10px;
-    }
-}
-
-/* Tablet-ish widths */
-@media (max-width: 900px) {
-    .navbar {
-        padding: 12px 20px;
-        gap: 16px;
-    }
-
-    .nav-search {
-        max-width: 100%;
-        margin: 0 10px;
-    }
-
-    .nav-title {
-        font-size: 18px;
-    }
-
-    .nav-right {
-        gap: 14px;
-    }
-
-    .signup-btn {
-        padding: 8px 14px;
-        font-size: 14px;
-    }
-}
-
-/* Narrow screens / mobile (optional but nice) */
-@media (max-width: 700px) {
-    .navbar {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .nav-left {
-        justify-content: center;
-    }
-
-    .nav-search {
-        order: 3;
-        margin: 0;
-    }
-
-    .nav-right {
-        justify-content: center;
-        order: 2;
-    }
+/* ======================================
+   SEPARATOR LINE
+====================================== */
+.nav-separator {
+    background-color: #ffffff;
+    width: 1px;
+    height: 28px;
+    opacity: 0.55;
 }

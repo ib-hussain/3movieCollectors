@@ -1,13 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
-
-/* ======================================
-   ROOT VARIABLES (Fixes var(--accent-red))
-====================================== */
-:root {
-    --accent-red: #e50914;  /* Your chosen red */
-    --brand: #ffffff;
-}
-
 /* ======================================
    Global reset
 ====================================== */
@@ -53,7 +44,6 @@ body {
     top: 0;
     left: 0;
     z-index: 100;
-    opacity: 0.9;
 }
 
 /* ======================================
@@ -65,7 +55,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 2px;
-    color: var(--brand);
+    color: white;
     text-decoration: none;
     font-size: 24px;
     line-height: 1;
@@ -211,7 +201,7 @@ body {
    ACTIVE STATE (Notifications, Messages)
 ====================================== */
 .icon-btn.active .icon-circle {
-    background-color: var(--accent-red);
+    background-color: var(--clickAbleLink);
     transform: scale(1.06);
 }
 
@@ -221,7 +211,7 @@ body {
 
 .icon-btn.active .icon-badge .icon-btn{
     background-color: white;
-    color: var(--accent-red);
+    color: var(--clickAbleLink);
 }
 
  /* ======================================
@@ -230,7 +220,7 @@ body {
    FIX: MESSAGES MATCH NOTIFICATIONS
 ====================================== */
 .icon-btn.messages-btn:hover .icon-circle {
-    background-color: var(--accent-red);
+    background-color: var(--clickAbleLink);
 }
 
 .icon-btn.messages-btn:hover .icon-img {
@@ -238,7 +228,7 @@ body {
 }
 
 .icon-btn.messages-btn.active .icon-circle {
-    background-color: var(--accent-red);
+    background-color: var(--clickAbleLink);
 }
 
 .icon-btn.messages-btn.active .icon-img {

@@ -6,7 +6,10 @@
     --DarkBlue: #5C8BC0;
     --LightBlue: #e0edfc;
     --boxBackground: #afe4f163;
-    --Shadow: rgba(0,0,0,0.15);
+    --Shadow: rgba(0, 0, 0, 0.15);
+    --clickAbleLink: #ff2c2c;
+    --ratingYellow: #FF9100;
+    --statCardBG: #7f6d8d0a;
     --statCardBorder: #dfdcbc;
 }
 body {
