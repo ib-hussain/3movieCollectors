@@ -3,6 +3,7 @@ USE MovieCommunity;
 
 CREATE TABLE User(
     userID INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL DEFAULT "",
     name VARCHAR(255) NOT NULL DEFAULT "",
     email VARCHAR(255) NOT NULL DEFAULT "",
     password VARCHAR(255) NOT NULL DEFAULT "",
@@ -10,8 +11,8 @@ CREATE TABLE User(
     role ENUM('user', 'admin') DEFAULT 'user'              
 );
 -- issues:
--- add fields to movie fie;ld
--- add username to user
+-- add fields to movie fie;ld - done
+-- add username to user - done
 CREATE TABLE Genres (
     genreID INT AUTO_INCREMENT PRIMARY KEY,
     genreName VARCHAR(100) NOT NULL UNIQUE
@@ -28,12 +29,19 @@ CREATE TABLE UserGenres (
 CREATE TABLE Movie(
     movieID INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(1023) NOT NULL DEFAULT "",
-    synopsis VARCHAR(2047) NOT NULL DEFAULT "",
+    synopsis VARCHAR(2047) NOT NULL DEFAULT "", -- basically plot summary
+    director  VARCHAR(255) NOT NULL DEFAULT "",
     releaseYear INT NOT NULL,
     posterImg VARCHAR(255) NOT NULL DEFAULT 'default.png',
     totalViews INT DEFAULT 0,
     viewCount INT DEFAULT 0,
     avgRating DECIMAL(3, 1) DEFAULT 0.0
+);
+
+CREATE TABLE MovieCast (
+    movieID INT NOT NULL,
+    castMember  VARCHAR(255) NOT NULL DEFAULT "",
+    FOREIGN KEY (movieID) REFERENCES Movie(movieID) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE MovieGenres (
