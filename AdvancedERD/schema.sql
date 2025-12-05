@@ -9,7 +9,9 @@ CREATE TABLE User(
     registrationDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     role ENUM('user', 'admin') DEFAULT 'user'              
 );
-
+-- issues:
+-- add fields to movie fie;ld
+-- add username to user
 CREATE TABLE Genres (
     genreID INT AUTO_INCREMENT PRIMARY KEY,
     genreName VARCHAR(100) NOT NULL UNIQUE
