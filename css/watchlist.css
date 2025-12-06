@@ -279,3 +279,47 @@ body.sidebar-collapsed .content-area {
     margin: 0 6px;
     color: black;
 }
+
+/* Action buttons */
+.action-btn {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.completed-btn {
+    background: #27ae60;
+    color: white;
+}
+
+.completed-btn:hover {
+    background: #229954;
+}
+
+.added-btn {
+    background: #3498db;
+    color: white;
+}
+
+.added-btn:hover {
+    background: #2980b9;
+}
+
+.remove-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+.remove-btn:hover {
+    background: #c0392b;
+}
+
+.movie-rating {
+    font-size: 13px;
+    color: #f39c12;
+    margin-top: 5px;
+}

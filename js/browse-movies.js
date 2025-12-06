@@ -107,7 +107,13 @@ async function loadMovies(append = false) {
     const data = await App.get(`/movies?${params}`);
 
     if (data.success) {
-      displayMovies(data.movies, append);
+      // Fetch watchlist status for all movies
+      const watchlistData = await App.get("/watchlist");
+      const watchlistMovieIds = watchlistData.success
+        ? watchlistData.movies.map((m) => m.movieId)
+        : [];
+
+      displayMovies(data.movies, append, watchlistMovieIds);
       updateLoadMoreButton(data.pagination);
       if (!append) {
         updateMovieCount(data.pagination.total);
@@ -122,7 +128,7 @@ async function loadMovies(append = false) {
 /**
  * Display movies in the grid
  */
-function displayMovies(movies, append = false) {
+function displayMovies(movies, append = false, watchlistMovieIds = []) {
   const grid = document.getElementById("moviesGrid");
   if (!grid) return;
 
@@ -141,6 +147,16 @@ function displayMovies(movies, append = false) {
       console.log(
         `[Browse] Movie: ${movie.title}, posterPath: ${movie.posterPath}`
       );
+
+      const isInWatchlist = watchlistMovieIds.includes(movie.movieId);
+      const buttonText = isInWatchlist
+        ? "Added to Watchlist"
+        : "Add to Watchlist";
+      const buttonStyle = isInWatchlist
+        ? "background: #27ae60; cursor: not-allowed;"
+        : "";
+      const buttonDisabled = isInWatchlist ? "disabled" : "";
+
       return `
     <article class="movie-card" onclick="window.location.href='movie.html?id=${
       movie.movieId
@@ -168,6 +184,13 @@ function displayMovies(movies, append = false) {
           <img src="/pictures/star.png" alt="Star">
           <span>${movie.avgRating}</span>
         </div>
+        <button class="add-watchlist-btn" data-movie-id="${
+          movie.movieId
+        }" style="${buttonStyle}" ${buttonDisabled} onclick="event.stopPropagation(); addToWatchlistFromBrowse(${
+        movie.movieId
+      })">
+          ${buttonText}
+        </button>
       </div>
     </article>
   `;
@@ -337,3 +360,38 @@ function setupSearch() {
     }, 500); // Wait 500ms after user stops typing
   });
 }
+
+/**
+ * Add movie to watchlist from browse page
+ */
+async function addToWatchlistFromBrowse(movieId) {
+  try {
+    const data = await App.post("/watchlist", { movieId });
+
+    if (data.success) {
+      // Update button to show it's added
+      const btn = document.querySelector(`button[data-movie-id="${movieId}"]`);
+      if (btn) {
+        btn.textContent = "Added ✓";
+        btn.style.background = "#27ae60";
+        btn.disabled = true;
+      }
+
+      if (App.showToast) {
+        App.showToast("Added to watchlist", "success");
+      }
+    }
+  } catch (error) {
+    console.error("Error adding to watchlist:", error);
+    if (error.message && error.message.includes("already in your watchlist")) {
+      alert("This movie is already in your watchlist");
+    } else if (error.message && error.message.includes("log in")) {
+      alert("Please log in to add movies to your watchlist");
+    } else {
+      alert("Failed to add to watchlist. Please try again.");
+    }
+  }
+}
+
+// Make function globally accessible
+window.addToWatchlistFromBrowse = addToWatchlistFromBrowse;

@@ -106,8 +106,7 @@
 
     /**
      * Get current user (loads if not cached)
-     */
-    async getCurrentUser() {
+     */   async getCurrentUser() {
       if (!this.currentUser) {
         await this.checkAuth();
       }

@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>My Watchlist - 3movCollectors</title>
 
-        <link rel="icon" href="../pictures/M.png" />
+    <link rel="icon" href="../pictures/M.png" />
     <!-- Shared component styles -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+    <link rel="stylesheet" href="../css/main-navbar.css" />
+    <link rel="stylesheet" href="../css/side-panel.css" />
+    <link rel="stylesheet" href="../css/main-footer.css" />
 
     <!-- Page styles -->
-    <link rel="stylesheet" href="../css/watchlist.css">
-</head>
+    <link rel="stylesheet" href="../css/watchlist.css" />
+  </head>
 
-<body data-page="watchlist">
+  <body data-page="watchlist">
     <!-- NAVBAR (fixed at top) -->
     <div id="navbar-container"></div>
+    <script src="../js/app.js" defer></script>
     <script src="../js/include-main-navbar.js" defer></script>
 
     <div class="layout-wrapper">
-        <!-- SIDEPANEL -->
-        <div id="sidepanel-container"></div>
-        <script src="../js/include-side-panel.js" defer></script>
+      <!-- SIDEPANEL -->
+      <div id="sidepanel-container"></div>
+      <script src="../js/include-side-panel.js" defer></script>
 
-        <!-- MAIN CONTENT -->
-        <main class="content-area">
-            <!-- Page header + sort / view controls -->
-            <header class="watchlist-header">
-                <div class="header-main">
-                    <h1>My Watchlist</h1>
-                    <p>Keep track of movies you want to watch</p>
-                </div>
+      <!-- MAIN CONTENT -->
+      <main class="content-area">
+        <!-- Page header + sort / view controls -->
+        <header class="watchlist-header">
+          <div class="header-main">
+            <h1>My Watchlist</h1>
+            <p>Keep track of movies you want to watch</p>
+          </div>
+        </header>
 
-            </header>
-
-            <!-- Top stats row (4 cards) -->
-            <!-- <section class="watchlist-stats">
+        <!-- Top stats row (4 cards) -->
+        <!-- <section class="watchlist-stats">
                 <div class="stat-card">
                     <div class="stat-label">Total Movies</div>
                     <div class="stat-value">12</div>
@@ -58,128 +58,18 @@
                 </div>
             </section> -->
 
-            <!-- Filter chips (tabs) -->
-            <section class="watchlist-filters">
-                <button class="filter-chip active" data-filter="all">
-                    All (12)
-                </button>
-                <button class="filter-chip" data-filter="want">
-                    Want to Watch (4)
-                </button>
-                <button class="filter-chip" data-filter="watching">
-                    Watching (3)
-                </button>
-                <button class="filter-chip" data-filter="completed">
-                    Completed (5)
-                </button>
-            </section>
+        <!-- Filter chips (tabs) -->
+        <section class="watchlist-filters">
+          <button class="filter-chip active" data-filter="all">All</button>
+          <button class="filter-chip" data-filter="added">Added</button>
+          <button class="filter-chip" data-filter="completed">Completed</button>
+        </section>
 
-            <!-- Movie cards grid -->
-            <section class="watchlist-grid">
-
-                <article class="movie-card" data-status="want" onclick="window.location.href='movie.html'">
-                    <div class="movie-poster-wrap" onclick="window.location.href='movie.html'">
-                        <img src="../pictures/movie_posters/inception.jpg" alt="Inception" class="movie-poster">
-                        <span class="status-pill status-pill--want">Want to Watch</span>
-                    </div>
-                    <div class="movie-info" onclick="window.location.href='movie.html'">
-                        <h3 class="movie-title">Inception</h3>
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Watching cards -->
-                <article class="movie-card" data-status="watching">
-                    <div class="movie-poster-wrap">
-                        <img src="../pictures/default.png" alt="The Dark Knight" class="movie-poster">
-                        <span class="status-pill status-pill--watching">Watching</span>
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">The Dark Knight</h3>
-                        <div class="movie-meta">
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="movie-card" data-status="watching">
-                    <div class="movie-poster-wrap">
-                        <img src="../pictures/default.png" alt="Interstellar" class="movie-poster">
-                        <span class="status-pill status-pill--watching">Watching</span>
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">Interstellar</h3>
-                        <div class="movie-meta">
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                        </div>
-                    </div>
-                </article>
-
-                <!-- Completed cards -->
-                <article class="movie-card" data-status="completed">
-                    <div class="movie-poster-wrap">
-                        <img src="../pictures/default.png" alt="Pulp Fiction" class="movie-poster">
-                        <span class="status-pill status-pill--completed">Completed</span>
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">Pulp Fiction</h3>
-                        <div class="movie-meta">
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="movie-card" data-status="completed">
-                    <div class="movie-poster-wrap">
-                        <img src="../pictures/default.png" alt="The Godfather" class="movie-poster">
-                        <span class="status-pill status-pill--completed">Completed</span>
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">The Godfather</h3>
-                        <div class="movie-meta">
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="movie-card" data-status="completed">
-                    <div class="movie-poster-wrap">
-                        <img src="../pictures/default.png" alt="Fight Club" class="movie-poster">
-                        <span class="status-pill status-pill--completed">Completed</span>
-                    </div>
-                    <div class="movie-info">
-                        <h3 class="movie-title">Fight Club</h3>
-                        <div class="movie-meta">
-                        <div class="movie-meta">
-                            <span>2010</span>
-                                    <span class="dot">•</span>
-                                    <span>Sci-Fi</span>
-                        </div>
-                        </div>
-                    </div>
-                </article>
-            </section>
-        </main>
+        <!-- Movie cards grid -->
+        <section class="watchlist-grid" id="watchlist-grid">
+          <!-- Movies will be dynamically loaded here -->
+        </section>
+      </main>
     </div>
 
     <!-- FOOTER -->
@@ -188,5 +78,5 @@
 
     <!-- Page JS -->
     <script src="../js/watchlist.js" defer></script>
-</body>
+  </body>
 </html>

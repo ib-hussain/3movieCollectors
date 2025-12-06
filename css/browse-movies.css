@@ -310,6 +310,30 @@ body {
   height: 14px;
 }
 
+/* Add to watchlist button */
+.add-watchlist-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-watchlist-btn:hover {
+  background: #2980b9;
+}
+
+.add-watchlist-btn:disabled {
+  background: #27ae60;
+  cursor: not-allowed;
+}
+
 /* Load more */
 
 .load-more-wrap {

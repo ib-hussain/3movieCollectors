@@ -101,7 +101,7 @@ router.post("/", async (req, res) => {
       });
     }
 
-    const { movieId, status = "to-watch" } = req.body;
+    const { movieId, status = "added" } = req.body;
 
     if (!movieId) {
       return res.status(400).json({
@@ -178,11 +178,11 @@ router.patch("/:movieId", async (req, res) => {
       });
     }
 
-    const validStatuses = ["to-watch", "watching", "completed", "not seen"];
+    const validStatuses = ["added", "completed"];
     if (!validStatuses.includes(status)) {
       return res.status(400).json({
         success: false,
-        message: "Invalid status",
+        message: "Invalid status. Must be 'added' or 'completed'",
       });
     }
 

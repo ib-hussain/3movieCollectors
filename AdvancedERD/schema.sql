@@ -52,7 +52,7 @@ CREATE TABLE WatchList(
     PRIMARY KEY (movieID, userID),
     FOREIGN KEY (movieID) REFERENCES Movie(movieID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (userID) REFERENCES User(userID) ON DELETE CASCADE ON UPDATE CASCADE,
-    status ENUM('to-watch', 'watching', 'completed', 'not seen') DEFAULT 'not seen',
+    status ENUM('added', 'completed') DEFAULT 'added',
     lastUpdated DATETIME DEFAULT CURRENT_TIMESTAMP,
     addedDate DATETIME NOT NULL
 );
