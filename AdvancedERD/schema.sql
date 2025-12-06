@@ -38,12 +38,6 @@ CREATE TABLE Movie(
     avgRating DECIMAL(3, 1) DEFAULT 0.0
 );
 
-CREATE TABLE MovieCast (
-    movieID INT NOT NULL,
-    castMember  VARCHAR(255) NOT NULL DEFAULT "",
-    FOREIGN KEY (movieID) REFERENCES Movie(movieID) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
 CREATE TABLE MovieGenres (
     movieID INT NOT NULL,
     genreID INT NOT NULL,

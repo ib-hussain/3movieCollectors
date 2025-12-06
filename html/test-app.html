@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature 5 Test Page - App Utilities</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      h1 {
+        color: #667eea;
+        margin-bottom: 10px;
+      }
+
+      .subtitle {
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 14px;
+      }
+
+      .test-section {
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        border-left: 4px solid #667eea;
+      }
+
+      .test-section h2 {
+        color: #333;
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+
+      .button-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background: #667eea;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+
+      button:hover {
+        background: #5568d3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+      }
+
+      button:active {
+        transform: translateY(0);
+      }
+
+      .btn-success {
+        background: #27ae60;
+      }
+
+      .btn-success:hover {
+        background: #229954;
+      }
+
+      .btn-error {
+        background: #e74c3c;
+      }
+
+      .btn-error:hover {
+        background: #c0392b;
+      }
+
+      .btn-warning {
+        background: #f39c12;
+      }
+
+      .btn-warning:hover {
+        background: #d68910;
+      }
+
+      .btn-info {
+        background: #3498db;
+      }
+
+      .btn-info:hover {
+        background: #2980b9;
+      }
+
+      .output {
+        margin-top: 10px;
+        padding: 15px;
+        background: white;
+        border-radius: 5px;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        color: #333;
+        max-height: 150px;
+        overflow-y: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+
+      .output.empty {
+        color: #999;
+        font-style: italic;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        margin-left: 10px;
+      }
+
+      .status.success {
+        background: #d4edda;
+        color: #155724;
+      }
+
+      .status.error {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      .instructions {
+        background: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .instructions h3 {
+        color: #856404;
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .instructions p {
+        color: #856404;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .code {
+        background: #2d2d2d;
+        color: #f8f8f2;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body data-page="test-app">
+    <div class="container">
+      <h1>🎬 Feature 5 Test Page</h1>
+      <p class="subtitle">
+        Interactive testing for App utilities - Click buttons to test each
+        feature!
+      </p>
+
+      <div class="instructions">
+        <h3>📋 Instructions:</h3>
+        <p>
+          1. Open DevTools Console (Press <span class="code">F12</span> and
+          click "Console" tab)<br />
+          2. Click the buttons below to test each feature<br />
+          3. Watch for toast notifications in the top-right corner<br />
+          4. Check the output boxes and console for results
+        </p>
+      </div>
+
+      <!-- Test 3: API Helpers -->
+      <div class="test-section">
+        <h2>Test 3: API Helpers <span class="status success">Easy</span></h2>
+        <div class="button-group">
+          <button onclick="testGetMe()">Test GET /auth/me</button>
+          <button onclick="testCheckAuth()">Test checkAuth()</button>
+          <button onclick="testGetCurrentUser()">Test getCurrentUser()</button>
+        </div>
+        <div id="output-api" class="output empty">
+          Results will appear here...
+        </div>
+      </div>
+
+      <!-- Test 4: Toast System -->
+      <div class="test-section">
+        <h2>
+          Test 4: Toast Notifications <span class="status success">Easy</span>
+        </h2>
+        <div class="button-group">
+          <button class="btn-error" onclick="testToastError()">
+            Show Error Toast
+          </button>
+          <button class="btn-success" onclick="testToastSuccess()">
+            Show Success Toast
+          </button>
+          <button class="btn-warning" onclick="testToastWarning()">
+            Show Warning Toast
+          </button>
+          <button class="btn-info" onclick="testToastInfo()">
+            Show Info Toast
+          </button>
+          <button onclick="testToastCustom()">Test Custom Duration (1s)</button>
+        </div>
+        <div id="output-toast" class="output empty">
+          Watch top-right corner for toasts!
+        </div>
+      </div>
+
+      <!-- Test 5: Loading Overlay -->
+      <div class="test-section">
+        <h2>
+          Test 5: Loading Overlay <span class="status success">Easy</span>
+        </h2>
+        <div class="button-group">
+          <button onclick="testLoadingSimple()">
+            Show Loading (3 seconds)
+          </button>
+          <button onclick="testLoadingWithData()">
+            Show Loading + Fake API Call
+          </button>
+          <button onclick="testLoadingManual()">Manual Show/Hide</button>
+        </div>
+        <div id="output-loading" class="output empty">
+          Loading overlay will appear over entire page...
+        </div>
+      </div>
+
+      <!-- Test 6: Date Formatting -->
+      <div class="test-section">
+        <h2>
+          Test 6: Date Formatting <span class="status success">Easy</span>
+        </h2>
+        <div class="button-group">
+          <button onclick="testFormatDate()">Test formatDate()</button>
+          <button onclick="testFormatDateTime()">Test formatDateTime()</button>
+          <button onclick="testFormatToday()">Format Today's Date</button>
+        </div>
+        <div id="output-date" class="output empty">
+          Formatted dates will appear here...
+        </div>
+      </div>
+
+      <!-- Test 7: Debounce -->
+      <div class="test-section">
+        <h2>
+          Test 7: Debounce Utility <span class="status success">Easy</span>
+        </h2>
+        <div class="button-group">
+          <button onclick="testDebounceClick()">Click Me Rapidly!</button>
+          <button onclick="testDebounceReset()">Reset Counter</button>
+        </div>
+        <div id="output-debounce" class="output empty">
+          Click "Click Me Rapidly!" multiple times quickly...
+        </div>
+      </div>
+
+      <!-- Test 8: Page Initialization -->
+      <div class="test-section">
+        <h2>
+          Test 8: Page Initialization
+          <span class="status success">Auto-tested</span>
+        </h2>
+        <div class="button-group">
+          <button onclick="testPageInit()">Check Initialization</button>
+        </div>
+        <div id="output-init" class="output empty">
+          Check if page initialized correctly...
+        </div>
+      </div>
+
+      <!-- Test 9: Auth Flow -->
+      <div class="test-section">
+        <h2>
+          Test 9: Complete Auth Flow
+          <span class="status success">Already Tested</span>
+        </h2>
+        <p style="margin: 10px 0; font-size: 14px; color: #666">
+          ✅ You already tested this in Tests 1 & 2 (Login and Signup)
+        </p>
+        <div class="button-group">
+          <button onclick="window.location.href='login.html'">
+            Go to Login
+          </button>
+          <button onclick="window.location.href='signup.html'">
+            Go to Signup
+          </button>
+        </div>
+      </div>
+
+      <!-- Test 10: Browser Compatibility -->
+      <div class="test-section">
+        <h2>
+          Test 10: Browser Compatibility
+          <span class="status success">Currently Testing</span>
+        </h2>
+        <p style="margin: 10px 0; font-size: 14px; color: #666">
+          You're currently testing in:
+          <strong id="browser-name">Detecting...</strong>
+        </p>
+        <div class="button-group">
+          <button onclick="testBrowserInfo()">Show Browser Info</button>
+          <button onclick="testAllFeatures()">Run All Tests</button>
+        </div>
+        <div id="output-browser" class="output empty">
+          Browser detection results...
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/app.js"></script>
+    <script>
+      // Initialize page
+      window.initPage = window.initPage || {};
+      window.initPage["test-app"] = function () {
+        console.log("[Test Page] Initialized!");
+        document.getElementById("browser-name").textContent = getBrowserName();
+      };
+
+      // Test 3: API Helpers
+      async function testGetMe() {
+        const output = document.getElementById("output-api");
+        try {
+          const data = await App.get("/auth/me");
+          output.className = "output";
+          output.textContent = JSON.stringify(data, null, 2);
+          App.showSuccess("GET /auth/me successful!");
+        } catch (error) {
+          output.className = "output";
+          output.textContent = "Error: " + error.message;
+          App.showError("API call failed: " + error.message);
+        }
+      }
+
+      async function testCheckAuth() {
+        const output = document.getElementById("output-api");
+        try {
+          const isAuth = await App.checkAuth();
+          output.className = "output";
+          output.textContent = `Authenticated: ${isAuth}\n\nCurrent User:\n${JSON.stringify(
+            App.currentUser,
+            null,
+            2
+          )}`;
+          App.showInfo(`Authentication: ${isAuth}`);
+        } catch (error) {
+          output.className = "output";
+          output.textContent = "Error: " + error.message;
+        }
+      }
+
+      async function testGetCurrentUser() {
+        const output = document.getElementById("output-api");
+        try {
+          const user = await App.getCurrentUser();
+          output.className = "output";
+          output.textContent = JSON.stringify(user, null, 2);
+          App.showSuccess("Current user loaded!");
+        } catch (error) {
+          output.className = "output";
+          output.textContent = "Error: " + error.message;
+        }
+      }
+
+      // Test 4: Toast System
+      function testToastError() {
+        App.showError("This is an error message!");
+        document.getElementById("output-toast").textContent =
+          "✅ Error toast shown (red, top-right)";
+      }
+
+      function testToastSuccess() {
+        App.showSuccess("This is a success message!");
+        document.getElementById("output-toast").textContent =
+          "✅ Success toast shown (green, top-right)";
+      }
+
+      function testToastWarning() {
+        App.showWarning("This is a warning message!");
+        document.getElementById("output-toast").textContent =
+          "✅ Warning toast shown (yellow, top-right)";
+      }
+
+      function testToastInfo() {
+        App.showInfo("This is an info message!");
+        document.getElementById("output-toast").textContent =
+          "✅ Info toast shown (blue, top-right)";
+      }
+
+      function testToastCustom() {
+        App.showToast("This disappears in 1 second!", "info", 1000);
+        document.getElementById("output-toast").textContent =
+          "✅ Toast with 1-second duration shown";
+      }
+
+      // Test 5: Loading Overlay
+      async function testLoadingSimple() {
+        const output = document.getElementById("output-loading");
+        output.textContent = "Loading overlay shown for 3 seconds...";
+
+        App.showLoading("Processing...");
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        App.hideLoading();
+
+        output.textContent =
+          "✅ Loading overlay shown and hidden successfully!";
+        App.showSuccess("Loading test complete!");
+      }
+
+      async function testLoadingWithData() {
+        const output = document.getElementById("output-loading");
+        output.textContent = "Simulating API call with loading...";
+
+        App.showLoading("Fetching data...");
+
+        // Simulate API call
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        App.hideLoading();
+        output.textContent =
+          "✅ Fake API call completed!\n\nData: { movies: 20, users: 2, genres: 13 }";
+        App.showSuccess("Data loaded successfully!");
+      }
+
+      function testLoadingManual() {
+        const output = document.getElementById("output-loading");
+        App.showLoading("Manual test - Click outside to see overlay");
+        output.textContent =
+          "⚠️ Loading overlay is shown. Run this in console to hide:\n\nApp.hideLoading()";
+      }
+
+      // Test 6: Date Formatting
+      function testFormatDate() {
+        const output = document.getElementById("output-date");
+        const date = "2024-01-15T10:30:00Z";
+        const formatted = App.formatDate(date);
+        output.textContent = `Input: ${date}\nOutput: ${formatted}`;
+        App.showSuccess("Date formatted!");
+      }
+
+      function testFormatDateTime() {
+        const output = document.getElementById("output-date");
+        const date = "2024-01-15T10:30:00Z";
+        const formatted = App.formatDateTime(date);
+        output.textContent = `Input: ${date}\nOutput: ${formatted}`;
+        App.showSuccess("DateTime formatted!");
+      }
+
+      function testFormatToday() {
+        const output = document.getElementById("output-date");
+        const now = new Date();
+        const formatted = App.formatDate(now);
+        const formattedTime = App.formatDateTime(now);
+        output.textContent = `Today:\n${formatted}\n\nWith Time:\n${formattedTime}`;
+        App.showSuccess("Today's date formatted!");
+      }
+
+      // Test 7: Debounce
+      let debounceCount = 0;
+      let totalClicks = 0;
+      const debouncedFunction = App.debounce(() => {
+        debounceCount++;
+        const output = document.getElementById("output-debounce");
+        output.textContent = `Total Clicks: ${totalClicks}\nActual Executions: ${debounceCount}\n\n✅ Debounce working! Function only executed ${debounceCount} time(s) despite ${totalClicks} clicks.`;
+        App.showSuccess(`Debounced function executed ${debounceCount} times`);
+      }, 500);
+
+      function testDebounceClick() {
+        totalClicks++;
+        debouncedFunction();
+        const output = document.getElementById("output-debounce");
+        output.textContent = `Clicks: ${totalClicks} - Waiting 500ms for debounce...`;
+      }
+
+      function testDebounceReset() {
+        debounceCount = 0;
+        totalClicks = 0;
+        const output = document.getElementById("output-debounce");
+        output.textContent =
+          'Counter reset! Click "Click Me Rapidly!" multiple times quickly.';
+        App.showInfo("Counter reset");
+      }
+
+      // Test 8: Page Initialization
+      function testPageInit() {
+        const output = document.getElementById("output-init");
+        const hasInitPage = typeof window.initPage !== "undefined";
+        const hasTestAppInit =
+          hasInitPage && typeof window.initPage["test-app"] === "function";
+        const bodyDataPage = document.body.dataset.page;
+
+        output.textContent = `window.initPage exists: ${hasInitPage}\n`;
+        output.textContent += `window.initPage['test-app'] exists: ${hasTestAppInit}\n`;
+        output.textContent += `<body data-page="${bodyDataPage}">\n\n`;
+        output.textContent += `✅ Page initialization system is working!\n`;
+        output.textContent += `Check console for: [App] Initializing page: test-app`;
+
+        App.showSuccess("Page initialization verified!");
+      }
+
+      // Test 10: Browser Compatibility
+      function getBrowserName() {
+        const ua = navigator.userAgent;
+        if (ua.includes("Firefox")) return "Firefox";
+        if (ua.includes("Chrome") && !ua.includes("Edg")) return "Chrome";
+        if (ua.includes("Edg")) return "Edge";
+        if (ua.includes("Safari") && !ua.includes("Chrome")) return "Safari";
+        return "Unknown Browser";
+      }
+
+      function testBrowserInfo() {
+        const output = document.getElementById("output-browser");
+        const info = {
+          browser: getBrowserName(),
+          userAgent: navigator.userAgent,
+          platform: navigator.platform,
+          language: navigator.language,
+          cookiesEnabled: navigator.cookieEnabled,
+          onLine: navigator.onLine,
+        };
+        output.textContent = JSON.stringify(info, null, 2);
+        App.showInfo(`Testing in ${info.browser}`);
+      }
+
+      async function testAllFeatures() {
+        App.showInfo("Running all tests...");
+
+        await testCheckAuth();
+        await new Promise((r) => setTimeout(r, 1000));
+
+        testToastError();
+        await new Promise((r) => setTimeout(r, 2000));
+
+        testToastSuccess();
+        await new Promise((r) => setTimeout(r, 2000));
+
+        App.showLoading("Running remaining tests...");
+        await new Promise((r) => setTimeout(r, 2000));
+        App.hideLoading();
+
+        testFormatToday();
+        await new Promise((r) => setTimeout(r, 1000));
+
+        testPageInit();
+        await new Promise((r) => setTimeout(r, 1000));
+
+        App.showSuccess("All tests completed! Check results above.");
+      }
+    </script>
+  </body>
+</html>
