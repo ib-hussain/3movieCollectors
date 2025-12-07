@@ -100,11 +100,14 @@ app.use("/api/friends", friendsRoutes);
 const reviewsRoutes = require("./server/routes/reviews");
 app.use("/api", reviewsRoutes);
 
+// Profile routes
+const profileRoutes = require("./server/routes/profile");
+app.use("/api", profileRoutes);
+
 // Future route imports (will be added as we implement features)
 // const eventsRoutes = require('./server/routes/events');
 // const messagesRoutes = require('./server/routes/messages');
 // const notificationsRoutes = require('./server/routes/notifications');
-// const profileRoutes = require('./server/routes/profile');
 // const postsRoutes = require('./server/routes/posts');
 // const adminRoutes = require('./server/routes/admin');
 
