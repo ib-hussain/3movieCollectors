@@ -58,6 +58,34 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-y: auto;
+  max-height: calc(100vh - 130px);
+  padding-bottom: 20px;
+}
+
+/* Custom Scrollbar Styling */
+.side-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.side-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.side-menu::-webkit-scrollbar-thumb {
+  background: #2a2d33;
+  border-radius: 10px;
+  transition: background 0.3s ease;
+}
+
+.side-menu::-webkit-scrollbar-thumb:hover {
+  background: #c90000;
+}
+
+/* Firefox Scrollbar */
+.side-menu {
+  scrollbar-width: thin;
+  scrollbar-color: #2a2d33 transparent;
 }
 
 .menu-item {
@@ -101,9 +129,12 @@
    Logout Item Styling  
 ———————————— */
 .menu-item.logout-item {
-  margin-top: 10px;
+  margin-top: 15px;
   border-top: 1px solid #2a2d33;
-  padding-top: 22px;
+  padding-top: 15px;
+  background: #c90000;
+  color: #fff;
+  transition: background 0.2s, color 0.2s;
 }
 
 .menu-item.logout-item:hover {
