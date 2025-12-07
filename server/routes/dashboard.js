@@ -41,12 +41,14 @@ router.get("/stats", requireAuth, async (req, res) => {
       [userId]
     );
 
-    // Get upcoming events count
+    // Get upcoming events count (host or participant)
     const eventsCount = await db.query(
-      `SELECT COUNT(DISTINCT we.eventID) as count 
-       FROM WatchEvent we 
-       WHERE we.host = ? AND we.eventDateTime >= NOW()`,
-      [userId]
+      `SELECT COUNT(DISTINCT we.eventID) as count
+       FROM WatchEvent we
+       LEFT JOIN EventParticipants ep ON we.eventID = ep.eventID
+       WHERE (we.host = ? OR ep.userID = ?)
+         AND we.eventDateTime >= NOW()`,
+      [userId, userId]
     );
 
     res.json({

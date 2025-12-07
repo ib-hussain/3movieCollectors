@@ -30,18 +30,18 @@ async function checkEventOverlap(
       e.duration,
       DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE) as eventEndTime
     FROM WatchEvent e
-    LEFT JOIN EventParticipants ep ON e.eventID = ep.eventID
+    LEFT JOIN EventParticipants ep ON e.eventID = ep.eventID AND ep.userID = ?
     WHERE 
-      (e.host = ? OR ep.userID = ?)
+      (e.host = ? OR ep.userID IS NOT NULL)
       AND (
-        -- New event starts during existing event
-        (? >= e.eventDateTime AND ? < DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
+        -- New event starts during existing event (strict - boundaries don't overlap)
+        (? > e.eventDateTime AND ? < DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
         OR
-        -- New event ends during existing event
-        (? > e.eventDateTime AND ? <= DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
+        -- New event ends during existing event (strict - boundaries don't overlap)
+        (? > e.eventDateTime AND ? < DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
         OR
-        -- New event completely contains existing event
-        (? <= e.eventDateTime AND ? >= DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
+        -- New event completely contains existing event (strict - boundaries don't overlap)
+        (? < e.eventDateTime AND ? > DATE_ADD(e.eventDateTime, INTERVAL e.duration MINUTE))
       )
   `;
 
@@ -322,11 +322,12 @@ router.post("/events/:id/join", requireAuth, async (req, res) => {
         .json({ success: false, message: "No more room left" });
     }
 
-    // Check for overlap
+    // Check for overlap, excluding the event being joined
     const overlap = await checkEventOverlap(
       userId,
       event.eventDateTime,
-      event.duration
+      event.duration,
+      eventID // exclude the event being joined
     );
     if (overlap) {
       const overlapTime = new Date(overlap.eventDateTime).toLocaleString();
