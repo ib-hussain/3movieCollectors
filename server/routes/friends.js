@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { createNotification } = require("./notifications");
 
 // Get all friends for the logged-in user
 router.get("/", async (req, res) => {
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
     const query = `
             SELECT 
                 u.userID,
+                u.username,
                 u.name as firstName,
                 '' as lastName,
                 u.email,
@@ -218,6 +220,15 @@ router.post("/requests", async (req, res) => {
         `;
     const result = await db.query(insertQuery, [senderId, receiverId]);
 
+    // Create notification for the receiver
+    await createNotification(
+      receiverId,
+      senderId,
+      "friend_request",
+      "sent you a friend request",
+      null
+    );
+
     res.status(201).json({
       message: "Friend request sent successfully",
       requestId: result.insertId,
@@ -277,6 +288,15 @@ router.post("/requests/:id/accept", async (req, res) => {
 
       // Commit transaction
       await db.query("COMMIT");
+
+      // Create notification for the original sender
+      await createNotification(
+        request.senderID,
+        userId,
+        "friend_accept",
+        "accepted your friend request",
+        null
+      );
 
       res.json({ message: "Friend request accepted successfully" });
     } catch (error) {

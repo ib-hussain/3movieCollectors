@@ -106,7 +106,7 @@
 
     /**
      * Get current user (loads if not cached)
-     */   async getCurrentUser() {
+     */ async getCurrentUser() {
       if (!this.currentUser) {
         await this.checkAuth();
       }
@@ -364,6 +364,9 @@
 
       console.log(`[App] Initializing page: ${page}`);
 
+      // Setup global click handlers
+      this.setupGlobalHandlers();
+
       // Call page-specific initializer if it exists
       if (window.initPage && typeof window.initPage[page] === "function") {
         try {
@@ -372,6 +375,25 @@
           console.error(`[App] Error initializing ${page}:`, error);
         }
       }
+    },
+
+    /**
+     * Setup global event handlers for clickable usernames
+     */
+    setupGlobalHandlers() {
+      // Delegate click events for usernames
+      document.addEventListener("click", (e) => {
+        // Find if clicked element or its parent has data-username attribute
+        const usernameElement = e.target.closest("[data-username]");
+
+        if (usernameElement) {
+          e.preventDefault();
+          const username = usernameElement.dataset.username;
+          if (username) {
+            window.location.href = `profile.html?user=${username}`;
+          }
+        }
+      });
     },
   };
 

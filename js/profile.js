@@ -115,7 +115,12 @@ function displayProfile(profile, isOwnProfile) {
   displayFavoriteGenres(profile.favoriteGenres);
 
   // Display reviews
-  displayReviews(profile.reviews, profile.name, profile.profilePicture);
+  displayReviews(
+    profile.reviews,
+    profile.name,
+    profile.profilePicture,
+    profile
+  );
 }
 
 // Display favorite genres
@@ -133,7 +138,7 @@ function displayFavoriteGenres(genres) {
 }
 
 // Display reviews
-function displayReviews(reviews, userName, profilePicture) {
+function displayReviews(reviews, userName, profilePicture, profile) {
   const reviewsList = document.getElementById("reviews-list");
 
   if (!reviews || reviews.length === 0) {
@@ -143,12 +148,14 @@ function displayReviews(reviews, userName, profilePicture) {
   }
 
   reviewsList.innerHTML = reviews
-    .map((review) => createReviewCard(review, userName, profilePicture))
+    .map((review) =>
+      createReviewCard(review, userName, profilePicture, profile.username)
+    )
     .join("");
 }
 
 // Create a review card HTML
-function createReviewCard(review, userName, profilePicture) {
+function createReviewCard(review, userName, profilePicture, username) {
   const reviewDate = new Date(review.reviewDate);
   const timeAgo = getTimeAgo(reviewDate);
 
@@ -172,7 +179,11 @@ function createReviewCard(review, userName, profilePicture) {
                 <div class="review-user">
                     ${avatarHTML}
                     <div>
-                        <h3 class="review-user-name">${userName}</h3>
+                        <h3 class="review-user-name" ${
+                          username
+                            ? `data-username="${username}" style="cursor: pointer; color: var(--DarkBlue);"`
+                            : ""
+                        }>${userName}</h3>
                         <p class="review-meta">
                             reviewed <span class="review-film">${
                               review.movieTitle

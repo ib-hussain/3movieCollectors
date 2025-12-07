@@ -18,11 +18,13 @@ router.get("/", async (req, res) => {
     const query = `
       SELECT m.movieID, m.title, m.posterImg, m.releaseYear, m.avgRating,
              w.status, w.addedDate,
+             COUNT(DISTINCT CONCAT(rr.movieID, '-', rr.userID)) as reviewCount,
              GROUP_CONCAT(DISTINCT g.genreName SEPARATOR ', ') as genres
       FROM WatchList w
       JOIN Movie m ON w.movieID = m.movieID
       LEFT JOIN MovieGenres mg ON m.movieID = mg.movieID
       LEFT JOIN Genres g ON mg.genreID = g.genreID
+      LEFT JOIN ReviewRatings rr ON m.movieID = rr.movieID
       WHERE w.userID = ?
       GROUP BY m.movieID, m.title, m.posterImg, m.releaseYear, m.avgRating, w.status, w.addedDate
       ORDER BY w.addedDate DESC
@@ -37,6 +39,7 @@ router.get("/", async (req, res) => {
       releaseYear: m.releaseYear,
       genres: m.genres,
       avgRating: m.avgRating ? parseFloat(m.avgRating).toFixed(1) : "0.0",
+      reviewCount: m.reviewCount || 0,
       status: m.status,
       addedDate: m.addedDate,
     }));

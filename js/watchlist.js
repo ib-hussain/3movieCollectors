@@ -91,6 +91,9 @@ function createMovieCard(movie) {
       </div>
       <div class="movie-rating">
         ⭐ ${movie.avgRating}
+        <span style="color: #95a5a6; font-size: 0.9em; margin-left: 8px;">(${
+          movie.reviewCount || 0
+        })</span>
       </div>
       <div class="movie-actions" style="margin-top: 10px; display: flex; gap: 8px; flex-direction: column;">
         ${actionButton}

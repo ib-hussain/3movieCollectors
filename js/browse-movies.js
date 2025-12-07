@@ -107,6 +107,8 @@ async function loadMovies(append = false) {
     const data = await App.get(`/movies?${params}`);
 
     if (data.success) {
+      console.log("[Browse] Sample movie data:", data.movies[0]);
+
       // Fetch watchlist status for all movies
       const watchlistData = await App.get("/watchlist");
       const watchlistMovieIds = watchlistData.success
@@ -183,6 +185,9 @@ function displayMovies(movies, append = false, watchlistMovieIds = []) {
         <div class="movie-rating">
           <img src="/pictures/star.png" alt="Star">
           <span>${movie.avgRating}</span>
+          <span style="color: #95a5a6; font-size: 0.9em; margin-left: 8px;">(${
+            movie.reviewCount || 0
+          } ${movie.reviewCount === 1 ? "review" : "reviews"})</span>
         </div>
         <button class="add-watchlist-btn" data-movie-id="${
           movie.movieId

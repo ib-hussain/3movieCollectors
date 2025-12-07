@@ -92,10 +92,12 @@ router.get("/", async (req, res) => {
     const moviesQuery = `
       SELECT DISTINCT m.movieID, m.title, m.synopsis, m.director, m.releaseYear, 
              m.posterImg, m.avgRating,
+             COUNT(DISTINCT CONCAT(rr.movieID, '-', rr.userID)) as reviewCount,
              GROUP_CONCAT(DISTINCT g.genreName SEPARATOR ', ') as genres
       FROM Movie m
       LEFT JOIN MovieGenres mg ON m.movieID = mg.movieID
       LEFT JOIN Genres g ON mg.genreID = g.genreID
+      LEFT JOIN ReviewRatings rr ON m.movieID = rr.movieID
       ${whereClause}
       GROUP BY m.movieID, m.title, m.synopsis, m.director, m.releaseYear, m.posterImg, m.avgRating
       ORDER BY ${orderBy}
@@ -115,6 +117,7 @@ router.get("/", async (req, res) => {
         posterPath: m.posterImg ? `/pictures/${m.posterImg}` : null,
         genres: m.genres,
         avgRating: m.avgRating ? parseFloat(m.avgRating).toFixed(1) : "0.0",
+        reviewCount: m.reviewCount || 0,
       })),
       pagination: {
         page: parseInt(page),

@@ -104,10 +104,16 @@ app.use("/api", reviewsRoutes);
 const profileRoutes = require("./server/routes/profile");
 app.use("/api", profileRoutes);
 
+// Notifications routes
+const notificationsRoutes = require("./server/routes/notifications");
+app.use("/api", notificationsRoutes);
+
+// Messages routes
+const messagesRoutes = require("./server/routes/messages");
+app.use("/api", messagesRoutes);
+
 // Future route imports (will be added as we implement features)
 // const eventsRoutes = require('./server/routes/events');
-// const messagesRoutes = require('./server/routes/messages');
-// const notificationsRoutes = require('./server/routes/notifications');
 // const postsRoutes = require('./server/routes/posts');
 // const adminRoutes = require('./server/routes/admin');
 

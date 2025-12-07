@@ -26,6 +26,9 @@ window.initPage.movie = async function () {
   setupWatchlistButton(movieId);
   setupReviewForm(movieId);
   setupPostForm(movieId);
+
+  // Handle tab and postId from URL parameters
+  handleUrlParameters(urlParams);
 };
 
 // ==================== MOVIE DETAILS ====================
@@ -203,6 +206,7 @@ function displayPosts(posts) {
 function createPostElement(post) {
   const postDiv = document.createElement("div");
   postDiv.className = "comment-card";
+  postDiv.id = `post-${post.postId}`; // Add ID for scrolling
   postDiv.dataset.postId = post.postId;
 
   const likeButtonClass = post.isLikedByCurrentUser ? "liked" : "";
@@ -584,6 +588,7 @@ function displayReviews(reviews) {
 function createReviewCard(review) {
   const card = document.createElement("div");
   card.className = "review-card";
+  card.id = `review-${review.userID}`; // Add ID for scrolling
 
   const initials = review.userName
     .split(" ")
@@ -782,6 +787,73 @@ function setupTabSwitching() {
       document.getElementById(target).classList.add("active");
     });
   });
+}
+
+// ==================== URL PARAMETER HANDLING ====================
+
+function handleUrlParameters(urlParams) {
+  const tab = urlParams.get("tab");
+  const postId = urlParams.get("postId");
+  const reviewUserId = urlParams.get("reviewUserId");
+
+  // Switch to the specified tab if provided
+  if (tab) {
+    const targetSection = `${tab}-section`;
+    const tabButton = document.querySelector(
+      `.overview-tabs .tab[data-target="${targetSection}"]`
+    );
+
+    if (tabButton) {
+      // Remove active from all tabs and sections
+      document
+        .querySelectorAll(".overview-tabs .tab")
+        .forEach((t) => t.classList.remove("active"));
+      document
+        .querySelectorAll(".tab-content")
+        .forEach((sec) => sec.classList.remove("active"));
+
+      // Activate the target tab
+      tabButton.classList.add("active");
+      const targetElement = document.getElementById(targetSection);
+      if (targetElement) {
+        targetElement.classList.add("active");
+      }
+    }
+  }
+
+  // Scroll to specific post if postId is provided
+  if (postId) {
+    // Wait a bit for the DOM to update
+    setTimeout(() => {
+      const postElement = document.getElementById(`post-${postId}`);
+      if (postElement) {
+        postElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        // Add a highlight effect
+        postElement.style.backgroundColor = "#fff3cd";
+        setTimeout(() => {
+          postElement.style.transition = "background-color 2s";
+          postElement.style.backgroundColor = "";
+        }, 1000);
+      }
+    }, 500);
+  }
+
+  // Scroll to specific review if reviewUserId is provided
+  if (reviewUserId) {
+    // Wait a bit for the DOM to update
+    setTimeout(() => {
+      const reviewElement = document.getElementById(`review-${reviewUserId}`);
+      if (reviewElement) {
+        reviewElement.scrollIntoView({ behavior: "smooth", block: "center" });
+        // Add a highlight effect
+        reviewElement.style.backgroundColor = "#fff3cd";
+        setTimeout(() => {
+          reviewElement.style.transition = "background-color 2s";
+          reviewElement.style.backgroundColor = "";
+        }, 1000);
+      }
+    }, 500);
+  }
 }
 
 // ==================== UTILITY ====================

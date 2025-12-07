@@ -21,11 +21,26 @@ window.initPage.dashboard = async function () {
   // Update welcome message
   updateWelcomeMessage(user);
 
+  // Initialize activity feed state
+  window.dashboardState = {
+    activityPage: 1,
+    activityLimit: 10,
+    hasMoreActivity: true,
+  };
+
   // Load dashboard data
-  await Promise.all([loadStats(), loadRecommended(), loadRecentActivity()]);
+  await Promise.all([
+    loadStats(),
+    loadRecommended(),
+    loadTrending(),
+    loadRecentActivity(),
+  ]);
 
   // Setup tab switching for trending/recommended
   setupTrendingTabs();
+
+  // Setup load more button
+  setupLoadMore();
 
   console.log("[Dashboard] Initialized successfully");
 };
@@ -82,6 +97,21 @@ async function loadRecommended() {
     }
   } catch (error) {
     console.error("[Dashboard] Failed to load recommended:", error);
+  }
+}
+
+/**
+ * Load trending movies
+ */
+async function loadTrending() {
+  try {
+    const data = await App.get("/dashboard/trending?limit=5&days=30");
+
+    if (data.success && data.movies) {
+      displayTrendingMovies(data.movies);
+    }
+  } catch (error) {
+    console.error("[Dashboard] Failed to load trending:", error);
   }
 }
 
@@ -148,6 +178,9 @@ function displayRecommendedMovies(movies, basedOn) {
           <div class="trending-rating">
             <img src="../pictures/star.png" />
             <span>${movie.avgRating}</span>
+            <span style="color: #95a5a6; font-size: 0.85em; margin-left: 4px;">(${
+              movie.reviewCount || 0
+            })</span>
           </div>
         `
             : ""
@@ -161,6 +194,62 @@ function displayRecommendedMovies(movies, basedOn) {
 }
 
 /**
+ * Display trending movies
+ */
+function displayTrendingMovies(movies) {
+  const trendingList = document.getElementById("trendingList");
+  if (!trendingList) return;
+
+  trendingList.innerHTML = "";
+
+  if (movies.length === 0) {
+    trendingList.innerHTML = `
+      <li class="empty-message">
+        <p>No trending movies in the last 30 days.</p>
+      </li>
+    `;
+    return;
+  }
+
+  movies.forEach((movie, index) => {
+    const li = document.createElement("li");
+    li.className = "trending-item";
+    li.style.cursor = "pointer";
+    li.onclick = () => {
+      window.location.href = `movie.html?id=${movie.movieId}`;
+    };
+
+    li.innerHTML = `
+      <div class="trending-thumb" style="background-image: url('${
+        movie.posterPath || "../pictures/movie_posters/default.jpg"
+      }');"></div>
+      <div class="trending-info">
+        <h3>${movie.title}</h3>
+        <div class="trending-meta">
+          <span>${movie.releaseYear || "N/A"}</span>
+        </div>
+        ${
+          movie.avgRating
+            ? `
+          <div class="trending-rating">
+            <img src="../pictures/star.png" />
+            <span>${movie.avgRating}</span>
+            <span style="color: #95a5a6; font-size: 0.85em; margin-left: 4px;">(${
+              movie.reviewCount || 0
+            })</span>
+          </div>
+        `
+            : ""
+        }
+      </div>
+      <span class="trending-rank">${index + 1}</span>
+    `;
+
+    trendingList.appendChild(li);
+  });
+}
+
+/**
  * Load recent activity feed
  */
 async function loadRecentActivity() {
@@ -169,6 +258,8 @@ async function loadRecentActivity() {
 
     if (data.success && data.activities) {
       displayActivityFeed(data.activities);
+      // Update hasMore flag
+      window.dashboardState.hasMoreActivity = data.hasMore;
     }
   } catch (error) {
     console.error("[Dashboard] Failed to load activity:", error);
@@ -185,8 +276,9 @@ function displayActivityFeed(activities) {
   // Keep the load more button
   const loadMoreBtn = activityFeed.querySelector(".load-more-wrap");
 
-  // Clear existing cards (keep first 2 as examples, then add real data)
+  // Clear ALL existing cards (including dummy/static ones)
   const existingCards = activityFeed.querySelectorAll(".feed-card");
+  existingCards.forEach((card) => card.remove());
 
   if (activities.length === 0) {
     // No friends activity - show message
@@ -199,13 +291,11 @@ function displayActivityFeed(activities) {
       <p style="margin-top: 10px;">Add friends to see their movie reviews and updates!</p>
     `;
 
-    // Replace all cards with empty message
-    existingCards.forEach((card) => card.remove());
     activityFeed.insertBefore(emptyMessage, loadMoreBtn);
     return;
   }
 
-  // Add real activities after the first 2 example cards
+  // Add real activities
   activities.forEach((activity) => {
     const card = createActivityCard(activity);
     activityFeed.insertBefore(card, loadMoreBtn);
@@ -221,15 +311,22 @@ function createActivityCard(activity) {
 
   const timeAgo = getTimeAgo(new Date(activity.activityDate));
 
+  // Get profile picture with fallback to default
+  const profilePic = activity.profilePicture || "../pictures/profile.png";
+
   if (activity.type === "review") {
     article.innerHTML = `
       <div class="feed-header">
         <div class="feed-avatar">
-          <img src="../pictures/profile.png" />
+          <img src="${profilePic}" />
         </div>
         <div class="feed-meta">
           <div class="feed-title-row">
-            <span class="feed-name">${activity.name || activity.username}</span>
+            <span class="feed-name" data-username="${
+              activity.username
+            }" style="cursor: pointer; color: var(--DarkBlue);" title="View ${
+      activity.name || activity.username
+    }'s profile">${activity.name || activity.username}</span>
             <span class="feed-dot">•</span>
             <span class="feed-time-inline">${timeAgo}</span>
           </div>
@@ -248,23 +345,81 @@ function createActivityCard(activity) {
       </div>
 
       <p>${activity.reviewText || "No review text provided."}</p>
+    `;
 
-      <div class="feed-footer">
-        <div class="feed-stats">
-          <span>View movie</span>
+    // Make clickable to go to movie page (reviews tab with specific review)
+    article.style.cursor = "pointer";
+    article.onclick = () => {
+      window.location.href = `movie.html?id=${activity.movieId}&tab=reviews&reviewUserId=${activity.userId}`;
+    };
+  } else if (activity.type === "post") {
+    article.innerHTML = `
+      <div class="feed-header">
+        <div class="feed-avatar">
+          <img src="${profilePic}" />
         </div>
-        <button class="share-btn">
-          <img src="../pictures/share.png" />
-        </button>
+        <div class="feed-meta">
+          <div class="feed-title-row">
+            <span class="feed-name" data-username="${
+              activity.username
+            }" style="cursor: pointer; color: var(--DarkBlue);" title="View ${
+      activity.name || activity.username
+    }'s profile">${activity.name || activity.username}</span>
+            <span class="feed-dot">•</span>
+            <span class="feed-time-inline">${timeAgo}</span>
+          </div>
+          <span class="feed-subtitle">posted about ${activity.movieTitle}</span>
+        </div>
+      </div>
+
+      <p>${activity.postContent}</p>
+      
+      <div class="feed-stats">
+        <span>💬 ${activity.commentCount || 0} comments</span>
+        <span>❤️ ${activity.likeCount || 0} likes</span>
       </div>
     `;
 
-    // Make clickable to go to movie page
+    // Make clickable to go to discussion tab with this specific post
     article.style.cursor = "pointer";
-    article.onclick = (e) => {
-      if (!e.target.closest(".share-btn")) {
-        window.location.href = `movie.html?id=${activity.movieId}`;
-      }
+    article.onclick = () => {
+      window.location.href = `movie.html?id=${activity.movieId}&tab=discussion&postId=${activity.postID}`;
+    };
+  } else if (activity.type === "comment") {
+    article.innerHTML = `
+      <div class="feed-header">
+        <div class="feed-avatar">
+          <img src="${profilePic}" />
+        </div>
+        <div class="feed-meta">
+          <div class="feed-title-row">
+            <span class="feed-name" data-username="${
+              activity.username
+            }" style="cursor: pointer; color: var(--DarkBlue);" title="View ${
+      activity.name || activity.username
+    }'s profile">${activity.name || activity.username}</span>
+            <span class="feed-dot">•</span>
+            <span class="feed-time-inline">${timeAgo}</span>
+          </div>
+          <span class="feed-subtitle">commented on your post about ${
+            activity.movieTitle
+          }</span>
+        </div>
+      </div>
+
+      <div style="background: #f5f5f5; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 0.9em; color: #666;">
+        Your post: "${activity.originalPost.substring(0, 100)}${
+      activity.originalPost.length > 100 ? "..." : ""
+    }"
+      </div>
+
+      <p>${activity.commentContent}</p>
+    `;
+
+    // Make clickable to go to discussion tab with the post being commented on
+    article.style.cursor = "pointer";
+    article.onclick = () => {
+      window.location.href = `movie.html?id=${activity.movieId}&tab=discussion&postId=${activity.postID}`;
     };
   }
 
@@ -316,11 +471,65 @@ function setupTrendingTabs() {
 }
 
 // Setup load more button
-document.addEventListener("DOMContentLoaded", () => {
+function setupLoadMore() {
   const loadMoreBtn = document.querySelector(".load-more-btn");
   if (loadMoreBtn) {
-    loadMoreBtn.addEventListener("click", () => {
-      App.showInfo("Load more functionality coming soon!");
+    loadMoreBtn.addEventListener("click", async () => {
+      if (!window.dashboardState.hasMoreActivity) {
+        App.showInfo("No more activities to load");
+        return;
+      }
+
+      loadMoreBtn.disabled = true;
+      loadMoreBtn.textContent = "Loading...";
+
+      try {
+        window.dashboardState.activityPage++;
+        const offset =
+          (window.dashboardState.activityPage - 1) *
+          window.dashboardState.activityLimit;
+
+        const data = await App.get(
+          `/dashboard/recent-activity?limit=${window.dashboardState.activityLimit}&offset=${offset}`
+        );
+
+        if (data.success && data.activities && data.activities.length > 0) {
+          appendActivities(data.activities);
+
+          // Update hasMore flag from server
+          window.dashboardState.hasMoreActivity = data.hasMore;
+
+          if (!data.hasMore) {
+            loadMoreBtn.textContent = "No more activities";
+            loadMoreBtn.disabled = true;
+          } else {
+            loadMoreBtn.textContent = "Load More Activity";
+            loadMoreBtn.disabled = false;
+          }
+        } else {
+          window.dashboardState.hasMoreActivity = false;
+          loadMoreBtn.textContent = "No more activities";
+          loadMoreBtn.disabled = true;
+        }
+      } catch (error) {
+        console.error("[Dashboard] Failed to load more activity:", error);
+        App.showError("Failed to load more activity");
+        loadMoreBtn.textContent = "Load More Activity";
+        loadMoreBtn.disabled = false;
+      }
     });
   }
-});
+}
+
+/**
+ * Append activities to the feed
+ */
+function appendActivities(activities) {
+  const activityFeed = document.querySelector(".activity-feed");
+  const loadMoreBtn = activityFeed.querySelector(".load-more-wrap");
+
+  activities.forEach((activity) => {
+    const card = createActivityCard(activity);
+    activityFeed.insertBefore(card, loadMoreBtn);
+  });
+}

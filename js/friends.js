@@ -25,6 +25,21 @@ document.addEventListener("DOMContentLoaded", () => {
     setupTabs();
     setupSearch();
     await loadAllData();
+    handleURLParameters();
+  }
+
+  // Handle URL parameters for direct tab navigation
+  function handleURLParameters() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const tabParam = urlParams.get("tab");
+
+    if (tabParam) {
+      // Find the tab button with matching data-tab attribute
+      const targetTab = document.querySelector(`[data-tab="${tabParam}"]`);
+      if (targetTab) {
+        targetTab.click();
+      }
+    }
   }
 
   // Tab switching
@@ -206,17 +221,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function createFriendCard(friend) {
     const fullName = friend.firstName || friend.name || "Unknown";
     const initials = getInitials(fullName);
+    const username = friend.username || friend.email.split("@")[0];
 
     return `
             <article class="friend-card" data-user-id="${friend.userID}">
-                <header class="friend-card-header">
+                <header class="friend-card-header" style="cursor: pointer;" onclick="window.location.href='profile.html?user=${username}'">
                     <div class="friend-user">
                         <div class="friend-avatar">${initials}</div>
                         <div class="friend-meta">
                             <h3>${fullName}</h3>
-                            <span class="friend-handle">@${
-                              friend.email.split("@")[0]
-                            }</span>
+                            <span class="friend-handle">@${username}</span>
                         </div>
                     </div>
                 </header>

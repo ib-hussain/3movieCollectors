@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const { createNotification } = require("./notifications");
 
 /**
  * GET /api/movies/:movieId/posts
@@ -267,6 +268,17 @@ router.post("/posts/:postId/like", async (req, res) => {
         [postId]
       );
       action = "liked";
+
+      // Create notification for post author (if not liking own post)
+      if (post[0].userID !== req.session.userId) {
+        await createNotification(
+          post[0].userID,
+          req.session.userId,
+          "post_like",
+          "liked your post",
+          postId
+        );
+      }
     }
 
     // Get updated like count
@@ -387,6 +399,23 @@ router.post("/posts/:postId/comments", async (req, res) => {
       "UPDATE Post SET commentCount = commentCount + 1 WHERE postID = ?",
       [postId]
     );
+
+    // Get post author to send notification
+    const postAuthor = await db.query(
+      "SELECT userID FROM Post WHERE postID = ?",
+      [postId]
+    );
+
+    // Create notification for post author (if not commenting on own post)
+    if (postAuthor[0] && postAuthor[0].userID !== req.session.userId) {
+      await createNotification(
+        postAuthor[0].userID,
+        req.session.userId,
+        "post_comment",
+        "commented on your post",
+        postId
+      );
+    }
 
     // Get the created comment with user info
     const newComment = await db.query(

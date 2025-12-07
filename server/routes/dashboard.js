@@ -16,33 +16,33 @@ router.get("/stats", requireAuth, async (req, res) => {
   try {
     const userId = req.session.userId;
 
-    // Get watchlist count (to-watch status)
-    const [watchlistCount] = await db.query(
-      "SELECT COUNT(*) as count FROM WatchList WHERE userId = ? AND status = 'to-watch'",
+    // Get watchlist count (added status - not yet watched)
+    const watchlistCount = await db.query(
+      "SELECT COUNT(*) as count FROM WatchList WHERE userID = ? AND status = 'added'",
       [userId]
     );
 
     // Get watched count (completed status)
-    const [watchedCount] = await db.query(
-      "SELECT COUNT(*) as count FROM WatchList WHERE userId = ? AND status = 'completed'",
+    const watchedCount = await db.query(
+      "SELECT COUNT(*) as count FROM WatchList WHERE userID = ? AND status = 'completed'",
       [userId]
     );
 
     // Get friends count (Friends table has no status column - all are accepted)
-    const [friendsCount] = await db.query(
+    const friendsCount = await db.query(
       `SELECT COUNT(*) as count FROM Friends 
        WHERE user1 = ? OR user2 = ?`,
       [userId, userId]
     );
 
     // Get reviews count
-    const [reviewsCount] = await db.query(
-      "SELECT COUNT(*) as count FROM ReviewRatings WHERE userId = ?",
+    const reviewsCount = await db.query(
+      "SELECT COUNT(*) as count FROM ReviewRatings WHERE userID = ?",
       [userId]
     );
 
     // Get upcoming events count
-    const [eventsCount] = await db.query(
+    const eventsCount = await db.query(
       `SELECT COUNT(DISTINCT we.eventID) as count 
        FROM WatchEvent we 
        WHERE we.host = ? AND we.eventDateTime >= NOW()`,
@@ -181,6 +181,58 @@ router.get("/recommended", requireAuth, async (req, res) => {
 });
 
 /**
+ * GET /api/dashboard/trending
+ * Get trending movies based on recent reviews and watchlist additions
+ */
+router.get("/trending", async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 6;
+    const daysAgo = parseInt(req.query.days) || 30; // Default 30 days
+
+    // Get movies with most recent activity (reviews + watchlist additions)
+    const movies = await db.query(
+      `SELECT m.movieID, m.title, m.synopsis, m.director, m.releaseYear, m.posterImg, m.avgRating,
+       GROUP_CONCAT(DISTINCT g.genreName SEPARATOR ', ') as genres,
+       COUNT(DISTINCT CONCAT(rr.movieID, '-', rr.userID)) as reviewCount,
+       COUNT(DISTINCT wl.userID) as watchlistCount,
+       MAX(GREATEST(COALESCE(rr.reviewDate, '1970-01-01'), COALESCE(wl.addedDate, '1970-01-01'))) as lastActivity
+       FROM Movie m
+       LEFT JOIN MovieGenres mg ON m.movieID = mg.movieID
+       LEFT JOIN Genres g ON mg.genreID = g.genreID
+       LEFT JOIN ReviewRatings rr ON m.movieID = rr.movieID AND rr.reviewDate >= DATE_SUB(NOW(), INTERVAL ? DAY)
+       LEFT JOIN WatchList wl ON m.movieID = wl.movieID AND wl.addedDate >= DATE_SUB(NOW(), INTERVAL ? DAY)
+       GROUP BY m.movieID, m.title, m.synopsis, m.director, m.releaseYear, m.posterImg, m.avgRating
+       HAVING (reviewCount > 0 OR watchlistCount > 0)
+       ORDER BY (reviewCount * 2 + watchlistCount) DESC, lastActivity DESC
+       LIMIT ?`,
+      [daysAgo, daysAgo, limit]
+    );
+
+    res.json({
+      success: true,
+      movies: movies.map((m) => ({
+        movieId: m.movieID,
+        title: m.title,
+        synopsis: m.synopsis,
+        director: m.director,
+        releaseYear: m.releaseYear,
+        posterPath: m.posterImg ? `/pictures/${m.posterImg}` : null,
+        genres: m.genres,
+        avgRating: m.avgRating ? parseFloat(m.avgRating).toFixed(1) : "0.0",
+        reviewCount: m.reviewCount || 0,
+        watchlistCount: m.watchlistCount || 0,
+      })),
+    });
+  } catch (error) {
+    console.error("Trending movies error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to load trending movies",
+    });
+  }
+});
+
+/**
  * GET /api/dashboard/recent-watchlist
  * Get user's recently added watchlist items
  */
@@ -224,9 +276,10 @@ router.get("/recent-activity", requireAuth, async (req, res) => {
   try {
     const userId = req.session.userId;
     const limit = parseInt(req.query.limit) || 10;
+    const offset = parseInt(req.query.offset) || 0;
 
     // Get friend IDs (Friends table has no status column)
-    const [friends] = await db.query(
+    const friends = await db.query(
       `SELECT CASE 
          WHEN user1 = ? THEN user2 
          ELSE user1 
@@ -246,22 +299,58 @@ router.get("/recent-activity", requireAuth, async (req, res) => {
     const friendIds = friends.map((f) => f.friendId);
 
     // Get recent reviews from friends
-    const [reviews] = await db.query(
-      `SELECT 'review' as type, rr.reviewId as id, rr.userId, u.username, u.name,
-       rr.movieId, m.title as movieTitle, rr.rating, rr.reviewText,
+    const reviews = await db.query(
+      `SELECT 'review' as type, rr.movieID as movieId, rr.userID as userId, u.username, u.name,
+       u.profilePicture, m.title as movieTitle, rr.rating, rr.review as reviewText,
        rr.reviewDate as activityDate
        FROM ReviewRatings rr
-       JOIN User u ON rr.userId = u.userId
-       JOIN Movie m ON rr.movieId = m.movieId
-       WHERE rr.userId IN (?)
-       ORDER BY rr.reviewDate DESC
-       LIMIT ?`,
-      [friendIds, limit]
+       JOIN User u ON rr.userID = u.userID
+       JOIN Movie m ON rr.movieID = m.movieID
+       WHERE rr.userID IN (?)
+       ORDER BY rr.reviewDate DESC`,
+      [friendIds]
     );
+
+    // Get posts from friends
+    const posts = await db.query(
+      `SELECT 'post' as type, p.postID, p.movieID as movieId, p.userID as userId, 
+       u.username, u.name, u.profilePicture, m.title as movieTitle, p.postContent,
+       p.likeCount, p.commentCount, p.createdAt as activityDate
+       FROM Post p
+       JOIN User u ON p.userID = u.userID
+       JOIN Movie m ON p.movieID = m.movieID
+       WHERE p.userID IN (?)
+       ORDER BY p.createdAt DESC`,
+      [friendIds]
+    );
+
+    // Get comments on user's own posts
+    const comments = await db.query(
+      `SELECT 'comment' as type, c.commentID, c.postID, p.movieID as movieId,
+       c.userID as userId, u.username, u.name, u.profilePicture,
+       m.title as movieTitle, c.commentContent, p.postContent as originalPost,
+       c.createdAt as activityDate
+       FROM Comments c
+       JOIN Post p ON c.postID = p.postID
+       JOIN User u ON c.userID = u.userID
+       JOIN Movie m ON p.movieID = m.movieID
+       WHERE p.userID = ?
+       ORDER BY c.createdAt DESC`,
+      [userId]
+    );
+
+    // Combine all activities and sort by date
+    const allActivities = [...reviews, ...posts, ...comments].sort(
+      (a, b) => new Date(b.activityDate) - new Date(a.activityDate)
+    );
+
+    // Apply pagination
+    const paginatedActivities = allActivities.slice(offset, offset + limit);
 
     res.json({
       success: true,
-      activities: reviews,
+      activities: paginatedActivities,
+      hasMore: allActivities.length > offset + limit,
     });
   } catch (error) {
     console.error("Recent activity error:", error);

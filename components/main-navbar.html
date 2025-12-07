@@ -1,56 +1,58 @@
 <nav class="navbar" loading="lazy">
+  <!-- LEFT: BRAND -->
+  <a href="dashboard.html" class="navbar-brand">
+    <img src="../pictures/M.png" class="navbar-logo" alt="Logo" />
+    3movCollectors
+  </a>
 
-    <!-- LEFT: BRAND -->
-    <a href="dashboard.html" class="navbar-brand">
-        <img src="../pictures/M.png" class="navbar-logo" alt="Logo">
-        3movCollectors
-    </a>
+  <!-- CENTER: SEARCH BAR -->
+  <div class="nav-search">
+    <img src="../pictures/search.png" class="search-icon-img" />
+    <input type="text" placeholder="Search movies, people, discussions…" />
+  </div>
 
-    <!-- CENTER: SEARCH BAR -->
-    <div class="nav-search">
-        <img src="../pictures/search.png" class="search-icon-img">
-        <input type="text" placeholder="Search movies, people, discussions…" >
+  <!-- RIGHT: ICONS -->
+  <div class="nav-right">
+    <!-- Notifications -->
+    <button
+      class="icon-btn notifications-btn"
+      data-nav="notifications"
+      onclick="window.location.href='notifications.html'"
+    >
+      <div class="icon-circle">
+        <img
+          src="../pictures/bell-notification-social-media.png"
+          class="icon-img"
+        />
+        <span class="icon-badge notifications-badge" style="display: none"
+          >0</span
+        >
+      </div>
+    </button>
+
+    <!-- Messages -->
+    <button
+      class="icon-btn messages-btn"
+      data-nav="messages"
+      onclick="window.location.href='messages.html'"
+    >
+      <div class="icon-circle">
+        <img src="../pictures/envelope.png" class="icon-img" />
+        <span class="icon-badge messages-badge" style="display: none">0</span>
+      </div>
+    </button>
+
+    <img src="../pictures/line.png" class="nav-separator" />
+
+    <!-- Profile -->
+    <div
+      class="user-section"
+      data-nav="profile"
+      onclick="window.location.href='profile.html'"
+    >
+      <div class="icon-circle-profile user-circle">
+        <img src="../pictures/user.png" class="icon-img" />
+      </div>
     </div>
-
-    <!-- RIGHT: ICONS -->
-    <div class="nav-right">
-
-        <!-- Notifications -->
-        <button
-            class="icon-btn notifications-btn"
-            data-nav="notifications"
-            onclick="window.location.href='notifications.html'"
-        >
-            <div class="icon-circle">
-                <img src="../pictures/bell-notification-social-media.png" class="icon-img">
-                <span class="icon-badge">2</span>
-            </div>
-        </button>
-
-        <!-- Messages -->
-        <button
-            class="icon-btn messages-btn"
-            data-nav="messages"
-            onclick="window.location.href='messages.html'"
-        >
-            <div class="icon-circle">
-                <img src="../pictures/envelope.png" class="icon-img">
-                <span class="icon-badge">3</span>
-            </div>
-        </button>
-
-        <img src="../pictures/line.png" class="nav-separator">
-
-        <!-- Profile -->
-        <div
-            class="user-section"
-            data-nav="profile"
-            onclick="window.location.href='profile.html'"
-        >
-            <div class="icon-circle-profile user-circle">
-                <img src="../pictures/user.png" class="icon-img">
-            </div>
-        </div>
-
-    </div>
+  </div>
 </nav>
