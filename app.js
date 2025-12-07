@@ -12,6 +12,7 @@ const {
   errorHandler,
   notFoundHandler,
 } = require("./server/middleware/errorHandler");
+const { startScheduler, stopScheduler } = require("./server/scheduler");
 
 // Initialize Express app
 const app = express();
@@ -112,8 +113,11 @@ app.use("/api", notificationsRoutes);
 const messagesRoutes = require("./server/routes/messages");
 app.use("/api", messagesRoutes);
 
+// Events routes
+const eventsRoutes = require("./server/routes/events");
+app.use("/api", eventsRoutes);
+
 // Future route imports (will be added as we implement features)
-// const eventsRoutes = require('./server/routes/events');
 // const postsRoutes = require('./server/routes/posts');
 // const adminRoutes = require('./server/routes/admin');
 
@@ -181,6 +185,9 @@ async function startServer() {
       console.log(`   - http://localhost:${PORT}/api/health`);
       console.log(`   - http://localhost:${PORT}/index.html`);
       console.log("");
+
+      // Start scheduler
+      startScheduler();
     });
   } catch (error) {
     console.error("Failed to start server:", error);
@@ -191,11 +198,13 @@ async function startServer() {
 // Handle graceful shutdown
 process.on("SIGTERM", () => {
   console.log("SIGTERM received. Shutting down gracefully...");
+  stopScheduler();
   process.exit(0);
 });
 
 process.on("SIGINT", () => {
   console.log("SIGINT received. Shutting down gracefully...");
+  stopScheduler();
   process.exit(0);
 });
 

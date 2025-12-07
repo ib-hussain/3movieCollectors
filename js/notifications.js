@@ -107,6 +107,19 @@ function getNotificationDetails(notif) {
         link: `profile.html?user=${notif.triggerUsername}`,
       };
     case "new_post":
+      // Check if this is an event notification (content contains "event")
+      if (
+        notif.content &&
+        (notif.content.includes("joined your event") ||
+          notif.content.includes("cancelled the event"))
+      ) {
+        return {
+          icon: "📅",
+          actionText: notif.content,
+          link: notif.relatedID ? `events.html` : null,
+        };
+      }
+      // Otherwise it's a movie post
       return {
         icon: "📝",
         actionText: `posted about a movie`,
