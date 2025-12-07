@@ -117,6 +117,10 @@ app.use("/api", messagesRoutes);
 const eventsRoutes = require("./server/routes/events");
 app.use("/api", eventsRoutes);
 
+// Settings routes
+const settingsRoutes = require("./server/routes/settings");
+app.use("/api", settingsRoutes);
+
 // Future route imports (will be added as we implement features)
 // const postsRoutes = require('./server/routes/posts');
 // const adminRoutes = require('./server/routes/admin');

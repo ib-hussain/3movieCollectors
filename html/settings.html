@@ -1,214 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Settings – 3movCollectors</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon -->
-    <link rel="icon" href="../pictures/M.png">
+    <link rel="icon" href="../pictures/M.png" />
 
     <!-- Shared site CSS -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+    <link rel="stylesheet" href="../css/main-navbar.css" />
+    <link rel="stylesheet" href="../css/side-panel.css" />
+    <link rel="stylesheet" href="../css/main-footer.css" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="../css/settings.css">
-</head>
+    <link rel="stylesheet" href="../css/settings.css" />
+  </head>
 
-<body data-page="settings">
-
+  <body data-page="settings">
     <!--  NAVBAR (ALWAYS AT TOP)  -->
     <div id="navbar-container"></div>
     <script src="../js/include-main-navbar.js" defer></script>
 
     <!--  PAGE WRAPPER (SIDEBAR + CONTENT)  -->
     <div class="layout-wrapper">
+      <!--  SIDE PANEL (LEFT)  -->
+      <div id="sidepanel-container"></div>
+      <script src="../js/include-side-panel.js" defer></script>
 
-        <!--  SIDE PANEL (LEFT)  -->
-        <div id="sidepanel-container"></div>
-        <script src="../js/include-side-panel.js" defer></script>
+      <!--  PAGE CONTENT  -->
+      <main class="settings-main with-sidebar">
+        <div class="settings-inner">
+          <!-- HEADER -->
+          <header class="settings-header">
+            <h1>Settings</h1>
+            <p>Manage your account settings and preferences</p>
+          </header>
 
-        <!--  PAGE CONTENT  -->
-        <main class="settings-main with-sidebar">
-            <div class="settings-inner">
-
-                <!-- HEADER -->
-                <header class="settings-header">
-                    <h1>Settings</h1>
-                    <p>Manage your account settings and preferences</p>
-                </header>
-
-                <!-- TABS -->
-                <div class="settings-tabs-shell">
-                    <div class="settings-tabs">
-                        <button class="settings-tab-btn settings-tab-btn--active" data-settings-tab="account">Account</button>
-                        <button class="settings-tab-btn" data-settings-tab="security">Security</button>
-                        <button class="settings-tab-btn" data-settings-tab="notifications">Notifications</button>
-                    </div>
-                </div>
-
-                <!--  ACCOUNT TAB  -->
-                <section id="settings-panel-account" class="settings-tab-panel settings-tab-panel--active">
-
-                    <section class="settings-card">
-                        <h2>Account Information</h2>
-
-                        <div class="settings-field-group">
-                            <label>Display Name</label>
-                            <input type="text" placeholder="Alex Turner">
-                        </div>
-
-                        <div class="settings-field-group">
-                            <label>Email Address</label>
-                            <input type="email" placeholder="alex.turner@example.com">
-                        </div>
-
-                        <div class="settings-field-group">
-                            <label>Username</label>
-                            <input type="text" placeholder="@alexturner">
-                        </div>
-
-                        <div class="settings-field-group">
-                            <label>Bio</label>
-                            <textarea rows="3">Cinephile exploring the art of storytelling through film</textarea>
-                        </div>
-
-                        <div class="settings-actions-row">
-                            <button class="settings-btn settings-btn--primary">Save Changes</button>
-                        </div>
-                    </section>
-
-                    <section class="settings-card settings-card--danger">
-                        <h2>Danger Zone</h2>
-                        <p>Permanently delete your account and all associated data.</p>
-                        <div class="settings-actions-row">
-                            <button class="settings-btn settings-btn--danger">Delete Account</button>
-                        </div>
-                    </section>
-
-                </section>
-
-                <!--  SECURITY TAB  -->
-                <section id="settings-panel-security" class="settings-tab-panel">
-
-                    <section class="settings-card">
-                        <h2>Change Password</h2>
-
-                        <div class="settings-field-group password-field">
-                            <label>Current Password</label>
-                            <div class="field-with-icons">
-                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
-                                <input type="password" class="password-input">
-                                <span class="field-icon-right password-toggle">
-                                    <img src="../pictures/eye.png">
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="settings-field-group password-field">
-                            <label>New Password</label>
-                            <div class="field-with-icons">
-                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
-                                <input type="password" class="password-input">
-                                <span class="field-icon-right password-toggle">
-                                    <img src="../pictures/eye.png">
-                                </span>
-                            </div>
-                            <p class="field-hint">Must be at least 8 characters with uppercase, lowercase, and a number.</p>
-                        </div>
-
-                        <div class="settings-field-group password-field">
-                            <label>Confirm New Password</label>
-                            <div class="field-with-icons">
-                                <span class="field-icon-left"><img src="../pictures/secure-password.png"></span>
-                                <input type="password" class="password-input">
-                                <span class="field-icon-right password-toggle">
-                                    <img src="../pictures/eye.png">
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="settings-actions-row">
-                            <button class="settings-btn settings-btn--primary">Update Password</button>
-                        </div>
-                    </section>
-
-                    <section class="settings-card settings-card--logout">
-                        <h2>Log Out</h2>
-                        <p>Sign out of your account on this device.</p>
-                        <div class="settings-actions-row settings-actions-row--left">
-                            <button href="index.html" class="settings-btn settings-btn--outline">Log Out</button>
-                        </div>
-                    </section>
-
-                </section>
-
-                <!--  NOTIFICATIONS TAB  -->
-                <section id="settings-panel-notifications" class="settings-tab-panel">
-                    <section class="settings-card">
-                        <h2>Notification Preferences</h2>
-
-                        <div class="settings-toggle-group">
-
-                            <div class="settings-toggle-row">
-                                <div>
-                                    <div class="toggle-title">Email Notifications</div>
-                                    <div class="toggle-subtitle">Receive notifications via email.</div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="settings-toggle-row">
-                                <div>
-                                    <div class="toggle-title">Push Notifications</div>
-                                    <div class="toggle-subtitle">Receive push notifications in browser.</div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox">
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <hr class="settings-divider">
-
-                            <div class="settings-toggle-row">
-                                <div>
-                                    <div class="toggle-title">Friend Requests</div>
-                                    <div class="toggle-subtitle">When someone sends you a friend request.</div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                            <div class="settings-toggle-row">
-                                <div>
-                                    <div class="toggle-title">Comments</div>
-                                    <div class="toggle-subtitle">When someone comments on your posts or reviews.</div>
-                                </div>
-                                <label class="switch">
-                                    <input type="checkbox" checked>
-                                    <span class="slider"></span>
-                                </label>
-                            </div>
-
-                        </div>
-
-                        <div class="settings-actions-row settings-actions-row--left">
-                            <button class="settings-btn settings-btn--primary">Save Preferences</button>
-                        </div>
-                    </section>
-                </section>
-
+          <!-- TABS -->
+          <div class="settings-tabs-shell">
+            <div class="settings-tabs">
+              <button
+                class="settings-tab-btn settings-tab-btn--active"
+                data-settings-tab="account"
+              >
+                Account
+              </button>
+              <button class="settings-tab-btn" data-settings-tab="security">
+                Security
+              </button>
             </div>
-        </main>
+          </div>
 
+          <!--  ACCOUNT TAB  -->
+          <section
+            id="settings-panel-account"
+            class="settings-tab-panel settings-tab-panel--active"
+          >
+            <section class="settings-card">
+              <h2>Account Information</h2>
+
+              <div class="settings-field-group">
+                <label>Display Name</label>
+                <input
+                  type="text"
+                  id="displayName"
+                  placeholder="Alex Turner"
+                  required
+                />
+              </div>
+
+              <div class="settings-field-group">
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="alex.turner@example.com"
+                  required
+                />
+              </div>
+
+              <div class="settings-field-group">
+                <label>Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="alexturner"
+                  required
+                />
+                <p class="field-hint">
+                  3-20 characters (letters, numbers, underscores only)
+                </p>
+              </div>
+
+              <div class="settings-field-group">
+                <label>Profile Picture URL (optional)</label>
+                <input
+                  type="url"
+                  id="profilePicture"
+                  placeholder="https://example.com/avatar.jpg"
+                />
+              </div>
+
+              <div class="settings-actions-row">
+                <button
+                  class="settings-btn settings-btn--primary"
+                  id="saveAccountBtn"
+                >
+                  Save Changes
+                </button>
+              </div>
+            </section>
+
+            <section class="settings-card settings-card--danger">
+              <h2>Danger Zone</h2>
+              <p>
+                Permanently delete your account and all associated data. This
+                action cannot be undone.
+              </p>
+              <div class="settings-actions-row">
+                <button
+                  class="settings-btn settings-btn--danger"
+                  id="deleteAccountBtn"
+                >
+                  Delete Account
+                </button>
+              </div>
+            </section>
+          </section>
+
+          <!--  SECURITY TAB  -->
+          <section id="settings-panel-security" class="settings-tab-panel">
+            <section class="settings-card">
+              <h2>Change Password</h2>
+
+              <div class="settings-field-group password-field">
+                <label>Current Password</label>
+                <div class="field-with-icons">
+                  <span class="field-icon-left"
+                    ><img src="../pictures/secure-password.png"
+                  /></span>
+                  <input
+                    type="password"
+                    id="currentPassword"
+                    class="password-input"
+                    required
+                  />
+                  <span class="field-icon-right password-toggle">
+                    <img src="../pictures/eye.png" alt="toggle" />
+                  </span>
+                </div>
+              </div>
+
+              <div class="settings-field-group password-field">
+                <label>New Password</label>
+                <div class="field-with-icons">
+                  <span class="field-icon-left"
+                    ><img src="../pictures/secure-password.png"
+                  /></span>
+                  <input
+                    type="password"
+                    id="newPassword"
+                    class="password-input"
+                    required
+                  />
+                  <span class="field-icon-right password-toggle">
+                    <img src="../pictures/eye.png" alt="toggle" />
+                  </span>
+                </div>
+                <p class="field-hint">
+                  Must be at least 8 characters with uppercase, lowercase, and a
+                  number.
+                </p>
+              </div>
+
+              <div class="settings-field-group password-field">
+                <label>Confirm New Password</label>
+                <div class="field-with-icons">
+                  <span class="field-icon-left"
+                    ><img src="../pictures/secure-password.png"
+                  /></span>
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="password-input"
+                    required
+                  />
+                  <span class="field-icon-right password-toggle">
+                    <img src="../pictures/eye.png" alt="toggle" />
+                  </span>
+                </div>
+              </div>
+
+              <div class="settings-actions-row">
+                <button
+                  class="settings-btn settings-btn--primary"
+                  id="changePasswordBtn"
+                >
+                  Update Password
+                </button>
+              </div>
+            </section>
+
+            <section class="settings-card settings-card--logout">
+              <h2>Log Out</h2>
+              <p>Sign out of your account on this device.</p>
+              <div class="settings-actions-row settings-actions-row--left">
+                <button
+                  class="settings-btn settings-btn--outline"
+                  id="logoutBtn"
+                >
+                  Log Out
+                </button>
+              </div>
+            </section>
+          </section>
+        </div>
+      </main>
     </div>
 
     <!-- FOOTER -->
@@ -216,7 +224,7 @@
     <script src="../js/include-footer.js" defer></script>
 
     <!-- SETTINGS LOGIC -->
+    <script src="../js/app.js" defer></script>
     <script src="../js/settings.js" defer></script>
-
-</body>
+  </body>
 </html>

@@ -54,7 +54,7 @@ router.post("/signup", signupValidation, async (req, res, next) => {
 
     // Check if username already exists
     const existingUsername = await db.query(
-      "SELECT userID FROM User WHERE username = ?",
+      "SELECT userID FROM User WHERE username = ? AND isDeleted = FALSE",
       [username]
     );
 
@@ -67,7 +67,7 @@ router.post("/signup", signupValidation, async (req, res, next) => {
 
     // Check if email already exists
     const existingEmail = await db.query(
-      "SELECT userID FROM User WHERE email = ?",
+      "SELECT userID FROM User WHERE email = ? AND isDeleted = FALSE",
       [email]
     );
 
@@ -132,7 +132,7 @@ router.post("/login", loginValidation, async (req, res, next) => {
 
     // Find user by email
     const users = await db.query(
-      "SELECT userID, username, name, email, password, role FROM User WHERE email = ?",
+      "SELECT userID, username, name, email, password, role FROM User WHERE email = ? AND isDeleted = FALSE",
       [email]
     );
 
@@ -211,7 +211,7 @@ router.get("/me", async (req, res, next) => {
 
     // Fetch user details
     const users = await db.query(
-      "SELECT userID, username, name, email, role, registrationDate FROM User WHERE userID = ?",
+      "SELECT userID, username, name, email, role, registrationDate, profilePicture FROM User WHERE userID = ? AND isDeleted = FALSE",
       [req.session.userId]
     );
 
@@ -234,6 +234,7 @@ router.get("/me", async (req, res, next) => {
         email: user.email,
         role: user.role,
         registrationDate: user.registrationDate,
+        profilePicture: user.profilePicture,
       },
     });
   } catch (error) {

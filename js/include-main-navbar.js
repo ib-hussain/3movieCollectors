@@ -20,6 +20,7 @@ function loadNavbar() {
       setActiveNavbarItem();
       updateNotificationBadge();
       updateMessagesBadge();
+      loadProfilePicture();
     })
     .catch((err) => console.error("Navbar failed to load:", err));
 }
@@ -116,3 +117,29 @@ async function updateMessagesBadge() {
 
 // Make function available globally for updates
 window.updateMessagesBadge = updateMessagesBadge;
+
+/* ===========================================
+   Load User Profile Picture
+=========================================== */
+async function loadProfilePicture() {
+  try {
+    if (!window.App) return; // App not loaded yet
+
+    const data = await App.get("/auth/me");
+    if (data.success && data.user) {
+      const profileImg = document.querySelector(
+        ".user-section .icon-circle-profile img"
+      );
+      if (profileImg && data.user.profilePicture) {
+        profileImg.src = data.user.profilePicture;
+        profileImg.alt = data.user.name || "User";
+        profileImg.style.objectFit = "cover";
+      }
+    }
+  } catch (error) {
+    console.log("Could not load profile picture (user may not be logged in)");
+  }
+}
+
+// Make function available globally for updates
+window.loadProfilePicture = loadProfilePicture;
