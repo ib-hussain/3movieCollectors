@@ -96,6 +96,10 @@ app.use("/api", postsRoutes);
 const friendsRoutes = require("./server/routes/friends");
 app.use("/api/friends", friendsRoutes);
 
+// Reviews routes
+const reviewsRoutes = require("./server/routes/reviews");
+app.use("/api", reviewsRoutes);
+
 // Future route imports (will be added as we implement features)
 // const eventsRoutes = require('./server/routes/events');
 // const messagesRoutes = require('./server/routes/messages');

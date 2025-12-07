@@ -17,11 +17,14 @@ window.initPage.movie = async function () {
   // Initialize
   await loadMovieDetails(movieId);
   await loadWatchlistStatus(movieId);
+  await loadReviews(movieId);
+  await loadUserReview(movieId);
   await loadPosts(movieId);
   await loadSimilarMovies(movieId);
 
   setupTabSwitching();
   setupWatchlistButton(movieId);
+  setupReviewForm(movieId);
   setupPostForm(movieId);
 };
 
@@ -492,6 +495,272 @@ function displaySimilarMovies(movies) {
 
     container.appendChild(card);
   });
+}
+
+// ==================== REVIEWS & RATINGS ====================
+
+let userReviewData = null;
+
+async function loadReviews(movieId) {
+  try {
+    const data = await App.get(`/movies/${movieId}/reviews`);
+
+    if (data.success) {
+      displayReviews(data.reviews);
+      displayRatingStats(data.stats);
+      document.getElementById("reviews-count").textContent =
+        data.stats.totalReviews;
+    }
+  } catch (error) {
+    console.error("Error loading reviews:", error);
+  }
+}
+
+async function loadUserReview(movieId) {
+  try {
+    const data = await App.get(`/movies/${movieId}/reviews/me`);
+
+    if (data.success && data.review) {
+      userReviewData = data.review;
+      displayUserReview(data.review);
+      document.getElementById("review-form-box").style.display = "none";
+    } else {
+      userReviewData = null;
+      document.getElementById("user-review-container").style.display = "none";
+      document.getElementById("review-form-box").style.display = "block";
+    }
+  } catch (error) {
+    // User not logged in or no review - show form
+    console.log("No user review found");
+    document.getElementById("user-review-container").style.display = "none";
+    document.getElementById("review-form-box").style.display = "block";
+  }
+}
+
+function displayRatingStats(stats) {
+  // Update average rating
+  document.getElementById("avg-rating").textContent = stats.averageRating;
+  document.getElementById("total-reviews").textContent = stats.totalReviews;
+
+  // Update rating distribution bars
+  const total = stats.totalReviews;
+
+  for (let rating = 1; rating <= 10; rating++) {
+    const count = stats.ratingDistribution[rating] || 0;
+    const percentage = total > 0 ? (count / total) * 100 : 0;
+
+    const barElement = document.querySelector(
+      `.rating-bar[data-rating="${rating}"]`
+    );
+    if (barElement) {
+      const fill = barElement.querySelector(".bar-fill");
+      const percentText = barElement.querySelector(".rating-percent");
+
+      if (fill) fill.style.width = `${percentage}%`;
+      if (percentText) percentText.textContent = `${Math.round(percentage)}%`;
+    }
+  }
+}
+
+function displayReviews(reviews) {
+  const container = document.getElementById("reviews-container");
+  container.innerHTML = "";
+
+  if (reviews.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px; color: #7f8c8d;">
+        <p>No reviews yet. Be the first to review this movie!</p>
+      </div>
+    `;
+    return;
+  }
+
+  reviews.forEach((review) => {
+    const reviewCard = createReviewCard(review);
+    container.appendChild(reviewCard);
+  });
+}
+
+function createReviewCard(review) {
+  const card = document.createElement("div");
+  card.className = "review-card";
+
+  const initials = review.userName
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .substring(0, 2);
+
+  const reviewDate = new Date(review.reviewDate);
+  const dateStr = reviewDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  const isEdited =
+    review.lastUpdated &&
+    new Date(review.lastUpdated).getTime() !== reviewDate.getTime();
+
+  card.innerHTML = `
+    <div class="review-header">
+      <div class="review-user">
+        <div class="review-avatar">${initials}</div>
+        <div class="review-user-info">
+          <h4>${escapeHtml(review.userName)}</h4>
+          <div class="review-date">${dateStr}</div>
+        </div>
+      </div>
+      <div class="review-rating-badge">${review.rating}/10</div>
+    </div>
+    <div class="review-text">${escapeHtml(review.review)}</div>
+    ${isEdited ? '<div class="review-edited">(Edited)</div>' : ""}
+  `;
+
+  return card;
+}
+
+function displayUserReview(review) {
+  const container = document.getElementById("user-review-container");
+  container.style.display = "block";
+
+  const reviewDate = new Date(review.reviewDate);
+  const dateStr = reviewDate.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+
+  container.innerHTML = `
+    <div class="review-header">
+      <h4>Your Review</h4>
+      <div class="review-rating">${review.rating}/10</div>
+    </div>
+    <div class="review-date" style="opacity: 0.8; font-size: 13px; margin-bottom: 8px;">${dateStr}</div>
+    <div class="review-text">${escapeHtml(review.review)}</div>
+    <div class="review-actions">
+      <button id="edit-review-btn">Edit Review</button>
+      <button id="delete-review-btn">Delete Review</button>
+    </div>
+  `;
+
+  // Setup action buttons
+  document.getElementById("edit-review-btn").addEventListener("click", () => {
+    editUserReview(review);
+  });
+
+  document.getElementById("delete-review-btn").addEventListener("click", () => {
+    deleteUserReview();
+  });
+}
+
+function setupReviewForm(movieId) {
+  const submitBtn = document.getElementById("submit-review-btn");
+  const cancelBtn = document.getElementById("cancel-review-btn");
+  const ratingSelect = document.getElementById("review-rating");
+  const reviewText = document.getElementById("review-text");
+
+  submitBtn.addEventListener("click", async () => {
+    const rating = parseFloat(ratingSelect.value);
+    const review = reviewText.value.trim();
+
+    if (!rating || rating < 1 || rating > 10) {
+      App.showToast("Please select a rating", "error");
+      return;
+    }
+
+    if (!review) {
+      App.showToast("Please write a review", "error");
+      return;
+    }
+
+    try {
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Submitting...";
+
+      if (userReviewData) {
+        // Update existing review
+        await App.patch(`/reviews/${movieId}`, { rating, review });
+        App.showToast("Review updated successfully", "success");
+      } else {
+        // Create new review
+        await App.post(`/movies/${movieId}/reviews`, { rating, review });
+        App.showToast("Review posted successfully", "success");
+      }
+
+      // Reload reviews
+      await Promise.all([
+        loadReviews(movieId),
+        loadUserReview(movieId),
+        loadMovieDetails(movieId),
+      ]);
+
+      // Reset form
+      ratingSelect.value = "";
+      reviewText.value = "";
+      cancelBtn.style.display = "none";
+    } catch (error) {
+      console.error("Error submitting review:", error);
+      App.showToast(
+        error.error || "Failed to submit review. Please try again.",
+        "error"
+      );
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Submit Review";
+    }
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    // Reset form
+    ratingSelect.value = "";
+    reviewText.value = "";
+    cancelBtn.style.display = "none";
+    submitBtn.textContent = "Submit Review";
+
+    // Show user's existing review if any
+    if (userReviewData) {
+      document.getElementById("review-form-box").style.display = "none";
+      document.getElementById("user-review-container").style.display = "block";
+    }
+  });
+}
+
+function editUserReview(review) {
+  // Hide user review display, show form
+  document.getElementById("user-review-container").style.display = "none";
+  document.getElementById("review-form-box").style.display = "block";
+
+  // Populate form with existing data
+  document.getElementById("review-rating").value = review.rating;
+  document.getElementById("review-text").value = review.review;
+  document.getElementById("submit-review-btn").textContent = "Update Review";
+  document.getElementById("cancel-review-btn").style.display = "inline-block";
+}
+
+async function deleteUserReview() {
+  if (!confirm("Are you sure you want to delete your review?")) {
+    return;
+  }
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const movieId = urlParams.get("id");
+
+  try {
+    await App.delete(`/reviews/${movieId}`);
+    App.showToast("Review deleted successfully", "success");
+
+    // Reload reviews
+    await Promise.all([
+      loadReviews(movieId),
+      loadUserReview(movieId),
+      loadMovieDetails(movieId),
+    ]);
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    App.showToast("Failed to delete review. Please try again.", "error");
+  }
 }
 
 // ==================== TAB SWITCHING ====================
