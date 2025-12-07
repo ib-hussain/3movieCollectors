@@ -92,8 +92,11 @@ app.use("/api/watchlist", watchlistRoutes);
 const postsRoutes = require("./server/routes/posts");
 app.use("/api", postsRoutes);
 
+// Friends routes
+const friendsRoutes = require("./server/routes/friends");
+app.use("/api/friends", friendsRoutes);
+
 // Future route imports (will be added as we implement features)
-// const friendsRoutes = require('./server/routes/friends');
 // const eventsRoutes = require('./server/routes/events');
 // const messagesRoutes = require('./server/routes/messages');
 // const notificationsRoutes = require('./server/routes/notifications');
