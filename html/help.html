@@ -1,82 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <title>Help & Support – 3movCollectors</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Favicon -->
-    <link rel="icon" href="../pictures/M.png">
+    <link rel="icon" href="../pictures/M.png" />
 
     <!-- Shared site CSS -->
-    <link rel="stylesheet" href="../css/main-navbar.css">
-    <link rel="stylesheet" href="../css/side-panel.css">
-    <link rel="stylesheet" href="../css/main-footer.css">
+    <link rel="stylesheet" href="../css/main-navbar.css" />
+    <link rel="stylesheet" href="../css/side-panel.css" />
+    <link rel="stylesheet" href="../css/main-footer.css" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="../css/help.css">
-</head>
+    <link rel="stylesheet" href="../css/help.css" />
+  </head>
 
-<body data-page="settings">
-
+  <body data-page="settings">
     <!--  NAVBAR (ALWAYS AT TOP)  -->
     <div id="navbar-container"></div>
     <script src="../js/include-main-navbar.js" defer></script>
 
     <!--  PAGE WRAPPER (SIDEBAR + CONTENT)  -->
     <div class="layout-wrapper">
+      <!--  SIDE PANEL (LEFT)  -->
+      <div id="sidepanel-container"></div>
+      <script src="../js/include-side-panel.js" defer></script>
 
-        <!--  SIDE PANEL (LEFT)  -->
-        <div id="sidepanel-container"></div>
-        <script src="../js/include-side-panel.js" defer></script>
+      <!--  PAGE CONTENT  -->
+      <main class="content-area">
+        <div class="help-main">
+          <!-- HEADER -->
+          <header class="help-header">
+            <h1>Help & Support</h1>
+            <p>Get in touch with our team for assistance.</p>
+          </header>
 
-        <!--  PAGE CONTENT  -->
-        <main class="content-area">
-                <div class="help-main">
+          <!-- CONTACT CARDS GRID -->
+          <section class="help-grid">
+            <!-- Team Member 1 -->
+            <article class="help-card">
+              <div class="help-icon-wrap">
+                <img src="../pictures/user.png" alt="Izhan Nasir" />
+              </div>
+              <h3>Izhan Nasir</h3>
+              <p>Developer & Support Team</p>
+              <a
+                href="mailto:i232517@isb.nu.edu.pk"
+                class="help-btn help-btn--primary"
+              >
+                i232517@isb.nu.edu.pk
+              </a>
+            </article>
 
-                    <!-- HEADER -->
-                    <header class="help-header">
-                        <h1>Help & Support</h1>
-                        <p>Find answers and get in touch with support.</p>
-                    </header>
+            <!-- Team Member 2 -->
+            <article class="help-card">
+              <div class="help-icon-wrap">
+                <img src="../pictures/user.png" alt="M. Hussain Ibrahim" />
+              </div>
+              <h3>M. Hussain Ibrahim</h3>
+              <p>Developer & Support Team</p>
+              <a
+                href="mailto:i232626@isb.nu.edu.pk"
+                class="help-btn help-btn--primary"
+              >
+                i232626@isb.nu.edu.pk
+              </a>
+            </article>
 
-                    <!-- CARDS GRID -->
-                    <section class="help-grid">
-
-                        <!-- Email -->
-                        <article class="help-card">
-                            <div class="help-icon-wrap">
-                                <img src="../pictures/envelope.png" alt>
-                            </div>
-                            <h3>Email Support</h3>
-                            <p>Message us for technical help, bugs or general
-                                inquiries.</p>
-                            <a href="mailto:ibrahimbeaconarion@gmail.com"
-                                class="help-btn help-btn--primary">
-                                Email Support
-                            </a>
-                        </article>
-
-                        <!-- GitHub -->
-                        <article class="help-card">
-                            <div class="help-icon-wrap">
-                                <img src="../pictures/rose.png" alt>
-                            </div>
-                            <h3>GitHub</h3>
-                            <p>Explore the project, issues and
-                                contributions.</p>
-                            <a href="https://github.com/ib-hussain"
-                                target="_blank"
-                                class="help-btn help-btn--primary">
-                                Open GitHub
-                            </a>
-                        </article>
-
-                    </section>
-
-                </div>
-            </main>
-
+            <!-- Team Member 3 -->
+            <article class="help-card">
+              <div class="help-icon-wrap">
+                <img src="../pictures/user.png" alt="Saneedullah" />
+              </div>
+              <h3>Saneedullah</h3>
+              <p>Developer & Support Team</p>
+              <a
+                href="mailto:i232568@isb.nu.edu.pk"
+                class="help-btn help-btn--primary"
+              >
+                i232568@isb.nu.edu.pk
+              </a>
+            </article>
+          </section>
+        </div>
+      </main>
     </div>
 
     <!-- FOOTER -->
@@ -85,7 +94,5 @@
 
     <!-- SETTINGS LOGIC -->
     <script src="../js/help.js" defer></script>
-
-</body>
+  </body>
 </html>
-

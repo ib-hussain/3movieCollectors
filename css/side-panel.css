@@ -2,51 +2,51 @@
    Main Panel Container  
 ———————————— */
 .side-panel {
-    opacity: 0.9;
-    width: 260px;
-    background: #111;
-    height: 100vh;
-    position: fixed;
-    top: 65px; /* matches navbar height */
-    left: 0;
-    padding-top: 20px;
-    transition: 0.25s ;
-    z-index: 80;
-    /* border-right: 1px solid #2a2d33; */
+  opacity: 0.9;
+  width: 260px;
+  background: #111;
+  height: 100vh;
+  position: fixed;
+  top: 65px; /* matches navbar height */
+  left: 0;
+  padding-top: 20px;
+  transition: 0.25s;
+  z-index: 80;
+  /* border-right: 1px solid #2a2d33; */
 }
 
 /* Collapsed Mode */
 .side-panel.collapsed {
-    width: 78px;
-    background: #171a1f;
+  width: 78px;
+  background: #171a1f;
 }
 
 /* ————————————  
    Toggle Button  
 ———————————— */
 .side-toggle {
-    opacity: 1;
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    padding: 0 18px;
-    margin-bottom: 20px;
+  opacity: 1;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 18px;
+  margin-bottom: 20px;
 }
 
 .side-toggle img {
-    opacity: 1;
-    margin-right: 6px;
-    width: 26px;
-    height: 26px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: transform .25s ease;
+  opacity: 1;
+  margin-right: 6px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: transform 0.25s ease;
 }
 
 .side-toggle img:hover {
-    opacity: 1;
-    transform: scale(1.06);
-    opacity: 1;
+  opacity: 1;
+  transform: scale(1.06);
+  opacity: 1;
 }
 
 /* ————————————  
@@ -54,52 +54,67 @@
 ———————————— */
 
 .side-menu {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .menu-item {
-    width: 100%;
-    padding: 12px 22px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    cursor: pointer;
-    border-radius: 999px;
-    transition: background .25s, color .25s;
+  width: 100%;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  border-radius: 999px;
+  transition: background 0.25s, color 0.25s;
 }
 
 .menu-item:hover {
-    background: #2a2d33;
+  background: #2a2d33;
 }
 
 .menu-item.active {
-    background: #C90000 !important;
-    color: #fff;
+  background: #c90000 !important;
+  color: #fff;
 }
 
 .menu-item img.menu-icon {
-    width: 22px;
-    height: 22px;
-    flex-shrink: 0;
-    filter: brightness(0) invert(1);
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  filter: brightness(0) invert(1);
 }
 
 .side-panel.collapsed .menu-item span {
-    display: none;
+  display: none;
 }
 
 /* Ensure icons remain center-aligned when collapsed */
 .side-panel.collapsed .menu-item {
-    justify-content: center;
-    padding: 12px 0;
+  justify-content: center;
+  padding: 12px 0;
 }
+
+/* ————————————  
+   Logout Item Styling  
+———————————— */
+.menu-item.logout-item {
+  margin-top: 10px;
+  border-top: 1px solid #2a2d33;
+  padding-top: 22px;
+}
+
+.menu-item.logout-item:hover {
+  background: #8b0000;
+  color: #fff;
+}
+
 .footer-divider {
-    /* margin-left: 10px; */
-    width:100%;
-    /* border: none; */
-    /* border-top: 3px solid #ffffff; */
-    /* margin: 5px 0 20px; */
+  /* margin-left: 10px; */
+  width: 100%;
+  /* border: none; */
+  /* border-top: 3px solid #ffffff; */
+  /* margin: 5px 0 20px; */
 }
