@@ -185,6 +185,53 @@ router.get("/years", async (req, res) => {
 });
 
 /**
+ * GET /api/movies/popular
+ * Get random popular movies based on highest ratings
+ * Query params:
+ *   - limit: number of movies to return (default: 4)
+ */
+router.get("/popular", async (req, res) => {
+  try {
+    const limit = parseInt(req.query.limit) || 4;
+
+    // Get top-rated movies randomly
+    const query = `
+      SELECT m.movieID, m.title, m.releaseYear, m.posterImg, m.avgRating,
+             GROUP_CONCAT(DISTINCT g.genreName SEPARATOR ', ') as genres
+      FROM Movie m
+      LEFT JOIN MovieGenres mg ON m.movieID = mg.movieID
+      LEFT JOIN Genres g ON mg.genreID = g.genreID
+      WHERE m.avgRating >= 7.0
+      GROUP BY m.movieID, m.title, m.releaseYear, m.posterImg, m.avgRating
+      ORDER BY RAND()
+      LIMIT ?
+    `;
+
+    const movies = await db.query(query, [limit]);
+
+    res.json({
+      success: true,
+      movies: movies.map((m) => ({
+        movieId: m.movieID,
+        title: m.title,
+        releaseYear: m.releaseYear,
+        posterPath: m.posterImg
+          ? `/pictures/${m.posterImg}`
+          : "/pictures/movie_posters/white.png",
+        genres: m.genres,
+        avgRating: m.avgRating ? parseFloat(m.avgRating).toFixed(1) : "0.0",
+      })),
+    });
+  } catch (error) {
+    console.error("Popular movies error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to load popular movies",
+    });
+  }
+});
+
+/**
  * GET /api/movies/:id
  * Get detailed information about a specific movie
  */

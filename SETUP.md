@@ -3,6 +3,7 @@
 A social movie discovery and community platform where users can browse movies, create watchlists, join watch events, and connect with fellow movie enthusiasts.
 
 ## Table of Contents
+
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
 - [Database Setup](#database-setup)
@@ -19,10 +20,12 @@ A social movie discovery and community platform where users can browse movies, c
 Before you begin, ensure you have the following installed on your system:
 
 1. **Node.js** (v14.0.0 or higher)
+
    - Download from: https://nodejs.org/
    - Verify installation: `node --version`
 
 2. **MySQL** (v8.0 or higher)
+
    - Download from: https://dev.mysql.com/downloads/mysql/
    - Verify installation: `mysql --version`
 
@@ -36,12 +39,14 @@ Before you begin, ensure you have the following installed on your system:
 ### 1. Clone or Download the Repository
 
 **Option A: Using Git**
+
 ```bash
 git clone https://github.com/ib-hussain/3movieCollectors.git
 cd 3movieCollectors
 ```
 
 **Option B: Download ZIP**
+
 - Download the project ZIP file
 - Extract it to your desired location
 - Open terminal/command prompt in the project folder
@@ -53,6 +58,7 @@ npm install
 ```
 
 This will install all required Node.js packages including:
+
 - Express.js (web framework)
 - MySQL2 (database driver)
 - Express-session (session management)
@@ -77,11 +83,13 @@ CREATE DATABASE 3movieCollectors;
 Navigate to the `AdvancedERD` folder and execute the schema file:
 
 **Option A: Using MySQL Command Line**
+
 ```bash
 mysql -u root -p 3movieCollectors < AdvancedERD/schema.sql
 ```
 
 **Option B: Using MySQL Workbench**
+
 1. Open MySQL Workbench
 2. Connect to your MySQL server
 3. File → Open SQL Script
@@ -89,6 +97,7 @@ mysql -u root -p 3movieCollectors < AdvancedERD/schema.sql
 5. Execute the script
 
 This will create all necessary tables and populate them with sample data including:
+
 - 20 users (3 admins, 17 regular users)
 - 18 movies with genres
 - Sample friendships, posts, reviews, and events
@@ -137,6 +146,7 @@ TMDB_API_KEY=your_tmdb_api_key_here
 ```
 
 **Important:** Replace the following values:
+
 - `DB_PASSWORD`: Your MySQL root password
 - `SESSION_SECRET`: A random secure string (e.g., generate using: `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`)
 - `TMDB_API_KEY`: (Optional) Get free API key from https://www.themoviedb.org/settings/api
@@ -162,6 +172,7 @@ npm start
 ```
 
 You should see:
+
 ```
 ✓ Database connected successfully
 
@@ -177,6 +188,7 @@ You should see:
 ### 2. Access the Application
 
 Open your web browser and navigate to:
+
 ```
 http://localhost:3000/index.html
 ```
@@ -188,10 +200,12 @@ http://localhost:3000/index.html
 ### Getting Started
 
 1. **Landing Page**
+
    - Visit `http://localhost:3000/index.html`
    - Click "Get Started" or "Sign Up" to create an account
 
 2. **Sign Up**
+
    - Fill in your details (username, name, email, password)
    - Optionally add a profile picture URL
    - Click "Sign Up"
@@ -207,11 +221,13 @@ http://localhost:3000/index.html
 ### Main Features
 
 #### 1. Dashboard
+
 - View your stats (friends, watchlist items, upcoming events)
 - See trending movies and personalized recommendations
 - Check recent activity from friends
 
 #### 2. Browse Movies
+
 - Search for movies by title
 - Filter by genre
 - View movie details, ratings, and reviews
@@ -219,12 +235,14 @@ http://localhost:3000/index.html
 - Rate and review movies
 
 #### 3. Watchlist
+
 - View all movies you've saved
 - Mark movies as "To Watch" or "Completed"
 - Remove movies from watchlist
 - Quick access to movie details
 
 #### 4. Watch Events
+
 - **Upcoming Events Tab:** Browse and join upcoming watch events
 - **Hosting Tab:** View events you're hosting
 - **Past Tab:** See your event history
@@ -236,6 +254,7 @@ http://localhost:3000/index.html
   - Capacity (max participants)
 
 #### 5. Friends
+
 - Send friend requests
 - Accept/reject incoming requests
 - View your friends list
@@ -243,11 +262,13 @@ http://localhost:3000/index.html
 - Visit friend profiles
 
 #### 6. Messages
+
 - Real-time messaging with friends
 - View conversation history
 - Unread message indicators
 
 #### 7. Notifications
+
 - Get notified about:
   - Friend requests
   - Event invitations
@@ -256,6 +277,7 @@ http://localhost:3000/index.html
 - Mark notifications as read
 
 #### 8. Profile
+
 - View your profile information
 - Edit profile details
 - Upload profile picture
@@ -263,12 +285,14 @@ http://localhost:3000/index.html
 - See your movie statistics
 
 #### 9. Settings
+
 - Update account information
 - Change password
 - Manage privacy settings
 - Update profile picture
 
 #### 10. Help & Support
+
 - Access FAQs
 - Contact support
 - Report issues
@@ -284,6 +308,7 @@ http://localhost:3000/index.html
 ## Features
 
 ### Core Features
+
 ✅ User Authentication (Sign up, Login, Session management)  
 ✅ Movie Browsing with Search and Filters  
 ✅ Personalized Movie Recommendations  
@@ -297,9 +322,10 @@ http://localhost:3000/index.html
 ✅ User Profiles  
 ✅ Activity Feed  
 ✅ Settings Management  
-✅ Help & Support  
+✅ Help & Support
 
 ### Technical Features
+
 - RESTful API architecture
 - MySQL database with complex relationships
 - Session-based authentication
@@ -316,17 +342,21 @@ http://localhost:3000/index.html
 ### Common Issues
 
 #### 1. Database Connection Failed
+
 **Error:** `Access denied for user 'root'@'localhost'`
 
 **Solution:**
+
 - Verify MySQL is running
 - Check username and password in `.env` file
 - Ensure database `3movieCollectors` exists
 
 #### 2. Port Already in Use
+
 **Error:** `EADDRINUSE: address already in use :::3000`
 
 **Solution:**
+
 ```bash
 # Windows
 netstat -ano | findstr :3000
@@ -339,27 +369,35 @@ lsof -ti:3000 | xargs kill -9
 Or change the `PORT` in `.env` file to a different number (e.g., 3001)
 
 #### 3. Module Not Found
+
 **Error:** `Cannot find module 'express'`
 
 **Solution:**
+
 ```bash
 npm install
 ```
 
 #### 4. Movies Not Displaying
+
 **Solution:**
+
 - Run the movie scraper: `node server/add-more-movies.js`
 - Download posters: `node server/fetch-posters.js`
 - Verify `pictures/movie_posters/` directory exists
 
 #### 5. Sessions Not Persisting
+
 **Solution:**
+
 - Clear browser cookies and cache
 - Verify `SESSION_SECRET` is set in `.env`
 - Restart the server
 
 #### 6. Event Overlap Error
+
 If you see "You have an overlapping event" but shouldn't:
+
 ```bash
 # Run the cleanup script
 node server/cleanup_overlaps.js
@@ -423,6 +461,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For issues, questions, or contributions:
+
 - GitHub: https://github.com/ib-hussain/3movieCollectors
 - Email: Support team
 
