@@ -11,6 +11,8 @@ router.get("/", async (req, res) => {
     }
 
     const userId = req.session.userId;
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
 
     // Get all friendships where user is either user1 or user2
     const query = `
@@ -30,10 +32,32 @@ router.get("/", async (req, res) => {
             )
             WHERE f.user1 = ? OR f.user2 = ?
             ORDER BY u.name
+            LIMIT ? OFFSET ?
         `;
 
-    const friends = await db.query(query, [userId, userId, userId, userId]);
-    res.json(friends);
+    const friends = await db.query(query, [
+      userId,
+      userId,
+      userId,
+      userId,
+      limit + 1,
+      offset,
+    ]);
+
+    // Check for more friends
+    const hasMore = friends.length > limit;
+    const paginatedFriends = hasMore ? friends.slice(0, limit) : friends;
+
+    res.json({
+      success: true,
+      friends: paginatedFriends,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
+    });
   } catch (error) {
     console.error("Error fetching friends:", error);
     res.status(500).json({ error: "Failed to fetch friends" });
@@ -102,6 +126,8 @@ router.get("/suggestions", async (req, res) => {
     }
 
     const userId = req.session.userId;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = parseInt(req.query.offset) || 0;
 
     // Algorithm: Find users who are friends with my friends, but not friends with me
     // If no mutual friends exist, show all other users
@@ -138,7 +164,7 @@ router.get("/suggestions", async (req, res) => {
                 SELECT senderID FROM FriendRequest WHERE receiverID = ? AND status = 'pending'
             )
             ORDER BY mutualFriendsCount DESC, u.name
-            LIMIT 20
+            LIMIT ? OFFSET ?
         `;
 
     const suggestions = await db.query(query, [
@@ -151,9 +177,26 @@ router.get("/suggestions", async (req, res) => {
       userId,
       userId,
       userId,
+      limit + 1,
+      offset,
     ]);
 
-    res.json(suggestions);
+    // Check for more suggestions
+    const hasMore = suggestions.length > limit;
+    const paginatedSuggestions = hasMore
+      ? suggestions.slice(0, limit)
+      : suggestions;
+
+    res.json({
+      success: true,
+      suggestions: paginatedSuggestions,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
+    });
   } catch (error) {
     console.error("Error fetching friend suggestions:", error);
     res.status(500).json({ error: "Failed to fetch friend suggestions" });

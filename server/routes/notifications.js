@@ -18,6 +18,8 @@ router.get("/notifications", requireAuth, async (req, res) => {
   try {
     const userId = req.session.userId;
     const filter = req.query.filter || "all"; // 'all' or 'unread'
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
 
     let query = `
       SELECT 
@@ -44,9 +46,16 @@ router.get("/notifications", requireAuth, async (req, res) => {
       query += " AND n.isSeen = FALSE";
     }
 
-    query += " ORDER BY n.timeStamp DESC LIMIT 50";
+    query += " ORDER BY n.timeStamp DESC LIMIT ? OFFSET ?";
+    params.push(limit + 1, offset);
 
     const notifications = await db.query(query, params);
+
+    // Check for more notifications
+    const hasMore = notifications.length > limit;
+    const paginatedNotifications = hasMore
+      ? notifications.slice(0, limit)
+      : notifications;
 
     // Get unread count
     const unreadCount = await db.query(
@@ -56,8 +65,14 @@ router.get("/notifications", requireAuth, async (req, res) => {
 
     res.json({
       success: true,
-      notifications,
+      notifications: paginatedNotifications,
       unreadCount: unreadCount[0]?.count || 0,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Error fetching notifications:", error);

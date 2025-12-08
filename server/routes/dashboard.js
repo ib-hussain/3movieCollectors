@@ -273,6 +273,7 @@ router.get("/recent-watchlist", requireAuth, async (req, res) => {
 /**
  * GET /api/dashboard/recent-activity
  * Get recent activity from friends (reviews, watchlist additions, events)
+ * Optimized: Uses MySQL UNION and database-level pagination
  */
 router.get("/recent-activity", requireAuth, async (req, res) => {
   try {
@@ -280,79 +281,129 @@ router.get("/recent-activity", requireAuth, async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
     const offset = parseInt(req.query.offset) || 0;
 
-    // Get friend IDs (Friends table has no status column)
-    const friends = await db.query(
-      `SELECT CASE 
-         WHEN user1 = ? THEN user2 
-         ELSE user1 
-       END as friendId
-       FROM Friends 
-       WHERE user1 = ? OR user2 = ?`,
-      [userId, userId, userId]
+    // Use a single optimized query with UNION ALL to combine all activities
+    // MySQL handles sorting and pagination efficiently
+    const activities = await db.query(
+      `
+      SELECT * FROM (
+        -- Reviews from friends
+        SELECT 
+          'review' as type,
+          rr.movieID as movieId,
+          rr.userID as userId,
+          u.username,
+          u.name,
+          u.profilePicture,
+          m.title as movieTitle,
+          rr.rating,
+          rr.review as reviewText,
+          NULL as postContent,
+          NULL as likeCount,
+          NULL as commentCount,
+          NULL as commentContent,
+          NULL as originalPost,
+          NULL as postID,
+          NULL as commentID,
+          rr.reviewDate as activityDate
+        FROM ReviewRatings rr
+        JOIN User u ON rr.userID = u.userID
+        JOIN Movie m ON rr.movieID = m.movieID
+        WHERE rr.userID IN (
+          SELECT CASE 
+            WHEN user1 = ? THEN user2 
+            ELSE user1 
+          END as friendId
+          FROM Friends 
+          WHERE user1 = ? OR user2 = ?
+        )
+        
+        UNION ALL
+        
+        -- Posts from friends
+        SELECT 
+          'post' as type,
+          p.movieID as movieId,
+          p.userID as userId,
+          u.username,
+          u.name,
+          u.profilePicture,
+          m.title as movieTitle,
+          NULL as rating,
+          NULL as reviewText,
+          p.postContent,
+          p.likeCount,
+          p.commentCount,
+          NULL as commentContent,
+          NULL as originalPost,
+          p.postID,
+          NULL as commentID,
+          p.createdAt as activityDate
+        FROM Post p
+        JOIN User u ON p.userID = u.userID
+        JOIN Movie m ON p.movieID = m.movieID
+        WHERE p.userID IN (
+          SELECT CASE 
+            WHEN user1 = ? THEN user2 
+            ELSE user1 
+          END as friendId
+          FROM Friends 
+          WHERE user1 = ? OR user2 = ?
+        )
+        
+        UNION ALL
+        
+        -- Comments from friends on user's posts (exclude user's own comments)
+        SELECT 
+          'comment' as type,
+          p.movieID as movieId,
+          c.userID as userId,
+          u.username,
+          u.name,
+          u.profilePicture,
+          m.title as movieTitle,
+          NULL as rating,
+          NULL as reviewText,
+          NULL as postContent,
+          NULL as likeCount,
+          NULL as commentCount,
+          c.commentContent,
+          p.postContent as originalPost,
+          c.postID,
+          c.commentID,
+          c.createdAt as activityDate
+        FROM Comments c
+        JOIN Post p ON c.postID = p.postID
+        JOIN User u ON c.userID = u.userID
+        JOIN Movie m ON p.movieID = m.movieID
+        WHERE p.userID = ? AND c.userID != ?
+      ) AS combined_activities
+      ORDER BY activityDate DESC
+      LIMIT ? OFFSET ?
+      `,
+      [
+        userId,
+        userId,
+        userId,
+        userId,
+        userId,
+        userId,
+        userId,
+        userId,
+        limit + 1,
+        offset,
+      ]
     );
 
-    if (!friends || friends.length === 0) {
-      return res.json({
-        success: true,
-        activities: [],
-      });
-    }
-
-    const friendIds = friends.map((f) => f.friendId);
-
-    // Get recent reviews from friends
-    const reviews = await db.query(
-      `SELECT 'review' as type, rr.movieID as movieId, rr.userID as userId, u.username, u.name,
-       u.profilePicture, m.title as movieTitle, rr.rating, rr.review as reviewText,
-       rr.reviewDate as activityDate
-       FROM ReviewRatings rr
-       JOIN User u ON rr.userID = u.userID
-       JOIN Movie m ON rr.movieID = m.movieID
-       WHERE rr.userID IN (?)
-       ORDER BY rr.reviewDate DESC`,
-      [friendIds]
-    );
-
-    // Get posts from friends
-    const posts = await db.query(
-      `SELECT 'post' as type, p.postID, p.movieID as movieId, p.userID as userId, 
-       u.username, u.name, u.profilePicture, m.title as movieTitle, p.postContent,
-       p.likeCount, p.commentCount, p.createdAt as activityDate
-       FROM Post p
-       JOIN User u ON p.userID = u.userID
-       JOIN Movie m ON p.movieID = m.movieID
-       WHERE p.userID IN (?)
-       ORDER BY p.createdAt DESC`,
-      [friendIds]
-    );
-
-    // Get comments on user's own posts
-    const comments = await db.query(
-      `SELECT 'comment' as type, c.commentID, c.postID, p.movieID as movieId,
-       c.userID as userId, u.username, u.name, u.profilePicture,
-       m.title as movieTitle, c.commentContent, p.postContent as originalPost,
-       c.createdAt as activityDate
-       FROM Comments c
-       JOIN Post p ON c.postID = p.postID
-       JOIN User u ON c.userID = u.userID
-       JOIN Movie m ON p.movieID = m.movieID
-       WHERE p.userID = ?
-       ORDER BY c.createdAt DESC`,
-      [userId]
-    );
-
-    // Combine all activities and sort by date
-    const allActivities = [...reviews, ...posts, ...comments].sort(
-      (a, b) => new Date(b.activityDate) - new Date(a.activityDate)
-    );
-
-    // Apply pagination
-    const paginatedActivities = allActivities.slice(offset, offset + limit);
+    // Check if there are more activities (we fetched limit + 1)
+    const hasMore = activities.length > limit;
+    const paginatedActivities = hasMore
+      ? activities.slice(0, limit)
+      : activities;
 
     res.json({
       success: true,
       activities: paginatedActivities,
-      hasMore: allActivities.length > offset + limit,
+      hasMore: hasMore,
     });
   } catch (error) {
     console.error("Recent activity error:", error);
