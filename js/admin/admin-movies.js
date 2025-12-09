@@ -63,18 +63,21 @@ function initializeEventListeners() {
   // Filters
   document.getElementById("genreFilter").addEventListener("change", (e) => {
     currentFilters.genre = e.target.value;
+    console.log("Genre filter changed to:", currentFilters.genre);
     currentPage = 1;
     loadMovies();
   });
 
   document.getElementById("yearFilter").addEventListener("change", (e) => {
     currentFilters.year = e.target.value;
+    console.log("Year filter changed to:", currentFilters.year);
     currentPage = 1;
     loadMovies();
   });
 
   document.getElementById("sortBy").addEventListener("change", (e) => {
     currentFilters.sortBy = e.target.value;
+    console.log("Sort changed to:", currentFilters.sortBy);
     loadMovies();
   });
 
@@ -126,6 +129,11 @@ function initializeEventListeners() {
     .getElementById("cancelDeleteBtn")
     .addEventListener("click", closeDeleteModal);
 
+  // Notification button
+  document.getElementById("notificationBtn").addEventListener("click", () => {
+    window.location.href = "/admin/admin-dashboard.html#notifications";
+  });
+
   // Forms
   document
     .getElementById("movieForm")
@@ -151,7 +159,7 @@ function initializeEventListeners() {
 // Load genres for filters and form
 async function loadGenres() {
   try {
-    const response = await fetch(`${API_BASE}/genres`);
+    const response = await fetch(`${API_BASE}/movies/genres`);
     if (!response.ok) throw new Error("Failed to load genres");
 
     const data = await response.json();
@@ -161,7 +169,7 @@ async function loadGenres() {
     const genreFilter = document.getElementById("genreFilter");
     allGenres.forEach((genre) => {
       const option = document.createElement("option");
-      option.value = genre.genreID;
+      option.value = genre.genreName;
       option.textContent = genre.genreName;
       genreFilter.appendChild(option);
     });
@@ -194,9 +202,7 @@ async function loadMovieStats() {
     document.getElementById("totalViews").textContent = formatNumber(
       data.totalViews || 0
     );
-    document.getElementById("avgRating").textContent = (
-      data.averageRating || 0
-    ).toFixed(1);
+    document.getElementById("avgRating").textContent = data.recentReviews || 0;
   } catch (error) {
     console.error("Error loading stats:", error);
   }
@@ -216,17 +222,31 @@ async function loadMovies() {
     });
 
     if (currentFilters.search) params.append("search", currentFilters.search);
-    if (currentFilters.genre) params.append("genreId", currentFilters.genre);
+    if (currentFilters.genre) params.append("genre", currentFilters.genre);
     if (currentFilters.year) params.append("year", currentFilters.year);
-    if (currentFilters.sortBy) params.append("sortBy", currentFilters.sortBy);
+
+    console.log("Loading movies with params:", Object.fromEntries(params));
+    console.log("Current filters:", currentFilters);
+
+    // Handle sort with _desc suffix
+    if (currentFilters.sortBy) {
+      const sortValue = currentFilters.sortBy;
+      if (sortValue.endsWith("_desc")) {
+        params.append("sortBy", sortValue.replace("_desc", ""));
+        params.append("sortOrder", "DESC");
+      } else {
+        params.append("sortBy", sortValue);
+        params.append("sortOrder", "ASC");
+      }
+    }
 
     const response = await fetch(`${API_BASE}/movies?${params}`);
     if (!response.ok) throw new Error("Failed to load movies");
 
     const data = await response.json();
     const movies = data.movies || [];
-    totalPages = data.totalPages || 1;
-    totalItems = data.total || 0;
+    totalPages = data.pagination?.pages || 1;
+    totalItems = data.pagination?.total || 0;
 
     if (movies.length === 0) {
       tbody.innerHTML =
@@ -251,8 +271,20 @@ async function loadMovies() {
 
 // Create movie table row
 function createMovieRow(movie) {
-  const posterUrl =
-    movie.posterImg || "../../pictures/movie_posters/default.jpg";
+  // Fix poster path - ensure it starts with /pictures/ if it exists
+  let posterUrl = "";
+  if (movie.posterImg) {
+    if (movie.posterImg.startsWith("http")) {
+      posterUrl = movie.posterImg;
+    } else if (movie.posterImg.startsWith("/pictures/")) {
+      posterUrl = movie.posterImg;
+    } else if (movie.posterImg.startsWith("movie_posters/")) {
+      posterUrl = "/pictures/" + movie.posterImg;
+    } else {
+      posterUrl = "/pictures/movie_posters/" + movie.posterImg;
+    }
+  }
+
   const genres = movie.genres
     ? movie.genres.split(",").slice(0, 3).join(", ")
     : "N/A";
@@ -264,10 +296,15 @@ function createMovieRow(movie) {
   return `
         <tr data-movie-id="${movie.movieID}">
             <td>
-                <img src="${escapeHtml(posterUrl)}" 
-                     alt="${escapeHtml(movie.title)}" 
-                     class="movie-poster"
-                     onerror="this.src='../../pictures/movie_posters/default.jpg'">
+                ${
+                  posterUrl
+                    ? `<img src="${escapeHtml(posterUrl)}" 
+                       alt="${escapeHtml(movie.title)}" 
+                       class="movie-poster"
+                       onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                  <div class="poster-placeholder" style="display: none;"><i class="fas fa-film"></i></div>`
+                    : `<div class="poster-placeholder"><i class="fas fa-film"></i></div>`
+                }
             </td>
             <td><strong>${escapeHtml(movie.title)}</strong></td>
             <td>${escapeHtml(movie.director || "N/A")}</td>
@@ -426,6 +463,11 @@ async function handleMovieSubmit(e) {
     return;
   }
 
+  if (selectedGenres.length === 0) {
+    showNotification("Please select at least one genre", "error");
+    return;
+  }
+
   const movieData = {
     title,
     releaseYear: year,
@@ -505,7 +547,7 @@ async function handleDeleteConfirm() {
 // Open bulk import modal
 function openBulkImportModal() {
   document.getElementById("bulkImportModal").style.display = "flex";
-  document.getElementById("tmdbIds").value = "";
+  document.getElementById("numMovies").value = "5";
   document.getElementById("importProgress").style.display = "none";
   document.getElementById("importResults").innerHTML = "";
 }
@@ -517,20 +559,11 @@ function closeBulkImportModal() {
 
 // Handle bulk import from TMDB
 async function handleBulkImport() {
-  const tmdbIdsText = document.getElementById("tmdbIds").value.trim();
-  if (!tmdbIdsText) {
-    showNotification("Please enter TMDB IDs", "error");
-    return;
-  }
+  const numMoviesInput = document.getElementById("numMovies").value.trim();
+  const numMovies = parseInt(numMoviesInput);
 
-  // Parse IDs (comma or newline separated)
-  const tmdbIds = tmdbIdsText
-    .split(/[\n,]/)
-    .map((id) => id.trim())
-    .filter((id) => id && /^\d+$/.test(id));
-
-  if (tmdbIds.length === 0) {
-    showNotification("No valid TMDB IDs found", "error");
+  if (!numMoviesInput || isNaN(numMovies) || numMovies < 1 || numMovies > 100) {
+    showNotification("Please enter a valid number between 1 and 100", "error");
     return;
   }
 
@@ -542,22 +575,60 @@ async function handleBulkImport() {
   progressDiv.style.display = "block";
   resultsDiv.innerHTML = "";
   progressFill.style.width = "0%";
-  progressText.textContent = "Starting import...";
+  progressText.textContent = "Connecting to TMDB...";
+
+  let currentProgress = 0;
+  let progressInterval;
+
+  // Simulate realistic progress
+  const updateProgress = (target, message) => {
+    if (progressInterval) clearInterval(progressInterval);
+
+    progressInterval = setInterval(() => {
+      if (currentProgress < target) {
+        currentProgress += 1;
+        progressFill.style.width = `${currentProgress}%`;
+      } else {
+        clearInterval(progressInterval);
+      }
+    }, 50);
+
+    if (message) progressText.textContent = message;
+  };
 
   try {
+    // Phase 1: Scraping (0-50%)
+    updateProgress(10, "Connecting to TMDB...");
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    updateProgress(20, `Scraping ${numMovies} movies from TMDB...`);
+
+    const startTime = Date.now();
     const response = await fetch(`${API_BASE}/movies/bulk-add`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tmdbIds }),
+      body: JSON.stringify({ numMovies }),
     });
+
+    // Estimate progress based on time (scraping typically takes 2-5 seconds per movie)
+    const elapsed = Date.now() - startTime;
+    const estimatedProgress = Math.min(50, 20 + elapsed / 100);
+    updateProgress(estimatedProgress, "Processing movie data...");
 
     if (!response.ok) {
       const error = await response.json();
       throw new Error(error.message || "Failed to import movies");
     }
 
+    // Phase 2: Database import (50-90%)
+    updateProgress(60, "Importing to database...");
     const result = await response.json();
 
+    updateProgress(90, "Finalizing import...");
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    // Phase 3: Complete (100%)
+    clearInterval(progressInterval);
     progressFill.style.width = "100%";
     progressText.textContent = "Import complete!";
 
@@ -571,7 +642,12 @@ async function handleBulkImport() {
                 }</strong> movies imported successfully</p>
                 ${
                   result.skipped > 0
-                    ? `<p><small>${result.skipped} movies were skipped (already exist or invalid)</small></p>`
+                    ? `<p><small>${result.skipped} movies were skipped (already exist)</small></p>`
+                    : ""
+                }
+                ${
+                  result.errors && result.errors.length > 0
+                    ? `<p class="warning"><small>${result.errors.length} errors occurred during import</small></p>`
                     : ""
                 }
             </div>
@@ -584,6 +660,8 @@ async function handleBulkImport() {
     }, 2000);
   } catch (error) {
     console.error("Error importing movies:", error);
+    clearInterval(progressInterval);
+    progressFill.style.width = "0%";
     progressText.textContent = "Import failed";
     resultsDiv.innerHTML = `
             <div class="import-error">

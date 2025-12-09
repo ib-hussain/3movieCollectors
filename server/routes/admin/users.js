@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
   try {
     const {
       role, // user, admin
-      isSuspended,
+      status, // active, suspended
       search,
       page = 1,
       limit = 20,
@@ -31,7 +31,7 @@ router.get("/", async (req, res) => {
         (SELECT COUNT(*) FROM ReviewRatings WHERE userID = User.userID) as reviewCount,
         (SELECT COUNT(*) FROM UserViolations WHERE userID = User.userID) as violationCount
       FROM User
-      WHERE 1=1
+      WHERE isDeleted = 0
     `;
 
     const params = [];
@@ -41,9 +41,10 @@ router.get("/", async (req, res) => {
       params.push(role);
     }
 
-    if (isSuspended !== undefined) {
-      query += ` AND isSuspended = ?`;
-      params.push(isSuspended === "true" ? 1 : 0);
+    if (status === "active") {
+      query += ` AND isSuspended = 0`;
+    } else if (status === "suspended") {
+      query += ` AND isSuspended = 1`;
     }
 
     if (search) {
@@ -58,15 +59,16 @@ router.get("/", async (req, res) => {
     const users = await db.query(query, params);
 
     // Get total count
-    let countQuery = `SELECT COUNT(*) as total FROM User WHERE 1=1`;
+    let countQuery = `SELECT COUNT(*) as total FROM User WHERE isDeleted = 0`;
     const countParams = [];
     if (role) {
       countQuery += ` AND role = ?`;
       countParams.push(role);
     }
-    if (isSuspended !== undefined) {
-      countQuery += ` AND isSuspended = ?`;
-      countParams.push(isSuspended === "true" ? 1 : 0);
+    if (status === "active") {
+      countQuery += ` AND isSuspended = 0`;
+    } else if (status === "suspended") {
+      countQuery += ` AND isSuspended = 1`;
     }
     if (search) {
       countQuery += ` AND (username LIKE ? OR email LIKE ? OR name LIKE ?)`;
@@ -79,12 +81,10 @@ router.get("/", async (req, res) => {
     res.json({
       success: true,
       users,
-      pagination: {
-        page: parseInt(page),
-        limit: parseInt(limit),
-        total: countResult[0].total,
-        totalPages: Math.ceil(countResult[0].total / limit),
-      },
+      total: countResult[0].total,
+      page: parseInt(page),
+      limit: parseInt(limit),
+      totalPages: Math.ceil(countResult[0].total / limit),
     });
   } catch (error) {
     console.error("Get users error:", error);
@@ -169,41 +169,67 @@ router.get("/:userID", async (req, res) => {
 router.put("/:userID/suspend", async (req, res) => {
   try {
     const { userID } = req.params;
-    const { duration, reason } = req.body; // duration in days
+    const { reason } = req.body;
     const adminID = req.session.userId;
 
-    if (!duration || !reason) {
+    if (!reason) {
       return res.status(400).json({
         success: false,
-        message: "Duration and reason are required",
+        message: "Suspension reason is required",
       });
     }
 
-    // Set admin context
+    if (!adminID) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized - no admin session",
+      });
+    }
+
+    // Prevent self-suspension
+    if (parseInt(userID) === adminID) {
+      return res.status(400).json({
+        success: false,
+        message: "Cannot suspend yourself",
+      });
+    }
+
+    // Suspend user
     await db.query(
       `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
+      UPDATE User 
+      SET isSuspended = 1, 
+          suspendedDate = NOW(),
+          suspensionReason = ?,
+          suspendedBy = ?
+      WHERE userID = ?
+    `,
+      [reason, adminID, userID]
+    );
+
+    // Log action in AuditLog
+    await db.query(
+      `
+      INSERT INTO AuditLog (
+        adminID, 
+        operationPerformed, 
+        targetTable, 
+        targetRecordID, 
+        actionDetails,
+        ipAddress
+      ) VALUES (?, 'MANAGEMENT', 'User', ?, ?, ?)
     `,
       [
         adminID,
+        userID,
+        `Suspended: ${reason}`,
         req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
       ]
     );
 
-    // Call stored procedure to suspend user
-    await db.query(`CALL sp_suspend_user(?, ?, ?, ?)`, [
-      userID,
-      duration,
-      reason,
-      adminID,
-    ]);
-
     res.json({
       success: true,
-      message: `User suspended for ${duration} days`,
+      message: "User suspended successfully",
     });
   } catch (error) {
     console.error("Suspend user error:", error);
@@ -221,25 +247,14 @@ router.put("/:userID/unsuspend", async (req, res) => {
     const { userID } = req.params;
     const adminID = req.session.userId;
 
-    // Set admin context
-    await db.query(
-      `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
-    `,
-      [
-        adminID,
-        req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
-      ]
-    );
-
     // Unsuspend user
     await db.query(
       `
       UPDATE User 
-      SET isSuspended = 0, suspendedDate = NULL
+      SET isSuspended = 0, 
+          suspendedDate = NULL,
+          suspensionReason = NULL,
+          suspendedBy = NULL
       WHERE userID = ?
     `,
       [userID]
@@ -249,13 +264,13 @@ router.put("/:userID/unsuspend", async (req, res) => {
     await db.query(
       `
       INSERT INTO AuditLog (
-        userID, 
+        adminID, 
         operationPerformed, 
-        tableName, 
-        recordID, 
-        changeDetails,
+        targetTable, 
+        targetRecordID, 
+        actionDetails,
         ipAddress
-      ) VALUES (?, 'UNSUSPEND USER', 'User', ?, 'User unsuspended by admin', ?)
+      ) VALUES (?, 'MANAGEMENT', 'User', ?, 'User unsuspended by admin', ?)
     `,
       [adminID, userID, req.ip || req.connection.remoteAddress]
     );
@@ -352,20 +367,6 @@ router.put("/:userID/role", async (req, res) => {
       });
     }
 
-    // Set admin context
-    await db.query(
-      `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
-    `,
-      [
-        adminID,
-        req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
-      ]
-    );
-
     // Update user role
     await db.query(
       `
@@ -374,6 +375,26 @@ router.put("/:userID/role", async (req, res) => {
       WHERE userID = ?
     `,
       [role, userID]
+    );
+
+    // Log action in AuditLog
+    await db.query(
+      `
+      INSERT INTO AuditLog (
+        adminID, 
+        operationPerformed, 
+        targetTable, 
+        targetRecordID, 
+        actionDetails,
+        ipAddress
+      ) VALUES (?, 'MANAGEMENT', 'User', ?, ?, ?)
+    `,
+      [
+        adminID,
+        userID,
+        `Role changed to ${role}`,
+        req.ip || req.connection.remoteAddress,
+      ]
     );
 
     res.json({

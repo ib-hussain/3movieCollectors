@@ -38,6 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
         block: "start",
       });
     });
+
+  // Handle hash navigation (e.g., from other pages)
+  if (window.location.hash === "#notifications") {
+    setTimeout(() => {
+      document.querySelector(".notifications-section")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 500); // Wait for page to load
+  }
 });
 
 // Check if user is authenticated as admin

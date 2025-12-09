@@ -138,6 +138,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  flex-shrink: 0;
+  min-width: 0;
 }
 
 /* ==================== TOP BAR ==================== */
@@ -208,6 +210,20 @@ body {
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+  min-width: 0;
+  gap: 2rem;
+}
+
+.content-area {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - var(--topbar-height));
+  min-width: 800px;
+  width: 100%;
   gap: 2rem;
 }
 
@@ -357,11 +373,15 @@ body {
 
 .table-container {
   overflow-x: auto;
+  min-height: 400px;
+  width: 100%;
 }
 
 .data-table {
   width: 100%;
+  min-width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .data-table thead {

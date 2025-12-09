@@ -132,7 +132,7 @@ router.post("/login", loginValidation, async (req, res, next) => {
 
     // Find user by email
     const users = await db.query(
-      "SELECT userID, username, name, email, password, role FROM User WHERE email = ? AND isDeleted = FALSE",
+      "SELECT userID, username, name, email, password, role, isSuspended, suspensionReason FROM User WHERE email = ? AND isDeleted = FALSE",
       [email]
     );
 
@@ -152,6 +152,16 @@ router.post("/login", loginValidation, async (req, res, next) => {
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
+      });
+    }
+
+    // Check if user is suspended
+    if (user.isSuspended) {
+      return res.status(403).json({
+        success: false,
+        message: `Your account has been suspended. Reason: ${
+          user.suspensionReason || "Violation of terms of service"
+        }`,
       });
     }
 

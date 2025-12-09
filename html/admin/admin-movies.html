@@ -65,10 +65,14 @@
         <header class="top-bar">
           <h1>Movie Management</h1>
           <div class="top-bar-actions">
-            <button class="btn-icon" id="notificationBtn" title="Notifications">
+            <div
+              class="notification-bell"
+              id="notificationBtn"
+              title="Notifications"
+            >
               <i class="fas fa-bell"></i>
-              <span class="badge" id="notificationCount">0</span>
-            </button>
+              <span class="notification-count" id="notificationCount">0</span>
+            </div>
             <div class="admin-profile">
               <i class="fas fa-user-shield"></i>
               <span id="adminName">Admin</span>
@@ -122,8 +126,8 @@
                 <option value="title_desc">Title (Z-A)</option>
                 <option value="year_desc">Year (Newest)</option>
                 <option value="year">Year (Oldest)</option>
-                <option value="rating">Rating (High)</option>
-                <option value="views">Views (High)</option>
+                <option value="rating_desc">Rating (High)</option>
+                <option value="views_desc">Views (High)</option>
               </select>
             </div>
             <button class="btn btn-small" id="resetFilters">
@@ -168,11 +172,11 @@
                   background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
                 "
               >
-                <i class="fas fa-star"></i>
+                <i class="fas fa-comment-dots"></i>
               </div>
               <div class="stat-info">
                 <span class="stat-value" id="avgRating">0</span>
-                <span class="stat-label">Avg Rating</span>
+                <span class="stat-label">Reviews (7d)</span>
               </div>
             </div>
           </div>
@@ -273,8 +277,15 @@
               </div>
               <div class="form-group">
                 <label for="moviePoster">Poster URL</label>
-                <input type="url" id="moviePoster" placeholder="https://..." />
-                <small>Optional: Direct link to movie poster image</small>
+                <input
+                  type="text"
+                  id="moviePoster"
+                  placeholder="https://... or movie_posters/image.jpg"
+                />
+                <small
+                  >Optional: Full URL or relative path (e.g.,
+                  movie_posters/poster.jpg)</small
+                >
               </div>
             </div>
 
@@ -301,14 +312,31 @@
         <div class="modal-body">
           <div class="import-section">
             <h3><i class="fas fa-database"></i> Import from TMDB</h3>
-            <p>Enter TMDB movie IDs separated by commas or line breaks</p>
-            <textarea
-              id="tmdbIds"
-              rows="8"
-              placeholder="550, 13, 27205&#10;Or one ID per line:&#10;550&#10;13&#10;27205"
-            ></textarea>
+            <p>Enter the number of movies to import from TMDB (1-100)</p>
+            <input
+              type="number"
+              id="numMovies"
+              min="1"
+              max="100"
+              value="5"
+              placeholder="Enter number (e.g., 10)"
+              style="
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #334155;
+                border-radius: 8px;
+                background: #1e293b;
+                color: #e2e8f0;
+                font-size: 16px;
+                margin-bottom: 15px;
+              "
+            />
+            <p style="font-size: 13px; color: #64748b; margin-top: -10px">
+              <i class="fas fa-info-circle"></i> Movies will be scraped from
+              TMDB with full details and posters
+            </p>
             <button class="btn btn-primary" id="importTmdbBtn">
-              <i class="fas fa-download"></i> Import from TMDB
+              <i class="fas fa-download"></i> Import Movies from TMDB
             </button>
           </div>
           <div
