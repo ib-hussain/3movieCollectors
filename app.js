@@ -67,6 +67,9 @@ app.use("/components", express.static(path.join(__dirname, "components")));
 // Serve HTML files
 app.use(express.static(path.join(__dirname, "html")));
 
+// Serve root-level files (like test-dashboard.html)
+app.use(express.static(path.join(__dirname)));
+
 // ==================== API ROUTES ====================
 
 // Mount API routes
@@ -121,9 +124,12 @@ app.use("/api", eventsRoutes);
 const settingsRoutes = require("./server/routes/settings");
 app.use("/api", settingsRoutes);
 
+// Admin routes (Phase 2 - Admin Features)
+const adminRoutes = require("./server/routes/admin");
+app.use("/api/admin", adminRoutes);
+
 // Future route imports (will be added as we implement features)
 // const postsRoutes = require('./server/routes/posts');
-// const adminRoutes = require('./server/routes/admin');
 
 // app.use('/api/auth', authRoutes);
 // app.use('/api/movies', moviesRoutes);

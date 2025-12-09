@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Management - Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin/admin-dashboard.css" />
+    <link rel="stylesheet" href="/css/admin/admin-movies.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <i class="fas fa-film"></i>
+          <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="admin-dashboard.html" class="nav-item">
+            <i class="fas fa-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="admin-moderation.html" class="nav-item">
+            <i class="fas fa-flag"></i>
+            <span>Moderation</span>
+          </a>
+          <a href="admin-users.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+          <a href="admin-movies.html" class="nav-item active">
+            <i class="fas fa-film"></i>
+            <span>Movies</span>
+          </a>
+          <a href="admin-messages.html" class="nav-item">
+            <i class="fas fa-envelope"></i>
+            <span>Messages</span>
+          </a>
+          <a href="admin-restricted.html" class="nav-item">
+            <i class="fas fa-ban"></i>
+            <span>Restricted Words</span>
+          </a>
+          <a href="admin-reports.html" class="nav-item">
+            <i class="fas fa-file-export"></i>
+            <span>Reports</span>
+          </a>
+          <a href="admin-audit.html" class="nav-item">
+            <i class="fas fa-history"></i>
+            <span>Audit Log</span>
+          </a>
+          <a href="admin-security.html" class="nav-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Security</span>
+          </a>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+          <h1>Movie Management</h1>
+          <div class="top-bar-actions">
+            <button class="btn-icon" id="notificationBtn" title="Notifications">
+              <i class="fas fa-bell"></i>
+              <span class="badge" id="notificationCount">0</span>
+            </button>
+            <div class="admin-profile">
+              <i class="fas fa-user-shield"></i>
+              <span id="adminName">Admin</span>
+              <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Content Area -->
+        <div class="content-area">
+          <!-- Action Bar -->
+          <div class="action-bar">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input
+                type="text"
+                id="searchInput"
+                placeholder="Search movies by title, director, year..."
+              />
+            </div>
+            <div class="action-buttons">
+              <button class="btn btn-primary" id="addMovieBtn">
+                <i class="fas fa-plus"></i> Add Movie
+              </button>
+              <button class="btn btn-secondary" id="bulkImportBtn">
+                <i class="fas fa-upload"></i> Bulk Import
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter Bar -->
+          <div class="filter-bar">
+            <div class="filter-group">
+              <label for="genreFilter">Genre:</label>
+              <select id="genreFilter">
+                <option value="">All Genres</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="yearFilter">Year:</label>
+              <select id="yearFilter">
+                <option value="">All Years</option>
+              </select>
+            </div>
+            <div class="filter-group">
+              <label for="sortBy">Sort By:</label>
+              <select id="sortBy">
+                <option value="title">Title (A-Z)</option>
+                <option value="title_desc">Title (Z-A)</option>
+                <option value="year_desc">Year (Newest)</option>
+                <option value="year">Year (Oldest)</option>
+                <option value="rating">Rating (High)</option>
+                <option value="views">Views (High)</option>
+              </select>
+            </div>
+            <button class="btn btn-small" id="resetFilters">
+              <i class="fas fa-redo"></i> Reset
+            </button>
+          </div>
+
+          <!-- Stats Cards -->
+          <div class="stats-row">
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                "
+              >
+                <i class="fas fa-film"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value" id="totalMovies">0</span>
+                <span class="stat-label">Total Movies</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                "
+              >
+                <i class="fas fa-eye"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value" id="totalViews">0</span>
+                <span class="stat-label">Total Views</span>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                "
+              >
+                <i class="fas fa-star"></i>
+              </div>
+              <div class="stat-info">
+                <span class="stat-value" id="avgRating">0</span>
+                <span class="stat-label">Avg Rating</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Movies Table -->
+          <div class="table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Poster</th>
+                  <th>Title</th>
+                  <th>Director</th>
+                  <th>Year</th>
+                  <th>Genres</th>
+                  <th>Rating</th>
+                  <th>Views</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="moviesTableBody">
+                <tr>
+                  <td colspan="8" class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading movies...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <button class="btn-pagination" id="prevPage" disabled>
+              <i class="fas fa-chevron-left"></i> Previous
+            </button>
+            <div class="pagination-info">
+              <span
+                >Page <span id="currentPage">1</span> of
+                <span id="totalPages">1</span></span
+              >
+              <span class="separator">•</span>
+              <span
+                >Showing <span id="showingStart">0</span>-<span id="showingEnd"
+                  >0</span
+                >
+                of <span id="totalItems">0</span> movies</span
+              >
+            </div>
+            <button class="btn-pagination" id="nextPage" disabled>
+              Next <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Add/Edit Movie Modal -->
+    <div id="movieModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Add New Movie</h2>
+          <button class="modal-close" id="closeModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <form id="movieForm">
+            <input type="hidden" id="movieId" />
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="movieTitle">Title *</label>
+                <input type="text" id="movieTitle" required />
+              </div>
+              <div class="form-group">
+                <label for="movieYear">Release Year *</label>
+                <input
+                  type="number"
+                  id="movieYear"
+                  min="1900"
+                  max="2030"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="movieDirector">Director *</label>
+              <input type="text" id="movieDirector" required />
+            </div>
+
+            <div class="form-group">
+              <label for="movieSynopsis">Synopsis</label>
+              <textarea id="movieSynopsis" rows="4"></textarea>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="movieGenres">Genres</label>
+                <div id="genreCheckboxes" class="checkbox-group"></div>
+              </div>
+              <div class="form-group">
+                <label for="moviePoster">Poster URL</label>
+                <input type="url" id="moviePoster" placeholder="https://..." />
+                <small>Optional: Direct link to movie poster image</small>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" id="cancelBtn">
+                Cancel
+              </button>
+              <button type="submit" class="btn btn-primary" id="saveMovieBtn">
+                <i class="fas fa-save"></i> Save Movie
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bulk Import Modal -->
+    <div id="bulkImportModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Bulk Import Movies</h2>
+          <button class="modal-close" id="closeBulkModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="import-section">
+            <h3><i class="fas fa-database"></i> Import from TMDB</h3>
+            <p>Enter TMDB movie IDs separated by commas or line breaks</p>
+            <textarea
+              id="tmdbIds"
+              rows="8"
+              placeholder="550, 13, 27205&#10;Or one ID per line:&#10;550&#10;13&#10;27205"
+            ></textarea>
+            <button class="btn btn-primary" id="importTmdbBtn">
+              <i class="fas fa-download"></i> Import from TMDB
+            </button>
+          </div>
+          <div
+            class="import-progress"
+            id="importProgress"
+            style="display: none"
+          >
+            <div class="progress-bar">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Importing...</p>
+          </div>
+          <div id="importResults" class="import-results"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+      <div class="modal-content modal-small">
+        <div class="modal-header">
+          <h2>Confirm Delete</h2>
+          <button class="modal-close" id="closeDeleteModal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to delete this movie?</p>
+          <p><strong id="deleteMovieTitle"></strong></p>
+          <p class="warning">
+            <i class="fas fa-exclamation-triangle"></i> This action cannot be
+            undone!
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="cancelDeleteBtn">Cancel</button>
+          <button class="btn btn-danger" id="confirmDeleteBtn">
+            <i class="fas fa-trash"></i> Delete Movie
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/js/admin/admin-movies.js"></script>
+  </body>
+</html>
