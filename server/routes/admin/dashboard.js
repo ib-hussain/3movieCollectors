@@ -271,6 +271,29 @@ router.get("/notifications", async (req, res) => {
   }
 });
 
+// GET /api/admin/notifications/unread-count - Get unread notification count
+router.get("/notifications/unread-count", async (req, res) => {
+  try {
+    const result = await db.query(`
+      SELECT COUNT(*) as count
+      FROM AdminNotifications
+      WHERE isRead = 0
+    `);
+
+    res.json({
+      success: true,
+      count: result[0].count,
+    });
+  } catch (error) {
+    console.error("Get unread notification count error:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to get unread notification count",
+      error: error.message,
+    });
+  }
+});
+
 // PUT /api/admin/dashboard/notifications/:notificationID/read - Mark notification as read
 router.put("/notifications/:notificationID/read", async (req, res) => {
   try {

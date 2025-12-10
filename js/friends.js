@@ -115,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load friends
   async function loadFriends() {
     try {
-      const friends = await App.get("/friends");
-      allFriends = friends;
-      displayFriends(friends);
+      const response = await App.get("/friends");
+      allFriends = response.friends || [];
+      displayFriends(allFriends);
       updateCounts();
     } catch (error) {
       console.error("Error loading friends:", error);
@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load friend requests
   async function loadRequests() {
     try {
-      const requests = await App.get("/friends/requests");
-      allRequests = requests;
-      displayRequests(requests);
+      const response = await App.get("/friends/requests");
+      allRequests = response || { incoming: [], outgoing: [] };
+      displayRequests(allRequests);
       updateCounts();
     } catch (error) {
       console.error("Error loading requests:", error);
@@ -143,9 +143,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Load friend suggestions
   async function loadSuggestions() {
     try {
-      const suggestions = await App.get("/friends/suggestions");
-      allSuggestions = suggestions;
-      displaySuggestions(suggestions);
+      const response = await App.get("/friends/suggestions");
+      allSuggestions = response.suggestions || [];
+      displaySuggestions(allSuggestions);
       updateCounts();
     } catch (error) {
       console.error("Error loading suggestions:", error);
