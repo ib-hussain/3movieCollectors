@@ -17,6 +17,15 @@ const {
 
 // ==================== AUDIT LOG EXPORTS ====================
 
+// TODO: Add audit logging for 'REPORT CREATION' operation
+// When Reports Interface (Phase 9) is implemented, add this to each export endpoint:
+//
+// await db.query(
+//   `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+//    VALUES (?, 'REPORT CREATION', 'AuditLog', 0, ?)`,
+//   [req.session.userId, `Generated ${format} report: ${reportType} with filters`]
+// );
+
 // GET /api/admin/reports/audit-log/pdf - Export audit log as PDF
 router.get("/audit-log/pdf", async (req, res) => {
   try {

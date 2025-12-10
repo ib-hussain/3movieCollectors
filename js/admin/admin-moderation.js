@@ -448,6 +448,46 @@ async function viewFlag(flagID) {
 function displayFlagDetails(flag) {
   const body = document.getElementById("flagDetailsBody");
 
+  // Build content display
+  let contentDisplay = "";
+  if (flag.fullContent) {
+    const content = flag.fullContent;
+    if (flag.contentType === "Post") {
+      contentDisplay = `
+        <div class="content-detail">
+          <strong>Author:</strong> ${content.authorUsername || "Unknown"}<br>
+          <strong>Posted:</strong> ${formatDateTime(content.createdAt)}<br>
+          <strong>Content:</strong><br>
+          <div class="full-content">${content.postContent || "No content"}</div>
+        </div>
+      `;
+    } else if (flag.contentType === "Comment") {
+      contentDisplay = `
+        <div class="content-detail">
+          <strong>Author:</strong> ${content.authorUsername || "Unknown"}<br>
+          <strong>Posted:</strong> ${formatDateTime(content.createdAt)}<br>
+          <strong>Content:</strong><br>
+          <div class="full-content">${
+            content.commentContent || "No content"
+          }</div>
+        </div>
+      `;
+    } else if (flag.contentType === "Review") {
+      contentDisplay = `
+        <div class="content-detail">
+          <strong>Author:</strong> ${content.authorUsername || "Unknown"}<br>
+          <strong>Movie:</strong> ${content.movieTitle || "Unknown"}<br>
+          <strong>Rating:</strong> ${content.rating || "N/A"}/10<br>
+          <strong>Posted:</strong> ${formatDateTime(content.reviewDate)}<br>
+          <strong>Review:</strong><br>
+          <div class="full-content">${content.review || "No review text"}</div>
+        </div>
+      `;
+    }
+  } else {
+    contentDisplay = `<div class="value" style="color: #ef4444;">Content has been deleted or is unavailable</div>`;
+  }
+
   body.innerHTML = `
     <div class="flag-detail-item">
       <label>Flag ID</label>
@@ -464,10 +504,8 @@ function displayFlagDetails(flag) {
     </div>
 
     <div class="flag-detail-item">
-      <label>Content</label>
-      <div class="content-preview">${
-        flag.contentPreview || "No content available"
-      }</div>
+      <label>Full Content</label>
+      ${contentDisplay}
     </div>
 
     <div class="flag-detail-item">

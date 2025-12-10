@@ -24,7 +24,17 @@ router.get("/flags", async (req, res) => {
         fc.flaggedDate,
         fc.status,
         fc.isHidden,
-        fc.matchedWord
+        fc.matchedWord,
+        CASE 
+          WHEN fc.contentType = 'Post' THEN (SELECT SUBSTRING(p.postContent, 1, 200) FROM Post p WHERE p.postID = fc.contentID)
+          WHEN fc.contentType = 'Comment' THEN (SELECT SUBSTRING(c.commentContent, 1, 200) FROM Comments c WHERE c.commentID = fc.contentID)
+          WHEN fc.contentType = 'Review' THEN (
+            SELECT SUBSTRING(rr.review, 1, 200) 
+            FROM ReviewRatings rr 
+            WHERE CONCAT(rr.movieID, '-', rr.userID) = fc.contentID
+          )
+          ELSE 'No preview available'
+        END as contentPreview
       FROM FlaggedContent fc
       WHERE fc.status = ?
     `;
@@ -74,6 +84,7 @@ router.get("/flags", async (req, res) => {
 router.get("/flags/:flagID", async (req, res) => {
   try {
     const { flagID } = req.params;
+    const adminID = req.session.userId;
 
     const flags = await db.query(
       `
@@ -96,9 +107,88 @@ router.get("/flags/:flagID", async (req, res) => {
       });
     }
 
+    const flag = flags[0];
+
+    // Fetch the actual content based on content type
+    let contentData = null;
+    try {
+      console.log(
+        `Fetching content for flag ${flagID}, type: ${flag.contentType}, contentID: ${flag.contentID}`
+      );
+
+      if (flag.contentType === "Post") {
+        const posts = await db.query(
+          `SELECT p.postID, p.postContent, p.createdAt, u.username as authorUsername, u.userID as authorID
+           FROM Post p
+           LEFT JOIN User u ON p.userID = u.userID
+           WHERE p.postID = ?`,
+          [flag.contentID]
+        );
+        contentData = posts.length > 0 ? posts[0] : null;
+        console.log(`Post content found:`, contentData ? "Yes" : "No");
+      } else if (flag.contentType === "Comment") {
+        const comments = await db.query(
+          `SELECT c.commentID, c.commentContent, c.createdAt, u.username as authorUsername, u.userID as authorID
+           FROM Comments c
+           LEFT JOIN User u ON c.userID = u.userID
+           WHERE c.commentID = ?`,
+          [flag.contentID]
+        );
+        contentData = comments.length > 0 ? comments[0] : null;
+        console.log(`Comment content found:`, contentData ? "Yes" : "No");
+      } else if (flag.contentType === "Review") {
+        // Review contentID is in format "movieID-userID"
+        const [movieID, userID] = flag.contentID.split("-");
+        const reviews = await db.query(
+          `SELECT rr.rating, rr.review, rr.reviewDate, u.username as authorUsername, u.userID as authorID, m.title as movieTitle
+           FROM ReviewRatings rr
+           LEFT JOIN User u ON rr.userID = u.userID
+           LEFT JOIN Movie m ON rr.movieID = m.movieID
+           WHERE rr.movieID = ? AND rr.userID = ?`,
+          [movieID, userID]
+        );
+        contentData = reviews.length > 0 ? reviews[0] : null;
+        console.log(`Review content found:`, contentData ? "Yes" : "No");
+      }
+
+      if (contentData) {
+        console.log("Content data keys:", Object.keys(contentData));
+      }
+    } catch (contentError) {
+      console.error("Error fetching content:", contentError);
+      // Continue even if content fetch fails
+    }
+
+    // Add content to flag object
+    flag.fullContent = contentData;
+    console.log(
+      "Flag response includes fullContent:",
+      flag.fullContent ? "Yes" : "No"
+    );
+
+    // Log view of restricted content to AuditLog
+    await db.query(
+      `
+      INSERT INTO AuditLog (
+        adminID, 
+        operationPerformed, 
+        targetTable, 
+        targetRecordID, 
+        actionDetails
+      ) VALUES (?, 'VIEW RESTRICTED CONTENT', 'FlaggedContent', ?, ?)
+    `,
+      [
+        adminID,
+        flagID,
+        `Viewed ${flag.contentType} (ID: ${flag.contentID}) - Matched word: ${
+          flag.matchedWord || "N/A"
+        }`,
+      ]
+    );
+
     res.json({
       success: true,
-      flag: flags[0],
+      flag: flag,
     });
   } catch (error) {
     console.error("Get flag details error:", error);

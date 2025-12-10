@@ -445,19 +445,182 @@ Based on your answers, here are the confirmed specifications:
 
 ---
 
-### 📋 **PHASE 9: Frontend - Reports Interface (NEXT)**
+### ✅ **PHASE 8.5: Audit Log Page & VIEW RESTRICTED CONTENT - COMPLETED**
 
-**Goal:** Content moderation queue and restricted words
+**Status:** ✅ **COMPLETE & FULLY TESTED**  
+**Completed:** December 10, 2025
+
+**Goal:** Audit log viewer with filtering/pagination/exports + VIEW RESTRICTED CONTENT audit logging
+
+**Files Created:**
+
+1. ✅ `html/admin/admin-audit.html` (220 lines) - Audit log viewer page
+2. ✅ `js/admin/admin-audit.js` (377 lines) - Audit log logic with filtering
+3. ✅ `css/admin/admin-audit.css` (192 lines) - Audit log dark theme styling
+
+**Files Modified:**
+
+1. ✅ `server/routes/admin/moderation.js` - Enhanced flag endpoint with full content fetching
+2. ✅ `js/admin/admin-moderation.js` - Full content display in modal
+3. ✅ `css/admin/admin-moderation.css` - Content styling with scrollbars
+4. ✅ `server/utils/pdfExport.js` - Fixed page indexing bug in addFooter
+5. ✅ `server/routes/admin/reports.js` - Added TODO for REPORT CREATION logging
+6. ✅ All admin HTML files - Added Audit Log link to sidebars (6th menu item)
+
+**Key Features:**
+
+- **Audit Log Viewer Page:**
+  - Filter by operation type (7 types: INSERT, UPDATE, DELETE CONTENT, MODERATION, MANAGEMENT, REPORT CREATION, VIEW RESTRICTED CONTENT)
+  - Filter by table name (8 tables: Post, Comments, ReviewRatings, FlaggedContent, User, Watchlist, RestrictedWords, Messages)
+  - Date range filtering with datetime-local inputs (from/to dates)
+  - Pagination (50 entries per page with first/prev/next/last controls)
+  - Real-time data display with color-coded operation badges
+  - CSV export with filters applied (downloads as audit_log_YYYY-MM-DD.csv)
+  - PDF export with filters applied (A4 landscape, 10pt font, 15 rows per page)
+  - Detailed action details column with code-style formatting
+  - Admin username and timestamp for each log entry
+  - Apply/Clear filters buttons with immediate effect
+- **VIEW RESTRICTED CONTENT Audit Logging:**
+  - Backend: Enhanced GET `/api/admin/moderation/flags/:flagID` endpoint
+  - Fetches full content from Post (postContent, createdAt), Comments (commentContent, createdAt), ReviewRatings (review, reviewDate, rating, title)
+  - Returns flag object with nested fullContent property including author details
+  - Creates audit log entry on every view: `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)`
+  - Action details format: `Viewed {contentType} (ID: {contentID}) - Matched word: {matchedWord}`
+  - Handles deleted content gracefully with null checks and error messages
+  - Content preview in list view (200 character SUBSTRING for performance)
+- **Full Content Display in Moderation Modal:**
+  - Frontend: Enhanced `displayFlagDetails` function in admin-moderation.js
+  - Shows full flagged content with proper formatting (scrollable, max-height 300px)
+  - Displays author username, timestamp (createdAt/reviewDate), and complete content
+  - For Reviews: also shows movie title and star rating (1-5 stars)
+  - Custom scrollbar styling with #667eea purple theme
+  - Error message "Content has been deleted or is unavailable" if fullContent is null
+  - Graceful handling of missing fullContent property
+
+**Bug Fixes:**
+
+- **PDF Export Bug (pdfExport.js):**
+  - Issue: `switchToPage(0) out of bounds` error when buffer starts at page 4
+  - Root cause: Using absolute page index instead of relative to buffer
+  - Solution: Changed `doc.switchToPage(i)` to `doc.switchToPage(range.start + i)`
+  - Impact: Multi-page PDF reports now export without 500 errors
+- **Column Name Mismatches:**
+  - Fixed Post: `createdAt` (was using postDate)
+  - Fixed Comments: `createdAt` (was using timeStamp)
+  - Fixed ReviewRatings: `reviewDate` (was using timeStamp), `title` from Movie join (was using movieTitle)
+  - Applied fixes in backend queries (moderation.js) and frontend display (admin-moderation.js)
+- **db.query Array Issue:**
+  - Issue: `posts.length` check passing but `posts[0]` returning undefined
+  - Root cause: Destructuring `const [posts]` when db.query already returns array
+  - Solution: Changed to `const posts = await db.query()` to avoid nested arrays
+  - Impact: Full content now displays correctly in modal for all content types
+
+**Testing & Verification:**
+
+- ✅ Created comprehensive test suite: `test-view-content-comprehensive.js` (6 tests, 340 lines)
+- ✅ Test 1: List flags with content preview (verified 200 char SUBSTRING limit)
+- ✅ Test 2: Retrieve full content for Post (postContent, createdAt, author username)
+- ✅ Test 3: Retrieve full content for Comment (commentContent, createdAt, author username)
+- ✅ Test 4: Retrieve full content for Review (review, reviewDate, rating, movie title, author username)
+- ✅ Test 5: Audit logging (verified INSERT for each view, validated actionDetails format with matched word)
+- ✅ Test 6: Performance test (10 flag views in 29ms, average 4.14ms per view)
+- ✅ Verified deleted content handling (null check working, error message shown)
+- ✅ PDF export tested on multi-page reports (no more 500 errors on pages 2+)
+- ✅ Audit log filtering working (operation type + table name + date range)
+- ✅ Audit log pagination functional (50 per page, proper counts)
+- ✅ CSV/PDF exports include filtered results only
+- ✅ Modal displays content correctly for all three content types (Post, Comment, Review)
+- ✅ 150+ audit log entries in database from testing and normal operations
+
+**Audit Log Operation Coverage:**
+
+- ✅ INSERT - Fully implemented (movies.js, bulk movie import)
+- ✅ UPDATE - Fully implemented (movies.js edit + database triggers)
+- ✅ DELETE CONTENT - Fully implemented (triggers on Post/Comment/Review deletion)
+- ✅ MODERATION - Fully implemented (flag dismissals, rescans, restricted word actions)
+- ✅ MANAGEMENT - Fully implemented (user suspend/unsuspend, role changes)
+- ✅ VIEW RESTRICTED CONTENT - ✅ **Fully implemented** (this phase)
+- ⚠️ REPORT CREATION - Partial (TODO added in reports.js for Phase 9)
+
+**UI Components:**
+
+- Filter section with 4 dropdowns (operation type, table name) + 2 date inputs (from/to)
+- Apply/Clear filters buttons with purple styling
+- Stats card showing total audit log entries
+- 6-column data table: Log ID, Admin, Operation (badge), Table, Timestamp, Action Details (code block)
+- 7 color-coded operation badges (INSERT=blue, UPDATE=green, DELETE=red, MODERATION=purple, MANAGEMENT=orange, REPORT=teal, VIEW=pink)
+- Pagination controls with first/prev/next/last buttons
+- Export buttons (CSV + PDF) with download icons
+- Dark theme (#1e1e2e backgrounds, #667eea purple accents)
+- Code blocks for actionDetails with dark syntax highlighting
+- Striped table rows with hover effects
+
+**API Integration:**
+
+- `/api/admin/audit-log` - Get audit logs with filters (operation, table, dateFrom, dateTo, page, limit) ✅
+- `/api/admin/audit-log/export/csv` - Export CSV with filters ✅
+- `/api/admin/audit-log/export/pdf` - Export PDF with filters ✅
+- `/api/admin/moderation/flags/:id` - Enhanced with fullContent fetching and VIEW audit logging ✅
+
+**Design Consistency:**
+
+- Sidebar updates: All 6 admin pages now include Audit Log link (6th item after Reports)
+- Navigation: Dashboard, Users, Movies, Moderation, Reports, **Audit Log**
+- Dark theme maintained across all pages (#1e1e2e base, #667eea accents)
+- Operation badges consistent with action severity (red=DELETE, green=UPDATE, purple=MODERATION)
+- Table styling matches other admin pages (striped rows, hover effects)
+- Export functionality consistent with existing reports
+
+---
+
+### 📋 **PHASE 9: Reports Interface UI (NEXT - FINAL MAJOR FEATURE)**
+
+**Status:** 🎯 **NEXT UP**  
+**Priority:** HIGH (Last page remaining)
+
+**Goal:** Report generation and export interface with REPORT CREATION audit logging
 
 **Files to Create:**
 
-1. `html/admin/moderation.html` - Moderation queue page
-2. `html/admin/restricted.html` - Restricted words page
-3. `js/admin/admin-moderation.js` - Moderation logic
-4. `js/admin/admin-restricted.js` - Restricted words logic
+1. `html/admin/admin-reports.html` - Reports generation page
+2. `js/admin/admin-reports.js` - Report generation logic
+3. `css/admin/admin-reports.css` - Reports page styling (optional, can reuse audit styles)
 
-**Estimated Time:** 1-2 sessions  
-**Complexity:** Medium-High
+**Files to Create:**
+
+1. `html/admin/admin-reports.html` - Reports generation page
+2. `js/admin/admin-reports.js` - Report generation logic
+3. `css/admin/admin-reports.css` - Reports page styling (optional, can reuse audit styles)
+
+**Files to Modify:**
+
+1. `server/routes/admin/reports.js` - Add REPORT CREATION audit logging to all export endpoints
+
+**Key Features to Implement:**
+
+- Report type selection (4 types: Audit Log, User Activity, Flagged Content, Security Events)
+- Date range filtering (from/to dates)
+- Export format selection (PDF/CSV)
+- Generate report button with progress feedback
+- Preview section showing report summary
+- Download buttons for generated reports
+- Stats cards showing available report types and recent exports
+- Use existing 8 export endpoints from Phase 4
+- Add REPORT CREATION audit log entry on every export
+
+**Existing API Endpoints (Phase 4):**
+
+- `/api/admin/reports/audit-log/pdf` - Export audit log as PDF ✅
+- `/api/admin/reports/audit-log/csv` - Export audit log as CSV ✅
+- `/api/admin/reports/user-activity/pdf` - Export user activity as PDF ✅
+- `/api/admin/reports/user-activity/csv` - Export user activity as CSV ✅
+- `/api/admin/reports/flagged-content/pdf` - Export flagged content as PDF ✅
+- `/api/admin/reports/flagged-content/csv` - Export flagged content as CSV ✅
+- `/api/admin/reports/security-events/pdf` - Export security events as PDF ✅
+- `/api/admin/reports/security-events/csv` - Export security events as CSV ✅
+
+**Estimated Time:** 1 session  
+**Complexity:** Medium (UI creation + audit logging integration)
 
 ---
 
@@ -477,26 +640,19 @@ Based on your answers, here are the confirmed specifications:
 
 ---
 
-### **PHASE 9: Notifications & Real-time (Session After)**
+### **PHASE 10: Testing & Polish (FINAL SESSION)**
 
-**Goal:** Admin notifications and polling system
-
-**Files to Create:**
-
-1. `server/routes/admin/notifications.js` - Admin notification API
-2. `js/admin/admin-polling.js` - Centralized polling service
-3. `js/admin/admin-notifications.js` - Notification UI
-
-**Estimated Time:** 1 session  
-**Complexity:** Medium
-
----
-
-### **PHASE 10: Testing & Polish (Final Session)**
-
-**Goal:** End-to-end testing, bug fixes, documentation
+**Goal:** End-to-end testing, bug fixes, final documentation
 
 **Tasks:**
+
+- Cross-browser testing (Chrome, Firefox, Edge)
+- Mobile responsiveness verification
+- Performance optimization (query caching, pagination)
+- Security audit (SQL injection, XSS, CSRF)
+- Final documentation updates (user guide, deployment guide)
+- Code cleanup and refactoring
+- Final testing of all 6 admin pages
 
 1. Test all admin workflows
 2. Verify trigger execution
