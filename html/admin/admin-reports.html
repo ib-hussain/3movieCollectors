@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports - Admin Panel | 3MovieCollectors</title>
+    <link rel="stylesheet" href="../../css/admin/admin-dashboard.css" />
+    <link rel="stylesheet" href="../../css/admin/admin-reports.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="logo">
+          <i class="fas fa-film"></i>
+          <span>Admin Panel</span>
+        </div>
+        <nav class="nav-menu">
+          <a href="admin-dashboard.html" class="nav-item">
+            <i class="fas fa-chart-line"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="admin-users.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+          <a href="admin-movies.html" class="nav-item">
+            <i class="fas fa-film"></i>
+            <span>Movies</span>
+          </a>
+          <a href="admin-moderation.html" class="nav-item">
+            <i class="fas fa-flag"></i>
+            <span>Moderation</span>
+          </a>
+          <a href="admin-reports.html" class="nav-item active">
+            <i class="fas fa-file-alt"></i>
+            <span>Reports</span>
+          </a>
+          <a href="admin-audit.html" class="nav-item">
+            <i class="fas fa-history"></i>
+            <span>Audit Log</span>
+          </a>
+        </nav>
+        <div class="sidebar-footer">
+          <a href="../dashboard.html" class="nav-item">
+            <i class="fas fa-arrow-left"></i>
+            <span>Back to Site</span>
+          </a>
+          <a href="#" class="nav-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+          <h1>Reports & Exports</h1>
+          <div class="top-bar-actions">
+            <div class="notification-bell">
+              <i class="fas fa-bell"></i>
+              <span class="notification-count" id="notificationCount">0</span>
+            </div>
+            <div class="admin-profile">
+              <span id="adminUsername">Admin</span>
+              <i class="fas fa-user-circle"></i>
+            </div>
+          </div>
+        </header>
+
+        <!-- Reports Content -->
+        <div class="reports-container">
+          <!-- Statistics Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                "
+              >
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="totalReports">0</h3>
+                <p>Total Reports Generated</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+                "
+              >
+                <i class="fas fa-clock"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="reportsToday">0</h3>
+                <p>Reports Today</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+                "
+              >
+                <i class="fas fa-download"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="lastReportTime">Never</h3>
+                <p>Last Report Generated</p>
+              </div>
+            </div>
+            <div class="stat-card">
+              <div
+                class="stat-icon"
+                style="
+                  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+                "
+              >
+                <i class="fas fa-file-csv"></i>
+              </div>
+              <div class="stat-info">
+                <h3>4</h3>
+                <p>Report Types Available</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Report Generation Section -->
+          <div class="report-section">
+            <div class="section-header">
+              <h2><i class="fas fa-chart-bar"></i> Generate Report</h2>
+              <p>
+                Select report type, apply filters, and export in your preferred
+                format
+              </p>
+            </div>
+
+            <div class="report-form">
+              <!-- Report Type Selection -->
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label for="reportType">
+                    <i class="fas fa-file-alt"></i> Report Type
+                  </label>
+                  <select id="reportType" onchange="updateReportDescription()">
+                    <option value="audit-log">Audit Log Report</option>
+                    <option value="user-activity">User Activity Report</option>
+                    <option value="flagged-content">
+                      Flagged Content Report
+                    </option>
+                    <option value="security-events">
+                      Security Events Report
+                    </option>
+                  </select>
+                  <small id="reportDescription" class="form-help">
+                    Complete audit trail of all admin actions, system changes,
+                    and user modifications
+                  </small>
+                </div>
+              </div>
+
+              <!-- Filters Section -->
+              <div class="filters-section" id="filtersSection">
+                <h3><i class="fas fa-filter"></i> Filters (Optional)</h3>
+
+                <!-- Audit Log Filters -->
+                <div class="filter-group" id="auditLogFilters">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label for="operationType">Operation Type</label>
+                      <select id="operationType">
+                        <option value="">All Operations</option>
+                        <option value="INSERT">INSERT</option>
+                        <option value="UPDATE">UPDATE</option>
+                        <option value="DELETE CONTENT">DELETE CONTENT</option>
+                        <option value="MODERATION">MODERATION</option>
+                        <option value="MANAGEMENT">MANAGEMENT</option>
+                        <option value="REPORT CREATION">REPORT CREATION</option>
+                        <option value="VIEW RESTRICTED CONTENT">
+                          VIEW RESTRICTED CONTENT
+                        </option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label for="tableName">Table Name</label>
+                      <select id="tableName">
+                        <option value="">All Tables</option>
+                        <option value="Post">Post</option>
+                        <option value="Comments">Comments</option>
+                        <option value="ReviewRatings">ReviewRatings</option>
+                        <option value="FlaggedContent">FlaggedContent</option>
+                        <option value="User">User</option>
+                        <option value="Watchlist">Watchlist</option>
+                        <option value="RestrictedWords">RestrictedWords</option>
+                        <option value="Messages">Messages</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Date Range Filters -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="startDate">
+                      <i class="fas fa-calendar-alt"></i> From Date
+                    </label>
+                    <input type="datetime-local" id="startDate" />
+                  </div>
+                  <div class="form-group">
+                    <label for="endDate">
+                      <i class="fas fa-calendar-alt"></i> To Date
+                    </label>
+                    <input type="datetime-local" id="endDate" />
+                  </div>
+                </div>
+
+                <!-- Limit -->
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="recordLimit">
+                      <i class="fas fa-list-ol"></i> Record Limit
+                    </label>
+                    <select id="recordLimit">
+                      <option value="100">100 records</option>
+                      <option value="500">500 records</option>
+                      <option value="1000" selected>1000 records</option>
+                      <option value="5000">5000 records</option>
+                      <option value="10000">10000 records</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Export Format -->
+              <div class="form-row">
+                <div class="form-group full-width">
+                  <label>
+                    <i class="fas fa-file-export"></i> Export Format
+                  </label>
+                  <div class="format-buttons">
+                    <button
+                      class="format-btn active"
+                      data-format="pdf"
+                      onclick="selectFormat('pdf')"
+                    >
+                      <i class="fas fa-file-pdf"></i>
+                      <span>PDF Document</span>
+                      <small>Professional formatted report</small>
+                    </button>
+                    <button
+                      class="format-btn"
+                      data-format="csv"
+                      onclick="selectFormat('csv')"
+                    >
+                      <i class="fas fa-file-csv"></i>
+                      <span>CSV Spreadsheet</span>
+                      <small>Import into Excel or Google Sheets</small>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Generate Button -->
+              <div class="form-actions">
+                <button
+                  class="btn-primary btn-generate"
+                  onclick="generateReport()"
+                >
+                  <i class="fas fa-download"></i>
+                  Generate & Download Report
+                </button>
+                <button class="btn-secondary" onclick="resetFilters()">
+                  <i class="fas fa-redo"></i>
+                  Reset Filters
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Reports Section -->
+          <div class="recent-reports-section">
+            <div class="section-header">
+              <h2><i class="fas fa-history"></i> Recent Reports</h2>
+              <p>Last 10 generated reports from audit log</p>
+            </div>
+
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Report Type</th>
+                    <th>Generated By</th>
+                    <th>Format</th>
+                    <th>Timestamp</th>
+                    <th>Filters Applied</th>
+                  </tr>
+                </thead>
+                <tbody id="recentReportsTable">
+                  <tr>
+                    <td colspan="5" class="no-data">No recent reports found</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="loading-spinner">
+        <i class="fas fa-spinner fa-spin"></i>
+        <p>Generating report...</p>
+      </div>
+    </div>
+
+    <script src="../../js/admin/admin-reports.js"></script>
+  </body>
+</html>

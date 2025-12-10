@@ -17,15 +17,6 @@ const {
 
 // ==================== AUDIT LOG EXPORTS ====================
 
-// TODO: Add audit logging for 'REPORT CREATION' operation
-// When Reports Interface (Phase 9) is implemented, add this to each export endpoint:
-//
-// await db.query(
-//   `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
-//    VALUES (?, 'REPORT CREATION', 'AuditLog', 0, ?)`,
-//   [req.session.userId, `Generated ${format} report: ${reportType} with filters`]
-// );
-
 // GET /api/admin/reports/audit-log/pdf - Export audit log as PDF
 router.get("/audit-log/pdf", async (req, res) => {
   try {
@@ -77,6 +68,17 @@ router.get("/audit-log/pdf", async (req, res) => {
     params.push(parseInt(limit));
 
     const auditLogs = await db.query(query, params);
+
+    // Log report creation
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'AuditLog', 0, ?)`,
+      [req.session.userId, `Generated PDF report: audit-log${filterDetails}`]
+    );
 
     // Generate PDF
     const doc = generateAuditLogPDF(auditLogs, filters);
@@ -148,6 +150,22 @@ router.get("/audit-log/csv", async (req, res) => {
 
     const auditLogs = await db.query(query, params);
 
+    // Log report creation
+    const filters = {};
+    if (operation) filters.operation = operation;
+    if (tableName) filters.tableName = tableName;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'AuditLog', 0, ?)`,
+      [req.session.userId, `Generated CSV report: audit-log${filterDetails}`]
+    );
+
     // Generate CSV
     const csv = generateAuditLogCSV(auditLogs);
 
@@ -183,7 +201,6 @@ router.get("/user-activity/pdf", async (req, res) => {
         COUNT(DISTINCT p.postID) as postCount,
         COUNT(DISTINCT r.movieID) as reviewCount,
         COUNT(DISTINCT c.commentID) as commentCount,
-        fn_user_activity_score(u.userID) as activityScore,
         (SELECT COUNT(*) FROM UserViolations WHERE userID = u.userID) as violationCount
       FROM User u
       LEFT JOIN Post p ON u.userID = p.userID
@@ -191,9 +208,19 @@ router.get("/user-activity/pdf", async (req, res) => {
       LEFT JOIN Comments c ON u.userID = c.userID
       WHERE u.role = 'user'
       GROUP BY u.userID
-      ORDER BY activityScore DESC
+      ORDER BY postCount DESC, reviewCount DESC
       LIMIT 100
     `);
+
+    // Log report creation
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'User', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated PDF report: user-activity (${users.length} users)`,
+      ]
+    );
 
     const doc = generateUserActivityPDF(users);
 
@@ -227,7 +254,6 @@ router.get("/user-activity/csv", async (req, res) => {
         COUNT(DISTINCT p.postID) as postCount,
         COUNT(DISTINCT r.movieID) as reviewCount,
         COUNT(DISTINCT c.commentID) as commentCount,
-        fn_user_activity_score(u.userID) as activityScore,
         (SELECT COUNT(*) FROM UserViolations WHERE userID = u.userID) as violationCount
       FROM User u
       LEFT JOIN Post p ON u.userID = p.userID
@@ -235,9 +261,19 @@ router.get("/user-activity/csv", async (req, res) => {
       LEFT JOIN Comments c ON u.userID = c.userID
       WHERE u.role = 'user'
       GROUP BY u.userID
-      ORDER BY activityScore DESC
-      LIMIT 1000
+      ORDER BY postCount DESC, reviewCount DESC
+      LIMIT 500
     `);
+
+    // Log report creation
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'User', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated CSV report: user-activity (${users.length} users)`,
+      ]
+    );
 
     const csv = generateUserActivityCSV(users);
 
@@ -263,12 +299,12 @@ router.get("/user-activity/csv", async (req, res) => {
 // GET /api/admin/reports/flagged-content/pdf - Export flagged content as PDF
 router.get("/flagged-content/pdf", async (req, res) => {
   try {
-    const { status = "pending" } = req.query;
+    const { status = "pending", contentType, startDate, endDate } = req.query;
 
     let query = `
       SELECT 
         fc.*,
-        flagger.username as flaggerUsername,
+        'System' as flaggerUsername,
         CASE 
           WHEN fc.contentType = 'post' THEN (SELECT postContent FROM Post WHERE postID = fc.contentID)
           WHEN fc.contentType = 'review' THEN (SELECT review FROM ReviewRatings WHERE movieID = fc.contentID LIMIT 1)
@@ -276,7 +312,6 @@ router.get("/flagged-content/pdf", async (req, res) => {
           ELSE NULL
         END as contentPreview
       FROM FlaggedContent fc
-      LEFT JOIN User flagger ON fc.flaggedBy = flagger.userID
       WHERE 1=1
     `;
 
@@ -290,6 +325,25 @@ router.get("/flagged-content/pdf", async (req, res) => {
     query += ` ORDER BY fc.flaggedDate DESC LIMIT 500`;
 
     const flags = await db.query(query, params);
+
+    // Log report creation
+    const filters = {};
+    if (status) filters.status = status;
+    if (contentType) filters.contentType = contentType;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'FlaggedContent', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated PDF report: flagged-content${filterDetails}`,
+      ]
+    );
 
     const doc = generateFlaggedContentPDF(flags);
 
@@ -314,12 +368,12 @@ router.get("/flagged-content/pdf", async (req, res) => {
 // GET /api/admin/reports/flagged-content/csv - Export flagged content as CSV
 router.get("/flagged-content/csv", async (req, res) => {
   try {
-    const { status = "pending" } = req.query;
+    const { status = "pending", contentType, startDate, endDate } = req.query;
 
     let query = `
       SELECT 
         fc.*,
-        flagger.username as flaggerUsername,
+        'System' as flaggerUsername,
         CASE 
           WHEN fc.contentType = 'post' THEN (SELECT postContent FROM Post WHERE postID = fc.contentID)
           WHEN fc.contentType = 'review' THEN (SELECT review FROM ReviewRatings WHERE movieID = fc.contentID LIMIT 1)
@@ -327,7 +381,6 @@ router.get("/flagged-content/csv", async (req, res) => {
           ELSE NULL
         END as contentPreview
       FROM FlaggedContent fc
-      LEFT JOIN User flagger ON fc.flaggedBy = flagger.userID
       WHERE 1=1
     `;
 
@@ -341,6 +394,25 @@ router.get("/flagged-content/csv", async (req, res) => {
     query += ` ORDER BY fc.flaggedDate DESC LIMIT 5000`;
 
     const flags = await db.query(query, params);
+
+    // Log report creation
+    const filters = {};
+    if (status) filters.status = status;
+    if (contentType) filters.contentType = contentType;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'FlaggedContent', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated CSV report: flagged-content${filterDetails}`,
+      ]
+    );
 
     const csv = generateFlaggedContentCSV(flags);
 
@@ -371,6 +443,7 @@ router.get("/security-events/pdf", async (req, res) => {
     let query = `
       SELECT 
         se.*,
+        se.description as eventDetails,
         u.username
       FROM SecurityEvents se
       LEFT JOIN User u ON se.userID = u.userID
@@ -397,6 +470,24 @@ router.get("/security-events/pdf", async (req, res) => {
     query += ` ORDER BY se.eventDate DESC LIMIT 500`;
 
     const events = await db.query(query, params);
+
+    // Log report creation
+    const filters = {};
+    if (eventType) filters.eventType = eventType;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'SecurityEvents', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated PDF report: security-events${filterDetails}`,
+      ]
+    );
 
     const doc = generateSecurityEventsPDF(events);
 
@@ -426,6 +517,7 @@ router.get("/security-events/csv", async (req, res) => {
     let query = `
       SELECT 
         se.*,
+        se.description as eventDetails,
         u.username
       FROM SecurityEvents se
       LEFT JOIN User u ON se.userID = u.userID
@@ -452,6 +544,24 @@ router.get("/security-events/csv", async (req, res) => {
     query += ` ORDER BY se.eventDate DESC LIMIT 5000`;
 
     const events = await db.query(query, params);
+
+    // Log report creation
+    const filters = {};
+    if (eventType) filters.eventType = eventType;
+    if (startDate) filters.startDate = startDate;
+    if (endDate) filters.endDate = endDate;
+    const filterDetails =
+      Object.keys(filters).length > 0
+        ? ` with filters: ${JSON.stringify(filters)}`
+        : "";
+    await db.query(
+      `INSERT INTO AuditLog (adminID, operationPerformed, targetTable, targetRecordID, actionDetails)
+       VALUES (?, 'REPORT CREATION', 'SecurityEvents', 0, ?)`,
+      [
+        req.session.userId,
+        `Generated CSV report: security-events${filterDetails}`,
+      ]
+    );
 
     const csv = generateSecurityEventsCSV(events);
 

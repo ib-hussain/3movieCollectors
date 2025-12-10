@@ -149,7 +149,6 @@ function generateUserActivityCSV(users) {
     { key: "postCount", label: "Posts" },
     { key: "reviewCount", label: "Reviews" },
     { key: "commentCount", label: "Comments" },
-    { key: "activityScore", label: "Activity Score" },
     { key: "violationCount", label: "Violations" },
   ];
 

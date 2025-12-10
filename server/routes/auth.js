@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
 const db = require("../db");
+const { logFailedLogin } = require("../middleware/securityLogger");
 
 // Validation middleware
 const signupValidation = [
@@ -137,6 +138,14 @@ router.post("/login", loginValidation, async (req, res, next) => {
     );
 
     if (users.length === 0) {
+      // Log failed login - user not found
+      await logFailedLogin(
+        email,
+        req.ip || req.connection.remoteAddress,
+        req.headers["user-agent"] || "Unknown",
+        "User not found"
+      );
+
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
@@ -149,6 +158,14 @@ router.post("/login", loginValidation, async (req, res, next) => {
     const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch) {
+      // Log failed login - incorrect password
+      await logFailedLogin(
+        user.username,
+        req.ip || req.connection.remoteAddress,
+        req.headers["user-agent"] || "Unknown",
+        "Incorrect password"
+      );
+
       return res.status(401).json({
         success: false,
         message: "Invalid email or password",
@@ -157,6 +174,14 @@ router.post("/login", loginValidation, async (req, res, next) => {
 
     // Check if user is suspended
     if (user.isSuspended) {
+      // Log failed login - account suspended
+      await logFailedLogin(
+        user.username,
+        req.ip || req.connection.remoteAddress,
+        req.headers["user-agent"] || "Unknown",
+        `Account suspended: ${user.suspensionReason || "Violation of terms"}`
+      );
+
       return res.status(403).json({
         success: false,
         message: `Your account has been suspended. Reason: ${

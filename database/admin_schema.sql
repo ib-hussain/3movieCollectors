@@ -40,8 +40,7 @@ CREATE TABLE IF NOT EXISTS FlaggedContent(
     INDEX idx_status (status),
     INDEX idx_content (contentType, contentID),
     INDEX idx_flagged_date (flaggedDate),
-    INDEX idx_is_hidden (isHidden),
-    INDEX idx_flagged_by (flaggedBy)
+    INDEX idx_is_hidden (isHidden)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ============================================================
@@ -100,7 +99,7 @@ CREATE TABLE IF NOT EXISTS UserViolations(
     FOREIGN KEY (userID) REFERENCES User(userID) ON DELETE CASCADE,
     
     -- Violation details
-    violationType ENUM('restricted_word', 'spam', 'harassment', 'inappropriate_content', 'other') NOT NULL,
+    violationType ENUM('restricted_word') NOT NULL DEFAULT 'restricted_word',
     violationDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     
     -- Related content

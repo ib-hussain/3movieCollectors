@@ -285,11 +285,10 @@ function generateUserActivityPDF(users) {
   const columns = [
     { key: "username", label: "Username", width: 100 },
     { key: "email", label: "Email", width: 120 },
-    { key: "postCount", label: "Posts", width: 50, align: "right" },
-    { key: "reviewCount", label: "Reviews", width: 50, align: "right" },
-    { key: "commentCount", label: "Comments", width: 60, align: "right" },
-    { key: "activityScore", label: "Score", width: 50, align: "right" },
-    { key: "violationCount", label: "Violations", width: 65, align: "right" },
+    { key: "postCount", label: "Posts", width: 60, align: "right" },
+    { key: "reviewCount", label: "Reviews", width: 60, align: "right" },
+    { key: "commentCount", label: "Comments", width: 80, align: "right" },
+    { key: "violationCount", label: "Violations", width: 70, align: "right" },
   ];
 
   addTable(doc, users, columns);
