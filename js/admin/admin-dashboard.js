@@ -160,8 +160,7 @@ async function loadRecentFlags() {
           <td><span class="badge badge-${flag.contentType.toLowerCase()}">${
             flag.contentType
           }</span></td>
-          <td>${escapeHtml(flag.flagReason || "No reason")}</td>
-          <td>${escapeHtml(flag.flaggerUsername || "System")}</td>
+          <td>${escapeHtml(flag.matchedWord || "N/A")}</td>
           <td>${formatDate(flag.flaggedDate)}</td>
           <td>
             <button class="btn btn-sm btn-primary" onclick="viewFlag(${

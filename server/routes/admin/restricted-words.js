@@ -8,7 +8,9 @@ const db = require("../../db");
 // GET /api/admin/restricted-words - Get all restricted words
 router.get("/", async (req, res) => {
   try {
-    const { severity } = req.query;
+    const { severity, page = 1, limit = 20 } = req.query;
+
+    const offset = (page - 1) * limit;
 
     let query = `
       SELECT 
@@ -16,25 +18,41 @@ router.get("/", async (req, res) => {
         word,
         severity,
         addedDate,
-        lastScannedDate
+        lastScannedDate,
+        flagCount
       FROM RestrictedWords
     `;
 
     const params = [];
+    const countParams = [];
 
     if (severity) {
       query += ` WHERE severity = ?`;
       params.push(severity);
+      countParams.push(severity);
     }
 
-    query += ` ORDER BY addedDate DESC`;
+    query += ` ORDER BY addedDate DESC LIMIT ? OFFSET ?`;
+    params.push(parseInt(limit), parseInt(offset));
 
     const words = await db.query(query, params);
+
+    // Get total count for pagination
+    let countQuery = `SELECT COUNT(*) as total FROM RestrictedWords`;
+    if (severity) {
+      countQuery += ` WHERE severity = ?`;
+    }
+    const countResult = await db.query(countQuery, countParams);
 
     res.json({
       success: true,
       words,
-      total: words.length,
+      pagination: {
+        page: parseInt(page),
+        limit: parseInt(limit),
+        total: countResult[0].total,
+        totalPages: Math.ceil(countResult[0].total / limit),
+      },
     });
   } catch (error) {
     console.error("Get restricted words error:", error);
@@ -211,8 +229,13 @@ router.post("/bulk-add", async (req, res) => {
     let skipped = 0;
 
     for (const item of words) {
-      const word = item.word?.toLowerCase();
-      const severity = item.severity || "medium";
+      // Handle both string and object formats
+      const word =
+        typeof item === "string"
+          ? item.toLowerCase()
+          : item.word?.toLowerCase();
+      const severity =
+        typeof item === "string" ? "medium" : item.severity || "medium";
 
       if (!word) continue;
 
@@ -237,7 +260,7 @@ router.post("/bulk-add", async (req, res) => {
       success: true,
       message: `Bulk add completed: ${added} added, ${skipped} skipped (duplicates)`,
       added,
-      skipped,
+      duplicates: skipped,
     });
   } catch (error) {
     console.error("Bulk add restricted words error:", error);

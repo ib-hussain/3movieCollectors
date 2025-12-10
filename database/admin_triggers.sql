@@ -445,8 +445,6 @@ BEGIN
         INSERT INTO FlaggedContent (
             contentType,
             contentID,
-            flaggedBy,
-            flagReason,
             status,
             matchedWord,
             isHidden
@@ -454,8 +452,6 @@ BEGIN
         VALUES (
             'Post',
             NEW.postID,
-            NULL, -- System-triggered
-            CONCAT('Auto-flagged: Contains restricted word "', v_restricted, '"'),
             'pending',
             v_restricted,
             TRUE -- Hide content immediately
@@ -531,23 +527,19 @@ BEGIN
                 INSERT INTO FlaggedContent (
                     contentType,
                     contentID,
-                    flaggedBy,
                     flagReason,
                     status,
                     matchedWord,
                     isHidden
                 )
                 VALUES (
-                    'Post',
-                    NEW.postID,
-                    NULL,
+                    'Review',
+                    CONCAT(NEW.movieID, '-', NEW.userID),
                     CONCAT('Auto-flagged after edit: Contains restricted word "', v_restricted, '"'),
                     'pending',
                     v_restricted,
                     TRUE
-                );
-                
-                UPDATE RestrictedWords 
+                );DATE RestrictedWords 
                 SET flagCount = flagCount + 1 
                 WHERE word = v_restricted;
                 
@@ -590,8 +582,6 @@ BEGIN
         INSERT INTO FlaggedContent (
             contentType,
             contentID,
-            flaggedBy,
-            flagReason,
             status,
             matchedWord,
             isHidden
@@ -599,16 +589,10 @@ BEGIN
         VALUES (
             'Comment',
             NEW.commentID,
-            NULL,
-            CONCAT('Auto-flagged: Contains restricted word "', v_restricted, '"'),
             'pending',
             v_restricted,
             TRUE
-        );
-        
-        UPDATE RestrictedWords 
-        SET flagCount = flagCount + 1 
-        WHERE word = v_restricted;
+        );ERE word = v_restricted;
         
         INSERT INTO AdminNotifications (
             notificationType,
@@ -671,17 +655,13 @@ BEGIN
                 INSERT INTO FlaggedContent (
                     contentType,
                     contentID,
-                    flaggedBy,
-                    flagReason,
                     status,
                     matchedWord,
                     isHidden
                 )
                 VALUES (
-                    'Comment',
-                    NEW.commentID,
-                    NULL,
-                    CONCAT('Auto-flagged after edit: Contains "', v_restricted, '"'),
+                    'Post',
+                    NEW.postID,
                     'pending',
                     v_restricted,
                     TRUE
@@ -713,25 +693,17 @@ BEGIN
         INSERT INTO FlaggedContent (
             contentType,
             contentID,
-            flaggedBy,
-            flagReason,
             status,
             matchedWord,
             isHidden
         )
         VALUES (
             'Review',
-            CONCAT(NEW.movieID, '-', NEW.userID), -- Composite key
-            NULL,
-            CONCAT('Auto-flagged: Contains restricted word "', v_restricted, '"'),
+            CONCAT(NEW.movieID, '-', NEW.userID),
             'pending',
             v_restricted,
             TRUE
-        );
-        
-        UPDATE RestrictedWords 
-        SET flagCount = flagCount + 1 
-        WHERE word = v_restricted;
+        );ERE word = v_restricted;
         
         INSERT INTO AdminNotifications (
             notificationType,

@@ -20,10 +20,7 @@ CREATE TABLE IF NOT EXISTS FlaggedContent(
     contentType ENUM('Post', 'Comment', 'Review', 'Message') NOT NULL,
     contentID VARCHAR(50) NOT NULL, -- Can be INT or composite key like 'movieID-userID'
     
-    -- Flagging details
-    flaggedBy INT, -- NULL for system-triggered flags
-    FOREIGN KEY (flaggedBy) REFERENCES User(userID) ON DELETE SET NULL,
-    flagReason VARCHAR(1023) NOT NULL DEFAULT "",
+    -- Flagging details (system-triggered only)
     flaggedDate DATETIME DEFAULT CURRENT_TIMESTAMP,
     
     -- Status tracking

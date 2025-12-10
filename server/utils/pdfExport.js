@@ -317,11 +317,11 @@ function generateFlaggedContentPDF(flags) {
 
   const columns = [
     { key: "contentType", label: "Type", width: 60 },
-    { key: "flagReason", label: "Reason", width: 100 },
+    { key: "matchedWord", label: "Matched Word", width: 80 },
     { key: "flaggedDate", label: "Date", width: 90 },
     { key: "flaggerUsername", label: "Flagged By", width: 80 },
     { key: "status", label: "Status", width: 60 },
-    { key: "contentPreview", label: "Preview", width: 105 },
+    { key: "contentPreview", label: "Preview", width: 125 },
   ];
 
   addTable(doc, flags, columns);

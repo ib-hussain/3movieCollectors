@@ -125,7 +125,7 @@ function generateFlaggedContentCSV(flags) {
     { key: "flagID", label: "Flag ID" },
     { key: "contentType", label: "Content Type" },
     { key: "contentID", label: "Content ID" },
-    { key: "flagReason", label: "Reason" },
+    { key: "matchedWord", label: "Matched Word" },
     { key: "flaggedDate", label: "Flagged Date" },
     { key: "flaggerUsername", label: "Flagged By" },
     { key: "status", label: "Status" },

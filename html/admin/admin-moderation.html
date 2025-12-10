@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Moderation - Admin Panel</title>
+    <link rel="stylesheet" href="/css/admin/admin-dashboard.css" />
+    <link rel="stylesheet" href="/css/admin/admin-moderation.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <i class="fas fa-film"></i>
+          <h2>Admin Panel</h2>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="admin-dashboard.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="admin-users.html" class="nav-item">
+            <i class="fas fa-users"></i>
+            <span>Users</span>
+          </a>
+          <a href="admin-movies.html" class="nav-item">
+            <i class="fas fa-film"></i>
+            <span>Movies</span>
+          </a>
+          <a href="admin-moderation.html" class="nav-item active">
+            <i class="fas fa-shield-alt"></i>
+            <span>Moderation</span>
+          </a>
+          <a href="admin-reports.html" class="nav-item">
+            <i class="fas fa-chart-bar"></i>
+            <span>Reports</span>
+          </a>
+        </nav>
+        <button class="btn btn-logout" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="main-content">
+        <!-- Top Bar -->
+        <header class="top-bar">
+          <h1>Content Moderation</h1>
+          <div class="top-bar-actions">
+            <div
+              class="notification-bell"
+              id="notificationBtn"
+              title="Notifications"
+            >
+              <i class="fas fa-bell"></i>
+              <span class="notification-count" id="notificationCount">0</span>
+            </div>
+            <div class="admin-profile">
+              <i class="fas fa-user-shield"></i>
+              <span id="adminName">Admin</span>
+              <button class="btn-logout" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="dashboard-content">
+          <!-- Stats Cards -->
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-icon pending">
+                <i class="fas fa-flag"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="pendingFlags">0</h3>
+                <p>Pending Flags</p>
+                <span class="stat-change" id="pendingChange">-</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon dismissed">
+                <i class="fas fa-check-circle"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="dismissedFlags">0</h3>
+                <p>Dismissed Today</p>
+                <span class="stat-change" id="dismissedChange">-</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon deleted">
+                <i class="fas fa-trash"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="deletedContent">0</h3>
+                <p>Content Deleted</p>
+                <span class="stat-change" id="deletedChange">-</span>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon words">
+                <i class="fas fa-ban"></i>
+              </div>
+              <div class="stat-info">
+                <h3 id="restrictedWordsCount">0</h3>
+                <p>Restricted Words</p>
+                <span class="stat-change" id="wordsChange">-</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="tabs-container">
+            <button class="tab-btn active" data-tab="flagged">
+              <i class="fas fa-flag"></i> Flagged Content
+            </button>
+            <button class="tab-btn" data-tab="restricted">
+              <i class="fas fa-ban"></i> Restricted Words
+            </button>
+          </div>
+
+          <!-- Flagged Content Tab -->
+          <div class="tab-content active" id="flagged-tab">
+            <!-- Filters Section -->
+            <div class="filters-section">
+              <div class="filter-group">
+                <label for="statusFilter">Status:</label>
+                <select id="statusFilter">
+                  <option value="pending">Pending</option>
+                  <option value="dismissed">Dismissed</option>
+                  <option value="resolved">Resolved</option>
+                </select>
+              </div>
+
+              <div class="filter-group">
+                <label for="typeFilter">Content Type:</label>
+                <select id="typeFilter">
+                  <option value="">All Types</option>
+                  <option value="Post">Post</option>
+                  <option value="Comment">Comment</option>
+                  <option value="Review">Review</option>
+                  <option value="Message">Message</option>
+                </select>
+              </div>
+
+              <button class="btn-rescan" id="rescanBtn">
+                <i class="fas fa-sync"></i> Rescan Content
+              </button>
+            </div>
+
+            <!-- Flagged Content Table -->
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Flag ID</th>
+                    <th>Type</th>
+                    <th>Content Preview</th>
+                    <th>Matched Word</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="flagsTableBody">
+                  <tr>
+                    <td colspan="8" class="loading">
+                      <i class="fas fa-spinner fa-spin"></i> Loading flagged
+                      content...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <button class="btn-pagination" id="prevPageFlags" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+              </button>
+              <span class="pagination-info" id="paginationInfoFlags"
+                >Page <span>1</span> of <span>1</span></span
+              >
+              <button class="btn-pagination" id="nextPageFlags" disabled>
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Restricted Words Tab -->
+          <div class="tab-content" id="restricted-tab">
+            <!-- Add Word Section -->
+            <div class="add-word-section">
+              <div class="add-word-form">
+                <input
+                  type="text"
+                  id="newWordInput"
+                  placeholder="Enter restricted word..."
+                  maxlength="255"
+                />
+                <button class="btn-add-word" id="addWordBtn">
+                  <i class="fas fa-plus"></i> Add Word
+                </button>
+              </div>
+              <div class="bulk-add-form">
+                <textarea
+                  id="bulkWordsInput"
+                  placeholder="Paste multiple words (one per line or comma-separated)..."
+                  rows="4"
+                ></textarea>
+                <button class="btn-bulk-add" id="bulkAddBtn">
+                  <i class="fas fa-list"></i> Bulk Add
+                </button>
+              </div>
+            </div>
+
+            <!-- Restricted Words Table -->
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Word ID</th>
+                    <th>Word</th>
+                    <th>Added Date</th>
+                    <th>Flags Count</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="wordsTableBody">
+                  <tr>
+                    <td colspan="5" class="loading">
+                      <i class="fas fa-spinner fa-spin"></i> Loading restricted
+                      words...
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <button class="btn-pagination" id="prevPageWords" disabled>
+                <i class="fas fa-chevron-left"></i> Previous
+              </button>
+              <span class="pagination-info" id="paginationInfoWords"
+                >Page <span>1</span> of <span>1</span></span
+              >
+              <button class="btn-pagination" id="nextPageWords" disabled>
+                Next <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Flag Details Modal -->
+    <div class="modal" id="flagDetailsModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><i class="fas fa-flag"></i> Flag Details</h2>
+          <button class="close-btn" onclick="closeFlagModal()">&times;</button>
+        </div>
+        <div class="modal-body" id="flagDetailsBody">
+          <div class="loading-modal">
+            <i class="fas fa-spinner fa-spin"></i> Loading...
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" onclick="closeFlagModal()">
+            Close
+          </button>
+          <button class="btn btn-dismiss" id="dismissFlagBtn" disabled>
+            <i class="fas fa-check"></i> Dismiss Flag
+          </button>
+          <button class="btn btn-danger" id="deleteContentBtn" disabled>
+            <i class="fas fa-trash"></i> Delete Content
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/admin/admin-moderation.js"></script>
+  </body>
+</html>

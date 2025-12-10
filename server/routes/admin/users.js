@@ -298,8 +298,7 @@ router.get("/:userID/violations", async (req, res) => {
       `
       SELECT 
         v.*,
-        fc.contentType,
-        fc.flagReason
+        fc.contentType
       FROM UserViolations v
       LEFT JOIN FlaggedContent fc ON v.relatedFlagID = fc.flagID
       WHERE v.userID = ?

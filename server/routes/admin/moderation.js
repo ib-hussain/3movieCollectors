@@ -21,15 +21,11 @@ router.get("/flags", async (req, res) => {
         fc.flagID,
         fc.contentType,
         fc.contentID,
-        fc.flagReason,
         fc.flaggedDate,
         fc.status,
         fc.isHidden,
-        fc.matchedWord,
-        u.userID,
-        u.username
+        fc.matchedWord
       FROM FlaggedContent fc
-      LEFT JOIN User u ON u.userID = fc.flaggedBy
       WHERE fc.status = ?
     `;
 
@@ -121,25 +117,13 @@ router.put("/flags/:flagID/dismiss", async (req, res) => {
     const { reason } = req.body;
     const adminID = req.session.userId;
 
-    // Set admin context for triggers/procedures
-    await db.query(
-      `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
-    `,
-      [
-        adminID,
-        req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
-      ]
-    );
-
     // Call stored procedure to dismiss flag
-    await db.query(`CALL sp_dismiss_flag(?, ?, ?)`, [
+    await db.query(`CALL sp_dismiss_flag(?, ?, ?, ?, ?)`, [
       flagID,
       adminID,
       reason || "Dismissed by admin",
+      req.ip || req.connection.remoteAddress,
+      req.get("user-agent") || "Unknown",
     ]);
 
     res.json({
@@ -163,25 +147,14 @@ router.delete("/flags/:flagID/content", async (req, res) => {
     const { reason } = req.body;
     const adminID = req.session.userId;
 
-    // Set admin context for triggers/procedures
-    await db.query(
-      `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
-    `,
-      [
-        adminID,
-        req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
-      ]
-    );
-
     // Call stored procedure to delete flagged content
-    await db.query(`CALL sp_delete_flagged_content(?, ?, ?)`, [
+    await db.query(`CALL sp_delete_flagged_content(?, ?, ?, ?, ?, ?)`, [
       flagID,
       adminID,
       reason || "Content violation",
+      true, // notifyUser
+      req.ip || req.connection.remoteAddress,
+      req.get("user-agent") || "Unknown",
     ]);
 
     res.json({
@@ -198,43 +171,112 @@ router.delete("/flags/:flagID/content", async (req, res) => {
   }
 });
 
-// POST /api/admin/moderation/rescan - Rescan content for restricted word
+// POST /api/admin/moderation/rescan - Rescan all content for all restricted words
 router.post("/rescan", async (req, res) => {
   try {
-    const { word } = req.body;
     const adminID = req.session.userId;
 
-    if (!word) {
-      return res.status(400).json({
-        success: false,
-        message: "Restricted word is required",
+    // Get all restricted words
+    const restrictedWords = await db.query(
+      `SELECT word FROM RestrictedWords ORDER BY word`
+    );
+
+    if (restrictedWords.length === 0) {
+      return res.json({
+        success: true,
+        message: "No restricted words to scan for",
+        newFlags: 0,
+        scannedContent: 0,
       });
     }
 
-    // Set admin context
-    await db.query(
-      `
-      SET @current_admin_id = ?;
-      SET @current_ip_address = ?;
-      SET @current_user_agent = ?;
-    `,
-      [
-        adminID,
-        req.ip || req.connection.remoteAddress,
-        req.get("user-agent") || "Unknown",
-      ]
-    );
+    let totalNewFlags = 0;
+    let totalScanned = 0;
 
-    // Call stored procedure to rescan content
-    const result = await db.query(`CALL sp_rescan_content_for_word(?, ?)`, [
-      word,
-      adminID,
-    ]);
+    // Scan Posts
+    for (const { word } of restrictedWords) {
+      const posts = await db.query(
+        `
+        SELECT p.postID, p.postContent, p.userID
+        FROM Post p
+        LEFT JOIN FlaggedContent fc ON fc.contentType = 'Post' AND fc.contentID = p.postID
+        WHERE LOWER(p.postContent) LIKE CONCAT('%', LOWER(?), '%')
+          AND fc.flagID IS NULL
+      `,
+        [word]
+      );
+
+      for (const post of posts) {
+        await db.query(
+          `
+          INSERT INTO FlaggedContent (contentType, contentID, status, matchedWord, isHidden)
+          VALUES ('Post', ?, 'pending', ?, TRUE)
+        `,
+          [post.postID, word]
+        );
+        totalNewFlags++;
+      }
+      totalScanned += posts.length;
+    }
+
+    // Scan Comments
+    for (const { word } of restrictedWords) {
+      const comments = await db.query(
+        `
+        SELECT c.commentID, c.commentContent, c.userID
+        FROM Comments c
+        LEFT JOIN FlaggedContent fc ON fc.contentType = 'Comment' AND fc.contentID = c.commentID
+        WHERE LOWER(c.commentContent) LIKE CONCAT('%', LOWER(?), '%')
+          AND fc.flagID IS NULL
+      `,
+        [word]
+      );
+
+      for (const comment of comments) {
+        await db.query(
+          `
+          INSERT INTO FlaggedContent (contentType, contentID, status, matchedWord, isHidden)
+          VALUES ('Comment', ?, 'pending', ?, TRUE)
+        `,
+          [comment.commentID, word]
+        );
+        totalNewFlags++;
+      }
+      totalScanned += comments.length;
+    }
+
+    // Scan Reviews
+    for (const { word } of restrictedWords) {
+      const reviews = await db.query(
+        `
+        SELECT r.movieID, r.userID, r.review
+        FROM ReviewRatings r
+        LEFT JOIN FlaggedContent fc ON fc.contentType = 'Review' 
+          AND fc.contentID = CONCAT(r.movieID, '-', r.userID)
+        WHERE LOWER(r.review) LIKE CONCAT('%', LOWER(?), '%')
+          AND fc.flagID IS NULL
+      `,
+        [word]
+      );
+
+      for (const review of reviews) {
+        await db.query(
+          `
+          INSERT INTO FlaggedContent (contentType, contentID, status, matchedWord, isHidden)
+          VALUES ('Review', ?, 'pending', ?, TRUE)
+        `,
+          [`${review.movieID}-${review.userID}`, word]
+        );
+        totalNewFlags++;
+      }
+      totalScanned += reviews.length;
+    }
 
     res.json({
       success: true,
-      message: `Rescan completed for word: ${word}`,
-      result: result[0],
+      message: `Rescan completed. Scanned ${totalScanned} items, created ${totalNewFlags} new flags.`,
+      newFlags: totalNewFlags,
+      scannedContent: totalScanned,
     });
   } catch (error) {
     console.error("Rescan content error:", error);
@@ -253,8 +295,8 @@ router.get("/stats", async (req, res) => {
       SELECT 
         COUNT(*) as totalFlags,
         SUM(CASE WHEN status = 'pending' THEN 1 ELSE 0 END) as pendingFlags,
-        SUM(CASE WHEN status = 'dismissed' THEN 1 ELSE 0 END) as dismissedFlags,
-        SUM(CASE WHEN status = 'deleted' THEN 1 ELSE 0 END) as deletedFlags,
+        SUM(CASE WHEN status = 'dismissed' AND DATE(reviewedDate) = CURDATE() THEN 1 ELSE 0 END) as dismissedToday,
+        SUM(CASE WHEN status = 'resolved' AND DATE(reviewedDate) = CURDATE() THEN 1 ELSE 0 END) as deletedToday,
         SUM(CASE WHEN isHidden = 1 THEN 1 ELSE 0 END) as hiddenContent
       FROM FlaggedContent
     `);
@@ -264,7 +306,6 @@ router.get("/stats", async (req, res) => {
       SELECT 
         flagID,
         contentType,
-        flagReason,
         flaggedDate,
         status
       FROM FlaggedContent

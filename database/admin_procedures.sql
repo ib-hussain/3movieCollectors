@@ -213,20 +213,22 @@ BEGIN
     
     -- Delete based on content type
     IF v_contentType = 'Post' THEN
-        -- Get post details
+        -- Get post details (if exists)
         SELECT userID, movieID INTO v_userID, v_movieID
-        FROM Post WHERE postID = v_contentID;
+        FROM Post WHERE postID = CAST(v_contentID AS UNSIGNED)
+        LIMIT 1;
         
         -- Delete post (cascade deletes comments)
-        DELETE FROM Post WHERE postID = v_contentID;
+        DELETE FROM Post WHERE postID = CAST(v_contentID AS UNSIGNED);
         
     ELSEIF v_contentType = 'Comment' THEN
-        -- Get comment details
+        -- Get comment details (if exists)
         SELECT userID, postID INTO v_userID, v_postID
-        FROM Comments WHERE commentID = v_contentID;
+        FROM Comments WHERE commentID = CAST(v_contentID AS UNSIGNED)
+        LIMIT 1;
         
         -- Delete comment
-        DELETE FROM Comments WHERE commentID = v_contentID;
+        DELETE FROM Comments WHERE commentID = CAST(v_contentID AS UNSIGNED);
         
     ELSEIF v_contentType = 'Review' THEN
         -- Parse composite key 'movieID-userID'
@@ -240,7 +242,7 @@ BEGIN
     
     -- Update flag status
     UPDATE FlaggedContent
-    SET status = 'removed',
+    SET status = 'resolved',
         reviewedBy = p_adminID,
         reviewedDate = NOW(),
         adminNotes = p_deleteReason

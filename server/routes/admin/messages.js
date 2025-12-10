@@ -30,7 +30,6 @@ router.get("/", async (req, res) => {
         receiver.username as receiverUsername,
         receiver.email as receiverEmail,
         fc.flagID,
-        fc.flagReason,
         fc.flaggedDate,
         fc.status as flagStatus
       FROM Message m
@@ -151,7 +150,6 @@ router.get("/:messageID", async (req, res) => {
         receiver.username as receiverUsername,
         receiver.email as receiverEmail,
         fc.flagID,
-        fc.flagReason,
         fc.flaggedDate,
         fc.flaggedBy,
         flagger.username as flaggerUsername
@@ -199,8 +197,7 @@ router.get("/conversation/:userID1/:userID2", async (req, res) => {
         m.*,
         sender.username as senderUsername,
         receiver.username as receiverUsername,
-        fc.flagID,
-        fc.flagReason
+        fc.flagID
       FROM Message m
       INNER JOIN User sender ON m.senderID = sender.userID
       INNER JOIN User receiver ON m.receiverID = receiver.userID
