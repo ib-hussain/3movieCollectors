@@ -11,7 +11,7 @@ CREATE TABLE User(
     role ENUM('user', 'admin') DEFAULT 'user'              
 );
 -- issues:
--- add fields to movie fie;ld - done
+-- add fields to movie field - done
 -- add username to user - done
 CREATE TABLE Genres (
     genreID INT AUTO_INCREMENT PRIMARY KEY,
@@ -429,5 +429,3 @@ VALUES
 (18,18,'to-watch',NOW()),(1,18,'completed',NOW()),
 (2,19,'to-watch',NOW()),(3,19,'completed',NOW()),
 (4,20,'to-watch',NOW()),(5,20,'completed',NOW());
-
-
