@@ -15,11 +15,11 @@
     <div class="admin-container">
       <!-- Sidebar -->
       <aside class="sidebar" id="sidebar">
-        <div class="logo">
+        <div class="sidebar-header">
           <i class="fas fa-film"></i>
-          <span>Admin Panel</span>
+          <h2>Admin Panel</h2>
         </div>
-        <nav class="nav-menu">
+        <nav class="sidebar-nav">
           <a href="admin-dashboard.html" class="nav-item">
             <i class="fas fa-chart-line"></i>
             <span>Dashboard</span>
@@ -45,16 +45,10 @@
             <span>Audit Log</span>
           </a>
         </nav>
-        <div class="sidebar-footer">
-          <a href="../dashboard.html" class="nav-item">
-            <i class="fas fa-arrow-left"></i>
-            <span>Back to Site</span>
-          </a>
-          <a href="#" class="nav-item" onclick="logout()">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-          </a>
-        </div>
+        <button class="btn btn-logout" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
       </aside>
 
       <!-- Main Content -->
@@ -63,13 +57,17 @@
         <header class="top-bar">
           <h1>Reports & Exports</h1>
           <div class="top-bar-actions">
-            <div class="notification-bell">
+            <div
+              class="notification-bell"
+              id="notificationBtn"
+              title="Notifications"
+            >
               <i class="fas fa-bell"></i>
               <span class="notification-count" id="notificationCount">0</span>
             </div>
             <div class="admin-profile">
-              <span id="adminUsername">Admin</span>
-              <i class="fas fa-user-circle"></i>
+              <i class="fas fa-user-shield"></i>
+              <span id="adminName">Admin</span>
             </div>
           </div>
         </header>

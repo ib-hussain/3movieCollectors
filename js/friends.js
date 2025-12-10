@@ -159,8 +159,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!friendsGrid) return;
 
     if (friends.length === 0) {
-      friendsGrid.innerHTML =
-        '<p style="text-align: center; color: #7f8c8d; padding: 2rem;">No friends yet. Check out suggestions!</p>';
+      friendsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <p style="font-size: 16px; margin-bottom: 8px; font-weight: 600;">No friends yet</p>
+          <p style="font-size: 14px; opacity: 0.7;">Check out suggestions to find friends!</p>
+        </div>
+      `;
       return;
     }
 
@@ -176,8 +180,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const { incoming, outgoing } = requests;
 
     if (incoming.length === 0 && outgoing.length === 0) {
-      requestsGrid.innerHTML =
-        '<p style="text-align: center; color: #7f8c8d; padding: 2rem;">No pending friend requests.</p>';
+      requestsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; align-items: center; justify-content: center;">
+          <p style="font-size: 14px; opacity: 0.7;">No pending friend requests</p>
+        </div>
+      `;
       return;
     }
 
@@ -207,8 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!suggestionsGrid) return;
 
     if (suggestions.length === 0) {
-      suggestionsGrid.innerHTML =
-        '<p style="text-align: center; color: #7f8c8d; padding: 2rem;">No friend suggestions available.</p>';
+      suggestionsGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; align-items: center; justify-content: center;">
+          <p style="font-size: 14px; opacity: 0.7;">No friend suggestions available</p>
+        </div>
+      `;
       return;
     }
 

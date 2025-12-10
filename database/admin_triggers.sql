@@ -483,18 +483,14 @@ BEGIN
         -- Notify user that their content is under review
         INSERT INTO Notifications (
             receivedFROMuserID,
-            triggerUserID,
             triggerEvent,
             content,
-            relatedID,
             isSeen
         )
         VALUES (
             NEW.userID,
-            NEW.userID,
             'new_post',
             CONCAT('Your post is under review due to potential policy violation. Reason: Contains restricted content.'),
-            NEW.postID,
             FALSE
         );
     END IF;
@@ -539,7 +535,9 @@ BEGIN
                     'pending',
                     v_restricted,
                     TRUE
-                );DATE RestrictedWords 
+                );
+                
+                UPDATE RestrictedWords 
                 SET flagCount = flagCount + 1 
                 WHERE word = v_restricted;
                 
@@ -592,7 +590,11 @@ BEGIN
             'pending',
             v_restricted,
             TRUE
-        );ERE word = v_restricted;
+        );
+        
+        UPDATE RestrictedWords 
+        SET flagCount = flagCount + 1 
+        WHERE word = v_restricted;
         
         INSERT INTO AdminNotifications (
             notificationType,
@@ -613,18 +615,14 @@ BEGIN
         
         INSERT INTO Notifications (
             receivedFROMuserID,
-            triggerUserID,
             triggerEvent,
             content,
-            relatedID,
             isSeen
         )
         VALUES (
             NEW.userID,
-            NEW.userID,
             'post_comment',
             'Your comment is under review due to potential policy violation.',
-            NEW.commentID,
             FALSE
         );
     END IF;

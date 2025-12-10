@@ -165,6 +165,7 @@ body {
 
 .events-tab-panel {
   display: none;
+  min-height: 400px;
 }
 
 .events-tab-panel--active {

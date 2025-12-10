@@ -140,8 +140,8 @@ function displayRecommendedMovies(movies, basedOn) {
 
   if (movies.length === 0) {
     recommendedList.innerHTML = `
-      <li class="empty-message">
-        <p>No recommendations yet. Rate some movies to get personalized suggestions!</p>
+      <li class="empty-message" style="padding: 40px 20px; text-align: center; color: var(--TextColor); min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <p style="font-size: 14px; opacity: 0.7;">No recommendations yet. Rate some movies to get personalized suggestions!</p>
       </li>
     `;
     return;
@@ -204,8 +204,8 @@ function displayTrendingMovies(movies) {
 
   if (movies.length === 0) {
     trendingList.innerHTML = `
-      <li class="empty-message">
-        <p>No trending movies in the last 30 days.</p>
+      <li class="empty-message" style="padding: 40px 20px; text-align: center; color: var(--TextColor); min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <p style="font-size: 14px; opacity: 0.7;">No trending movies in the last 30 days</p>
       </li>
     `;
     return;
@@ -285,10 +285,10 @@ function displayActivityFeed(activities) {
     const emptyMessage = document.createElement("div");
     emptyMessage.className = "empty-activity";
     emptyMessage.style.cssText =
-      "padding: 40px; text-align: center; color: #999;";
+      "padding: 60px 20px; text-align: center; color: var(--TextColor); min-height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center;";
     emptyMessage.innerHTML = `
-      <p>No recent activity from friends.</p>
-      <p style="margin-top: 10px;">Add friends to see their movie reviews and updates!</p>
+      <p style="font-size: 16px; font-weight: 600; margin-bottom: 10px;">No recent activity from friends</p>
+      <p style="font-size: 14px; opacity: 0.7;">Add friends to see their movie reviews and updates!</p>
     `;
 
     activityFeed.insertBefore(emptyMessage, loadMoreBtn);

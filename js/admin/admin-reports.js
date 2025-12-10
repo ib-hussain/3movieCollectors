@@ -46,7 +46,7 @@ async function checkAdminAuth() {
     }
 
     currentAdmin = data.user.username || "Admin";
-    document.getElementById("adminUsername").textContent = currentAdmin;
+    document.getElementById("adminName").textContent = currentAdmin;
   } catch (error) {
     console.error("Auth check failed:", error);
     window.location.href = "../login.html";

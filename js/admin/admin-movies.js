@@ -145,9 +145,6 @@ function initializeEventListeners() {
     .getElementById("confirmDeleteBtn")
     .addEventListener("click", handleDeleteConfirm);
 
-  // Logout
-  document.getElementById("logoutBtn").addEventListener("click", handleLogout);
-
   // Close modals on outside click
   window.addEventListener("click", (e) => {
     if (e.target.classList.contains("modal")) {

@@ -4,6 +4,7 @@ const bcrypt = require("bcrypt");
 const { body, validationResult } = require("express-validator");
 const db = require("../db");
 const { logFailedLogin } = require("../middleware/securityLogger");
+const { serverStartTime } = require("../serverInstance");
 
 // Validation middleware
 const signupValidation = [
@@ -97,6 +98,7 @@ router.post("/signup", signupValidation, async (req, res, next) => {
     req.session.username = username;
     req.session.email = email;
     req.session.isAdmin = false;
+    req.session.serverStartTime = serverStartTime;
 
     res.status(201).json({
       success: true,
@@ -195,6 +197,7 @@ router.post("/login", loginValidation, async (req, res, next) => {
     req.session.username = user.username;
     req.session.email = user.email;
     req.session.isAdmin = user.role === "admin";
+    req.session.serverStartTime = serverStartTime;
 
     res.json({
       success: true,

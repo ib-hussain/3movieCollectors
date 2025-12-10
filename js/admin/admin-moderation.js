@@ -41,7 +41,7 @@ async function checkAuth() {
     }
 
     document.getElementById("adminName").textContent =
-      data.user.name || data.user.username;
+      data.user.username || "Admin";
   } catch (error) {
     console.error("Auth check error:", error);
     window.location.href = "/login.html";
@@ -108,9 +108,6 @@ function setupEventListeners() {
   document.getElementById("notificationBtn").addEventListener("click", () => {
     window.location.href = "/admin/admin-dashboard.html#notifications";
   });
-
-  // Logout
-  document.getElementById("logoutBtn").addEventListener("click", logout);
 }
 
 // Switch tabs
@@ -174,9 +171,12 @@ async function loadStats() {
 // Update notification count
 async function updateNotificationCount() {
   try {
-    const response = await fetch("/api/admin/notifications/unread-count", {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `/api/admin/dashboard/notifications/unread-count`,
+      {
+        credentials: "include",
+      }
+    );
     const data = await response.json();
 
     const countElement = document.getElementById("notificationCount");

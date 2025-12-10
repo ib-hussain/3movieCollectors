@@ -461,9 +461,12 @@ function setupPolling() {
 // Update Notification Count
 async function updateNotificationCount() {
   try {
-    const response = await fetch(`${API_BASE}/notifications/unread-count`, {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `/api/admin/dashboard/notifications/unread-count`,
+      {
+        credentials: "include",
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();

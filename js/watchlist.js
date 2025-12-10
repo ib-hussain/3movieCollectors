@@ -20,8 +20,9 @@ async function loadWatchlist() {
     console.error("Error loading watchlist:", error);
     const grid = document.getElementById("watchlist-grid");
     grid.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
-        <p>Failed to load watchlist. Please try again.</p>
+      <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600; color: #e74c3c;">Failed to load watchlist</p>
+        <p style="font-size: 14px; opacity: 0.7;">Please try again or refresh the page</p>
       </div>
     `;
   }
@@ -32,9 +33,9 @@ function displayMovies(movies) {
 
   if (movies.length === 0) {
     grid.innerHTML = `
-      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #7f8c8d;">
-        <p>No movies in your watchlist yet.</p>
-        <p style="margin-top: 10px;"><a href="browse-movies.html" style="color: #3498db;">Browse movies</a> to add some!</p>
+      <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600;">No movies in your watchlist yet</p>
+        <p style="margin-top: 10px; font-size: 14px; opacity: 0.7;"><a href="browse-movies.html" style="color: var(--theGreenColor); text-decoration: underline;">Browse movies</a> to add some!</p>
       </div>
     `;
     return;

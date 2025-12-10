@@ -185,6 +185,7 @@ body.sidebar-collapsed .content-area {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 32px;
+    min-height: 400px;
 }
 
 /* Card */

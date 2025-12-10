@@ -17,9 +17,18 @@ const CHART_COLORS = {
 
 // ==================== INITIALIZATION ====================
 
-document.addEventListener("DOMContentLoaded", () => {
-  checkAuth();
-  initializeDashboard();
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("[Admin Dashboard] Initializing...");
+
+  // Check auth first, don't proceed if not authorized
+  const isAuthorized = await checkAuth();
+  if (!isAuthorized) {
+    console.log("[Admin Dashboard] Not authorized, redirecting...");
+    return; // Stop here if not authorized
+  }
+
+  console.log("[Admin Dashboard] Authorized, loading dashboard...");
+  await initializeDashboard();
   startPolling();
 
   // Activity period selector
@@ -57,15 +66,22 @@ async function checkAuth() {
     const data = await response.json();
 
     if (!response.ok || !data.success || data.user.role !== "admin") {
+      console.error("Not authorized as admin:", data);
       window.location.href = "../login.html";
-      return;
+      return false; // Not authorized
     }
 
-    document.getElementById("admin-name").textContent =
-      data.user.username || "Admin";
+    // Update admin name in UI (use correct element ID)
+    const adminNameEl = document.getElementById("adminName");
+    if (adminNameEl) {
+      adminNameEl.textContent = data.user.username || "Admin";
+    }
+
+    return true; // Authorized
   } catch (error) {
     console.error("Auth check failed:", error);
     window.location.href = "../login.html";
+    return false; // Not authorized
   }
 }
 
@@ -277,7 +293,7 @@ async function loadNotifications() {
     const data = await response.json();
 
     const container = document.getElementById("notifications-container");
-    const countBadge = document.getElementById("notification-count");
+    const countBadge = document.getElementById("notificationCount");
 
     if (data.success) {
       countBadge.textContent = data.unreadCount || 0;

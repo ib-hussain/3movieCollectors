@@ -31,9 +31,9 @@ function displayNotifications(notificationsList) {
 
   if (!notificationsList || notificationsList.length === 0) {
     container.innerHTML = `
-      <div style="text-align: center; padding: 60px 20px; color: #7f8c8d;">
-        <p style="font-size: 18px; margin-bottom: 8px;">No notifications yet</p>
-        <p style="font-size: 14px; opacity: 0.8;">You'll see your activity updates here</p>
+      <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600;">No notifications yet</p>
+        <p style="font-size: 14px; opacity: 0.7;">You'll see your activity updates here</p>
       </div>
     `;
     return;

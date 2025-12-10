@@ -119,6 +119,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  min-height: 400px;
 }
 
 /* GLASS CARD */

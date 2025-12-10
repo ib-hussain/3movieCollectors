@@ -52,9 +52,6 @@ function setupEventListeners() {
   document.getElementById("notificationBtn").addEventListener("click", () => {
     window.location.href = "/admin/admin-dashboard.html#notifications";
   });
-
-  // Logout
-  document.getElementById("logoutBtn").addEventListener("click", logout);
 }
 
 // Authentication
@@ -254,9 +251,12 @@ async function exportAuditLog(format) {
 // Update Notification Count
 async function updateNotificationCount() {
   try {
-    const response = await fetch(`/api/admin/notifications/unread-count`, {
-      credentials: "include",
-    });
+    const response = await fetch(
+      `/api/admin/dashboard/notifications/unread-count`,
+      {
+        credentials: "include",
+      }
+    );
 
     if (response.ok) {
       const data = await response.json();

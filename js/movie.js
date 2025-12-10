@@ -190,8 +190,9 @@ function displayPosts(posts) {
 
   if (posts.length === 0) {
     container.innerHTML = `
-      <div style="text-align: center; padding: 40px; color: #7f8c8d;">
-        <p>No discussions yet. Be the first to share your thoughts!</p>
+      <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600;">No discussions yet</p>
+        <p style="font-size: 14px; opacity: 0.7;">Be the first to share your thoughts!</p>
       </div>
     `;
     return;
@@ -393,8 +394,11 @@ function displayComments(postId, comments) {
   `;
 
   if (comments.length === 0) {
-    html +=
-      '<p style="color: #95a5a6; font-style: italic;">No comments yet.</p>';
+    html += `
+      <div style="text-align: center; padding: 30px 20px; color: var(--TextColor); opacity: 0.7;">
+        <p style="font-size: 14px; font-style: italic;">No comments yet. Be the first to comment!</p>
+      </div>
+    `;
   } else {
     comments.forEach((comment) => {
       html += `
@@ -476,8 +480,11 @@ function displaySimilarMovies(movies) {
   container.innerHTML = "";
 
   if (movies.length === 0) {
-    container.innerHTML =
-      '<p style="color: #95a5a6;">No similar movies found.</p>';
+    container.innerHTML = `
+      <div style="text-align: center; padding: 40px 20px; color: var(--TextColor); min-height: 150px; display: flex; align-items: center; justify-content: center;">
+        <p style="font-size: 14px; opacity: 0.7;">No similar movies found</p>
+      </div>
+    `;
     return;
   }
 
@@ -572,8 +579,9 @@ function displayReviews(reviews) {
 
   if (reviews.length === 0) {
     container.innerHTML = `
-      <div style="text-align: center; padding: 40px; color: #7f8c8d;">
-        <p>No reviews yet. Be the first to review this movie!</p>
+      <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600;">No reviews yet</p>
+        <p style="font-size: 14px; opacity: 0.7;">Be the first to review this movie!</p>
       </div>
     `;
     return;
