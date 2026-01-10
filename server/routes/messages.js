@@ -113,7 +113,10 @@ router.get("/messages/threads/:friendId", requireAuth, async (req, res) => {
         .json({ success: false, error: "Not friends with this user" });
     }
 
-    // Get all messages between these users
+    // Get messages with pagination (fetch recent messages first, then load older)
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
+
     const messages = await db.query(
       `SELECT 
         m.messageID,
@@ -129,9 +132,17 @@ router.get("/messages/threads/:friendId", requireAuth, async (req, res) => {
       JOIN User u ON m.senderID = u.userID
       WHERE (m.senderID = ? AND m.receiverID = ?)
          OR (m.senderID = ? AND m.receiverID = ?)
-      ORDER BY m.timeStamp ASC`,
-      [userId, friendId, friendId, userId]
+      ORDER BY m.timeStamp DESC
+      LIMIT ? OFFSET ?`,
+      [userId, friendId, friendId, userId, limit + 1, offset]
     );
+
+    // Check for more messages
+    const hasMore = messages.length > limit;
+    const paginatedMessages = hasMore ? messages.slice(0, limit) : messages;
+
+    // Reverse to show oldest first in UI (since we fetched DESC)
+    const orderedMessages = paginatedMessages.reverse();
 
     // Mark all messages from friend as read
     await db.query(
@@ -143,7 +154,13 @@ router.get("/messages/threads/:friendId", requireAuth, async (req, res) => {
 
     res.json({
       success: true,
-      messages,
+      messages: orderedMessages,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Error fetching messages:", error);

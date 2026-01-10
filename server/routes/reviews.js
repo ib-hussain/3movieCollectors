@@ -14,6 +14,8 @@ const requireAuth = (req, res, next) => {
 router.get("/movies/:movieId/reviews", async (req, res) => {
   try {
     const { movieId } = req.params;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = parseInt(req.query.offset) || 0;
 
     const query = `
             SELECT 
@@ -29,9 +31,10 @@ router.get("/movies/:movieId/reviews", async (req, res) => {
             INNER JOIN User u ON rr.userID = u.userID
             WHERE rr.movieID = ?
             ORDER BY rr.reviewDate DESC
+            LIMIT ? OFFSET ?
         `;
 
-    const reviews = await db.query(query, [movieId]);
+    const reviews = await db.query(query, [movieId, limit + 1, offset]);
 
     // Calculate rating statistics
     const stats = {
@@ -51,12 +54,19 @@ router.get("/movies/:movieId/reviews", async (req, res) => {
       },
     };
 
-    if (reviews.length > 0) {
-      const sum = reviews.reduce((acc, r) => acc + parseFloat(r.rating), 0);
-      stats.averageRating = (sum / reviews.length).toFixed(1);
+    // Check if there are more reviews
+    const hasMore = reviews.length > limit;
+    const paginatedReviews = hasMore ? reviews.slice(0, limit) : reviews;
+
+    if (paginatedReviews.length > 0) {
+      const sum = paginatedReviews.reduce(
+        (acc, r) => acc + parseFloat(r.rating),
+        0
+      );
+      stats.averageRating = (sum / paginatedReviews.length).toFixed(1);
 
       // Calculate distribution
-      reviews.forEach((r) => {
+      paginatedReviews.forEach((r) => {
         const rating = Math.floor(parseFloat(r.rating));
         if (rating >= 1 && rating <= 10) {
           stats.ratingDistribution[rating]++;
@@ -66,8 +76,14 @@ router.get("/movies/:movieId/reviews", async (req, res) => {
 
     res.json({
       success: true,
-      reviews,
+      reviews: paginatedReviews,
       stats,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Error fetching reviews:", error);

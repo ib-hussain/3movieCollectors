@@ -11,6 +11,18 @@ window.initPage.browse = async function () {
   // Check authentication
   if (!(await App.requireAuth())) return;
 
+  // Read URL parameters for search query
+  const urlParams = new URLSearchParams(window.location.search);
+  const searchQuery = urlParams.get("search");
+  if (searchQuery) {
+    state.search = searchQuery;
+    // Pre-fill the search input if it exists
+    const searchInput = document.getElementById("movieSearch");
+    if (searchInput) {
+      searchInput.value = searchQuery;
+    }
+  }
+
   // Load filters and movies
   await Promise.all([loadGenres(), loadYears()]);
   await loadMovies();
@@ -136,9 +148,9 @@ function displayMovies(movies, append = false, watchlistMovieIds = []) {
 
   if (movies.length === 0 && !append) {
     grid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #999;">
-        <p style="font-size: 18px; margin-bottom: 10px;">No movies found</p>
-        <p style="font-size: 14px;">Try adjusting your filters or search query</p>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+        <p style="font-size: 18px; margin-bottom: 10px; font-weight: 600;">No movies found</p>
+        <p style="font-size: 14px; opacity: 0.7;">Try adjusting your filters or search query</p>
       </div>
     `;
     return;

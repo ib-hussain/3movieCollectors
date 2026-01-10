@@ -96,8 +96,8 @@ if (window.eventsPageInitialized) {
 
       if (events.length === 0) {
         panel.innerHTML = `
-        <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); opacity: 0.6;">
-          <p style="font-size: 16px; margin: 0;">No ${filter} events found</p>
+        <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <p style="font-size: 16px; margin: 0; opacity: 0.7;">No ${filter} events found</p>
         </div>
       `;
         return;

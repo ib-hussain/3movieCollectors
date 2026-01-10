@@ -1,275 +1,368 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Anaheim&display=swap");
 /* ======================================
    Global reset
 ====================================== */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    --theGreenColor: #09855b;
-    --TextColor: #171a1f;
-    --Pink: #F2E0E7;
-    --DarkBlue: #5C8BC0;
-    --LightBlue: #e0edfc;
-    --boxBackground: #afe4f163;
-    --Shadow: rgba(0,0,0,0.15);
-    --clickAbleLink: #ff2c2c;   /* issue: to be decided, fix this colour later */
-    --ratingYellow: #FF9100;   
-    --statCardBG:#7f6d8d0a; 
-    --statCardBorder: #dfdcbc;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  --theGreenColor: #09855b;
+  --TextColor: #171a1f;
+  --Pink: #f2e0e7;
+  --DarkBlue: #5c8bc0;
+  --LightBlue: #e0edfc;
+  --boxBackground: #afe4f163;
+  --Shadow: rgba(0, 0, 0, 0.15);
+  --clickAbleLink: #ff2c2c; /* issue: to be decided, fix this colour later */
+  --ratingYellow: #ff9100;
+  --statCardBG: #7f6d8d0a;
+  --statCardBorder: #dfdcbc;
 }
 
 body {
-    background-color: #171a1f;
-    font-family: Arial, sans-serif;
-    color: #fff;
-    background: transparent;
-    transition: transform .25s ease;
+  background-color: #171a1f;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  background: transparent;
+  transition: transform 0.25s ease;
 }
 
 /* ======================================
    NAVBAR CONTAINER
 ====================================== */
 .navbar {
-    width: 100%;
-    padding: 14px ;
-    padding-left: 10px;
-    padding-right: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #171a1f;
-    gap: 24px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
+  width: 100%;
+  padding: 14px;
+  padding-left: 10px;
+  padding-right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #171a1f;
+  gap: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
 }
 
 /* ======================================
     BRAND (LEFT)
 ====================================== */
 .navbar-brand {
-    font-family: 'Manrope', sans-serif;
-    font-weight: bolder;
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    color: white;
-    text-decoration: none;
-    font-size: 24px;
-    line-height: 1;
-    transition: transform .25s ease;
-    margin-left: 20px;
+  font-family: "Manrope", sans-serif;
+  font-weight: bolder;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+  line-height: 1;
+  transition: transform 0.25s ease;
+  margin-left: 20px;
 }
 
 .navbar-brand:hover {
-    transform: scale(1.06);
+  transform: scale(1.06);
 }
 
 .navbar-logo {
-    height: 36px;
-    width: 36px;
+  height: 36px;
+  width: 36px;
 }
 
 /* ======================================
    CENTER SEARCH BAR
 ====================================== */
 .nav-search {
-    flex: 1;
-    max-width: 55%;
-    display: flex;
-    align-items: center;
-    background: transparent;
-    padding: 10px 15px;
-    border-radius: 999px;
-    /* border: 1px solid #000; */
-    gap: 10px;
-    transition: 0.25s;
+  position: relative;
+  flex: 1;
+  max-width: 55%;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  padding: 10px 15px;
+  border-radius: 999px;
+  /* border: 1px solid #000; */
+  gap: 10px;
+  transition: 0.25s;
 }
 
 .nav-search:hover {
-    border-color: #ffffff;
-    background: #212121;
+  border-color: #ffffff;
+  background: #212121;
 }
 
 .search-icon-img {
-    width: 18px;
-    height: 18px;
-    opacity: 0.7;
-    object-fit: contain;
+  width: 18px;
+  height: 18px;
+  opacity: 0.7;
+  object-fit: contain;
 }
 
 .nav-search input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    outline: none;
-    font-size: 15px;
-    color: #fff;
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 15px;
+  color: #fff;
 }
 
 .nav-search input::placeholder {
-    color: #777;
+  color: #777;
+}
+
+/* Search Dropdown */
+.search-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #1a1a1a;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  border: 1px solid #333;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: #2a2a2a;
+}
+
+.search-result-poster {
+  width: 50px;
+  height: 70px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background-color: #333;
+}
+
+.search-result-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-result-title {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.search-result-meta {
+  color: #999;
+  font-size: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.search-result-item.no-results,
+.search-result-item.view-all {
+  justify-content: center;
+  padding: 16px;
+}
+
+.search-result-item.no-results p,
+.search-result-item.view-all p {
+  color: #999;
+  font-size: 13px;
+  margin: 0;
+}
+
+.search-result-item.view-all {
+  background: #252525;
+  font-weight: 600;
+}
+
+.search-result-item.view-all:hover {
+  background: #2f2f2f;
+}
+
+.search-result-item.view-all p {
+  color: #09855b;
 }
 
 /* ======================================
    NAV RIGHT (ICONS + USER)
 ====================================== */
 .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 18px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
 }
 
 /* Base icon button */
 .icon-btn {
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
 }
 
 /* Icon background circle */
 .icon-circle {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.25s;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
 }
 .icon-circle-profile {
-    position: relative;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: 0.25s;
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.25s;
 }
 
 /* Icon image */
 .icon-img {
-    width: 18px;
-    height: 18px;
-    object-fit: contain;
-    transition: 0.25s;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  transition: 0.25s;
 }
 
 /* Badge */
 .icon-badge {
-    position: absolute;
-    top: -4px;
-    right: -4px;
-    min-width: 16px;
-    height: 16px;
-    padding: 0 4px;
-    border-radius: 999px;
-    background-color: #e50914;
-    color: #fff;
-    font-size: 11px;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background-color: #e50914;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ======================================
    HOVER EFFECTS (Shared for all icons)
 ====================================== */
 .icon-circle:hover {
-    background-color: #e50914;
-    transform: scale(1.06);
+  background-color: #e50914;
+  transform: scale(1.06);
 }
 
 .icon-circle-profile:hover {
-    background-color: var(--DarkBlue)   ;
-    transform: scale(1.06);
+  background-color: var(--DarkBlue);
+  transform: scale(1.06);
 }
 
 .icon-circle:hover .icon-img {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 /* ======================================
    ACTIVE STATE (Notifications, Messages)
 ====================================== */
 .icon-btn.active .icon-circle {
-    background-color: var(--clickAbleLink);
-    transform: scale(1.06);
+  background-color: var(--clickAbleLink);
+  transform: scale(1.06);
 }
 
 .icon-btn.active .icon-img {
-    filter: invert(1);
+  filter: invert(1);
 }
 
-.icon-btn.active .icon-badge .icon-btn{
-    background-color: white;
-    color: var(--clickAbleLink);
+.icon-btn.active .icon-badge .icon-btn {
+  background-color: white;
+  color: var(--clickAbleLink);
 }
 
- /* ======================================
+/* ======================================
    FIX: NOTIFICATIONS ICON
 /* ======================================
    FIX: MESSAGES MATCH NOTIFICATIONS
 ====================================== */
 .icon-btn.messages-btn:hover .icon-circle {
-    background-color: var(--clickAbleLink);
+  background-color: var(--clickAbleLink);
 }
 
 .icon-btn.messages-btn:hover .icon-img {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 .icon-btn.messages-btn.active .icon-circle {
-    background-color: var(--clickAbleLink);
+  background-color: var(--clickAbleLink);
 }
 
 .icon-btn.messages-btn.active .icon-img {
-    filter: invert(1);
+  filter: invert(1);
 }
 
 /* ======================================
    SEPARATOR LINE
 ====================================== */
 .nav-separator {
-    background-color: #ffffff;
-    width: 1px;
-    height: 28px;
-    opacity: 1;
+  background-color: #ffffff;
+  width: 1px;
+  height: 28px;
+  opacity: 1;
 }
 
 /* ======================================
    USER SECTION
 ====================================== */
 .user-section {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .user-circle {
-    width: 36px;
-    height: 36px;
-    position: relative;
+  width: 36px;
+  height: 36px;
+  position: relative;
 }
 
 /* ONLINE DOT FIXED */
 .user-circle::after {
-    content: "";
-    position: absolute;
-    width: 9px;
-    height: 9px;
-    background: var(--theGreenColor);
-    border-radius: 50%;
-    bottom: -1px;
-    right: -1px;
-    border: 2px solid var(--TextColor);
+  content: "";
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  background: var(--theGreenColor);
+  border-radius: 50%;
+  bottom: -1px;
+  right: -1px;
+  border: 2px solid var(--TextColor);
 }
 /* FIXED — Profile Active State Uses Your Assigned Color */
 /* ======================================================
@@ -277,10 +370,10 @@ body {
    ======================================================*/
 
 .user-section.active .icon-circle-profile {
-    background-color: var(--DarkBlue) !important;  /* your custom color */
-    transition: transform 0.25s ease;
+  background-color: var(--DarkBlue) !important; /* your custom color */
+  transition: transform 0.25s ease;
 }
 
 .user-section.active .icon-circle-profile .icon-img {
-    filter: invert(1);
+  filter: invert(1);
 }

@@ -10,6 +10,8 @@ const { createNotification } = require("./notifications");
 router.get("/movies/:movieId/posts", async (req, res) => {
   try {
     const movieId = parseInt(req.params.movieId);
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = parseInt(req.query.offset) || 0;
 
     const query = `
       SELECT p.postID, p.postContent, p.likeCount, p.commentCount, p.createdAt,
@@ -18,11 +20,16 @@ router.get("/movies/:movieId/posts", async (req, res) => {
       JOIN User u ON p.userID = u.userID
       WHERE p.movieID = ?
       ORDER BY p.createdAt DESC
+      LIMIT ? OFFSET ?
     `;
 
-    const posts = await db.query(query, [movieId]);
+    const posts = await db.query(query, [movieId, limit + 1, offset]);
 
-    const formattedPosts = posts.map((post) => ({
+    // Check for more posts
+    const hasMore = posts.length > limit;
+    const paginatedPosts = hasMore ? posts.slice(0, limit) : posts;
+
+    const formattedPosts = paginatedPosts.map((post) => ({
       postId: post.postID,
       content: post.postContent,
       likeCount: post.likeCount,
@@ -56,6 +63,12 @@ router.get("/movies/:movieId/posts", async (req, res) => {
     res.json({
       success: true,
       posts: formattedPosts,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Fetch posts error:", error);
@@ -308,6 +321,8 @@ router.post("/posts/:postId/like", async (req, res) => {
 router.get("/posts/:postId/comments", async (req, res) => {
   try {
     const postId = parseInt(req.params.postId);
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
 
     const query = `
       SELECT c.commentID, c.commentContent, c.createdAt,
@@ -316,11 +331,16 @@ router.get("/posts/:postId/comments", async (req, res) => {
       JOIN User u ON c.userID = u.userID
       WHERE c.postID = ?
       ORDER BY c.createdAt ASC
+      LIMIT ? OFFSET ?
     `;
 
-    const comments = await db.query(query, [postId]);
+    const comments = await db.query(query, [postId, limit + 1, offset]);
 
-    const formattedComments = comments.map((c) => ({
+    // Check for more comments
+    const hasMore = comments.length > limit;
+    const paginatedComments = hasMore ? comments.slice(0, limit) : comments;
+
+    const formattedComments = paginatedComments.map((c) => ({
       commentId: c.commentID,
       content: c.commentContent,
       createdAt: c.createdAt,
@@ -335,6 +355,12 @@ router.get("/posts/:postId/comments", async (req, res) => {
     res.json({
       success: true,
       comments: formattedComments,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Fetch comments error:", error);

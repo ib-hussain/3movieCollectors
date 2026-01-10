@@ -142,8 +142,11 @@ function displayReviews(reviews, userName, profilePicture, profile) {
   const reviewsList = document.getElementById("reviews-list");
 
   if (!reviews || reviews.length === 0) {
-    reviewsList.innerHTML =
-      '<p style="text-align: center; color: #666; padding: 40px;">No reviews yet</p>';
+    reviewsList.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 200px; display: flex; align-items: center; justify-content: center;">
+        <p style="font-size: 14px; opacity: 0.7;">No reviews yet</p>
+      </div>
+    `;
     return;
   }
 

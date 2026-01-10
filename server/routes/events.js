@@ -75,6 +75,8 @@ async function checkEventOverlap(
 router.get("/events", requireAuth, async (req, res) => {
   const userId = req.session.userId;
   const { filter = "upcoming" } = req.query;
+  const limit = parseInt(req.query.limit) || 20;
+  const offset = parseInt(req.query.offset) || 0;
 
   console.log(`${new Date().toISOString()} - GET /api/events?filter=${filter}`);
 
@@ -108,8 +110,9 @@ router.get("/events", requireAuth, async (req, res) => {
           e.eventDateTime > NOW()
           AND e.host != ?
         ORDER BY e.eventDateTime ASC
+        LIMIT ? OFFSET ?
       `;
-      params = [userId, userId];
+      params = [userId, userId, limit + 1, offset];
     } else if (filter === "hosting") {
       // Get events hosted by user
       query = `
@@ -135,8 +138,9 @@ router.get("/events", requireAuth, async (req, res) => {
           e.host = ?
           AND e.eventDateTime > NOW()
         ORDER BY e.eventDateTime ASC
+        LIMIT ? OFFSET ?
       `;
-      params = [userId];
+      params = [userId, limit + 1, offset];
     } else if (filter === "past") {
       // Get past events user participated in or hosted
       query = `
@@ -163,13 +167,28 @@ router.get("/events", requireAuth, async (req, res) => {
           e.eventDateTime < NOW()
           AND (e.host = ? OR ep.userID = ?)
         ORDER BY e.eventDateTime DESC
+        LIMIT ? OFFSET ?
       `;
-      params = [userId, userId, userId];
+      params = [userId, userId, userId, limit + 1, offset];
     }
 
     const events = await db.query(query, params);
     const eventsList = Array.isArray(events) ? events : [];
-    res.json({ success: true, events: eventsList });
+
+    // Check for more events
+    const hasMore = eventsList.length > limit;
+    const paginatedEvents = hasMore ? eventsList.slice(0, limit) : eventsList;
+
+    res.json({
+      success: true,
+      events: paginatedEvents,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
+    });
   } catch (error) {
     console.error("Error fetching events:", error);
     res.status(500).json({ success: false, message: "Failed to fetch events" });

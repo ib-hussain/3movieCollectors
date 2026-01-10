@@ -15,6 +15,9 @@ router.get("/", async (req, res) => {
       });
     }
 
+    const limit = parseInt(req.query.limit) || 50;
+    const offset = parseInt(req.query.offset) || 0;
+
     const query = `
       SELECT m.movieID, m.title, m.posterImg, m.releaseYear, m.avgRating,
              w.status, w.addedDate,
@@ -28,11 +31,20 @@ router.get("/", async (req, res) => {
       WHERE w.userID = ?
       GROUP BY m.movieID, m.title, m.posterImg, m.releaseYear, m.avgRating, w.status, w.addedDate
       ORDER BY w.addedDate DESC
+      LIMIT ? OFFSET ?
     `;
 
-    const movies = await db.query(query, [req.session.userId]);
+    const movies = await db.query(query, [
+      req.session.userId,
+      limit + 1,
+      offset,
+    ]);
 
-    const formattedMovies = movies.map((m) => ({
+    // Check for more movies
+    const hasMore = movies.length > limit;
+    const paginatedMovies = hasMore ? movies.slice(0, limit) : movies;
+
+    const formattedMovies = paginatedMovies.map((m) => ({
       movieId: m.movieID,
       title: m.title,
       posterPath: m.posterImg ? `/pictures/${m.posterImg}` : null,
@@ -47,6 +59,12 @@ router.get("/", async (req, res) => {
     res.json({
       success: true,
       movies: formattedMovies,
+      hasMore,
+      pagination: {
+        limit,
+        offset,
+        nextOffset: hasMore ? offset + limit : null,
+      },
     });
   } catch (error) {
     console.error("Watchlist fetch error:", error);

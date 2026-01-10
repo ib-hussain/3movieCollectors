@@ -209,7 +209,7 @@ async function getFavoriteGenres(userId) {
 }
 
 // Helper function to get user's reviews with movie details
-async function getUserReviews(userId) {
+async function getUserReviews(userId, limit = 20, offset = 0) {
   const reviews = await db.query(
     `
         SELECT 
@@ -225,9 +225,9 @@ async function getUserReviews(userId) {
         INNER JOIN Movie m ON rr.movieID = m.movieID
         WHERE rr.userID = ?
         ORDER BY rr.reviewDate DESC
-        LIMIT 20
+        LIMIT ? OFFSET ?
     `,
-    [userId]
+    [userId, limit, offset]
   );
 
   return reviews;

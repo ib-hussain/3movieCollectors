@@ -54,8 +54,16 @@ window.initPage.login = async function () {
 
       if (data.success) {
         App.showSuccess("Login successful! Redirecting...");
+
+        // Check if user is admin and redirect accordingly
+        const isAdmin = data.user && data.user.role === "admin";
+
         setTimeout(() => {
-          window.location.href = "dashboard.html";
+          if (isAdmin) {
+            window.location.href = "admin/admin-dashboard.html";
+          } else {
+            window.location.href = "dashboard.html";
+          }
         }, 500);
       }
     } catch (error) {

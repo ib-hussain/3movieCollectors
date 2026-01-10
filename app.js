@@ -3,6 +3,7 @@
 
 const express = require("express");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 const path = require("path");
 const cors = require("cors");
 require("dotenv").config();
@@ -13,6 +14,7 @@ const {
   notFoundHandler,
 } = require("./server/middleware/errorHandler");
 const { startScheduler, stopScheduler } = require("./server/scheduler");
+const { serverStartTime } = require("./server/serverInstance");
 
 // Initialize Express app
 const app = express();
@@ -33,11 +35,32 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Session configuration
+// MySQL session store configuration
+const sessionStore = new MySQLStore(
+  {
+    clearExpired: true,
+    checkExpirationInterval: 900000, // 15 minutes
+    expiration: 1000 * 60 * 60 * 24 * 7, // 7 days
+    createDatabaseTable: true,
+    schema: {
+      tableName: "sessions",
+      columnNames: {
+        session_id: "session_id",
+        expires: "expires",
+        data: "data",
+      },
+    },
+  },
+  db.pool
+);
+
+// Session configuration with MySQL store
 app.use(
   session({
+    key: "session_cookie_name",
     secret:
       process.env.SESSION_SECRET || "your-secret-key-change-in-production",
+    store: sessionStore,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -47,6 +70,29 @@ app.use(
     },
   })
 );
+
+// Middleware to check if session was created before server restart
+app.use((req, res, next) => {
+  if (req.session && req.session.userId) {
+    // Check if session was created before server restart
+    if (
+      !req.session.serverStartTime ||
+      req.session.serverStartTime < serverStartTime
+    ) {
+      // Session is from before server restart, destroy it
+      req.session.destroy((err) => {
+        if (err) {
+          console.error("Error destroying old session:", err);
+        }
+        return res
+          .status(401)
+          .json({ error: "Session expired. Please log in again." });
+      });
+      return;
+    }
+  }
+  next();
+});
 
 // Request logging (development only)
 if (process.env.NODE_ENV === "development") {
@@ -66,6 +112,9 @@ app.use("/components", express.static(path.join(__dirname, "components")));
 
 // Serve HTML files
 app.use(express.static(path.join(__dirname, "html")));
+
+// Serve root-level files (like test-dashboard.html)
+app.use(express.static(path.join(__dirname)));
 
 // ==================== API ROUTES ====================
 
@@ -121,9 +170,12 @@ app.use("/api", eventsRoutes);
 const settingsRoutes = require("./server/routes/settings");
 app.use("/api", settingsRoutes);
 
+// Admin routes (Phase 2 - Admin Features)
+const adminRoutes = require("./server/routes/admin");
+app.use("/api/admin", adminRoutes);
+
 // Future route imports (will be added as we implement features)
 // const postsRoutes = require('./server/routes/posts');
-// const adminRoutes = require('./server/routes/admin');
 
 // app.use('/api/auth', authRoutes);
 // app.use('/api/movies', moviesRoutes);

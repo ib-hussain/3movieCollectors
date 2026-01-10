@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (threads.length === 0) {
       threadsList.innerHTML = `
-        <li class="thread-empty-state">
-          <p>No conversations yet. Message a friend to start chatting!</p>
+        <li class="thread-empty-state" style="text-align: center; padding: 60px 20px; color: var(--TextColor); min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+          <p style="font-size: 14px; opacity: 0.7;">No conversations yet. Message a friend to start chatting!</p>
         </li>
       `;
       return;
